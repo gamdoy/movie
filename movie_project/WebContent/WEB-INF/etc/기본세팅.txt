@@ -6,25 +6,27 @@ jacksonjson
 tiles-core, tiles-jsp
 aspectjweaver,cglib,log4j
 
+ìœ ì€í˜¸ë³ì‹ 
 
 
-±âº» ¿öÅ©½ºÆäÀÌ½º
+
+ï¿½âº» ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½
 -C:\JAVA\KOSTA_PROJECT
-ORACLE(11g) °èÁ¤ : scott1//tiger1
-ÀÚ¹Ù : 1.8.0.25
-ÅèÄ¹ : 7.0.59, °æ·Î : C:\java\apache-tomcat-7.0.59
-ÀÌÅ¬¸³½º : Luna
+ORACLE(11g) ï¿½ï¿½ï¿½ï¿½ : scott1//tiger1
+ï¿½Ú¹ï¿½ : 1.8.0.25
+ï¿½ï¿½Ä¹ : 7.0.59, ï¿½ï¿½ï¿½ : C:\java\apache-tomcat-7.0.59
+ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ : Luna
 
-¼¼¼ÇÃ¼Å© - ÀÎÅÍ¼ÁÅÍ
+ï¿½ï¿½ï¿½ï¿½Ã¼Å© - ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½
 
-±âº»¿öÅ©½ºÆäÀÌ½º°æ·Î : C:\java\git\movie\movie_project
+ï¿½âº»ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ï¿½ : C:\java\git\movie\movie_project
 mapper : kr.or.kosta.common.config.mapper.theaterMapper.xml
 controller : kr.or.kosta.theater.controller.TheaterController.java
-service : kr.or.kosta.theater.model.service.TheaterServiceImpl.java -> Interface »ç¿ë(TheaterService.java)
-dao : kr.or.kosta.theater.model.dao.TheaterDAOImpl.java -> Interface »ç¿ë(TheaterDAO.java)
+service : kr.or.kosta.theater.model.service.TheaterServiceImpl.java -> Interface ï¿½ï¿½ï¿½(TheaterService.java)
+dao : kr.or.kosta.theater.model.dao.TheaterDAOImpl.java -> Interface ï¿½ï¿½ï¿½(TheaterDAO.java)
 vo : kr.or.kosta.theater.vo.TheaterVO.java
 
-{initParam.rootPath} -> <%=request.getContextPath() %> : application ³×ÀÓ(ÇÁ·ÎÁ§Æ®¸í)À» Ãâ·ÂÇØÁÜ.
+{initParam.rootPath} -> <%=request.getContextPath() %> : application ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 
-add index ÀÛ¾÷Àº ÇÁ·ÎÁ§Æ®¸¦ Å¬¸¯ÇÏ¿© ÇÏÁö ¸»°í ÆÐÅ°Áö, Æú´õ ´ÜÀ§·Î ÀÛ¾÷ÇÑ´Ù.
-commitÀÇ °æ¿ì ÀÛ¾÷ ³»¿ëÀº °¡´ÉÇÑ »ó¼¼ÇÏ°Ô ÀÛ¼ºÇÑ´Ù.
+add index ï¿½Û¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ï¿½Ñ´ï¿½.
+commitï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Û¼ï¿½ï¿½Ñ´ï¿½.
