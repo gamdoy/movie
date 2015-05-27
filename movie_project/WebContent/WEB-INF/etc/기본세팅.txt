@@ -1,4 +1,4 @@
-API
+ï»¿API
 spring-webmvc, spring-orm
 mybatis, mybatis-spring, dbcp
 jstl
@@ -8,23 +8,23 @@ aspectjweaver,cglib,log4j
 
 
 
-±âº» ¿öÅ©½ºÆäÀÌ½º
+ê¸°ë³¸ ì›Œí¬ìŠ¤íŽ˜ì´ìŠ¤
 -C:\JAVA\KOSTA_PROJECT
-ORACLE(11g) °èÁ¤ : scott1//tiger1
-ÀÚ¹Ù : 1.8.0.25
-ÅèÄ¹ : 7.0.59, °æ·Î : C:\java\apache-tomcat-7.0.59
-ÀÌÅ¬¸³½º : Luna
+ORACLE(11g) ê³„ì • : scott1//tiger1
+ìžë°” : 1.8.0.25
+í†°ìº£ : 7.0.59, ê²½ë¡œ : C:\java\apache-tomcat-7.0.59
+ì´í´ë¦½ìŠ¤ : Luna
 
-¼¼¼ÇÃ¼Å© - ÀÎÅÍ¼ÁÅÍ
+ì„¸ì…˜ì²´í¬ - ì¸í„°ì…‰í„°
 
-±âº»¿öÅ©½ºÆäÀÌ½º°æ·Î : C:\java\git\movie\movie_project
+ê¸°ë³¸ì›Œí¬ìŠ¤íŽ˜ì´ìŠ¤ê²½ë¡œ : C:\java\git\movie\movie_project
 mapper : kr.or.kosta.common.config.mapper.theaterMapper.xml
 controller : kr.or.kosta.theater.controller.TheaterController.java
-service : kr.or.kosta.theater.model.service.TheaterServiceImpl.java -> Interface »ç¿ë(TheaterService.java)
-dao : kr.or.kosta.theater.model.dao.TheaterDAOImpl.java -> Interface »ç¿ë(TheaterDAO.java)
+service : kr.or.kosta.theater.model.service.TheaterServiceImpl.java -> Interface ì‚¬ìš©(TheaterService.java)
+dao : kr.or.kosta.theater.model.dao.TheaterDAOImpl.java -> Interface ì‚¬ìš©(TheaterDAO.java)
 vo : kr.or.kosta.theater.vo.TheaterVO.java
 
-{initParam.rootPath} -> <%=request.getContextPath() %> : application ³×ÀÓ(ÇÁ·ÎÁ§Æ®¸í)À» Ãâ·ÂÇØÁÜ.
+{initParam.rootPath} -> <%=request.getContextPath() %> : application ë„¤ìž„(í”„ë¡œì íŠ¸ëª…)ì„ ì¶œë ¥í•´ì¤Œ.
 
-add index ÀÛ¾÷Àº ÇÁ·ÎÁ§Æ®¸¦ Å¬¸¯ÇÏ¿© ÇÏÁö ¸»°í ÆÐÅ°Áö, Æú´õ ´ÜÀ§·Î ÀÛ¾÷ÇÑ´Ù.
-commitÀÇ °æ¿ì ÀÛ¾÷ ³»¿ëÀº °¡´ÉÇÑ »ó¼¼ÇÏ°Ô ÀÛ¼ºÇÑ´Ù.
+add index ìž‘ì—…ì€ í”„ë¡œì íŠ¸ë¥¼ í´ë¦­í•˜ì—¬ í•˜ì§€ ë§ê³  íŒ¨í‚¤ì§€, í´ë” ë‹¨ìœ„ë¡œ ìž‘ì—…í•œë‹¤.
+commitì˜ ê²½ìš° ìž‘ì—… ë‚´ìš©ì€ ê°€ëŠ¥í•œ ìƒì„¸í•˜ê²Œ ìž‘ì„±í•œë‹¤.
