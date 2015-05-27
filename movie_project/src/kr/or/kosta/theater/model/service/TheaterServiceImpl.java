@@ -2,6 +2,7 @@ package kr.or.kosta.theater.model.service;
 
 import java.util.List;
 
+import kr.or.kosta.theater.model.dao.TheaterDAO;
 import kr.or.kosta.theater.vo.TheaterVO;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package kr.or.kosta.theater.model.service;
+package kr.or.kosta.theater.model.dao;
 
 import java.util.List;
 
