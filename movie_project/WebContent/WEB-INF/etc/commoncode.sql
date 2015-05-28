@@ -62,3 +62,12 @@ insert into COMMONCODE values ('109100', '2DScreen', '일반 상영관');
 insert into COMMONCODE values ('109200', '3DScreen', '3D 상영관');
 insert into COMMONCODE values ('109300', '4DScreen', '4D 상영관');
 insert into COMMONCODE values ('109400', 'imaxScreen', 'IMAX 상영관');
+
+--장르타입 genreTYPE
+insert into COMMONCODE values ('110000', 'genreType', '장르타입');
+insert into COMMONCODE values ('110100', 'action', '액션');
+insert into COMMONCODE values ('110200', 'horror', '공포');
+insert into COMMONCODE values ('110300', 'melo', '멜로');
+insert into COMMONCODE values ('110400', 'romance', '로맨스');
+insert into COMMONCODE values ('110500', 'COMEDY', '코미디');
+insert into COMMONCODE values ('110600', 'SF', 'SF');
