@@ -7,8 +7,12 @@
 	<typeAliases>
 		<package name="kr.or.kosta.theater.vo"/>
 	</typeAliases>
-	
+	<!-- 의순이 -->
 	<mappers>
 		<mapper resource="kr/or/kosta/common/config/mapper/theaterMapper.xml"/>
 	</mappers>
+	
+	
 </configuration>
+
+
