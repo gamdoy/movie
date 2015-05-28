@@ -1,4 +1,4 @@
-package src.kr.or.kosta.movie.vo;
+package kr.or.kosta.movie.vo;
 
 public class MovieVO {
 	//기본정보

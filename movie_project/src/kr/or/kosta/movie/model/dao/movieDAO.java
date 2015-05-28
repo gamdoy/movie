@@ -1,6 +1,6 @@
-package src.kr.or.kosta.movie.model.dao;
+package kr.or.kosta.movie.model.dao;
 
-import src.kr.or.kosta.movie.vo.MovieVO;
+import kr.or.kosta.movie.vo.MovieVO;
 
 
 public interface movieDAO {

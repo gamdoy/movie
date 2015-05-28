@@ -1,10 +1,10 @@
-package src.kr.or.kosta.movie.model.dao;
+package kr.or.kosta.movie.model.dao;
 
+
+import kr.or.kosta.movie.vo.MovieVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-
-import src.kr.or.kosta.movie.vo.MovieVO;
 
 
 
