@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="commoncode.dao.commoncodeMapper">
+	<sql id="commonCode-select">
+		select	cmn_no, cmn_code_eng, cmn_code_kor 
+		from		commoncode
+	</sql>
+	
+	<resultMap type="commonCodeVO" id="commonCode-resultmap">
+		<result column="cmn_no" property="cmnNo"/>
+		<result column="cmn_code_eng" property="cmnCodeEng"/>
+		<result column="cmn_code_kor" property="cmnCodeKor"/>
+	</resultMap>
+	
+	<select id="selectCommonCodeByNo" parameterType="string" resultMap="commonCode-resultmap">
+		<include refid="commonCode-select"/>
+		where	cmn_no like #{value}||'%'
+	</select>
+</mapper>

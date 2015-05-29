@@ -13,12 +13,16 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	<context:component-scan base-package="kr.or.kosta.theater.controller"/>
+	<context:component-scan base-package="kr.or.kosta.commoncode.controller"/>
+	
 	<context:component-scan base-package="kr.or.kosta.theater.model"/>
+	<context:component-scan base-package="kr.or.kosta.commoncode.model"/>
 	<mvc:annotation-driven/>
 	
 	
 	<!-- 단순 Link controller -->
-	<mvc:view-controller path="main.do" view-name="main.tiles"/>
+	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
+	<mvc:view-controller path="/commoncode/zipcode.do" view-name="/WEB-INF/view/common/zipcode.jsp"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -28,6 +32,9 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- file upload 처리 multipartResolver 등록 -->
+	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	
 	<!-- View Resolver -->
 	<bean  class="org.springframework.web.servlet.view.BeanNameViewResolver"
