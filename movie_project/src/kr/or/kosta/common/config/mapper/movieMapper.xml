@@ -6,7 +6,7 @@
 		insert into MOVIE 
 		(MOV_NO, MOV_TITLE, MOV_SYNOPSIS, MOV_OFFICIALSITE, MOV_SCREENINGGRADE, MOV_POSTER, MOV_INTHEATERS,
 		 MOV_RUNTIME, MOV_TRAILER, MOV_GRADE, MOV_COUNT,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
-		  values(movie_seq.nextval, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{poster},
+		  values(movie_seq.nextval, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{posterName},
 		   #{intheaters}, #{runtime}, #{trailer}, #{movGrade}, #{movCount} ,#{genre}, #{dirNo}, 33, #{proNo})
 	
 	</insert>

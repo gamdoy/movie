@@ -41,6 +41,9 @@
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
 				p:order="3"/>
 	
+	<!-- file upload 처리 multipartResolver 등록 -->
+	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
 	<!-- 
 	BasicDataSource&mapper위치<-SqlSessionFactoryBean<-SqlSessionTemplate<-MemberDAO<-MemberService
 	 -->

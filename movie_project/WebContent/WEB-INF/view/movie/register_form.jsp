@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 등록</title>
 </head>
 <body>
 <!-- 제목 <input type="text" name="title"><br>
@@ -27,11 +27,11 @@
 <h1>영화등록</h1>
 <form method="post"
 		action="<%=request.getContextPath()%>/movie/register.do"
-		id="registerForm">
+		id="registerForm" enctype="multipart/form-data">
 <table border="1">
 <tr>
 <td>제목 </td>
-<td><input type="text" name="title"></td>
+<td><input type="text" id="title" name="title"></td>
 </tr>
 <tr>
 <td>줄거리</td>
@@ -44,7 +44,7 @@
 </tr>
 
 <tr>
-<td>포스터</td> <td><input type="text" name="poster"></td>
+<td>포스터</td> <td><input type="file" name="poster"></td>
 </tr>
 
 <tr>
@@ -85,7 +85,11 @@
 
 <tr>
 <td>
-<input type="submit"></td></tr>
+<input type="submit" value="등록"></td>
+<td>
+<input type="reset" value="리셋"></td>
+</tr>
+
 </table>
 </form>
 </body>

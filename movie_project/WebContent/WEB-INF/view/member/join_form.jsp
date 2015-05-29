@@ -69,7 +69,7 @@ $(document).ready(function(){
 
 <h2>가입양식</h2>
 
-<form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data">
+<form method="post" action="${initParam.rootPath }/member/join.tiles"  id="registerForm" enctype="multipart/form-data">
 	<table style="width:600px">
 		<tr>
 			<td width="100">ID</td>

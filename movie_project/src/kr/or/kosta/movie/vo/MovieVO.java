@@ -1,5 +1,9 @@
 package kr.or.kosta.movie.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class MovieVO {
 	//기본정보
 	private int movieNo;//영화번호
@@ -7,7 +11,8 @@ public class MovieVO {
 	private String sysnopsis;//줄거리
 	private String officialSite;//공식사이트
 	private String screeningGrade;//영화등급
-	private String poster;//포스터
+	private MultipartFile poster;//포스터
+	private String posterName; //포스터 파일명
 	private String intheaters;//개봉일
 	private String runtime;//상영시간
 	private String trailer;//트레일러
@@ -27,9 +32,10 @@ public class MovieVO {
 	}
 
 	public MovieVO(int movieNo, String title, String sysnopsis,
-			String officialSite, String screeningGrade, String poster,
-			String intheaters, String runtime, String trailer, double movGrade,
-			int movCount, String genre, int dirNo, int actNo, int proNo) {
+			String officialSite, String screeningGrade, MultipartFile poster,
+			String posterName, String intheaters, String runtime,
+			String trailer, double movGrade, int movCount, String genre,
+			int dirNo, int actNo, int proNo) {
 		super();
 		this.movieNo = movieNo;
 		this.title = title;
@@ -37,6 +43,7 @@ public class MovieVO {
 		this.officialSite = officialSite;
 		this.screeningGrade = screeningGrade;
 		this.poster = poster;
+		this.posterName = posterName;
 		this.intheaters = intheaters;
 		this.runtime = runtime;
 		this.trailer = trailer;
@@ -88,12 +95,20 @@ public class MovieVO {
 		this.screeningGrade = screeningGrade;
 	}
 
-	public String getPoster() {
+	public MultipartFile getPoster() {
 		return poster;
 	}
 
-	public void setPoster(String poster) {
+	public void setPoster(MultipartFile poster) {
 		this.poster = poster;
+	}
+
+	public String getPosterName() {
+		return posterName;
+	}
+
+	public void setPosterName(String posterName) {
+		this.posterName = posterName;
 	}
 
 	public String getIntheaters() {
@@ -185,6 +200,8 @@ public class MovieVO {
 		result = prime * result
 				+ ((officialSite == null) ? 0 : officialSite.hashCode());
 		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
+		result = prime * result
+				+ ((posterName == null) ? 0 : posterName.hashCode());
 		result = prime * result + proNo;
 		result = prime * result + ((runtime == null) ? 0 : runtime.hashCode());
 		result = prime * result
@@ -236,6 +253,11 @@ public class MovieVO {
 				return false;
 		} else if (!poster.equals(other.poster))
 			return false;
+		if (posterName == null) {
+			if (other.posterName != null)
+				return false;
+		} else if (!posterName.equals(other.posterName))
+			return false;
 		if (proNo != other.proNo)
 			return false;
 		if (runtime == null) {
@@ -271,12 +293,11 @@ public class MovieVO {
 		return "MovieVO [movieNo=" + movieNo + ", title=" + title
 				+ ", sysnopsis=" + sysnopsis + ", officialSite=" + officialSite
 				+ ", screeningGrade=" + screeningGrade + ", poster=" + poster
-				+ ", intheaters=" + intheaters + ", runtime=" + runtime
-				+ ", trailer=" + trailer + ", movGrade=" + movGrade
-				+ ", movCount=" + movCount + ", genre=" + genre + ", dirNo="
-				+ dirNo + ", actNo=" + actNo + ", proNo=" + proNo + "]";
+				+ ", posterName=" + posterName + ", intheaters=" + intheaters
+				+ ", runtime=" + runtime + ", trailer=" + trailer
+				+ ", movGrade=" + movGrade + ", movCount=" + movCount
+				+ ", genre=" + genre + ", dirNo=" + dirNo + ", actNo=" + actNo
+				+ ", proNo=" + proNo + "]";
 	}
-	
-	
 
 }
