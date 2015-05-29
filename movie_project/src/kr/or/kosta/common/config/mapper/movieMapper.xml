@@ -11,6 +11,10 @@
 	
 	</insert>
 	
+	<select id="commoncode" parameterMap="movieVO-resultmap">
+		select * from MOV_SCREENINGGRADE
+	</select>
+	
 
 	
 </mapper>

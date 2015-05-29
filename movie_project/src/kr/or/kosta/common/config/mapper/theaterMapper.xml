@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="theater.dao.theaterMapper">
-	<sql id="theater-select">
-		select 	thea_no
-		from		theater			
-	</sql>
-	
 	<resultMap type="theaterVO" id="theater-resultmap">
 		<id column="thea_no" property="theaNo"/>
+		<result column="zip_no" property="zipNo"/>
+		<result column="zip_zipcode" property="zipZipcode"/>
+		<result column="thea_location" property="theaLocation"/>
+		<result column="thea_phoneno" property="theaPhoneNo"/>
+		<result column="thea_address1" property="theaAddress1"/>
+		<result column="thea_address2" property="theaAddress2"/>
 	</resultMap>
 	
 	<insert id="insertMember" parameterType="theaterVO">
@@ -15,28 +16,32 @@
 		values (#{id}, #{password}, #{name}, #{email}, to_char(sysdate, 'yyyymmdd'), #{pictureName, jdbcType=VARCHAR})
 	</insert>
 	
-	<update id="updateMember" parameterType="theaterVO">
-		update member
-		set		password=#{password},
-					name=#{name},
-					email=#{email}
-					<if test="pictureName!=null">
-					,picture_name=#{pictureName}
-					</if>
-		where	id=#{id}
+	<update id="updateTheater" parameterType="theaterVO">
+		update theater
+		set		zip_no=#{zipNo},
+					thea_location=#{theaLocation},
+					thea_phoneno=#{theaPhoneNo},
+					thea_address1=#{theaAddress1},
+					thea_address2=#{theaAddress2}
+					
+		where	thea_no=#{theaNo}
 	</update>
 	
 	<delete id="deleteMemberById" parameterType="string">
 		delete from member where id=#{id}
 	</delete>
 		
-	<select id="selectMemberById" parameterType="string" resultMap="theater-resultmap">
-		<include refid="theater-select"/>
-		where	id=#{id}
+	<select id="selectTheaterByTheaNo" parameterType="_int" resultMap="theater-resultmap">
+		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2
+		from		theater t, zipcode z
+		where t.zip_no = z.zip_no
+			and t.thea_no = ${value}
 	</select>
 	
 	<select id="selectAllTheater" resultMap="theater-resultmap">
-		<include refid="theater-select"/>
+		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2
+		from		theater t, zipcode z
+		where t.zip_no = z.zip_no
 	</select>
 	
 	<!-- Paging 추가 -->
@@ -45,7 +50,7 @@
 		from (
 			select ceil(rownum/#{contentsPerPage}) page, id, password, name, email, join_date
 			from (
-					<include refid="theater-select"/>
+					
 					order by join_date
 			)
 		) 

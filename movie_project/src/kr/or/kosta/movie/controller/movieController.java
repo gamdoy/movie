@@ -2,6 +2,8 @@ package kr.or.kosta.movie.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,6 +12,7 @@ import kr.or.kosta.movie.vo.MovieVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,10 +27,12 @@ public class movieController {
 	
 	//영화등록 페이지
 	@RequestMapping("register_form")
-	public String registerForm(){
+	public String registerForm(ModelMap map){
+		List list = service.getCommoncode();
+		map.addAttribute("list",list);
 		
 		return "movie/register_form.tiles";
-		
+		 
 	}
 	
 	@RequestMapping(value ="register.do", method=RequestMethod.POST)
@@ -51,6 +56,15 @@ public class movieController {
 		service.registerMovie(movie);
 		return "movie/register_success.tiles";
 	}
+	
+	public ArrayList getMovieGrade(){
+		
+		
+		return null;
+		
+	}
+	
+	
 	
 	
 	

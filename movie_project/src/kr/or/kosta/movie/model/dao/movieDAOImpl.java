@@ -1,6 +1,8 @@
 package kr.or.kosta.movie.model.dao;
 
 
+import java.util.List;
+
 import kr.or.kosta.movie.vo.MovieVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -30,6 +32,12 @@ public class movieDAOImpl implements movieDAO {
 	public int modifyMovie(MovieVO movie) {
 		return session.insert(namespace+"updateMovie",movie);
 		
+	}
+
+	@Override
+	public List getCommoncode() {
+		
+		return session.selectList(namespace+"commoncode");
 	}
 
 	

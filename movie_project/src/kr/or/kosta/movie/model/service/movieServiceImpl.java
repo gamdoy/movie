@@ -1,5 +1,7 @@
 package kr.or.kosta.movie.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,15 @@ public class movieServiceImpl implements movieService {
 	}
 
 	@Override
-	public void modifyMevie(MovieVO movie) {
+	public void modifyMovie(MovieVO movie) {
 		dao.insertMovie(movie);
 		
+	}
+
+	@Override
+	public List getCommoncode() {
+		List list = dao.getCommoncode();
+		return list;
 	}
 
 }

@@ -1,5 +1,7 @@
 package kr.or.kosta.movie.model.service;
 
+import java.util.List;
+
 import kr.or.kosta.movie.vo.MovieVO;
 
 public interface movieService {
@@ -14,6 +16,10 @@ public interface movieService {
 	 * 영화 수정 메소드
 	 * @param movie
 	 */
-	public abstract void modifyMevie(MovieVO movie);
+	public abstract void modifyMovie(MovieVO movie);
+	
+	public List getCommoncode();
+
+	
 
 }

@@ -4,21 +4,14 @@
 	<settings>
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
-	
 	<typeAliases>
 		<package name="kr.or.kosta.theater.vo"/>
-		<package name="kr.or.kosta.movie.vo"/>
+		<package name="kr.or.kosta.commoncode.vo"/>
+		<package name="kr.or.kosta.common.vo"/> 
 	</typeAliases>
-	
 	
 	<mappers>
 		<mapper resource="kr/or/kosta/common/config/mapper/theaterMapper.xml"/>
-		<mapper resource="kr/or/kosta/common/config/mapper/movieMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/commonCodeMapper.xml"/>
 	</mappers>
-	
-	
-	
-	
 </configuration>
-
-

@@ -8,8 +8,8 @@
 </head>
 <body>
 	<h1>등록및 수정내용</h1>
-	
-	
+
+${requestScope.list }
 
 	<table border="1">
 		<tr>
@@ -27,7 +27,13 @@
 		</tr>
 		<tr>
 			<td>상영등급</td>
-			<td>${requestScope.movieVO.screeningGrade }</td>
+			<td><select>
+					<option>
+						<c:forEach items="${requestScope.list.list }">
+						</c:forEach>
+					</option>
+
+			</select></td>
 		</tr>
 
 		<tr>
@@ -42,16 +48,15 @@
 
 		<tr>
 			<td>상영시간</td>
-			<td colspan="2">
-			<c:choose>
-				<c:when test="${empty requestScope.member.posterName }">
-					<img src="<%=request.getContextPath()%>/images/noimage.png">
-				</c:when>
-				<c:otherwise>
-					<img src="<%=request.getContextPath()%>/images/${requestScope.member.potserName }">
-				</c:otherwise>
-			</c:choose>
-		</td>
+			<td colspan="2"><c:choose>
+					<c:when test="${empty requestScope.movieVO.posterName }">
+						<img src="<%=request.getContextPath()%>/images/noimage.png">
+					</c:when>
+					<c:otherwise>
+						<img
+							src="<%=request.getContextPath()%>/images/${requestScope.movieVO.posterName }">
+					</c:otherwise>
+				</c:choose></td>
 		</tr>
 
 		<tr>
@@ -92,7 +97,7 @@
 			<td>${requestScope.movieVO.officialSite }</td>
 		</tr>
 
-		
+
 
 	</table>
 </body>
