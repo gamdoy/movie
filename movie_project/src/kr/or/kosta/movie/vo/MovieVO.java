@@ -4,15 +4,18 @@ public class MovieVO {
 	//기본정보
 	private int movieNo;//영화번호
 	private String title;//영화제목
-	private String synopsis;//줄거리
-	private String officialsite;//공식사이트
-	private String screeninggrade;//영화등급
+	private String sysnopsis;//줄거리
+	private String officialSite;//공식사이트
+	private String screeningGrade;//영화등급
 	private String poster;//포스터
 	private String intheaters;//개봉일
 	private String runtime;//상영시간
 	private String trailer;//트레일러
-	private double grade;// 영화평점
-	private int count; //참여인원
+	private double movGrade;// 영화평점
+	private int movCount; //참여인원
+	private String genre; //장르
+	
+	
 	
 	//fk 
 	private int dirNo; //감독번호
@@ -23,40 +26,23 @@ public class MovieVO {
 		super();
 	}
 
-	public MovieVO(int movieNo, String title, String synopsis,
-			String officialSsite, String screeninggrade, String poster,
-			String intheaters, String runtime, String trailer, double grade,
-			int count) {
+	public MovieVO(int movieNo, String title, String sysnopsis,
+			String officialSite, String screeningGrade, String poster,
+			String intheaters, String runtime, String trailer, double movGrade,
+			int movCount, String genre, int dirNo, int actNo, int proNo) {
 		super();
 		this.movieNo = movieNo;
 		this.title = title;
-		this.synopsis = synopsis;
-		this.officialsite = officialSsite;
-		this.screeninggrade = screeninggrade;
+		this.sysnopsis = sysnopsis;
+		this.officialSite = officialSite;
+		this.screeningGrade = screeningGrade;
 		this.poster = poster;
 		this.intheaters = intheaters;
 		this.runtime = runtime;
 		this.trailer = trailer;
-		this.grade = grade;
-		this.count = count;
-	}
-
-	public MovieVO(int movieNo, String title, String synopsis,
-			String officialSsite, String screeninggrade, String poster,
-			String intheaters, String runtime, String trailer, double grade,
-			int count, int dirNo, int actNo, int proNo) {
-		super();
-		this.movieNo = movieNo;
-		this.title = title;
-		this.synopsis = synopsis;
-		this.officialsite = officialSsite;
-		this.screeninggrade = screeninggrade;
-		this.poster = poster;
-		this.intheaters = intheaters;
-		this.runtime = runtime;
-		this.trailer = trailer;
-		this.grade = grade;
-		this.count = count;
+		this.movGrade = movGrade;
+		this.movCount = movCount;
+		this.genre = genre;
 		this.dirNo = dirNo;
 		this.actNo = actNo;
 		this.proNo = proNo;
@@ -78,28 +64,28 @@ public class MovieVO {
 		this.title = title;
 	}
 
-	public String getSynopsis() {
-		return synopsis;
+	public String getSysnopsis() {
+		return sysnopsis;
 	}
 
-	public void setSynopsis(String synopsis) {
-		this.synopsis = synopsis;
+	public void setSysnopsis(String sysnopsis) {
+		this.sysnopsis = sysnopsis;
 	}
 
-	public String getOfficialSsite() {
-		return officialsite;
+	public String getOfficialSite() {
+		return officialSite;
 	}
 
-	public void setOfficialSsite(String officialSsite) {
-		this.officialsite = officialSsite;
+	public void setOfficialSite(String officialSite) {
+		this.officialSite = officialSite;
 	}
 
-	public String getScreeninggrade() {
-		return screeninggrade;
+	public String getScreeningGrade() {
+		return screeningGrade;
 	}
 
-	public void setScreeninggrade(String screeninggrade) {
-		this.screeninggrade = screeninggrade;
+	public void setScreeningGrade(String screeningGrade) {
+		this.screeningGrade = screeningGrade;
 	}
 
 	public String getPoster() {
@@ -134,20 +120,28 @@ public class MovieVO {
 		this.trailer = trailer;
 	}
 
-	public double getGrade() {
-		return grade;
+	public double getMovGrade() {
+		return movGrade;
 	}
 
-	public void setGrade(double grade) {
-		this.grade = grade;
+	public void setMovGrade(double movGrade) {
+		this.movGrade = movGrade;
 	}
 
-	public int getCount() {
-		return count;
+	public int getMovCount() {
+		return movCount;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setMovCount(int movCount) {
+		this.movCount = movCount;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 	public int getDirNo() {
@@ -179,23 +173,24 @@ public class MovieVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + actNo;
-		result = prime * result + count;
 		result = prime * result + dirNo;
-		long temp;
-		temp = Double.doubleToLongBits(grade);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result
 				+ ((intheaters == null) ? 0 : intheaters.hashCode());
+		result = prime * result + movCount;
+		long temp;
+		temp = Double.doubleToLongBits(movGrade);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + movieNo;
 		result = prime * result
-				+ ((officialsite == null) ? 0 : officialsite.hashCode());
+				+ ((officialSite == null) ? 0 : officialSite.hashCode());
 		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
 		result = prime * result + proNo;
 		result = prime * result + ((runtime == null) ? 0 : runtime.hashCode());
 		result = prime * result
-				+ ((screeninggrade == null) ? 0 : screeninggrade.hashCode());
+				+ ((screeningGrade == null) ? 0 : screeningGrade.hashCode());
 		result = prime * result
-				+ ((synopsis == null) ? 0 : synopsis.hashCode());
+				+ ((sysnopsis == null) ? 0 : sysnopsis.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((trailer == null) ? 0 : trailer.hashCode());
 		return result;
@@ -212,24 +207,29 @@ public class MovieVO {
 		MovieVO other = (MovieVO) obj;
 		if (actNo != other.actNo)
 			return false;
-		if (count != other.count)
-			return false;
 		if (dirNo != other.dirNo)
 			return false;
-		if (Double.doubleToLongBits(grade) != Double
-				.doubleToLongBits(other.grade))
+		if (genre == null) {
+			if (other.genre != null)
+				return false;
+		} else if (!genre.equals(other.genre))
 			return false;
 		if (intheaters == null) {
 			if (other.intheaters != null)
 				return false;
 		} else if (!intheaters.equals(other.intheaters))
 			return false;
+		if (movCount != other.movCount)
+			return false;
+		if (Double.doubleToLongBits(movGrade) != Double
+				.doubleToLongBits(other.movGrade))
+			return false;
 		if (movieNo != other.movieNo)
 			return false;
-		if (officialsite == null) {
-			if (other.officialsite != null)
+		if (officialSite == null) {
+			if (other.officialSite != null)
 				return false;
-		} else if (!officialsite.equals(other.officialsite))
+		} else if (!officialSite.equals(other.officialSite))
 			return false;
 		if (poster == null) {
 			if (other.poster != null)
@@ -243,15 +243,15 @@ public class MovieVO {
 				return false;
 		} else if (!runtime.equals(other.runtime))
 			return false;
-		if (screeninggrade == null) {
-			if (other.screeninggrade != null)
+		if (screeningGrade == null) {
+			if (other.screeningGrade != null)
 				return false;
-		} else if (!screeninggrade.equals(other.screeninggrade))
+		} else if (!screeningGrade.equals(other.screeningGrade))
 			return false;
-		if (synopsis == null) {
-			if (other.synopsis != null)
+		if (sysnopsis == null) {
+			if (other.sysnopsis != null)
 				return false;
-		} else if (!synopsis.equals(other.synopsis))
+		} else if (!sysnopsis.equals(other.sysnopsis))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -269,24 +269,13 @@ public class MovieVO {
 	@Override
 	public String toString() {
 		return "MovieVO [movieNo=" + movieNo + ", title=" + title
-				+ ", synopsis=" + synopsis + ", officialSsite=" + officialsite
-				+ ", screeninggrade=" + screeninggrade + ", poster=" + poster
+				+ ", sysnopsis=" + sysnopsis + ", officialSite=" + officialSite
+				+ ", screeningGrade=" + screeningGrade + ", poster=" + poster
 				+ ", intheaters=" + intheaters + ", runtime=" + runtime
-				+ ", trailer=" + trailer + ", grade=" + grade + ", count="
-				+ count + ", dirNo=" + dirNo + ", actNo=" + actNo + ", proNo="
-				+ proNo + "]";
+				+ ", trailer=" + trailer + ", movGrade=" + movGrade
+				+ ", movCount=" + movCount + ", genre=" + genre + ", dirNo="
+				+ dirNo + ", actNo=" + actNo + ", proNo=" + proNo + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

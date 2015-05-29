@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.domain.config.mapper.movieMapper">
-	<resultMap type="movie" id="movie-resultmap">
-		<id column="MOV_NO" property="movieNo"/>
-		<result column="MOV_TITLE" property="title"/>
-		<result column="MOV_SYNOPSIS" property="synopsis"/>
-		<result column="MOV_OFFICIALSITE" property="officialsite"/>
-		<result column="MOV_SCREENINGGRADE" property="screeninggrade"/>
-		<result column="MOV_POSTER" property="poster"/>
-		<result column="MOV_INTHEATERS" property="intheaters"/>
-		<result column="MOV_RUNTIME" property="runtime"/>
-		<result column="MOV_TRAILER" property="trailer"/>
-		<result column="MOV_GRADE" property="grade"/>
-		<result column="MOV_COUNT" property="count"/>
-		
-		<result column="DIR_NO" property="dirNo"/>
-		<result column="ACT_NO" property="actNo"/>
-		<result column="PRO_NO" property="proNo"/>
-	</resultMap>
+<mapper namespace="kr.or.kosta.common.config.movieMapper">
 	
-	<insert id="insertMovie" parameterType="Movie">
-		insert into movie(MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,
-					 MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,
-					 DIR_NO,ACT_NO,PRO_NO)
-			   value (#{movieNo},#{title},#{synopsis},#{officialSsite},#{screeninggrade},#{poster},
-			   		  #{intheaters},#{runtime},#{trailer},#{grade},#{count},#{dirNo},#{actNo},#{proNo},)
-	
-	
+	<insert id="insertMovie" parameterType="movieVO">
+		insert into MOVIE 
+		(MOV_NO, MOV_TITLE, MOV_SYNOPSIS, MOV_OFFICIALSITE, MOV_SCREENINGGRADE, MOV_POSTER, MOV_INTHEATERS,
+		 MOV_RUNTIME, MOV_TRAILER, MOV_GRADE, MOV_COUNT,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
+		  values(movie_seq.nextval, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{poster},
+		   #{intheaters}, #{runtime}, #{trailer}, #{movGrade}, #{movCount} ,#{genre}, #{dirNo}, 33, #{proNo})
 	
 	</insert>
-  
+	
+
+	
 </mapper>
