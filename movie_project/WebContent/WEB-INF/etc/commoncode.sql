@@ -5,11 +5,11 @@ insert into COMMONCODE values ('100200', 'female', '여성');
 
 --전화번호
 insert into COMMONCODE values ('101000', 'phoneType', '번호');
-insert into COMMONCODE values ('101100', '010', '010');
-insert into COMMONCODE values ('101200', '011', '011');
-insert into COMMONCODE values ('101300', '016', '016');
-insert into COMMONCODE values ('101400', '019', '019');
-insert into COMMONCODE values ('101500', '070', '070');
+insert into COMMONCODE values ('101100', '02', '02');
+insert into COMMONCODE values ('101200', '031', '031');
+insert into COMMONCODE values ('101300', '032', '032');
+insert into COMMONCODE values ('101400', '033', '033');
+insert into COMMONCODE values ('101500', '034', '034');
 
 --회원분류
 insert into COMMONCODE values ('102000', 'memberType', '회원분류');
@@ -71,3 +71,8 @@ insert into COMMONCODE values ('110300', 'melo', '멜로');
 insert into COMMONCODE values ('110400', 'romance', '로맨스');
 insert into COMMONCODE values ('110500', 'COMEDY', '코미디');
 insert into COMMONCODE values ('110600', 'SF', 'SF');
+
+--극장상태
+insert into COMMONCODE values ('111000', 'theaStatus', '영업여부');
+insert into COMMONCODE values ('111100', 'open', '영업');
+insert into COMMONCODE values ('111200', 'close', '비영업');

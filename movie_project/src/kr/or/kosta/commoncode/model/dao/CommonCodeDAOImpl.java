@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.kosta.common.vo.ZipcodeVO;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
 
 @Repository
@@ -24,6 +25,11 @@ public class CommonCodeDAOImpl implements CommonCodeDAO {
 	@Override
 	public List<CommonCodeVO> selectCodeList(String codeNo) {
 		return session.selectList(nameSpace + "selectCommonCodeByNo", codeNo);
+	}
+
+	@Override
+	public List<ZipcodeVO> selectZipodeList(String keyword) {
+		return session.selectList(nameSpace + "selectZipcodeByKeyword", keyword);
 	}
 
 }
