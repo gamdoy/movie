@@ -9,11 +9,12 @@
 		<result column="thea_phoneno" property="theaPhoneNo"/>
 		<result column="thea_address1" property="theaAddress1"/>
 		<result column="thea_address2" property="theaAddress2"/>
+		<result column="thea_status" property="theaStatus"/>
 	</resultMap>
 	
-	<insert id="insertMember" parameterType="theaterVO">
-		insert into member (id, password, name, email, join_date, picture_name)
-		values (#{id}, #{password}, #{name}, #{email}, to_char(sysdate, 'yyyymmdd'), #{pictureName, jdbcType=VARCHAR})
+	<insert id="insertTheater" parameterType="theaterVO">
+		insert into theater (thea_no, zip_no, thea_location, thea_phoneNo, thea_address1, thea_address2)
+		values (THEATER_SEQ.nextval, #{zipNo}, #{theaLocation}, #{theaPhoneNo}, #{theaAddress1}, #{theaAddress2})
 	</insert>
 	
 	<update id="updateTheater" parameterType="theaterVO">
@@ -22,8 +23,8 @@
 					thea_location=#{theaLocation},
 					thea_phoneno=#{theaPhoneNo},
 					thea_address1=#{theaAddress1},
-					thea_address2=#{theaAddress2}
-					
+					thea_address2=#{theaAddress2},
+					thea_status=#{theaStatus}
 		where	thea_no=#{theaNo}
 	</update>
 	
@@ -32,16 +33,17 @@
 	</delete>
 		
 	<select id="selectTheaterByTheaNo" parameterType="_int" resultMap="theater-resultmap">
-		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2
+		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2, t.thea_status
 		from		theater t, zipcode z
 		where t.zip_no = z.zip_no
 			and t.thea_no = ${value}
 	</select>
 	
 	<select id="selectAllTheater" resultMap="theater-resultmap">
-		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2
+		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2, t.thea_status
 		from		theater t, zipcode z
 		where t.zip_no = z.zip_no
+		order by t.thea_location
 	</select>
 	
 	<!-- Paging 추가 -->
