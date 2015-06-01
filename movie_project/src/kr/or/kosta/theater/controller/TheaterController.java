@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.kosta.commoncode.model.service.CommonCodeService;
+import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.theater.model.service.TheaterService;
 import kr.or.kosta.theater.vo.TheaterVO;
 
@@ -18,13 +20,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/theater/")
 public class TheaterController {
 	@Autowired
-	private TheaterService service;
+	private TheaterService theaterService;
 	
+	@Autowired
+	private CommonCodeService commonCodeService;
+	
+
 	@RequestMapping(value="test")
 	public String test(ModelMap map) {
-		System.out.println("test.do");
-		List<TheaterVO> list = service.test();
-		System.out.println("list size : " + list.size());
+		List<TheaterVO> list = theaterService.getTheaterList();
 		map.addAttribute("name", list);
 		return "/main.do";
 	}
@@ -32,9 +36,36 @@ public class TheaterController {
 	@RequestMapping(value="ajaxTest")
 	@ResponseBody
 	public Map<String, Object> ajaxTest(@ModelAttribute TheaterVO vo) {
-		System.out.println("ajaxTest.do");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("theaNo", vo.getTheaNo());
 		return map; 
+	}
+	
+	@RequestMapping(value="theaterManagement")
+	public String theaterManagement(ModelMap map) {
+		List<TheaterVO> list = theaterService.getTheaterList();
+		List<CommonCodeVO> statusList = commonCodeService.getCodeLIst("111");
+		
+		map.addAttribute("theaterList", list);
+		map.addAttribute("statusList", statusList);
+		
+		return "theater/theaterManagement.tiles"; 
+	}
+	
+	@RequestMapping(value="modifyTheater")
+	@ResponseBody
+	public int modifyTheater(@ModelAttribute TheaterVO vo, ModelMap map) {
+		return theaterService.setTheater(vo);
+	}
+	
+	@RequestMapping(value="addTheater")
+	@ResponseBody
+	public int addTheater(@ModelAttribute TheaterVO vo, ModelMap map) {
+		return theaterService.registTheater(vo);
+	}
+	
+	@RequestMapping(value="movieSchedule")
+	public String movieSchedule(ModelMap map) {
+		return "theater/movieSchedule.tiles";
 	}
 }

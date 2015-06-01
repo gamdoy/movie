@@ -19,13 +19,14 @@ public class MovieVO {
 	private double movGrade;// 영화평점
 	private int movCount; //참여인원
 	private String genre; //장르
+
 	
 	
 	
 	//fk 
-	private int dirNo; //감독번호
-	private int actNo; //배우번호
-	private int proNo; //제작사 번호
+	private DirectorVO dirVo; //감독 객체
+	private ActorVO actVo; //배우 객체
+	private ProductionVO proVo; //제작사 객체
 	
 	public MovieVO() {
 		super();
@@ -35,7 +36,7 @@ public class MovieVO {
 			String officialSite, String screeningGrade, MultipartFile poster,
 			String posterName, String intheaters, String runtime,
 			String trailer, double movGrade, int movCount, String genre,
-			int dirNo, int actNo, int proNo) {
+			DirectorVO dirVo, ActorVO actVo, ProductionVO proVo) {
 		super();
 		this.movieNo = movieNo;
 		this.title = title;
@@ -50,9 +51,9 @@ public class MovieVO {
 		this.movGrade = movGrade;
 		this.movCount = movCount;
 		this.genre = genre;
-		this.dirNo = dirNo;
-		this.actNo = actNo;
-		this.proNo = proNo;
+		this.dirVo = dirVo;
+		this.actVo = actVo;
+		this.proVo = proVo;
 	}
 
 	public int getMovieNo() {
@@ -159,36 +160,36 @@ public class MovieVO {
 		this.genre = genre;
 	}
 
-	public int getDirNo() {
-		return dirNo;
+	public DirectorVO getDirVo() {
+		return dirVo;
 	}
 
-	public void setDirNo(int dirNo) {
-		this.dirNo = dirNo;
+	public void setDirVo(DirectorVO dirVo) {
+		this.dirVo = dirVo;
 	}
 
-	public int getActNo() {
-		return actNo;
+	public ActorVO getActVo() {
+		return actVo;
 	}
 
-	public void setActNo(int actNo) {
-		this.actNo = actNo;
+	public void setActVo(ActorVO actVo) {
+		this.actVo = actVo;
 	}
 
-	public int getProNo() {
-		return proNo;
+	public ProductionVO getProVo() {
+		return proVo;
 	}
 
-	public void setProNo(int proNo) {
-		this.proNo = proNo;
+	public void setProVo(ProductionVO proVo) {
+		this.proVo = proVo;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + actNo;
-		result = prime * result + dirNo;
+		result = prime * result + ((actVo == null) ? 0 : actVo.hashCode());
+		result = prime * result + ((dirVo == null) ? 0 : dirVo.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result
 				+ ((intheaters == null) ? 0 : intheaters.hashCode());
@@ -202,7 +203,7 @@ public class MovieVO {
 		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
 		result = prime * result
 				+ ((posterName == null) ? 0 : posterName.hashCode());
-		result = prime * result + proNo;
+		result = prime * result + ((proVo == null) ? 0 : proVo.hashCode());
 		result = prime * result + ((runtime == null) ? 0 : runtime.hashCode());
 		result = prime * result
 				+ ((screeningGrade == null) ? 0 : screeningGrade.hashCode());
@@ -222,9 +223,15 @@ public class MovieVO {
 		if (getClass() != obj.getClass())
 			return false;
 		MovieVO other = (MovieVO) obj;
-		if (actNo != other.actNo)
+		if (actVo == null) {
+			if (other.actVo != null)
+				return false;
+		} else if (!actVo.equals(other.actVo))
 			return false;
-		if (dirNo != other.dirNo)
+		if (dirVo == null) {
+			if (other.dirVo != null)
+				return false;
+		} else if (!dirVo.equals(other.dirVo))
 			return false;
 		if (genre == null) {
 			if (other.genre != null)
@@ -258,7 +265,10 @@ public class MovieVO {
 				return false;
 		} else if (!posterName.equals(other.posterName))
 			return false;
-		if (proNo != other.proNo)
+		if (proVo == null) {
+			if (other.proVo != null)
+				return false;
+		} else if (!proVo.equals(other.proVo))
 			return false;
 		if (runtime == null) {
 			if (other.runtime != null)
@@ -296,8 +306,9 @@ public class MovieVO {
 				+ ", posterName=" + posterName + ", intheaters=" + intheaters
 				+ ", runtime=" + runtime + ", trailer=" + trailer
 				+ ", movGrade=" + movGrade + ", movCount=" + movCount
-				+ ", genre=" + genre + ", dirNo=" + dirNo + ", actNo=" + actNo
-				+ ", proNo=" + proNo + "]";
+				+ ", genre=" + genre + ", dirVo=" + dirVo + ", actVo=" + actVo
+				+ ", proVo=" + proVo + "]";
 	}
+	
 
 }

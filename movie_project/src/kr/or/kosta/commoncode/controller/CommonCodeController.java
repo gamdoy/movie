@@ -5,9 +5,11 @@ import java.util.List;
 import kr.or.kosta.common.vo.ZipcodeVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
+import kr.or.kosta.theater.vo.TheaterVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,16 +20,28 @@ public class CommonCodeController {
 	@Autowired
 	private CommonCodeService Service;
 	
-	@RequestMapping(value="phoneCode")
+	@RequestMapping("phoneCode")
 	@ResponseBody
 	public List<CommonCodeVO> phoneCode() {
 		return Service.getCodeLIst("101");
 	}
 	
-	@RequestMapping(value="findZipcode")
+	@RequestMapping("getCode")
+	@ResponseBody
+	public List<CommonCodeVO> getCode(@ModelAttribute CommonCodeVO vo) {
+		return Service.getCodeLIst(vo.getKeyword());
+	}
+	
+	@RequestMapping("zipcode")
+	public String getZipCode(@ModelAttribute TheaterVO vo, ModelMap map) {
+		map.addAttribute("theaNo", vo.getTheaNo());
+		return "/WEB-INF/view/common/zipcode.jsp";
+	}
+	
+	@RequestMapping("findZipcode")
 	@ResponseBody
 	public List<ZipcodeVO> findZipcode(@ModelAttribute ZipcodeVO vo) {
-		System.out.println(vo.getKeyword());
-		return null;
+		System.out.println(Service.getZipcodeList(vo.getKeyword()));
+		return Service.getZipcodeList(vo.getKeyword());
 	}
 }
