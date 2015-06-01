@@ -12,6 +12,12 @@
 	.event_menu {background-color: gray; height: 80px;width: 1000px; display: none;}
 	.customer_menu {background-color: gray; height: 80px;width: 1000px; display: none;}
 	.loginArea{background-color: blue; height: 30px;width: 200px; float:right;}
+	.menu {background-color: gray; height: 160px;width: 1280px;}/*메뉴영역*/
+	.main_menu {background-color: black; height: 80px;width: 1280px;}/*메뉴영역*/
+	.myinfo_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
+	.movie_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
+	.event_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
+	.customer_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -29,7 +35,7 @@
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
-			$(".theater_menu").show();
+			location.href = "<%= request.getContextPath()%>/theater/theaterManagement.do";
 		});
 		$("#eventBtn").on("click", function() {
 			hide_subMenu();
@@ -60,30 +66,32 @@
 		window.location="<%=request.getContextPath() %>/member/joinForm.do";
 	}
 </script>
-<section class="menu"><!-- 메뉴영역 -->
-<section class="main_menu"><!-- 메인 메뉴영역 -->
-	<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
-	<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
-	<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
-	<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
-	<label id="customerBtn">고객센터</label>
-	<label id="testBtn">test</label>
-</section>
-	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
+<div class="menu"><!-- 메뉴영역 -->
+	<span>
+	<div class="main_menu"><!-- 메인 메뉴영역 -->
+		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label id="customerBtn">고객센터</label>
+		<label id="testBtn">test</label>
+	</div>
+	<div class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		정보수정&nbsp;&nbsp;&nbsp;관심영화&nbsp;&nbsp;&nbsp;관람작&nbsp;&nbsp;&nbsp;마일리지 관리&nbsp;&nbsp;&nbsp;예매내역&nbsp;&nbsp;&nbsp;회원탈퇴
-	</section>
-	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
+	</div>
+	<div class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
-	</section>
-	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->
-	</section>
-	<section class="theater_menu"><!-- 영화 서브메뉴영역 -->
-	</section>
-	<section class="event_menu"><!-- 이벤트 서브메뉴영역 -->
+	</div>
+	<div class="reserve_menu"><!-- 영화 서브메뉴영역 -->
+	</div>
+	<div class="theater_menu"><!-- 영화 서브메뉴영역 -->
+	</div>
+	<div class="event_menu"><!-- 이벤트 서브메뉴영역 -->
 		진행중인 이벤트&nbsp;&nbsp;&nbsp;종료된 이벤트&nbsp;&nbsp;&nbsp;당첨자 확인
-	</section>
-	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
+	</div>
+	<div class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;F & Q
+<<<<<<< HEAD
 	</section>
 </section>
 <section class="loginArea">
@@ -108,4 +116,3 @@
 	</table>
 
 </section><!-- 로그인 영역 -->
- 

@@ -24,6 +24,7 @@
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/joinsuccess.do" view-name="member/join_success.tiles"/>
+	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">

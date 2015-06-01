@@ -18,8 +18,31 @@ public class TheaterServiceImpl implements TheaterService {
 	 * 전체 극장리스트를 받는 메소드
 	 */
 	@Override
-	public List<TheaterVO> test(){
-		List<TheaterVO> list = dao.selectAllMember();
-		return list;
+	public List<TheaterVO> getTheaterList(){
+		return dao.selectAllTheater();
+	}
+
+	/**
+	 * 극장을 찾는 메소드
+	 */
+	@Override
+	public TheaterVO getTheater(int theaNo) {
+		return dao.selectTheaterByTheaNo(theaNo);
+	}
+
+	/**
+	 * 극장을 수정하는 메소드
+	 */
+	@Override
+	public int setTheater(TheaterVO vo) {
+		return dao.updateTheater(vo);
+	}
+
+	/**
+	 * 극장을 생성하는 메소드
+	 */
+	@Override
+	public int registTheater(TheaterVO vo) {
+		return dao.insertTheater(vo);
 	}
 }
