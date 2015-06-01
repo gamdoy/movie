@@ -4,6 +4,7 @@ public class ActorVO {
 	
 	private int actNo;
 	private String actName;
+	
 	public ActorVO() {
 		super();
 	}

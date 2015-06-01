@@ -7,17 +7,20 @@ import kr.or.kosta.movie.vo.DirectorVO;
 import kr.or.kosta.movie.vo.MovieVO;
 import kr.or.kosta.movie.vo.ProductionVO;
 
-public interface movieDAO {
+public interface MovieDAO {
 
 	public int insertMovie(MovieVO movie);
 
 	public int modifyMovie(MovieVO movie);
 
+	public MovieVO getMovieByNo(String movNo);
 
 	public List<DirectorVO> getDirector();
 
 	public List<ActorVO> getActor();
 
-	public List<ProductionVO> getProduction();
+	public List<ProductionVO> getProduction(); 
+	
+
  
 }

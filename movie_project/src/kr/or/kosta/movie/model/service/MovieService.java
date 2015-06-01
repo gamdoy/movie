@@ -7,7 +7,7 @@ import kr.or.kosta.movie.vo.DirectorVO;
 import kr.or.kosta.movie.vo.MovieVO;
 import kr.or.kosta.movie.vo.ProductionVO;
 
-public interface movieService {
+public interface MovieService {
 
 	/**
 	 * 영화 등록 메소드
@@ -23,10 +23,14 @@ public interface movieService {
 	 */
 	public abstract void modifyMovie(MovieVO movie);
 	
+	public MovieVO getMovieByNo(String movNo);
+	
 	public List<DirectorVO> getDirector();
 
 	public List<ActorVO> getActor();
 
 	public List<ProductionVO> getProduction();
+	
+	
 
 }

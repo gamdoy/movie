@@ -15,7 +15,6 @@
 </head>
 <body>
 
-
 	<!-- 제목 <input type="text" name="title"><br>
 줄거리 <input type="text" name="sysnopsis"><br>
 공식홈 <input type="text" name="officialSite"><br>
@@ -37,6 +36,8 @@
 	<form method="post"
 		action="<%=request.getContextPath()%>/movie/register.do"
 		id="registerForm" enctype="multipart/form-data">
+		<!-- <input type="hidden" name="regNo" id="movieNo"> -->
+		
 		<table border="1">
 			<tr>
 				<td>제목</td>
@@ -53,7 +54,7 @@
 			</tr>
 			<tr>
 				<td>상영등급</td>
-				<td><select name="screeningGrade" id="screenGrade">
+				<td><select name="screeningGrade" >
 						<c:forEach items="${screenGrade }" var="sgrade">
 							<option value="${sgrade.cmnNo }"> ${sgrade.cmnCodeKor }</option>
 						</c:forEach> 
@@ -95,7 +96,7 @@
 
 			<tr>
 				<td>장르</td>
-				<td><select name="genre" id="genre">
+				<td><select name="genre" >
 						<c:forEach items="${genre }" var="genre">
 							<option value="${genre.cmnNo }">${genre.cmnCodeKor }</option>
 
@@ -105,9 +106,10 @@
 
 			<tr>
 				<td>감독<br>
-				<td><select name="director" id="director">
-						<c:forEach items="${director }" var="director">
-							<option value="${director.dirNo }">${director.dirName }</option>
+				<td><select name="dirNo" id="dirNo">
+						
+						<c:forEach items="${dirNo }" var="dir">
+							<option value="${dir.dirNo }">${dir.dirName }</option>
 
 						</c:forEach>
 				</select></td>
@@ -116,9 +118,9 @@
 			<tr>
 				<td>배우<br>
 				</td>
-				 <td><select name="actor" id="actor">
-						<c:forEach items="${actor }" var="actor">
-							<option value="${actor.actNo }">${actor.actName }</option>
+				 <td><select name="actNo" id="actNo">
+						<c:forEach items="${actNo }" var="act">
+							<option value="${act.actNo }">${act.actName }</option>
 						</c:forEach>
 				</select></td> 
 			</tr>
@@ -126,9 +128,9 @@
 			<tr>
 				<td>제작사<br>(후에 db불러오는걸로 수정)
 				</td>
-				<td><select name="production" id="production">
-						<c:forEach items="${production }" var="production">
-							<option value="${production.proNo }">${production.proName }</option>
+				<td><select name="proNo" id="proNo">
+						<c:forEach items="${proNo }" var="pro">
+							<option value="${pro.proNo }">${pro.proName }</option>
 						</c:forEach>
 				</select></td>  
 			</tr>

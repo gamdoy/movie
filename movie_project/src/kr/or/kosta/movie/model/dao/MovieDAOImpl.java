@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class movieDAOImpl implements movieDAO {
+public class MovieDAOImpl implements MovieDAO {
 	private String namespace = "kr.or.kosta.common.config.movieMapper.";
 	@Autowired
 	private SqlSessionTemplate session;
@@ -36,6 +36,12 @@ public class movieDAOImpl implements movieDAO {
 		
 	}
 
+	@Override
+	public MovieVO getMovieByNo(String movNo) {
+		
+		return session.selectOne(namespace+"getMovieByNo",movNo);
+		
+	}
 	
 	@Override
 	public List<DirectorVO> getDirector() {
@@ -52,6 +58,8 @@ public class movieDAOImpl implements movieDAO {
 	public List<ProductionVO> getProduction() {
 		return session.selectList(namespace+"production");
 	}
+
+
 
 	
 }
