@@ -29,7 +29,7 @@
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
-			$(".theater_menu").show();
+			window.location = "<%=request.getContextPath() %>/theater/movieSchedule.do";
 		});
 		$("#eventBtn").on("click", function() {
 			hide_subMenu();
