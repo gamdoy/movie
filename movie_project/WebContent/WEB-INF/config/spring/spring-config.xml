@@ -23,7 +23,6 @@
 	
 	<!-- 단순 Link controller -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
-	<mvc:view-controller path="/commoncode/zipcode.do" view-name="/WEB-INF/view/common/zipcode.jsp"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
