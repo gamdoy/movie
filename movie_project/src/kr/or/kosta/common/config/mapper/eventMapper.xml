@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
+<mapper namespace="event.dao.eventMapper">
 	<select id="selectEvent">
 		select 	e.evt_no, e.evt_name, e.evt_startdate, e.evt_enddate, e.evt_regdate, e.evt_title
 		from		event e
