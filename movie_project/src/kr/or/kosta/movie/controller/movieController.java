@@ -7,8 +7,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.or.kosta.commoncode.model.service.CommonCodeService;
+import kr.or.kosta.commoncode.model.service.CommonCodeServiceImpl;
+import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.movie.model.service.movieService;
+import kr.or.kosta.movie.vo.ActorVO;
+import kr.or.kosta.movie.vo.DirectorVO;
 import kr.or.kosta.movie.vo.MovieVO;
+import kr.or.kosta.movie.vo.ProductionVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +31,30 @@ public class movieController {
 	@Autowired
 	private movieService service;
 	
+	@Autowired
+	private CommonCodeService service2;
+	
 	//영화등록 페이지
 	@RequestMapping("register_form")
 	public String registerForm(ModelMap map){
-		List list = service.getCommoncode();
-		map.addAttribute("list",list);
+		
+		//commonCode 사용 
+		List<CommonCodeVO> screenGrade = service2.getCodeLIst("104");
+		System.out.println(screenGrade);
+		List<CommonCodeVO> genre = service2.getCodeLIst("110");
+		
+		
+		List<DirectorVO> director = service.getDirector();
+		List<ActorVO> actor = service.getActor();
+		List<ProductionVO> production = service.getProduction();
+		
+		
+		map.addAttribute("screenGrade",screenGrade);
+		map.addAttribute("genre",genre);
+		map.addAttribute("director",director);
+		map.addAttribute("actor",actor);
+		map.addAttribute("production",production);
+		
 		
 		return "movie/register_form.tiles";
 		 
@@ -40,7 +65,6 @@ public class movieController {
 	
 		//파일업로드 처리
 		MultipartFile file = movie.getPoster();
-		System.out.println(file.getSize());
 		
 		
 		if(file != null && !file.isEmpty()){
@@ -51,18 +75,14 @@ public class movieController {
 			movie.setPosterName(fileName);
 		}
 		
-		System.out.println("2번 "+movie.getPosterName());
+		
+		System.out.println("영화등급 "+movie.getScreeningGrade());
 		
 		service.registerMovie(movie);
 		return "movie/register_success.tiles";
 	}
 	
-	public ArrayList getMovieGrade(){
-		
-		
-		return null;
-		
-	}
+	
 	
 	
 	

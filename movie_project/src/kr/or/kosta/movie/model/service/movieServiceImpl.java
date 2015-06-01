@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kosta.movie.model.dao.movieDAO;
+import kr.or.kosta.movie.vo.ActorVO;
+import kr.or.kosta.movie.vo.DirectorVO;
 import kr.or.kosta.movie.vo.MovieVO;
+import kr.or.kosta.movie.vo.ProductionVO;
 @Service
 public class movieServiceImpl implements movieService {
 	
@@ -26,9 +29,22 @@ public class movieServiceImpl implements movieService {
 	}
 
 	@Override
-	public List getCommoncode() {
-		List list = dao.getCommoncode();
-		return list;
+	public List<DirectorVO> getDirector() {
+		return dao.getDirector();
 	}
+
+	@Override
+	public List<ActorVO> getActor() {
+		
+		return dao.getActor();
+	}
+
+	@Override
+	public List<ProductionVO> getProduction() {
+		return dao.getProduction();
+	}
+
+	
+	
 
 }

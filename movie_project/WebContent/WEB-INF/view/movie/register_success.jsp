@@ -80,21 +80,20 @@ ${requestScope.list }
 		</tr>
 
 		<tr>
-			<td>감독번호<br>(후에 db불러오는걸로 수정)
-			</td>
-			<td>지금은 값 없음</td>
+			<td>감독번호</td>
+			<td>${requestScope.movieVO. } </td>
 		</tr>
 
 		<tr>
-			<td>배우<br>(db수정떔에 고정값)
+			<td>배우<br>
 			</td>
-			<td>${requestScope.movieVO.proNo }</td>
+			<td> ${requestScope.movieVO }</td>
 		</tr>
 
 		<tr>
-			<td>제작사<br>(후에 db불러오는걸로 수정)
+			<td>제작사<br>
 			</td>
-			<td>${requestScope.movieVO.officialSite }</td>
+			<td>${requestScope.movieVO }</td>
 		</tr>
 
 

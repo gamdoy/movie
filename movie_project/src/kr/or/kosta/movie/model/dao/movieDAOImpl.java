@@ -3,7 +3,10 @@ package kr.or.kosta.movie.model.dao;
 
 import java.util.List;
 
+import kr.or.kosta.movie.vo.ActorVO;
+import kr.or.kosta.movie.vo.DirectorVO;
 import kr.or.kosta.movie.vo.MovieVO;
+import kr.or.kosta.movie.vo.ProductionVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +25,7 @@ public class movieDAOImpl implements movieDAO {
 	//영화 등록 메소드
 	@Override
 	public int insertMovie(MovieVO movie) {
-		System.out.println(movie.getTitle());
-		System.out.println(movie.getSysnopsis());
+	
 		 return session.insert(namespace+"insertMovie",movie);
 		
 	}
@@ -34,10 +36,21 @@ public class movieDAOImpl implements movieDAO {
 		
 	}
 
+	
 	@Override
-	public List getCommoncode() {
+	public List<DirectorVO> getDirector() {
+		return session.selectList(namespace+"director");
+	}
+
+	@Override
+	public List<ActorVO> getActor() {
+		return session.selectList(namespace+"actor");
 		
-		return session.selectList(namespace+"commoncode");
+	}
+
+	@Override
+	public List<ProductionVO> getProduction() {
+		return session.selectList(namespace+"production");
 	}
 
 	
