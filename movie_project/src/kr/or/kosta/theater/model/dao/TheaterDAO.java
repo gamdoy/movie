@@ -6,8 +6,19 @@ import kr.or.kosta.theater.vo.TheaterVO;
 
 public interface TheaterDAO {
 	/**
-	 * Member 테이블의 전체 회원정보 조회 처리
+	 * Theater 테이블의 전체 극장 조회 처리
 	 * @return
 	 */
-	public abstract List<TheaterVO> selectAllMember();
+	public abstract List<TheaterVO> selectAllTheater();
+
+	/**
+	 * Theater 테이블의 전체 극장 조회 처리
+	 * @param theaNo 
+	 * @return
+	 */
+	public abstract TheaterVO selectTheaterByTheaNo(int theaNo);
+
+	public abstract int updateTheater(TheaterVO vo);
+
+	public abstract int insertTheater(TheaterVO vo);
 }

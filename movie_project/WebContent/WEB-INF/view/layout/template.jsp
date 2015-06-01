@@ -56,7 +56,7 @@ div.template{
 nav.template{
 	
 	vertical-align:middle;
-	height:160px;
+	height:200px;
 	line-height:50px;
 	background-color:blue;
 	color:white;
@@ -80,7 +80,7 @@ footer.template{
 </head>
 <body>
 <div class="template">
-	<nav class="template"><tiles:insertAttribute name="menu"/></nav>
+<nav class="template"><tiles:insertAttribute name="menu"/></nav>
 	<section class="template"><tiles:insertAttribute name="body"/></section>
 	<footer class="template"><tiles:insertAttribute name="footer"/></footer>
 </div>
