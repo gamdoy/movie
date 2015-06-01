@@ -18,6 +18,9 @@
 	
 	<context:component-scan base-package="kr.or.kosta.theater.model"/>
 	<context:component-scan base-package="kr.or.kosta.commoncode.model"/>
+	
+	<context:component-scan base-package="kr.or.kosta.movie.controller"/>
+	<context:component-scan base-package="kr.or.kosta.movie.model"/>
 	<mvc:annotation-driven/>
 	
 	
