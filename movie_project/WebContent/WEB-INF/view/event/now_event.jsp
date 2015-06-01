@@ -13,21 +13,26 @@ table#listTB thead tr{
 	<table id="listTB" style="width:700px">
 		<thead>
 			<tr>
-				<td>ID</td>
+				<td>NO</td>
 				<td>이름</td>
-				<td>Email</td>
-				<td>가입일</td>
+				<td>시작일</td>
+				<td>종료일</td>
+				<td>등록일</td>
+				<td>이벤트</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${requestScope.event_list }" var="EventVO">
 				<tr>
-					<td>${EventVO.id }</td>
-					<td>${EventVO.name}</td>
-					<td>${EventVO.email}</td>
-					<td>${EventVO.joinDate}</td>
+					<td>${EventVO.evtNo }</td>
+					<td>${EventVO.evtName}</td>
+					<td>${EventVO.evtStartDate}</td>
+					<td>${EventVO.evtEndDate}</td>
+					<td>${EventVO.evtRegDate}</td>
+					<td>${EventVO.evtTitle}</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
 	</table>
 </c:if>
+
