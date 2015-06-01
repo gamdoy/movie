@@ -5,12 +5,13 @@
 	a:hover	{text-decoration:underline; color: white;}/*링크에 마우스 올라갔을 때*/
 	a:active	{text-decoration:none; color: white;}/*링크 클릭시*/
 	a:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
-	.menu {background-color: gray; height: 160px;width: 1000px;}/*메뉴영역*/
-	.main_menu {background-color: black; height: 80px;width: 1000px;}/*메뉴영역*/
+	.menu {background-color: gray; height: 160px;width: 1000px;float:left;}/*메뉴영역*/
+	.main_menu {background-color: black; height: 80px;width: 1000px; float:left;}/*메뉴영역*/
 	.myinfo_menu {background-color: gray; height: 80px;width: 1000px; display: none;}
 	.movie_menu {background-color: gray; height: 80px;width: 1000px; display: none;}
 	.event_menu {background-color: gray; height: 80px;width: 1000px; display: none;}
 	.customer_menu {background-color: gray; height: 80px;width: 1000px; display: none;}
+	.loginArea{background-color: blue; height: 30px;width: 200px; float:right;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -55,6 +56,9 @@
 			$(".event_menu").hide();
 			$(".customer_menu").hide();
 	}
+	function join() {
+		window.location="<%=request.getContextPath() %>/member/joinForm.do";
+	}
 </script>
 <section class="menu"><!-- 메뉴영역 -->
 <section class="main_menu"><!-- 메인 메뉴영역 -->
@@ -82,4 +86,26 @@
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;F & Q
 	</section>
 </section>
-<section class="loginArea"></section><!-- 로그인 영역 -->    
+<section class="loginArea">
+	<table>
+		<tr>
+			<td>아이디</td>
+			<td><input type="text" name="id" size="5" autofocus="autofocus"></td>
+		</tr>
+		<tr>
+			<td>패스워드</td>
+			<td><input type="password" name="password" size="5"></td>
+			
+		</tr>
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" value="로그인">
+				<input type="button" value="회원가입" onclick="join()">				
+				<input type="button" value="Id/PW찾기">	
+			</td>
+		</tr>
+			
+	</table>
+
+</section><!-- 로그인 영역 -->
+ 
