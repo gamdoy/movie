@@ -1,0 +1,353 @@
+/*영화감독리스트*/
+insert into director values (director_seq.nextval,'강우석');
+insert into director values (director_seq.nextval,'강제규');
+insert into director values (director_seq.nextval,'구명철');
+insert into director values (director_seq.nextval,'곽재용');
+insert into director values (director_seq.nextval,'김기덕');
+insert into director values (director_seq.nextval,'김기덕');
+insert into director values (director_seq.nextval,'김대승');
+insert into director values (director_seq.nextval,'김지운');
+insert into director values (director_seq.nextval,'김태윤');
+insert into director values (director_seq.nextval,'노진수');
+insert into director values (director_seq.nextval,'류승완');
+insert into director values (director_seq.nextval,'박찬옥');
+insert into director values (director_seq.nextval,'박찬욱');
+insert into director values (director_seq.nextval,'방은진');
+insert into director values (director_seq.nextval,'봉준호');
+insert into director values (director_seq.nextval,'손재곤');
+insert into director values (director_seq.nextval,'심형래');
+insert into director values (director_seq.nextval,'유하');
+insert into director values (director_seq.nextval,'이강원');
+insert into director values (director_seq.nextval,'이명세');
+insert into director values (director_seq.nextval,'이무영');
+insert into director values (director_seq.nextval,'이준익');
+insert into director values (director_seq.nextval,'이철하');
+insert into director values (director_seq.nextval,'임권택');
+insert into director values (director_seq.nextval,'임상수');
+insert into director values (director_seq.nextval,'임순례');
+insert into director values (director_seq.nextval,'임필성');
+insert into director values (director_seq.nextval,'엄재광');
+insert into director values (director_seq.nextval,'장진');
+insert into director values (director_seq.nextval,'장준환');
+insert into director values (director_seq.nextval,'장항준');
+insert into director values (director_seq.nextval,'정성일');
+insert into director values (director_seq.nextval,'추창민');
+insert into director values (director_seq.nextval,'허진호');
+insert into director values (director_seq.nextval,'홍상수');
+insert into director values (director_seq.nextval,'뉴질랜드감독');
+insert into director values (director_seq.nextval,'피터잭슨');
+insert into director values (director_seq.nextval,'덴마크감독');
+insert into director values (director_seq.nextval,'라스폰트리에');
+insert into director values (director_seq.nextval,'독일감독');
+insert into director values (director_seq.nextval,'레니리펜슈탈');
+insert into director values (director_seq.nextval,'롤란트에머리히');
+insert into director values (director_seq.nextval,'베르너헤르초크');
+insert into director values (director_seq.nextval,'빔벤더스');
+insert into director values (director_seq.nextval,'우베볼');
+insert into director values (director_seq.nextval,'프리츠랑');
+insert into director values (director_seq.nextval,'러시아감독');
+insert into director values (director_seq.nextval,'세르게이예이젠시테인');
+insert into director values (director_seq.nextval,'알렉산드르소쿠로프');
+insert into director values (director_seq.nextval,'지가베르토프');
+insert into director values (director_seq.nextval,'멕시코감독');
+insert into director values (director_seq.nextval,'기예르모델토로');
+insert into director values (director_seq.nextval,'알폰소쿠아론');
+insert into director values (director_seq.nextval,'미국감독');
+insert into director values (director_seq.nextval,'거스밴샌트');
+insert into director values (director_seq.nextval,'대런애러노프스키');
+insert into director values (director_seq.nextval,'덩컨존스');
+insert into director values (director_seq.nextval,'데이비드린치');
+insert into director values (director_seq.nextval,'데이비드핀처');
+insert into director values (director_seq.nextval,'도널드페트리');
+insert into director values (director_seq.nextval,'로버트로드리게스');
+insert into director values (director_seq.nextval,'로버트올트먼');
+insert into director values (director_seq.nextval,'로버트저메키스');
+insert into director values (director_seq.nextval,'로버트클루즈');
+insert into director values (director_seq.nextval,'로저코먼');
+insert into director values (director_seq.nextval,'롭좀비');
+insert into director values (director_seq.nextval,'리처드플라이셔');
+insert into director values (director_seq.nextval,'리처드링클레이터');
+insert into director values (director_seq.nextval,'마이클맨');
+insert into director values (director_seq.nextval,'마이클무어');
+insert into director values (director_seq.nextval,'마이클베이');
+insert into director values (director_seq.nextval,'마틴스코세이지');
+insert into director values (director_seq.nextval,'버스터키턴');
+insert into director values (director_seq.nextval,'벤스틸러');
+insert into director values (director_seq.nextval,'벤애플렉');
+insert into director values (director_seq.nextval,'브라이언드팔마');
+insert into director values (director_seq.nextval,'브라이언싱어');
+insert into director values (director_seq.nextval,'브라이언유즈나');
+insert into director values (director_seq.nextval,'빅터플레밍');
+insert into director values (director_seq.nextval,'빌리와일더');
+insert into director values (director_seq.nextval,'샘레이미');
+insert into director values (director_seq.nextval,'샘맨디스');
+insert into director values (director_seq.nextval,'샘페킨파');
+insert into director values (director_seq.nextval,'스탠리큐브릭');
+insert into director values (director_seq.nextval,'스티븐소더버그');
+insert into director values (director_seq.nextval,'스티븐스필버그');
+insert into director values (director_seq.nextval,'스티브오드커크');
+insert into director values (director_seq.nextval,'스튜어트고든');
+insert into director values (director_seq.nextval,'시드니루멧');
+insert into director values (director_seq.nextval,'시드니폴락');
+insert into director values (director_seq.nextval,'앨런파커');
+insert into director values (director_seq.nextval,'에드우드');
+insert into director values (director_seq.nextval,'오슨웰스');
+insert into director values (director_seq.nextval,'올리버스톤');
+insert into director values (director_seq.nextval,'우디앨런');
+insert into director values (director_seq.nextval,'워쇼스키남매');
+insert into director values (director_seq.nextval,'웨스앤더슨');
+insert into director values (director_seq.nextval,'웨스크레이븐');
+insert into director values (director_seq.nextval,'윌리엄프리드킨');
+insert into director values (director_seq.nextval,'일라이로스');
+insert into director values (director_seq.nextval,'잭스나이더');
+insert into director values (director_seq.nextval,'저드애퍼토');
+insert into director values (director_seq.nextval,'조엘슈마허');
+insert into director values (director_seq.nextval,'조지루커스');
+insert into director values (director_seq.nextval,'조지클루니');
+insert into director values (director_seq.nextval,'존카펜터');
+insert into director values (director_seq.nextval,'존패브로');
+insert into director values (director_seq.nextval,'존포드');
+insert into director values (director_seq.nextval,'존프랭컨하이머');
+insert into director values (director_seq.nextval,'존휴스턴');
+insert into director values (director_seq.nextval,'짐헨슨');
+insert into director values (director_seq.nextval,'찰리채플린');
+insert into director values (director_seq.nextval,'캐머런크로');
+insert into director values (director_seq.nextval,'캐스린비글로');
+insert into director values (director_seq.nextval,'케빈스미스');
+insert into director values (director_seq.nextval,'코엔형제');
+insert into director values (director_seq.nextval,'쿠엔틴타란티노');
+insert into director values (director_seq.nextval,'크리스샌더스');
+insert into director values (director_seq.nextval,'클라이브바커');
+insert into director values (director_seq.nextval,'클린트이스트우드');
+insert into director values (director_seq.nextval,'타일러페리');
+insert into director values (director_seq.nextval,'테리길리엄');
+insert into director values (director_seq.nextval,'팀버튼');
+insert into director values (director_seq.nextval,'폴토머스앤더슨');
+insert into director values (director_seq.nextval,'프랜시스포드코폴라');
+insert into director values (director_seq.nextval,'프랭크오즈');
+insert into director values (director_seq.nextval,'해럴드로이드');
+insert into director values (director_seq.nextval,'M.나이트샤말란');
+insert into director values (director_seq.nextval,'스웨덴감독');
+insert into director values (director_seq.nextval,'잉마르베리만');
+insert into director values (director_seq.nextval,'스페인감독');
+insert into director values (director_seq.nextval,'루이스브뉘엘');
+insert into director values (director_seq.nextval,'페드로알모도바르');
+insert into director values (director_seq.nextval,'오스트레일리아감독');
+insert into director values (director_seq.nextval,'멜깁슨');
+insert into director values (director_seq.nextval,'영국감독');
+insert into director values (director_seq.nextval,'대니보일');
+insert into director values (director_seq.nextval,'데이브매킨');
+insert into director values (director_seq.nextval,'데이비드린');
+insert into director values (director_seq.nextval,'리들리스콧');
+insert into director values (director_seq.nextval,'사이먼페그');
+insert into director values (director_seq.nextval,'앨프리드히치콕');
+insert into director values (director_seq.nextval,'에드거라이트');
+insert into director values (director_seq.nextval,'켄러셀');
+insert into director values (director_seq.nextval,'토니스콧');
+insert into director values (director_seq.nextval,'폴그린그래스');
+insert into director values (director_seq.nextval,'피터예이츠');
+insert into director values (director_seq.nextval,'피터그리너웨이');
+insert into director values (director_seq.nextval,'크리스토퍼놀런');
+insert into director values (director_seq.nextval,'이탈리아감독');
+insert into director values (director_seq.nextval,'다리오아르젠토');
+insert into director values (director_seq.nextval,'람베르토바바');
+insert into director values (director_seq.nextval,'로베르토로셀리니');
+insert into director values (director_seq.nextval,'루키노비스콘티');
+insert into director values (director_seq.nextval,'마리오바바');
+insert into director values (director_seq.nextval,'미켈란젤로안토니오니');
+insert into director values (director_seq.nextval,'미켈레소아비');
+insert into director values (director_seq.nextval,'베르나르도베르톨루치');
+insert into director values (director_seq.nextval,'비토리오데시카');
+insert into director values (director_seq.nextval,'세르조레오네');
+insert into director values (director_seq.nextval,'세르조코르부치');
+insert into director values (director_seq.nextval,'안드레이타르콥스키');
+insert into director values (director_seq.nextval,'주세페토르나토레');
+insert into director values (director_seq.nextval,'페데리코펠리니');
+insert into director values (director_seq.nextval,'인도감독');
+insert into director values (director_seq.nextval,'사티야지트레이');
+insert into director values (director_seq.nextval,'일본감독');
+insert into director values (director_seq.nextval,'고바야시마사키');
+insert into director values (director_seq.nextval,'구로사와기요시');
+insert into director values (director_seq.nextval,'구로사와아키라');
+insert into director values (director_seq.nextval,'기타노다케시');
+insert into director values (director_seq.nextval,'기타무라류헤이');
+insert into director values (director_seq.nextval,'나루세미키오');
+insert into director values (director_seq.nextval,'나카시마데쓰야');
+insert into director values (director_seq.nextval,'미이케다카시');
+insert into director values (director_seq.nextval,'미조구치겐지');
+insert into director values (director_seq.nextval,'스즈키세이준');
+insert into director values (director_seq.nextval,'야마다요지');
+insert into director values (director_seq.nextval,'오시이마모루');
+insert into director values (director_seq.nextval,'오시마나기사');
+insert into director values (director_seq.nextval,'오즈야스지로');
+insert into director values (director_seq.nextval,'이와이슌지');
+insert into director values (director_seq.nextval,'사이요이치');
+insert into director values (director_seq.nextval,'쓰카모토신야');
+insert into director values (director_seq.nextval,'후카사쿠긴지');
+insert into director values (director_seq.nextval,'중국감독');
+insert into director values (director_seq.nextval,'나유');
+insert into director values (director_seq.nextval,'두기봉');
+insert into director values (director_seq.nextval,'리안');
+insert into director values (director_seq.nextval,'쉬커');
+insert into director values (director_seq.nextval,'성룡');
+insert into director values (director_seq.nextval,'오우삼');
+insert into director values (director_seq.nextval,'왕자웨이');
+insert into director values (director_seq.nextval,'장이머우');
+insert into director values (director_seq.nextval,'장철');
+insert into director values (director_seq.nextval,'저우싱츠');
+insert into director values (director_seq.nextval,'호금전');
+insert into director values (director_seq.nextval,'황지강');
+insert into director values (director_seq.nextval,'캐나다감독');
+insert into director values (director_seq.nextval,'데이비드크로넌버그');
+insert into director values (director_seq.nextval,'제임스캐머런');
+insert into director values (director_seq.nextval,'타이감독');
+insert into director values (director_seq.nextval,'아피찻뽕위라세타쿤');
+insert into director values (director_seq.nextval,'폴란드감독');
+insert into director values (director_seq.nextval,'로만폴란스키');
+insert into director values (director_seq.nextval,'아그니에슈카홀란트');
+insert into director values (director_seq.nextval,'크시슈토프키에실로프스키');
+insert into director values (director_seq.nextval,'프랑스감독');
+insert into director values (director_seq.nextval,'레오카락스');
+insert into director values (director_seq.nextval,'뤼크베송');
+insert into director values (director_seq.nextval,'소피마르소');
+insert into director values (director_seq.nextval,'알레한드로조도로프스키');
+insert into director values (director_seq.nextval,'장뤼크고다르');
+insert into director values (director_seq.nextval,'장자크베넥스');
+insert into director values (director_seq.nextval,'장클로드다그');
+insert into director values (director_seq.nextval,'장피에르멜빌');
+insert into director values (director_seq.nextval,'조르주멜리에스');
+insert into director values (director_seq.nextval,'프랑수아트뤼포');
+
+/*영화배우리스트*/
+insert into actor values (actor_seq.nextval,'톰하디');
+insert into actor values (actor_seq.nextval,'샤를리즈테론');
+insert into actor values (actor_seq.nextval,'니콜라스홀트');
+insert into actor values (actor_seq.nextval,'조크라비츠');
+
+/*영화제작사리스트*/
+
+insert into production values (production_seq.nextval,'픽사');
+insert into production values (production_seq.nextval,'소니픽처스');
+insert into production values (production_seq.nextval,'마블스튜디오');
+insert into production values (production_seq.nextval,'루커스필름');
+insert into production values (production_seq.nextval,'디어사일럼');
+insert into production values (production_seq.nextval,'드림웍스');
+
+
+CREATE TABLE "SCOTT1"."MOVIE" 
+   (	"MOV_NO" NUMBER, 
+	"MOV_TITLE" VARCHAR2(20 BYTE), 
+	"MOV_SYNOPSIS" CLOB, 
+	"MOV_OFFICIALSITE" VARCHAR2(50 BYTE), 
+	"MOV_SCREENINGGRADE" VARCHAR2(6 BYTE), 
+	"MOV_POSTER" VARCHAR2(50 BYTE), 
+	"MOV_INTHEATERS" VARCHAR2(19 BYTE), 
+	"MOV_RUNTIME" NUMBER, 
+	"MOV_TRAILER" VARCHAR2(50 BYTE), 
+	"MOV_GRADE" NUMBER DEFAULT 0, 
+	"MOV_COUNT" NUMBER DEFAULT 0, 
+	"MOV_GENRE" VARCHAR2(6 BYTE), 
+	"DIR_NO" NUMBER, 
+	"ACT_NO" NUMBER, 
+	"PRO_NO" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" 
+ LOB ("MOV_SYNOPSIS") STORE AS BASICFILE (
+  TABLESPACE "SYSTEM" ENABLE STORAGE IN ROW CHUNK 8192 RETENTION 
+  NOCACHE LOGGING 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)) ;
+
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_NO" IS '번호';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_TITLE" IS '제목';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_SYNOPSIS" IS '줄거리';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_OFFICIALSITE" IS '공식홈';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_SCREENINGGRADE" IS '상영등급';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_POSTER" IS '포스터';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_INTHEATERS" IS '개봉일';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_RUNTIME" IS '상영시간';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_TRAILER" IS '트레일러';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_GRADE" IS '평점';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_COUNT" IS '참여인원';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."MOV_GENRE" IS '장르';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."DIR_NO" IS '감독번호';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."ACT_NO" IS '배우번호';
+   COMMENT ON COLUMN "SCOTT1"."MOVIE"."PRO_NO" IS '제작사번호';
+   COMMENT ON TABLE "SCOTT1"."MOVIE"  IS '영화';
+REM INSERTING into SCOTT1.MOVIE
+SET DEFINE OFF;
+
+
+--영화 리스트
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (172,'영화3','내용개좋음','3','104200','1433121201798','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (173,'영화2','내용개좋음','3','104200','1433121240131','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (174,'영화1','내용개좋음','3','104200','1433121263889','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (175,'트랜스포머','내용개좋음','3','104200','1433121266093','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (176,'토르','내용개좋음','3','104200','1433121275083','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (177,'살인의추억','내용개좋음','3','104200','1433121277284','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (178,'해리포터','내용개좋음','3','104200','1433121278099','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (179,'친구2','내용개좋음','3','104200','1433121293863','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (178,'해리포터2','내용개좋음','3','104200','1433121278099','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (179,'친구','내용개좋음','3','104200','1433121293863','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (178,'해리포터3','내용개좋음','3','104200','1433121278099','3',3,'3',3,3,'110000',0,3,0);
+Insert into SCOTT1.MOVIE (MOV_NO,MOV_TITLE,MOV_SYNOPSIS,MOV_OFFICIALSITE,MOV_SCREENINGGRADE,MOV_POSTER,MOV_INTHEATERS,MOV_RUNTIME,MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE,DIR_NO,ACT_NO,PRO_NO) values (179,'킹스맨','내용개좋음','3','104200','1433121293863','3',3,'3',3,3,'110000',0,3,0);
+
+
+--스케쥴 정보
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('1',41,172,1,'09:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('2',41,176,1,'11:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('3',41,176,1,'13:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('4',41,172,2,'15:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('5',41,172,2,'17:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('6',43,173,1,'09:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('7',43,174,2,'11:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('8',51,175,3,'13:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('9',51,173,3,'15:00   ');
+Insert into SCOTT1.SCHEDULE (SCH_NO,SCH_TNO,MOV_NO,MR_NO,SCH_STARTTIME) values ('10',41,173,1,'17:00   ');
+
+CREATE TABLE "SCOTT1"."MEMBER" 
+   (	"MEM_NO" NUMBER, 
+	"ZIP_NO" NUMBER, 
+	"MEM_ID" VARCHAR2(20 BYTE), 
+	"MEM_NAME" VARCHAR2(30 BYTE), 
+	"MEM_PASSWORD" VARCHAR2(30 BYTE), 
+	"MEM_ADDRESS1" VARCHAR2(100 BYTE), 
+	"MEM_ADDRESS2" VARCHAR2(100 BYTE), 
+	"MEM_BIRTHDATE" CHAR(8 BYTE), 
+	"MEM_EMAIL" VARCHAR2(50 BYTE), 
+	"MEM_PHONENO" VARCHAR2(12 BYTE), 
+	"MEM_MILEAGE" NUMBER(7,0), 
+	"MEM_MEMBERTYPE" VARCHAR2(6 BYTE), 
+	"MEM_JOINDATE" VARCHAR2(19 BYTE), 
+	"MEM_LASTLOGIN" VARCHAR2(19 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_NO" IS '회원번호';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."ZIP_NO" IS '우편번호';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_ID" IS 'ID';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_NAME" IS '이름';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_PASSWORD" IS '패스워드';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_ADDRESS1" IS '주소1';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_ADDRESS2" IS '주소2';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_BIRTHDATE" IS '생년월일';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_EMAIL" IS '이메일';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_PHONENO" IS '연락처';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_MILEAGE" IS '마일리지';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_MEMBERTYPE" IS '회원분류';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_JOINDATE" IS '가입일';
+   COMMENT ON COLUMN "SCOTT1"."MEMBER"."MEM_LASTLOGIN" IS '최종로그인일';
+   COMMENT ON TABLE "SCOTT1"."MEMBER"  IS '회원';
+   
+Insert into SCOTT1.MEMBER (MEM_NO,ZIP_NO,MEM_ID,MEM_NAME,MEM_PASSWORD,MEM_ADDRESS1,MEM_ADDRESS2,MEM_BIRTHDATE,MEM_EMAIL,MEM_PHONENO,MEM_MILEAGE,MEM_MEMBERTYPE,MEM_JOINDATE,MEM_LASTLOGIN) values (1,1,'tester1','테스터','1111','경기도 어딘가','대왕로 어딘가','19900101','test@kosta.or.kr','010-123-4567',0,'102100','2015-06-01','2015-06-01');
+Insert into SCOTT1.MEMBER (MEM_NO,ZIP_NO,MEM_ID,MEM_NAME,MEM_PASSWORD,MEM_ADDRESS1,MEM_ADDRESS2,MEM_BIRTHDATE,MEM_EMAIL,MEM_PHONENO,MEM_MILEAGE,MEM_MEMBERTYPE,MEM_JOINDATE,MEM_LASTLOGIN) values (2,1,'tester2','테스터','1111','서울시 어딘가','대왕로 어딘가','19900101','tester@kosta.or.kr','010-123-4567',0,'102100','2015-05-01','2015-06-01');
+Insert into SCOTT1.MEMBER (MEM_NO,ZIP_NO,MEM_ID,MEM_NAME,MEM_PASSWORD,MEM_ADDRESS1,MEM_ADDRESS2,MEM_BIRTHDATE,MEM_EMAIL,MEM_PHONENO,MEM_MILEAGE,MEM_MEMBERTYPE,MEM_JOINDATE,MEM_LASTLOGIN) values (3,1,'admin','관리자','1111','경기도 어딘가','어딘가','19900103','admin@kosta.or.kr','010-123-4567',0,'102100','2015-05-31','2015-06-01');
+Insert into SCOTT1.MEMBER (MEM_NO,ZIP_NO,MEM_ID,MEM_NAME,MEM_PASSWORD,MEM_ADDRESS1,MEM_ADDRESS2,MEM_BIRTHDATE,MEM_EMAIL,MEM_PHONENO,MEM_MILEAGE,MEM_MEMBERTYPE,MEM_JOINDATE,MEM_LASTLOGIN) values (4,1,'mega','메가','1111','경기도 어딘가','없음','19900102','mega@kosta.or.kr','010-123-4567',0,'102100','2015-05-20','2015-06-01');
+Insert into SCOTT1.MEMBER (MEM_NO,ZIP_NO,MEM_ID,MEM_NAME,MEM_PASSWORD,MEM_ADDRESS1,MEM_ADDRESS2,MEM_BIRTHDATE,MEM_EMAIL,MEM_PHONENO,MEM_MILEAGE,MEM_MEMBERTYPE,MEM_JOINDATE,MEM_LASTLOGIN) values (5,1,'beta','베타','1111','경기도 어딘가','길바닥','19900102','beta@kosta.or.kr','010-123-4567',0,'102100','2015-06-01','2015-06-01');
+

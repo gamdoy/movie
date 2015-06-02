@@ -25,8 +25,8 @@ public class StatsController {
 		@RequestMapping("statistics_list")
 		public String getStatisticsList(ModelMap map){
 			
-			map.addAttribute("movieList", movieList);
+			//map.addAttribute("movieList", );
 			
-			return 
+			return  "stats/seat_occupancy_form.tiles";
 		}
 }
