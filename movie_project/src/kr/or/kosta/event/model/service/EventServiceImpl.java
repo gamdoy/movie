@@ -26,4 +26,14 @@ public class EventServiceImpl implements EventService {
 		EventVO vo=dao.selectEventByEvtNo(evtNo);
 		return vo;
 	}
+	
+	@Override
+	public int registEvent(EventVO vo) {
+		return dao.insertEvent(vo);
+	}
+	
+	@Override
+	public int setEvent(EventVO vo) {
+		return dao.updateEvent(vo);
+	}
 }

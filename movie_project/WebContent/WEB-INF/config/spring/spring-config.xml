@@ -28,6 +28,8 @@
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/joinsuccess.do" view-name="member/join_success.tiles"/>
+	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
+	<mvc:view-controller path="/event/modifyForm.do" view-name="event/modify_form.tiles"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
