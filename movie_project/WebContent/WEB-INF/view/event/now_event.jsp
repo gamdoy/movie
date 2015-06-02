@@ -19,6 +19,8 @@ table#listTB thead tr{
 }
 </style>
 <h2>진행중인 이벤트</h2>
+<a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
+<a href="<%=request.getContextPath() %>/event/modifyForm.do"><font color="black">관리자 이벤트 수정</font></a>
 <form method="POST" action="<%=request.getContextPath() %>/event/test11.do" id="abc">
 <input type="hidden" name="evtNo" id="evtNo"> 	
 <c:if test="${fn:length(requestScope.event_list) != 0 }">

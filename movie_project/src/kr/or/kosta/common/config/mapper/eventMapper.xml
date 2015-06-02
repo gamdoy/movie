@@ -25,4 +25,21 @@
 		where e.evt_no = ${value}
 	</select>
 	
+	<insert id="insertEvent" parameterType="eventVO">
+		insert into event (evt_no, evt_name, evt_startdate, evt_enddate, evt_regdate, evt_title)
+		values (EVENT_SEQ.nextval, #{evtName}, #{evtStartDate}, #{evtEndDate}, #{evtRegDate}, #{evtTitle})
+	</insert>
+	
+	<update id="updateEvent" parameterType="eventVO">
+		update theater
+		set			evt_name=#{evtName},
+					evt_startdate=#{evtStartDate},
+					evt_enddate=#{evtEndDate},
+					evt_regdate=#{evtRegDate},
+					evt_title=#{evtTitle},
+					
+		where	evt_no=#{evtNo}
+	</update>
+	
+	
 </mapper>

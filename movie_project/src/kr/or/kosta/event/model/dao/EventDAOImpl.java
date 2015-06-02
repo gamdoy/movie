@@ -24,4 +24,14 @@ public class EventDAOImpl implements EventDAO {
 	public EventVO selectEventByEvtNo(int evtNo) {
 		return session.selectOne(namespace+"selectEventByEvtNo",evtNo);
 	}
+	
+	@Override
+	public int insertEvent(EventVO vo) {
+		return session.insert(namespace+ "insertEvent", vo);
+	}
+	
+	@Override
+	public int updateEvent(EventVO vo) {
+		return session.update(namespace+ "updateEvent",vo);
+	}
 }
