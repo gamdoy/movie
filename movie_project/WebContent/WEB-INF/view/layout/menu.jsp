@@ -5,14 +5,6 @@
 	a:hover	{text-decoration:underline; color: white;}/*링크에 마우스 올라갔을 때*/
 	a:active	{text-decoration:none; color: white;}/*링크 클릭시*/
 	a:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
-<<<<<<< HEAD
-	.menu {background-color: gray; height: 160px;width: 1280px;}/*메뉴영역*/
-	.main_menu {background-color: black; height: 80px;width: 1280px;}/*메뉴영역*/
-	.myinfo_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
-	.movie_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
-	.event_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
-	.customer_menu {background-color: gray; height: 80px;width: 1280px; display: none;}
-=======
 	.loginArea{background-color: blue; height: 30px;width: 300px; float:right;}
 	.menu {background-color: gray; height: 160px;width: 980px; float:left;}/*메뉴영역*/
 	.main_menu {background-color: black; height: 80px;width: 980px;}/*메뉴영역*/
@@ -20,7 +12,6 @@
 	.movie_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.event_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.customer_menu {background-color: gray; height: 80px;width: 980px; display: none;}
->>>>>>> branch 'master' of https://github.com/gamdoy/movie.git
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -38,7 +29,6 @@
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
-			location.href = "<%= request.getContextPath()%>/theater/theaterManagement.do";
 			window.location = "<%=request.getContextPath() %>/theater/movieSchedule.do";
 		});
 		$("#eventBtn").on("click", function() {
@@ -48,6 +38,10 @@
 		$("#customerBtn").on("click", function() {
 			hide_subMenu();
 			$(".customer_menu").show();
+		});
+		$("#statsBtn").on("click", function() {
+			hide_subMenu();
+			$(".stats_menu").show();
 		});
 		$("#testBtn").on("click", function() {
 			$.ajax({
@@ -65,24 +59,12 @@
 			$(".movie_menu").hide();
 			$(".event_menu").hide();
 			$(".customer_menu").hide();
+			$(".stats_menu").hide();
 	}
 	function join() {
 		window.location="<%=request.getContextPath() %>/member/joinForm.do";
 	}
 </script>
-<<<<<<< HEAD
-<div class="menu"><!-- 메뉴영역 -->
-	<span>
-	<div class="main_menu"><!-- 메인 메뉴영역 -->
-		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="customerBtn">고객센터</label>
-		<label id="testBtn">test</label>
-	</div>
-	<div class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
-=======
 <section class="menu"><!-- 메뉴영역 -->
 	<section class="main_menu"><!-- 메인 메뉴영역 -->
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -91,35 +73,13 @@
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>
 		<label id="testBtn">test</label>
+		<label id="statsBtn">통계</label>
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
->>>>>>> branch 'master' of https://github.com/gamdoy/movie.git
 		정보수정&nbsp;&nbsp;&nbsp;관심영화&nbsp;&nbsp;&nbsp;관람작&nbsp;&nbsp;&nbsp;마일리지 관리&nbsp;&nbsp;&nbsp;예매내역&nbsp;&nbsp;&nbsp;회원탈퇴
-	</div>
-	<div class="movie_menu"><!-- 영화 서브메뉴영역 -->
+	</section>
+	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
-<<<<<<< HEAD
-	</div>
-	<div class="reserve_menu"><!-- 영화 서브메뉴영역 -->
-	</div>
-	<div class="theater_menu"><!-- 영화 서브메뉴영역 -->
-	</div>
-	<div class="event_menu"><!-- 이벤트 서브메뉴영역 -->
-		진행중인 이벤트&nbsp;&nbsp;&nbsp;종료된 이벤트&nbsp;&nbsp;&nbsp;당첨자 확인
-	</div>
-	<div class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
-		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;F & Q
-	</div>
-	
-	</span>
-	<span style="float: right;" >
-	</span>
-</div>
-<div class="login_area">
-	
-</div>
-<!-- 로그인 영역 -->    
-=======
 	</section>
 	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->
 	</section>
@@ -130,6 +90,11 @@
 	</section>
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;F & Q
+	</section>
+	<section class="stats_menu"	><!-- 통계 서브메뉴 영역 -->
+		<a href="<%=request.getContextPath() %>/stats/booking_status_form.do">예약현황</a>&nbsp;&nbsp;&nbsp;
+		<a href="<%=request.getContextPath() %>/stats/seat_occupancy_form.do">좌석점유율</a>&nbsp;&nbsp;&nbsp;
+		<a href="<%=request.getContextPath() %>/stats/statistics_form.do">통계표</a>
 	</section>
 </section>
 <section class="loginArea">
@@ -154,4 +119,3 @@
 	</table>
 
 </section><!-- 로그인 영역 -->
->>>>>>> branch 'master' of https://github.com/gamdoy/movie.git

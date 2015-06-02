@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper>
-  <cache-ref namespace=""/>
+<mapper namespace="theater.dao.theaterMapper">
+	<resultMap type="theaterVO" id="theater-resultmap">
+		<result column="mov_title" property="title"/>					<!-- 영화제목 -->
+		<result column="mov_intheaters" property="intheaters"/>	 <!-- 개봉일 -->
+		<result column="tic_totalcustomer" property="bookingStatus"/>	<!--  -->
+		<result column="thea_phoneno" property="weeklySales"/>
+		<result column="thea_address2" property="bookingCount"/>
+		<result column="thea_status" property="cumulativeAttendance"/>
+		<result column="thea_status" property="seats"/>
+	</resultMap>
+
+	<select id="selectMovieRank" resultMap="stats-resultmap">
+		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2, t.thea_status
+		from		theater t, schedule s, ticket tk
+		where t.zip_no = z.zip_no
+			and t.thea_no = ${value}
+	</select>
+	
+	<select id="selectAllTheater" resultMap="theater-resultmap">
+		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2, t.thea_status
+		from		theater t, zipcode z
+		where t.zip_no = z.zip_no
+		order by t.thea_location
+	</select>
+	
+	<select id="selectTotalMemberCount" resultType="_int">
+		select count(id) from member
+	</select>
 </mapper>

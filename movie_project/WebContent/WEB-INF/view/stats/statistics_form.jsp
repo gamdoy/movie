@@ -1,12 +1,15 @@
 <%@ page contentType= "text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
-<script type="text/javascript" src="<%= request.getContextPath()%>/WEB-INF/view/common/click_cal.js"></script>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
+
 <body>
-<input type="text" OnClick="Calendar(this, 'down','no');">
+<form method="post" action="<%=request.getContextPath() %>/stats/statistics_list.do"  id="statsForm">
+시작일 : <input type="date" name="startDate">
+종료일 : <input type="date" name="endDate">
+<input type="submit"  value="조회">
+</form>
 </body>
 </html>
