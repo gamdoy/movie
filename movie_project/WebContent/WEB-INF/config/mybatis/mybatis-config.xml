@@ -10,6 +10,7 @@
 		<package name="kr.or.kosta.event.vo"/>
 		<package name="kr.or.kosta.common.vo"/> 
 		<package name="kr.or.kosta.movie.vo"/> 
+		<package name="kr.or.kosta.center.vo"/>
 	</typeAliases>
 	
 	<mappers>
@@ -17,5 +18,6 @@
 		<mapper resource="kr/or/kosta/common/config/mapper/commonCodeMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/eventMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/movieMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/centerMapper.xml"/>
 	</mappers>
 </configuration>
