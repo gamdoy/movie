@@ -59,7 +59,7 @@ public class MovieController {
 	//영화등록 로직
 	@RequestMapping(value ="register.do", method=RequestMethod.POST)
 	public String registerMovie(@ModelAttribute MovieVO movie, Errors errors, HttpServletRequest request) throws IllegalStateException, IOException{
-		System.out.println(movie.getDirNo());
+		
 		
 		//파일업로드 처리
 		MultipartFile file = movie.getPoster();
@@ -70,11 +70,9 @@ public class MovieController {
 			file.transferTo(image);
 			movie.setPosterName(fileName);
 		}
-		
 		service.registerMovie(movie);
 		
 		System.out.println("db작업후 "+movie);
-		
 		
 		return "redirect:/movie/register_success.do?movNo="+movie.getMovieNo(); 
 	}
@@ -83,9 +81,10 @@ public class MovieController {
 	@RequestMapping("register_success.do")
 	public String registerSuccsess(@RequestParam String movNo,ModelMap map){
 		
-		
 		MovieVO movie = service.getMovieByNo(movNo);
-		System.out.println("영화정보 "+movie);
+		
+		System.out.println("결과화면 무비객체 "+movie);
+		
 		map.addAttribute("movie",movie);
 		return "movie/register_success.tiles";
 		

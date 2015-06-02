@@ -9,7 +9,18 @@
 <title>영화 등록</title>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/script/jquery.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/script/date_picker.js"></script>
+
 <script type="text/javascript">
+	function lengthcheck(obj){
+		alert("으악")
+		if(!obj.value){
+			alert("필수입력 사항입니다.")
+		}else(obj.value.length>10){
+			alert('10글자 이상은 입력 할 수 없습니다.')
+		}
+	}
+	
 	
 </script>
 </head>
@@ -41,7 +52,9 @@
 		<table border="1">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" id="title" name="title"></td>
+				<td><input type="text" id="title" name="title">
+				<span id="알림 칸"></span>
+				</td>
 			</tr>
 			<tr>
 				<td>줄거리</td>
@@ -71,7 +84,8 @@
 
 			<tr>
 				<td>개봉일</td>
-				<td><input type="text" name="intheaters"></td>
+				<td><input type="text" name="intheaters">
+					<input type="button" value="달력 선택" onClick="datePicker(event,'intheaters')"></td>
 			</tr>
 
 			<tr>
@@ -82,16 +96,6 @@
 			<tr>
 				<td>트레일러</td>
 				<td><input type="text" name="trailer"></td>
-			</tr>
-
-			<tr>
-				<td>평점</td>
-				<td><input type="text" name="movGrade"></td>
-			</tr>
-
-			<tr>
-				<td>평점참가인원</td>
-				<td><input type="number" name="movCount"></td>
 			</tr>
 
 			<tr>
@@ -126,7 +130,7 @@
 			</tr>
 
 			<tr>
-				<td>제작사<br>(후에 db불러오는걸로 수정)
+				<td>제작사<br>
 				</td>
 				<td><select name="proNo" id="proNo">
 						<c:forEach items="${proNo }" var="pro">

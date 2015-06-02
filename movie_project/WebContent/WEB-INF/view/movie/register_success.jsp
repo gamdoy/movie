@@ -26,12 +26,7 @@
 		<tr>
 			<td>상영등급</td>
 			<td>
-				<select name="screeningGrade" >
-						<c:forEach items="${screenGrade }" var="sgrade">
-							<option value="${sgrade.cmnNo }"> ${sgrade.cmnCodeKor }</option>
-						</c:forEach> 
-				</select>  
-
+				${requestScope.movie.sgradeName }
 			</td>
 		</tr>
 
@@ -65,22 +60,12 @@
 		</tr>
 
 		<tr>
-			<td>평점</td>
-			<td>${requestScope.movie.movGrade }</td>
-		</tr>
-
-		<tr>
-			<td>평점참가인원</td>
-			<td>${requestScope.movie.movCount }</td>
-		</tr>
-
-		<tr>
 			<td>장르</td>
-			<td>${requestScope.movie.genre }</td>
+			<td>${requestScope.movie.genreName }</td>
 		</tr>
 
 		<tr>
-			<td>감독번호</td>
+			<td>감독</td>
 			<td>${requestScope.movie.dirName } </td>
 		</tr>
 
