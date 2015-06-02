@@ -8,4 +8,5 @@ public interface EventService {
 	
 	public abstract List<EventVO> getEventList();
 	
+	public abstract EventVO getEventByEvtNo(int evtNo);
 }

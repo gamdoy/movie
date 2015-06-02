@@ -1,6 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script type="text/javascript">
+function getEvent(evtNo){
+	$("#evtNo").val(evtNo);
+	$("#abc").submit();
+}
+
+</script>
+
+
+
 <style type="text/css">
 
 table#listTB thead tr{
@@ -8,31 +18,28 @@ table#listTB thead tr{
 	background: lightgray;
 }
 </style>
-<h2>회원목록</h2> 	
+<h2>진행중인 이벤트</h2>
+<form method="POST" action="<%=request.getContextPath() %>/event/test11.do" id="abc">
+<input type="hidden" name="evtNo" id="evtNo"> 	
 <c:if test="${fn:length(requestScope.event_list) != 0 }">
 	<table id="listTB" style="width:700px">
 		<thead>
 			<tr>
 				<td>NO</td>
 				<td>이름</td>
-				<td>시작일</td>
-				<td>종료일</td>
-				<td>등록일</td>
-				<td>이벤트</td>
+				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.event_list }" var="EventVO">
+			<c:forEach items="${requestScope.event_list }" var="eventVO">
 				<tr>
-					<td>${EventVO.evtNo }</td>
-					<td>${EventVO.evtName}</td>
-					<td>${EventVO.evtStartDate}</td>
-					<td>${EventVO.evtEndDate}</td>
-					<td>${EventVO.evtRegDate}</td>
-					<td>${EventVO.evtTitle}</td>
+					<td><label onclick="getEvent(${eventVO.evtNo })">${eventVO.evtNo }</label> </td>
+					<td>${eventVO.evtName}</td>
+					
 				</tr> 
 			</c:forEach>
 		</tbody>
 	</table>
 </c:if>
+</form>
 

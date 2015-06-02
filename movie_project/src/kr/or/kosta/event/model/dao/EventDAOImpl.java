@@ -10,13 +10,18 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class EventDAOImpl implements EventDAO {
-	private String namespace="event.dao.eventMapper";
+	private String namespace="event.dao.eventMapper.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
 	
 	@Override
-	public List<EventVO> selectEvent(){
-		return session.selectList(namespace+"selectEvent");		
+	public List<EventVO> selectEventList(){
+		return session.selectList(namespace+"selectEventList");		
+	}
+	
+	@Override
+	public EventVO selectEventByEvtNo(int evtNo) {
+		return session.selectOne(namespace+"selectEventByEvtNo",evtNo);
 	}
 }
