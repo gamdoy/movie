@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.or.kosta.common.config.movieMapper">
+	
+	<insert id="insertMovie" parameterType="movieVO">
+		insert into MOVIE 
+		(MOV_NO, MOV_TITLE, MOV_SYNOPSIS, MOV_OFFICIALSITE, MOV_SCREENINGGRADE, MOV_POSTER, MOV_INTHEATERS,
+		 MOV_RUNTIME, MOV_TRAILER, MOV_GRADE, MOV_COUNT,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
+		  values(movie_seq.nextval, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{posterName},
+		   #{intheaters}, #{runtime}, #{trailer}, #{movGrade}, #{movCount} ,#{genre}, #{dirNo}, 33, #{proNo})
+	
+	</insert>
+	<!-- 공통관리 -->
+	<resultMap type="commonCodeVO" id="commonCode-resultmap">
+		<result column="cmn_no" property="cmnNo"/>
+		<result column="cmn_code_eng" property="cmnCodeEng"/>
+		<result column="cmn_code_kor" property="cmnCodeKor"/>
+	</resultMap>
+	
+	<select id="commoncode" resultMap="commonCode-resultmap">
+		select * from commoncode
+	</select>
+	
+	<!-- 감독 -->
+	<resultMap type="directorVO" id="director-resultmap">
+		<result column="dir_no" property="dirNo"/>
+		<result column="dir_name" property="dirName"/>
+	</resultMap>
+	<select id="director" resultMap="director-resultmap">
+		select * from director
+	</select>
+	
+	<!-- 배우 -->
+	<resultMap type="actorVO" id="actor-resultmap">
+		<result column="act_no" property="actNo"/>
+		<result column="act_name" property="actName"/>
+	</resultMap>
+	<select id="actor" resultMap="actor-resultmap">
+		select * from actor
+	</select>
+	
+	<!-- 제작사 -->
+	<resultMap type="productionVO" id="production-resultmap">
+		<result column="pro_no" property="proNo"/>
+		<result column="pro_name" property="proName"/>
+	</resultMap>
+	<select id="production" resultMap="production-resultmap">
+		select * from production
+	</select>
+	
+</mapper>

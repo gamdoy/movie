@@ -69,13 +69,13 @@ $(document).ready(function(){
 
 <h2>가입양식</h2>
 
-<form method="post" action="${initParam.rootPath }/member/join.do"  id="registerForm" enctype="multipart/form-data">
+<form method="post" action="${initParam.rootPath }/member/join.tiles"  id="registerForm" enctype="multipart/form-data">
 	<table style="width:600px">
 		<tr>
 			<td width="100">ID</td>
 			<td>
 				<input type="text" name="id" id='id'> <span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
-				
+				<input type="button" name="idconfirm" id="idconfirm" value="중복확인">
 			</td>
 		</tr>
 		<tr>
@@ -85,9 +85,21 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
+			<td>Password확인</td>
+			<td>
+				<input type="password" id="password2" name="password2"> <span class="errorMessage"><form:errors path="member.password"/></span>
+			</td>
+		</tr>
+		<tr>
 			<td>이름</td>
 			<td>
 				<input type="text" id="name" name="name"> <span class="errorMessage"><form:errors path="member.name"/></span>
+			</td>
+		</tr>
+		<tr>
+			<td>나이</td>
+			<td>
+				<input type="text" id="age" name="age"> <span class="errorMessage"><form:errors path="member.name"/></span>
 			</td>
 		</tr>
 		<tr>
@@ -97,9 +109,19 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td>사진</td>
+			<td>우편번호<td>
+			<input type="button" id="address" name="address" value="우편번호검색"> <span class="errorMessage"><form:errors path="member.email"/></span>
+		</tr>
+		<tr>
+			<td>상세주소</td>
 			<td>
-				<input type="file" id="picture" name="picture">
+				<input type="text" id="address2" name="address2"> <span class="errorMessage"><form:errors path="member.email"/></span>
+			</td>
+		</tr>
+		<tr>
+			<td>연락처</td>
+			<td>
+				<input type="text" id="tel" name="tel"> <span class="errorMessage"><form:errors path="member.email"/></span>
 			</td>
 		</tr>
 		<tr>
