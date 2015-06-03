@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/event/")
@@ -50,5 +51,19 @@ public class EventController {
 	public String prizeWinner(){
 		System.out.println("eventTest.do");
 		return "event/prizeWinner.tiles";
+	}
+	
+	@RequestMapping(value="addEvent")
+	@ResponseBody
+	public int addEvent(@ModelAttribute EventVO vo, ModelMap map){
+		int i=service.registEvent(vo);
+		System.out.println(i);
+		return i;
+	}
+	
+	@RequestMapping(value="modifyEvent")
+	@ResponseBody
+	public int modifyEvent(@ModelAttribute EventVO vo,ModelMap map){
+		return service.setEvent(vo);
 	}
 }
