@@ -8,7 +8,7 @@ $(document).ready(function(){
 	$("#id").on("keyup", function(){
 		var id = this.value;
 		$.ajax({
-			url:"${initParam.rootPath}/member/idDuplicateCheck.do",
+			url:"<%=request.getContextPath() %>/member/idDuplicateCheck.do",
 			data:{"id":id},
 			dataType:"JSON",
 			beforeSend:function(){

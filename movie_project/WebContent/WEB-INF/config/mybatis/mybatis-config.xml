@@ -8,10 +8,14 @@
 		<package name="kr.or.kosta.theater.vo"/>
 		<package name="kr.or.kosta.commoncode.vo"/>
 		<package name="kr.or.kosta.common.vo"/>
+		<package name="kr.or.kosta.member.vo"/>
+		
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="kr/or/kosta/common/config/mapper/theaterMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/commonCodeMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/memberMapper.xml"/>
+		
 	</mappers>
 </configuration>
