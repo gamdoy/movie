@@ -12,14 +12,18 @@ public class StatsVO {
 	private int bookingCount;//예매관객수
 	private int cumulativeAttendance;//누적관객수	
 	private int seats;//좌석수
+	private int movieNumber;
+	private int scheduleNumber;
+	private int ticketPrice;
 	
 	public StatsVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public StatsVO(int rank, String title, String intheaters,
 			double bookingStatus, int weeklySales, int cumulativeSales,
-			int bookingCount, int cumulativeAttendance, int seats) {
+			int bookingCount, int cumulativeAttendance, int seats,
+			int movieNumber, int scheduleNumber) {
 		super();
 		this.rank = rank;
 		this.title = title;
@@ -30,71 +34,104 @@ public class StatsVO {
 		this.bookingCount = bookingCount;
 		this.cumulativeAttendance = cumulativeAttendance;
 		this.seats = seats;
+		this.movieNumber = movieNumber;
+		this.scheduleNumber = scheduleNumber;
 	}
 
 	public int getRank() {
 		return rank;
 	}
+
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getIntheaters() {
 		return intheaters;
 	}
+
 	public void setIntheaters(String intheaters) {
 		this.intheaters = intheaters;
 	}
+
 	public double getBookingStatus() {
 		return bookingStatus;
 	}
+
 	public void setBookingStatus(double bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
+
 	public int getWeeklySales() {
 		return weeklySales;
 	}
+
 	public void setWeeklySales(int weeklySales) {
 		this.weeklySales = weeklySales;
 	}
+
 	public int getCumulativeSales() {
 		return cumulativeSales;
 	}
+
 	public void setCumulativeSales(int cumulativeSales) {
 		this.cumulativeSales = cumulativeSales;
 	}
+
 	public int getBookingCount() {
 		return bookingCount;
 	}
+
 	public void setBookingCount(int bookingCount) {
 		this.bookingCount = bookingCount;
 	}
+
 	public int getCumulativeAttendance() {
 		return cumulativeAttendance;
 	}
+
 	public void setCumulativeAttendance(int cumulativeAttendance) {
 		this.cumulativeAttendance = cumulativeAttendance;
 	}
+
 	public int getSeats() {
 		return seats;
 	}
+
 	public void setSeats(int seats) {
 		this.seats = seats;
 	}
 
-	@Override
-	public String toString() {
-		return "StatsVO [rank=" + rank + ", title=" + title + ", intheaters="
-				+ intheaters + ", bookingStatus=" + bookingStatus
-				+ ", weeklySales=" + weeklySales + ", cumulativeSales="
-				+ cumulativeSales + ", bookingCount=" + bookingCount
-				+ ", cumulativeAttendance=" + cumulativeAttendance + ", seats="
-				+ seats + "]";
+	public int getMovieNumber() {
+		return movieNumber;
+	}
+
+	public void setMovieNumber(int movieNumber) {
+		this.movieNumber = movieNumber;
+	}
+
+	public int getScheduleNumber() {
+		return scheduleNumber;
+	}
+
+	public void setScheduleNumber(int scheduleNumber) {
+		this.scheduleNumber = scheduleNumber;
+	}
+
+	public int getTicketPrice() {
+		return ticketPrice;
+	}
+
+	public void setTicketPrice(int ticketPrice) {
+		this.ticketPrice = ticketPrice;
 	}
 
 	@Override
@@ -109,8 +146,11 @@ public class StatsVO {
 		result = prime * result + cumulativeSales;
 		result = prime * result
 				+ ((intheaters == null) ? 0 : intheaters.hashCode());
+		result = prime * result + movieNumber;
 		result = prime * result + rank;
+		result = prime * result + scheduleNumber;
 		result = prime * result + seats;
+		result = prime * result + ticketPrice;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + weeklySales;
 		return result;
@@ -139,9 +179,15 @@ public class StatsVO {
 				return false;
 		} else if (!intheaters.equals(other.intheaters))
 			return false;
+		if (movieNumber != other.movieNumber)
+			return false;
 		if (rank != other.rank)
 			return false;
+		if (scheduleNumber != other.scheduleNumber)
+			return false;
 		if (seats != other.seats)
+			return false;
+		if (ticketPrice != other.ticketPrice)
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -152,6 +198,18 @@ public class StatsVO {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "StatsVO [rank=" + rank + ", title=" + title + ", intheaters="
+				+ intheaters + ", bookingStatus=" + bookingStatus
+				+ ", weeklySales=" + weeklySales + ", cumulativeSales="
+				+ cumulativeSales + ", bookingCount=" + bookingCount
+				+ ", cumulativeAttendance=" + cumulativeAttendance + ", seats="
+				+ seats + ", movieNumber=" + movieNumber + ", scheduleNumber="
+				+ scheduleNumber + ", ticketPrice=" + ticketPrice + "]";
+	}
+
 	
 	
 }

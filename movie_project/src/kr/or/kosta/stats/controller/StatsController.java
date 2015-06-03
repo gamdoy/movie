@@ -1,5 +1,11 @@
 package kr.or.kosta.stats.controller;
 
+import java.util.List;
+
+import kr.or.kosta.stats.model.service.StatsService;
+import kr.or.kosta.stats.vo.StatsVO;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/stats/")
 public class StatsController {
+	
+	@Autowired
+	private StatsService statsService;
+	
 		@RequestMapping("statistics_form")
 		public String goStatisticsForm(){
 			return "stats/statistics_form.tiles";
@@ -24,9 +34,8 @@ public class StatsController {
 		
 		@RequestMapping("statistics_list")
 		public String getStatisticsList(ModelMap map){
-			
-			//map.addAttribute("movieList", );
-			
-			return  "stats/seat_occupancy_form.tiles";
+			List<StatsVO> list= statsService.getStatistics();
+			map.addAttribute("statsList", list);
+			return  "stats/statistics_form.tiles";
 		}
 }
