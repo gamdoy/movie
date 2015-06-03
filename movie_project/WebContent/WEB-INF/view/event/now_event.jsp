@@ -4,7 +4,7 @@
 <script type="text/javascript">
 function getEvent(evtNo){
 	$("#evtNo").val(evtNo);
-	$("#abc").submit();
+	$("#now_event").submit();
 }
 
 </script>
@@ -21,7 +21,7 @@ table#listTB thead tr{
 <h2>진행중인 이벤트</h2>
 <a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
 <a href="<%=request.getContextPath() %>/event/modifyForm.do"><font color="black">관리자 이벤트 수정</font></a>
-<form method="POST" action="<%=request.getContextPath() %>/event/test11.do" id="abc">
+<form method="POST" action="<%=request.getContextPath() %>/event/test11.do" id="now_event">
 <input type="hidden" name="evtNo" id="evtNo"> 	
 <c:if test="${fn:length(requestScope.event_list) != 0 }">
 	<table id="listTB" style="width:700px">
