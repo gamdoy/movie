@@ -125,6 +125,8 @@ public class TheaterController {
 	@RequestMapping("reserveSuccess")
 	public String reserveSuccess(@ModelAttribute TicketVO vo, ModelMap map) {
 		map.addAttribute("ticket", theaterService.getTicketByNo(vo.getTicNo()));
+		System.out.println(vo.getTicNo());
+		System.out.println(theaterService.getTicketByNo(vo.getTicNo()));
 		return "ticket/reserveSuccess.tiles";
 	}
 }
