@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin.dao.adminMapper">
+  	<resultMap type="couponVO" id="coupon-resultmap">
+  		<id column="cop_no" property="coupNo"/>
+  		<result column="cop_type" property="coupType"/>
+  		<result column="cop_used" property="coupUsed"/>
+  		<result column="cop_usedate" property="coupUsedDate"/>
+  	</resultMap>
+  	
+	<resultMap type="adminVO" id="admin-resultmap">
+		<id column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memberId"/>
+		<result column="mem_name" property="memberName"/>
+		<result column="mem_birthdate" property="memberBirthdate"/>
+		<result column="mem_email" property="memberEmail"/>
+		<result column="mem_phoneno" property="memberPhone"/>
+		<result column="mem_mileage" property="memberMileage"/>
+		<result column="mem_membertype" property="memberType"/>
+		<result column="mem_joindate" property="memberJoindate"/>
+		<collection  property="coupon" ofType="couponVO" resultMap="coupon-resultmap"/>
+	</resultMap>
+
+	<select id="selectMemberList" resultMap="admin-resultmap">
+		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate, c.cop_no, c.cop_type, c.cop_used, c.cop_usedate
+		from member m, coupon c
+		where m.mem_no = c.mem_no
+	</select>
+
+	<select id="selectMemberByName"  parameterType="string" resultMap="admin-resultmap">
+		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate, c.cop_no, c.cop_type, c.cop_used, c.cop_usedate
+		from member m, coupon c
+		where m.mem_no = c.mem_no
+		and m.mem_name like '%'||#{value}||'%'
+	</select>
+	
+	<select id="selectMemberById"  parameterType="string" resultMap="admin-resultmap">
+		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate, c.cop_no, c.cop_type, c.cop_used, c.cop_usedate
+		from member m, coupon c
+		where m.mem_no = c.mem_no
+		and m.mem_id = #{value}
+	</select>
+	
+	<insert id="insertCoupon" parameterType="couponVO">
+		INSERT INTO COUPON(COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE)
+		values(COUPON_SEQ.nextval,#{MemNo},#{coupType},#{coupUsed},#{coupUsedDate});
+	</insert>
+</mapper>
