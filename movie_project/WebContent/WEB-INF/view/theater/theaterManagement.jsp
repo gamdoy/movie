@@ -159,7 +159,7 @@ function addTheater(){
 }
 //우편번호 팝업창
 function modifyZipcode(theaNo) {
-	window.open("<%= request.getContextPath()%>/commonCode/zipcode.do?theaNo=" + theaNo, "zipcode", "height=500, width=700, menubar=no, toolbar=no, location=no, status=no, resizable=no");
+	window.open("<%= request.getContextPath()%>/commonCode/getZipCodeForTheater.do?theaNo=" + theaNo, "zipcode", "height=500, width=700, menubar=no, toolbar=no, location=no, status=no, resizable=no");
 }
 
 //버튼 토글
