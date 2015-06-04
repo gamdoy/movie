@@ -39,7 +39,7 @@ public class MemberDAOImpl implements MemberDAO{
 	public List<MemberVO> selectAllMember() {
 		return session.selectList(namespace+"selectAllMember");
 	}
-@Override
+    @Override
 	public MemberVO selectMemberByNo(int memNo) {
 		System.out.println("selectMemberByNo : "+memNo);
 		return session.selectOne(namespace+"selectMemberByNo", memNo);

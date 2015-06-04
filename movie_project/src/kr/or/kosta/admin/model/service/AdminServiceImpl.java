@@ -37,12 +37,12 @@ public class AdminServiceImpl implements AdminService{
 			String coupType) {
 		//멤버 마일리지 수정
 		System.out.println("issueCouponByMemberNo"+memNo);
-		
 		MemberVO memVo = memberDao.selectMemberByNo(memNo);
 		
 		System.out.println("멤버객체"+memVo);
 		memVo.setMemMileage(memberMileage);
 		memberDao.updateMember(memVo);
+		
 		//쿠폰발행
 		CouponVO copVo = new CouponVO();
 		copVo.setMemNo(memVo.getMemNo());
