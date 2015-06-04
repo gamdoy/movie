@@ -15,6 +15,10 @@
 	<context:component-scan base-package="kr.or.kosta.theater.controller"/>
 	<context:component-scan base-package="kr.or.kosta.event.controller"/>
 	<context:component-scan base-package="kr.or.kosta.commoncode.controller"/>
+
+	<context:component-scan base-package="kr.or.kosta.member.controller"/>
+	<context:component-scan base-package="kr.or.kosta.member.model"/>
+
 	<context:component-scan base-package="kr.or.kosta.theater.model"/>
 	<context:component-scan base-package="kr.or.kosta.commoncode.model"/>
 	<context:component-scan base-package="kr.or.kosta.event.model"/>
@@ -30,7 +34,7 @@
 	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
 	<mvc:view-controller path="/member/joinsuccess.do" view-name="member/join_success.tiles"/>
 	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
-	<mvc:view-controller path="/event/modifyForm.do" view-name="event/modify_form.tiles"/>
+	
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

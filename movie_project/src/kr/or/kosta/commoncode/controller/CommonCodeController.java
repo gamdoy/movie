@@ -23,19 +23,19 @@ public class CommonCodeController {
 	@RequestMapping("phoneCode")
 	@ResponseBody
 	public List<CommonCodeVO> phoneCode() {
-		return Service.getCodeLIst("101");
+		return Service.getCodeList("101");
 	}
 	
 	@RequestMapping("getCode")
 	@ResponseBody
 	public List<CommonCodeVO> getCode(@ModelAttribute CommonCodeVO vo) {
-		return Service.getCodeLIst(vo.getKeyword());
+		return Service.getCodeList(vo.getKeyword());
 	}
 	
-	@RequestMapping("zipcode")
-	public String getZipCode(@ModelAttribute TheaterVO vo, ModelMap map) {
+	@RequestMapping("getZipCodeForTheater")
+	public String getZipCodeForTheater(@ModelAttribute TheaterVO vo, ModelMap map) {
 		map.addAttribute("theaNo", vo.getTheaNo());
-		return "/WEB-INF/view/common/zipcode.jsp";
+		return "/WEB-INF/view/common/zipcodeForTheater.jsp";
 	}
 	
 	@RequestMapping("findZipcode")

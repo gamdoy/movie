@@ -43,13 +43,13 @@ $(document).ready(function(){
 
 <h2>이벤트 수정 </h2>
 
-<form method="post" action="<%=request.getContextPath() %>/event/modifyForm.do" id="modifyForm" 
+<form method="post" action="<%=request.getContextPath() %>/event/modifyEvent.do" id="modifyForm" 
 	      enctype="multipart/form-data">
-	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
+	<input type="hidden" name="evtNo" value="${evtVO.evtNo }">
 	<table style="width:500px">
 		<tr>
 			<td>이벤트번호</td>
-			<td>${sessionScope.login_info.id }</td>
+			<td>${evtVO.evtNo }</td>
 		</tr>
 		<tr>
 			<td width="100">이벤트 분류</td>
