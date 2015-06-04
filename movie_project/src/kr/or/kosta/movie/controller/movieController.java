@@ -39,9 +39,9 @@ public class movieController {
 	public String registerForm(ModelMap map){
 		
 		//commonCode 사용 
-		List<CommonCodeVO> screenGrade = service2.getCodeLIst("104");
+		List<CommonCodeVO> screenGrade = service2.getCodeList("104");
 		System.out.println(screenGrade);
-		List<CommonCodeVO> genre = service2.getCodeLIst("110");
+		List<CommonCodeVO> genre = service2.getCodeList("110");
 		
 		
 		List<DirectorVO> director = service.getDirector();

@@ -12,9 +12,40 @@
 		<result column="thea_status" property="theaStatus"/>
 	</resultMap>
 	
+	<resultMap type="scheduleVO" id="schdule-resultmap">
+		<id column="sch_no" property="schNo"/>
+		<result column="mov_no" property="movNo"/>
+		<result column="mr_no" property="mrNo"/>
+		<result column="sch_date" property="schDate"/>
+		<result column="thea_no" property="theaNo"/>
+	</resultMap>
+	
+	<resultMap type="ticketVO" id="ticket-resultmap">
+		<id column="sch_no" property="ticNo"/>
+		<result column="tic_date" property="ticDate"/>
+		<result column="tic_price" property="ticPrice"/>
+		<result column="tic_paytype" property="ticPaytype"/>
+		<result column="tic_paytypename" property="ticPayTypename"/>
+		<result column="tic_seatno" property="ticSeatno"/>
+		<result column="tic_totalcustomer" property="ticTotalcustomer"/>
+		<result column="sch_no" property="schNo"/>
+		<result column="sch_date" property="schDate"/>
+		<result column="mr_no" property="mrNo"/>
+		<result column="mr_name" property="mrName"/>
+		<result column="mr_screentype" property="mrScreentype"/>
+		<result column="mr_screenname" property="mrScreenname"/>
+		<result column="mr_line" property="mrLine"/>
+		<result column="mr_seat" property="mrSeat"/>
+		<result column="thea_no" property="theaNo"/>
+		<result column="mem_no" property="memNo"/>
+	</resultMap>
+	
 	<insert id="insertTheater" parameterType="theaterVO">
+		<selectKey keyProperty="theaNo" resultType="_int" order="BEFORE">
+			select THEATER_SEQ.nextval from dual
+		</selectKey>
 		insert into theater (thea_no, zip_no, thea_location, thea_phoneNo, thea_address1, thea_address2)
-		values (THEATER_SEQ.nextval, #{zipNo}, #{theaLocation}, #{theaPhoneNo}, #{theaAddress1}, #{theaAddress2})
+		values (#{theaNo}, #{zipNo}, #{theaLocation}, #{theaPhoneNo}, #{theaAddress1}, #{theaAddress2})
 	</insert>
 	
 	<update id="updateTheater" parameterType="theaterVO">
@@ -46,6 +77,45 @@
 		order by t.thea_location
 	</select>
 	
+	<!-- 극장별 상영일 조회 -->
+	<select id="selectSechduleList" parameterType="_int" resultMap="schdule-resultmap">
+		select distinct substr(sch_date,1,10) sch_date
+		from schedule s, movieroom mr, theater t
+		where sch_date > to_char(sysdate, 'yyyy-mm-dd hh24:mi')
+			and mr.mr_no = s.mr_no
+			and mr.thea_no = t.thea_no
+			and t.thea_no = ${value}
+		order by sch_date
+	</select>
+	
+	<!-- 극장별 상영 정보 조회  -->
+	<select id="selectSechduleListByTheater" parameterType="_int" resultMap="schdule-resultmap">
+		select s.sch_no, s.sch_no, s.mr_no, s.sch_date, m.thea_no
+		from schedule s, movieroom m
+		where s.mr_no = m.mr_no
+		<if test="value != 0">
+			and m.thea_no = #{value}
+		</if>
+		order by m.thea_no, s.sch_no
+	</select>
+	
+	<!-- 극장별 해당 상영일 시간표 조회  -->
+	<select id="selectScreenTimeList" parameterType="scheduleVO" resultMap="schdule-resultmap">
+		select SUBSTR(s.sch_date, 12) sch_date, s.sch_no
+		from schedule s, movieroom mr, theater t
+		where 1=1
+			and mr.mr_no = s.mr_no
+			and mr.thea_no = t.thea_no
+		<if test="theaNo != 0">
+			and mr.thea_no = #{theaNo}
+		</if>
+		<if test="schDate != null">
+			and SUBSTR(s.sch_date, 1, 10) = #{schDate}
+		</if>
+		and s.sch_date > to_char(sysdate, 'yyyy-mm-dd hh24:mi:ss')
+		order by s.sch_date
+	</select>
+	
 	<!-- Paging 추가 -->
 	<select id="selectAllMemberPaging" parameterType="map" resultMap="theater-resultmap">
 		select id, password, name, email, join_date
@@ -61,4 +131,42 @@
 	<select id="selectTotalMemberCount" resultType="_int">
 		select count(id) from member
 	</select>
+	
+	<!-- 상영관 정보를 조회 -->
+	<select id="selectMovieRoomByNo" parameterType="_int" resultMap="ticket-resultmap">
+		select s.sch_no, s.mr_no, mr.thea_no, mr.mr_name, mr.mr_screentype, c.cmn_code_kor mr_screenname, mr.mr_line, mr.mr_seat, s.sch_date
+		from schedule s, movieroom mr, commoncode c
+		where 1=1
+		and s.sch_no = #{value}
+		and s.mr_no = mr.mr_no
+		and mr.MR_SCREENTYPE = c.cmn_no
+	</select>
+	
+	<!-- 티켓 정보를 입력 -->
+	<insert id="insertTicket" parameterType="ticketVO">
+		<selectKey keyProperty="ticNo" resultType="_int" order="BEFORE">
+			select ticket_seq.nextval from dual
+		</selectKey>
+		insert into ticket (tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer)
+		values (#{ticNo}, #{memNo}, #{schNo}, #{ticDate}, #{ticPrice}, #{ticPaytype}, #{ticSeatno}, #{ticTotalcustomer})
+	</insert>
+	
+	<!-- 티켓 정보를 입력 -->
+	<select id="selectTicket" resultMap="ticket-resultmap" parameterType="_int">
+		select tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer from ticket
+		where 1=1
+		and tic_no=#{value}
+	</select>
+	
+	<!-- 예매된 좌석 정보를 입력 -->
+	<select id="selectReservedSeats" parameterType="ticketVO" resultType="String">
+		select tic_seatno 
+		from ticket t
+		where 1=1
+			<if test="schNo != 0">
+				and sch_no=#{schNo}
+			</if>
+	</select>
+	
+	
 </mapper>

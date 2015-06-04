@@ -6,7 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.vo.TheaterVO;
+import kr.or.kosta.ticket.vo.TicketVO;
 
 @Component
 public class TheaterDAOImpl implements TheaterDAO {
@@ -48,6 +50,53 @@ public class TheaterDAOImpl implements TheaterDAO {
 	@Override
 	public int insertTheater(TheaterVO vo) {
 		return session.insert(namespace + "insertTheater", vo);
+	}
+
+	/**
+	 * 상영스케줄을 찾는 메소드
+	 */
+	@Override
+	public List<ScheduleVO> selectScheduleListByNo(int theaNo) {
+		return session.selectList(namespace + "selectSechduleListByTheater", theaNo);
+	}
+
+	/**
+	 * 상영일을 스케줄에서 조회하는 메소드
+	 */
+	@Override
+	public List<ScheduleVO> selectScheduleList(int theaNo) {
+		return session.selectList(namespace + "selectSechduleList", theaNo);
+	}
+
+	@Override
+	public List<ScheduleVO> selectScreenTimeList(ScheduleVO vo) {
+		return session.selectList(namespace + "selectScreenTimeList", vo);
+	}
+
+	@Override
+	public TicketVO selectMovieRoomByNo(int schNo) {
+		return session.selectOne(namespace + "selectMovieRoomByNo", schNo);
+	}
+
+	@Override
+	public int insertTicket(TicketVO vo) {
+		return session.insert(namespace + "insertTicket", vo);
+	}
+
+	@Override
+	public List<TicketVO> selectTicket(int schNo) {
+		return session.selectOne(namespace + "selectTicket", schNo);
+	}
+
+	@Override
+	public TicketVO selectTicketByNo(int ticNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> selectReservedSeats(TicketVO tvo) {
+		return session.selectList(namespace + "selectReservedSeats", tvo);
 	}
 
 }

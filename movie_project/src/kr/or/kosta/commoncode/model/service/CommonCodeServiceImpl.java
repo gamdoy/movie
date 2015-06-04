@@ -16,7 +16,7 @@ public class CommonCodeServiceImpl implements CommonCodeService {
 	private CommonCodeDAO dao;
 	
 	@Override
-	public List<CommonCodeVO> getCodeLIst(String codeNo) {
+	public List<CommonCodeVO> getCodeList(String codeNo) {
 		return dao.selectCodeList(codeNo);
 	}
 
