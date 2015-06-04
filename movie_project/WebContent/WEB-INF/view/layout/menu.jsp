@@ -80,7 +80,7 @@
 	<section class="theater_menu"><!-- 영화 서브메뉴영역 -->
 	</section>
 	<section class="event_menu"><!-- 이벤트 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/event/test1.do">진행중인 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/test2.do">종료된 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/test3.do">당첨자 확인</a>
+		<a href="<%=request.getContextPath() %>/event/nowEvent.do">진행중인 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/endEvent.do">종료된 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/eventListPaging.do">당첨자 확인</a>
 	</section>
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>

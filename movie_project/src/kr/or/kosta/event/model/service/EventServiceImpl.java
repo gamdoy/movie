@@ -1,7 +1,10 @@
 package kr.or.kosta.event.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.event.model.dao.EventDAO;
 import kr.or.kosta.event.vo.EventVO;
 
@@ -35,5 +38,24 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public int setEvent(EventVO vo) {
 		return dao.updateEvent(vo);
+	}
+	
+	@Override
+	public int removeEventByEventNumber(int evtNo) {
+		return dao.deleteEventByEventNumber(evtNo);
+	}
+	
+	@Override
+	public Map getEventListPaging(int pageNo) {
+		//목록에 뿌려줄 List<EventVO>조회
+		List<EventVO> list=dao.selectAllEventPaging(pageNo);
+		//PagingBean생성
+		int totalContent =dao.selectTotalEventCount();
+		PagingBean pagingBean= new PagingBean(totalContent, pageNo);
+		//두개의 값(List, PagingBean)을 Map에 넣어 return
+		HashMap map = new HashMap();
+		map.put("event_list", list);
+		map.put("pagingBean",pagingBean);
+		return map;
 	}
 }
