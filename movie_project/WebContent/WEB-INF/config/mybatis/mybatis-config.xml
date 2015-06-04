@@ -7,13 +7,21 @@
 	<typeAliases>
 		<package name="kr.or.kosta.theater.vo"/>
 		<package name="kr.or.kosta.commoncode.vo"/>
+		<package name="kr.or.kosta.member.vo"/>
+		<package name="kr.or.kosta.event.vo"/>
 		<package name="kr.or.kosta.common.vo"/> 
 		<package name="kr.or.kosta.movie.vo"/> 
+		<package name="kr.or.kosta.center.vo"/>
+		<package name="kr.or.kosta.schedule.vo"/> 
+		<package name="kr.or.kosta.ticket.vo"/> 
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="kr/or/kosta/common/config/mapper/theaterMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/commonCodeMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/memberMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/eventMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/movieMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/centerMapper.xml"/>
 	</mappers>
 </configuration>
