@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="center.dao.centerMapper">
-	
+	<!-- 
+	  <resultMap type="QaVo" id="qa_list-resultmap">
+		<id column="fq_no" property="fqNo"/>
+		<result column="qa_title" property="qaTitle"/>
+		<result column="fq_regdate" property="fqRegdate"/>
+		<result column="qa_count" property="qaCount"/>
+		<result column="mem_no" property="memNo"/>
+		
+		<associtation property="member" javaType="" resultMap="">
+		</associtation>
+	</resultMap>-->
+	  
+	  <resultMap type="QaVo" id="qa_insert-resultmap">
+	  	<id column="fq_no" property="fqNo"/>
+	  	<result column="mem_no" property="memNo"/>
+		<result column="qa_title" property="qaTitle"/>
+		<result column="fq_regdate" property="fqRegdate"/>
+		<result column="fq_lastdate" property="fqLastdate"/>
+		<result column="qa_count" property="qaCount"/>
+		<result column="qa_text" property="qaText"/>
+		<result column="qa_status" property="qaStatus"/>
+		<result column="qa_secret" property="qaSecret"/>
+		<result column="qa_password" property="qaPassword"/>
+		<result column="fq_parent_number" property="fqParentNumber"/>
+		<result column="file_no" property="fileNo"/>
+	  </resultMap>
+	  
+	  <resultMap type="QaVo" id="qa_list-resultmap1">
+		<id column="fq_no" property="fqNo"/>
+		<result column="qa_title" property="qaTitle"/>
+		<result column="fq_regdate" property="fqRegdate"/>
+		<result column="qa_count" property="qaCount"/>
+		<result column="mem_no"  property="memNo"/>
+	  </resultMap>
+	  
+	  <resultMap type="QaVo" id="qa_list-resultmap2">
+		<id column="fq_no" property="fqNo"/>
+		<result column="qa_title" property="qaTitle"/>
+		<result column="fq_regdate" property="fqRegdate"/>
+		<result column="qa_text" property="qaText"/>
+		<result column="file_no"  property="fileNo"/>
+	  </resultMap>
+	  
+	  <select id="selectQaList" resultMap="qa_list-resultmap1">
+	  		select q.fq_no, q.qa_title, q.fq_regdate, q.qa_count, m.mem_no
+	  		from qa q, member m
+	  		where m.mem_no = q.mem_no
+	  		order by q.fq_no
+	  </select>
+	  
+	  <insert id="insertQa" parameterType="QaVo">
+	  		insert into qa(fq_no, mem_no, qa_title, fq_regdate, fq_lastdate, qa_count, qa_text, qa_status, qa_secret, qa_password, fq_parent_number, file_no)
+	  		values (QA_SEQ.nextval, #{memNo},#{qaTitle},#{fqRegdate},#{fqLastdate},#{qaCount},#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqParentNumber},#{fileNo})
+	  </insert>
+	  
+	    <select id="selectQa" resultMap="qa_list-resultmap2" parameterType="_int">
+	  		select fq_no, qa_title, fq_regdate, qa_text, file_no
+	  		from qa 
+	  		where fq_no = #{number}	
+	  </select>
 </mapper>
+
