@@ -1,17 +1,26 @@
 <%@ page contentType = "text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <script type="text/javascript"	src="<%=request.getContextPath()%>/script/jquery.js"></script>
+<style type="text/css">
+table, td {
+	dorfer: 1px;
+}
+
+table {
+	width: 50%;
+	height: 100px;
+	magin: auto;
+	text-align: center;
+}
+</style>
+
 <script type="text/javascript">
 	
 	
 	function submitCheck() {
 		var flag = true;
 		
-		$("input").each(function(){
+		$("#modifyForm input,textarea").each(function(){
 			if(!$(this).val()){
 				alert('['+$(this).prop("name")+"] 항목은 필수 입력사항 입니다");
 				flag = false;
@@ -31,7 +40,9 @@
 	}
 
 	$(document).ready(function() {
-
+		if(${requestScope.movie.success==1 }){
+			alert("수정 성공");
+		}
 		/* 글자수 체크 */
 		$("#title").on("blur", function() {
 			var a = $(this).val();
@@ -97,26 +108,22 @@
 		
 	});
 </script>
-<title>영화 정보 수정</title>
-</head>
-<body>
 <h1>영화 정보 수정<br>
-${requestScope.movie.success } 
 <br>
 </h1>
 <form method="post"
 		action="<%=request.getContextPath()%>/movie/modify_success.do"
-		id="modifyForm" name="modifyForm" enctype="multipart/form-data">
+		id="modifyForm" name="modifyForm" enctype="multipart/form-data" onsubmit="return submitCheck();">
 		
 	
 <input type="hidden" id="movieNo" name="movieNo" value="${requestScope.movie.movieNo }">
-		<table onload="alert('등록성공')">
+		<table>
 			<tr>
 				<!-- 제목 -->
 				<td>제목</td>
 				<td colspan="3"><input type="text" id="title" name="title"
 					autofocus="autofocus"
-					value="${requestScope.movie.title }"></td>
+					value="${requestScope.movie.title }" ></td>
 			</tr>
 			<tr>
 				<!-- 줄거리 -자동 줄넘김 적용 -->
@@ -183,7 +190,10 @@ ${requestScope.movie.success }
 				<!-- 포스터 -->
 				<td>포스터</td>
 				<td><input type="file" name="poster" >
-					<br>
+					<span>
+					등록된 포스터<br>
+				<img src="<%=request.getContextPath()%>/images/${requestScope.movie.posterName }">
+				</span>
 				</td>
 			</tr>
 
@@ -220,5 +230,3 @@ ${requestScope.movie.success }
 		<a href="<%=request.getContextPath()%>/movie/adminmovie_list.do"> 리스트 </a>
 		</span>
 	</form>
-</body>
-</html>

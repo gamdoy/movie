@@ -116,7 +116,6 @@ public class MovieController {
 	//수정페이지
 	@RequestMapping("modify_success.do")
 	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
-	
 		// 파일업로드 처리
 				MultipartFile file = movie.getPoster();
 				

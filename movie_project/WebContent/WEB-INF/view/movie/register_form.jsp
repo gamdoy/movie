@@ -2,11 +2,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
+
 <meta charset="UTF-8">
-<title>영화 등록</title>
+
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/script/jquery.js"></script>
 <script type="text/javascript"
@@ -128,8 +126,6 @@ table {
 		
 	});
 </script>
-</head>
-<body>
 
 
 	<h1>영화등록</h1>
@@ -230,5 +226,3 @@ table {
 
 		</table>
 	</form>
-</body>
-</html>
