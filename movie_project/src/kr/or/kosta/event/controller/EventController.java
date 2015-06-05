@@ -94,4 +94,15 @@ public class EventController {
 		return "event/event_list_paging.tiles";
 		
 	}
+	
+	@RequestMapping(value="searchEventText")
+	public String searchEventText(@RequestParam String searchText, @ModelAttribute EventVO vo ,ModelMap map){
+		
+		List<EventVO> searchEventList = service.searchEventByText(searchText);
+		System.out.println(searchEventList);
+		
+		map.addAttribute("search_event_list",searchEventList);
+		
+		return "event/search_event.tiles";
+	}
 }
