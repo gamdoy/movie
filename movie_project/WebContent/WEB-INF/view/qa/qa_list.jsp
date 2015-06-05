@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>QA게시판</title>
 
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$("tbody tr").on("click", function(){
@@ -37,6 +39,7 @@ function goUrl(){
    
     </head>
     <body>
+   	 
        <!-- 검색 폼 영역 -->
        <form name="searchForm" action="" method="get">
        <p>
@@ -77,7 +80,7 @@ function goUrl(){
 					<td>${QaVO.fqNo}</td>
 					<td>${QaVO.qaTitle}</td>
 					<td>${QaVO.memNo}</td>
-					<td>${QaVO.fqRegdate}</td>
+					<td>${QaVO.fqLastdate}</td>
 					<td>${QaVO.qaCount}</td>
 				</tr> 
 			</c:forEach>

@@ -12,6 +12,10 @@ public interface QaDAO {
 
 	QaVO selectQa(int num);
 
-	
+	int deleteQa(int num);
+
+	int modifyQa(QaVO vo);
+
+	int modifyCount(QaVO vo);
 
 }
