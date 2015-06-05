@@ -9,12 +9,12 @@
 			   mem_name,
 			   mem_password,
 			   mem_addressdetail,
-			   to_char(to_date(mem_birthdate, 'yyyymmdd'), 'yyyy-mm-dd')mem_birthdate,
+			   mem_birthdate,
 			   mem_email,
 			   mem_phoneno,
 			   mem_mileage,
 			   mem_membertype,
-			   mem_joindate
+			   mem_joindate,
 			   mem_lastlogin
 		from member 
 	</sql>
@@ -66,5 +66,10 @@
  	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
  		<include refid="member-select"/>
  		where mem_id=#{memId}
+ 	</select>
+ 	
+ 	 <select id="selectMemberByNo" parameterType="_int" resultMap="member-resultmap">
+ 		<include refid="member-select"/>
+ 		where mem_no=#{memNo}
  	</select>
 </mapper>

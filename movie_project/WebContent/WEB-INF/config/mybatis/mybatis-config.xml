@@ -11,7 +11,10 @@
 		<package name="kr.or.kosta.event.vo"/>
 		<package name="kr.or.kosta.common.vo"/> 
 		<package name="kr.or.kosta.movie.vo"/> 
+		<package name="kr.or.kosta.stats.vo"/> 
 		<package name="kr.or.kosta.center.vo"/>
+		<package name="kr.or.kosta.admin.vo"/>
+		<package name="kr.or.kosta.coupon.vo"/>
 		<package name="kr.or.kosta.schedule.vo"/> 
 		<package name="kr.or.kosta.ticket.vo"/> 
 	</typeAliases>
@@ -22,6 +25,9 @@
 		<mapper resource="kr/or/kosta/common/config/mapper/memberMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/eventMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/movieMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/statsMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/centerMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/adminMapper.xml"/>
+		
 	</mappers>
 </configuration>

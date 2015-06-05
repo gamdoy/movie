@@ -20,7 +20,10 @@ table#listTB thead tr{
 </style>
 <h2>진행중인 이벤트</h2>
 <a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
-
+<form method="POST" action="<%=request.getContextPath() %>/event/searchEventText.do" id="search_event">
+<input type="text" id="searchText" name="searchText">
+<input type="submit" value="검색">
+</form>
 <form method="POST" action="<%=request.getContextPath() %>/event/specEvent.do" id="now_event">
 <input type="hidden" name="evtNo" id="evtNo"> 	
 <c:if test="${fn:length(requestScope.event_list) != 0 }">

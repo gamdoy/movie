@@ -39,6 +39,14 @@
 			hide_subMenu();
 			$(".customer_menu").show();
 		});
+		$("#statsBtn").on("click", function() {
+			hide_subMenu();
+			$(".stats_menu").show();
+		});
+		$("#adminBtn").on("click", function() {
+			hide_subMenu();
+			$(".admin_menu").show();
+		});
 		$("#testBtn").on("click", function() {
 			$.ajax({
 				url:"<%=request.getContextPath() %>/theater/ajaxTest.do",
@@ -55,6 +63,8 @@
 			$(".movie_menu").hide();
 			$(".event_menu").hide();
 			$(".customer_menu").hide();
+			$(".stats_menu").hide();
+			$(".admin_menu").hide();
 	}
 	function join() {
 		window.location="<%=request.getContextPath() %>/member/joinForm.do";
@@ -66,8 +76,9 @@
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="customerBtn">고객센터</label>
-		<label id="testBtn">test</label>
+		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label id="testBtn">test</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<label id="adminBtn">관리자</label>
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		정보수정&nbsp;&nbsp;&nbsp;관심영화&nbsp;&nbsp;&nbsp;관람작&nbsp;&nbsp;&nbsp;마일리지 관리&nbsp;&nbsp;&nbsp;예매내역&nbsp;&nbsp;&nbsp;회원탈퇴
@@ -85,6 +96,14 @@
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>
 	</section>
+	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
+		<a href="<%=request.getContextPath() %>/admin/member_list.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
+	</section>
+	<!-- 
+		<section class="stats_menu">
+			<a href="<%=request.getContextPath() %>/admin/member_list.do">회원목록</a>&nbsp;&nbsp;&nbsp;
+		</section>
+	 -->
 </section>
 <section class="loginArea">
 	<table style=" width: 300px;">

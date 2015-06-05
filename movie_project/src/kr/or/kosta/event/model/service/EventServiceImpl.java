@@ -45,6 +45,19 @@ public class EventServiceImpl implements EventService {
 		return dao.deleteEventByEventNumber(evtNo);
 	}
 	
+	
+	/*
+	 * 문자열 검색
+	 */
+	@Override
+	public List<EventVO> searchEventByText(String text) {
+		return dao.findEventByText(text);
+	}
+	
+	
+	/*
+	 * 페이징 처리
+	 */
 	@Override
 	public Map getEventListPaging(int pageNo) {
 		//목록에 뿌려줄 List<EventVO>조회

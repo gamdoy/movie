@@ -31,6 +31,21 @@ public class QaServiceImpl implements QaService{
 		QaVO vo = dao.selectQa(num);
 		return vo;
 	}
+
+	@Override
+	public int deleteQa(int num) {
+		return dao.deleteQa(num);
+	}
+
+	@Override
+	public int modifyQa(QaVO vo) {
+		return dao.modifyQa(vo);
+	}
+
+	@Override
+	public int modifyCount(QaVO vo) {
+		return dao.modifyCount(vo);
+	}
 	
 	
 }

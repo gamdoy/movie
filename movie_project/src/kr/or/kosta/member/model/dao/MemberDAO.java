@@ -20,4 +20,6 @@ public interface MemberDAO {
 	
 	//전체회원정보 조회
 	public abstract List<MemberVO>selectAllMember();
+
+	public abstract MemberVO selectMemberByNo(int memNo);
 }
