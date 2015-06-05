@@ -1,29 +1,30 @@
 <%@ page contentType= "text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <script type="text/javascript">
-
 $(document).ready(function(){
-	var usedMileage = $("#mileage").val();
-	
-	$("#mileage").keyup(function(){
-		if(this.val() < usedMileage || this.val() <= 0)
-				alert("욕심쟁이 시네요.");
+	var usedMileage = $("#memberMileage").val();
+	var memNo=$("#memNo").val();
+	$("#couponlistBtn").on("click", function(){
+		window.open('getCouponList.do?memNo='+memNo, "post", "height=400, width=700");
 	});
 	
 	$(':radio[name="milUse"]').on("click", function(){
 		var mcheck = $(':radio[name="milUse"]:checked').val();
 		if(mcheck == "use"){
-			$("#mileage").prop("disabled",false);
-			$("#mileage").prop("value","");
+			$("#memberMileage").prop("disabled",false);	
+			$("#memberMileage").prop("value","");
 		}
 		else if(mcheck == "unuse"){
-			$("#mileage").prop("disabled",true);
-			$("#mileage").prop("value","0");
+			$("#memberMileage").prop("disabled",true);
+			$("#memberMileage").prop("value","0");
 		}
 	});
 });
 
 </script>
+
 <form method="post" id="f_coupon" action="<%=request.getContextPath() %>/admin/issueCouponById.do">
 	<input type="hidden" id="memNo" name="memNo" value="${requestScope.member_info.memNo}">
 	<table style="width:700px">
@@ -34,11 +35,11 @@ $(document).ready(function(){
 			<td colspan="2">${requestScope.member_info.memberType}</td>
 		</tr>
 		<tr align="center" height="30">
-			<td>보유쿠폰</td>
+			<td id="couponlistBtn">보유쿠폰</td>
 			<td>보유마일리지</td>
 		</tr>
 		<tr align="center" height="50">
-			<td>${requestScope.member_info.coupon.coupNo }</td>
+			<td>${fn:length(requestScope.coupon_list )}</td>
 			<td>${requestScope.member_info.memberMileage}</td>
 		</tr>
 		<tr align="center" height="30">	

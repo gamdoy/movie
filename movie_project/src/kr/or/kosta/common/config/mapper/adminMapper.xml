@@ -22,9 +22,19 @@
 	</resultMap>
 
 	<select id="selectMemberList" resultMap="admin-resultmap">
-		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate, c.cop_no, c.cop_type, c.cop_used, c.cop_usedate
-		from member m, coupon c
-		where m.mem_no = c.mem_no
+		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate
+		from member m
+	</select>
+	
+	<select id="selectCouponList" resultMap="coupon-resultmap">
+		select COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE
+		from coupon
+	</select>
+	
+	<select id="selectCouponByMemberNo"  parameterType="int" resultMap="coupon-resultmap">
+		select COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE
+		from coupon
+		where mem_no = #{value}
 	</select>
 
 	<select id="selectMemberByName"  parameterType="string" resultMap="admin-resultmap">
@@ -35,14 +45,19 @@
 	</select>
 	
 	<select id="selectMemberById"  parameterType="string" resultMap="admin-resultmap">
-		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate, c.cop_no, c.cop_type, c.cop_used, c.cop_usedate
-		from member m, coupon c
-		where m.mem_no = c.mem_no
-		and m.mem_id = #{value}
+		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate
+		from member m
+		where m.mem_id = #{value}
+	</select>
+	
+	<select id="selectMemberByNo"  parameterType="int" resultMap="admin-resultmap">
+		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate
+		from member m
+		where m.mem_no = #{value}
 	</select>
 	
 	<insert id="insertCoupon" parameterType="couponVO">
 		INSERT INTO COUPON(COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE)
-		values(COUPON_SEQ.nextval,#{MemNo},#{coupType},#{coupUsed},#{coupUsedDate});
+		values(COUPON_SEQ.nextval,#{MemNo},#{coupType},#{coupUsed},#{coupUsedDate})
 	</insert>
 </mapper>

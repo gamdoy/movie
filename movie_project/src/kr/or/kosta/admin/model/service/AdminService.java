@@ -10,6 +10,9 @@ public interface AdminService {
 
 	public abstract AdminVO selectMemberById(String id);
 
-	public abstract int issueCouponByMemberNo(int memNo, int memberMileage, String coupType);
+	public abstract AdminVO selectMemberByNo(int memNo);
 	
+	public abstract int insertCoupon(CouponVO cvo);
+	
+	public List<CouponVO> selectCouponByMemberNo(int memNo);
 }

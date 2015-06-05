@@ -26,23 +26,50 @@ public class AdminController {
 	public String memberList(ModelMap map){
 		List<AdminVO> list = service.getMemberList();
 		map.addAttribute("member_list", list);
+		
 		return "admin/member_list.tiles";
 	}
 	
 	@RequestMapping("getMemberById")
 	public String getMemberById(ModelMap map,@RequestParam("memberId") String id){
 		AdminVO member = service.selectMemberById(id);
+		int memNo = member.getMemNo();
+		List<CouponVO> couponlist= service.selectCouponByMemberNo(memNo);
 		map.addAttribute("member_info", member);
+		map.addAttribute("coupon_list", couponlist);
+		System.out.println("쿠폰리스트 : "+couponlist);
 		return "admin/member_info.tiles";
 	}
+	
 	@RequestMapping("issueCouponById")
 	public String issueCouponById(@ModelAttribute  CouponVO vo,  @ModelAttribute  AdminVO aVo, ModelMap map){
 		String couponType = vo.getCoupType();
 		int memNo = aVo.getMemNo();
 		int memMil = aVo.getMemberMileage();
-		System.out.println("AdminController : "+couponType+":"+memNo+":"+memMil);
-		System.out.println("쿠폰발행 컨트롤러 : "+memNo+" : "+couponType);
-		int i = service.issueCouponByMemberNo(memNo, memMil, couponType);
-		return "admin/member_info.tiles";
+		
+		AdminVO member = service.selectMemberByNo(memNo);
+		member.setMemberMileage(memMil);
+		//업데이트멤버 추가
+		
+		CouponVO copVo = new CouponVO();
+		copVo.setMemNo(memNo);
+		copVo.setCoupType(couponType);
+		copVo.setCoupUsed("false");
+		copVo.setCoupTypeName("1");
+		copVo.setCoupUsedValue("1");
+		copVo.setCoupUsedDate(null);
+		service.insertCoupon(copVo);
+		System.out.println("issueCouponById : "+member);
+		//map.addAttribute("memberId", member.getMemberId());
+		
+		return "redirect:/admin/getMemberById.do?memberId="+member.getMemberId();
+	}
+	
+	//타일즈 안타는 쿠폰팝업창
+	@RequestMapping("getCouponList")
+	public String getCouponList(ModelMap map,@RequestParam("memNo") int memNo){
+		List<CouponVO> clist = service.selectCouponByMemberNo(memNo);
+		map.addAttribute("coupon_list", clist);
+		return "/WEB-INF/view/admin/coupon_list.jsp";
 	}
 }

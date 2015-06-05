@@ -33,25 +33,18 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int issueCouponByMemberNo(int memNo, int memberMileage,
-			String coupType) {
-		//멤버 마일리지 수정
-		System.out.println("issueCouponByMemberNo"+memNo);
-		MemberVO memVo = memberDao.selectMemberByNo(memNo);
-		
-		System.out.println("멤버객체"+memVo);
-		memVo.setMemMileage(memberMileage);
-		memberDao.updateMember(memVo);
-		
+	public AdminVO selectMemberByNo(int memNo){
+		AdminVO member = dao.selectMemberByNo(memNo);
+		return member;
+	}
+
+	public int insertCoupon(CouponVO cvo){
 		//쿠폰발행
-		CouponVO copVo = new CouponVO();
-		copVo.setMemNo(memVo.getMemNo());
-		copVo.setCoupType(coupType);
-		copVo.setCoupUsed("false");
-		copVo.setCoupTypeName("");
-		copVo.setCoupUsedValue("");
-		copVo.setCoupUsedDate(null);
-		int i = dao.insertCoupon(copVo);
+		int i = dao.insertCoupon(cvo);
 		return i;
+	}
+	
+	public List<CouponVO> selectCouponByMemberNo(int memNo){
+		return dao.selectCouponByMemberNo(memNo);
 	}
 }

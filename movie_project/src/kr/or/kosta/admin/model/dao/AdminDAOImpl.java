@@ -33,4 +33,14 @@ public class AdminDAOImpl implements AdminDAO{
 		int i = session.insert(namespace+"insertCoupon", copVo);
 		return i;
 	}
+	
+	public AdminVO selectMemberByNo(int memNo){
+		AdminVO vo = session.selectOne(namespace+"selectMemberByNo", memNo);
+		return vo;
+	}
+	
+	public List<CouponVO> selectCouponByMemberNo(int memNo){
+		return session.selectList(namespace+"selectCouponByMemberNo", memNo);
+	}
+		
 }
