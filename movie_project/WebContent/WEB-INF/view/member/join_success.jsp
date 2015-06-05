@@ -6,35 +6,35 @@
 <table style="width:500px"> 
 	<tr>
 		<th width="100px" align="left">ID</th>
-		<td>${requestScope.member.id }</td>
+		<td><%=request.getContextPath() %>.member.id</td>
 	</tr>
 	<tr>
 		<th  align="left">패스워드</th>
-		<td>${requestScope.member.password}</td>
+		<td><%=request.getContextPath() %>.member.password</td>
 	</tr>
 	<tr>
 		<th align="left">이름</th>
-		<td>${requestScope.member.name}</td>
+		<td><%=request.getContextPath() %>.member.name</td>
+	</tr>
+	<tr>
+		<th align="left">생년월일</th>
+		<td><%=request.getContextPath() %>.member.email</td>
 	</tr>
 	<tr>
 		<th align="left">이메일</th>
-		<td>${requestScope.member.email}</td>
+		<td><%=request.getContextPath() %>.member.joinDate</td>
+	</tr>
+	<tr>
+		<th align="left">주소</th>
+		<td><%=request.getContextPath() %>.member.joinDate</td>
+	</tr>
+	<tr>
+		<th align="left">연락처</th>
+		<td><%=request.getContextPath() %>.member.joinDate</td>
 	</tr>
 	<tr>
 		<th align="left">가입일</th>
-		<td>${requestScope.member.joinDate}</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<c:choose>
-				<c:when test="${empty requestScope.member.pictureName }">
-					<img src="${initParam.rootPath }/uploadPhoto/no-photo.png">
-				</c:when>
-				<c:otherwise>
-					<img src="${initParam.rootPath }/uploadPhoto/${requestScope.member.pictureName }">
-				</c:otherwise>
-			</c:choose>
-		</td>
+		<td><%=request.getContextPath() %>.member.joinDate</td>
 	</tr>
 </table>
 

@@ -14,20 +14,17 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	<context:component-scan base-package="kr.or.kosta.theater.controller"/>
 	<context:component-scan base-package="kr.or.kosta.event.controller"/>
-	<context:component-scan base-package="kr.or.kosta.stats.controller"/>
 	<context:component-scan base-package="kr.or.kosta.commoncode.controller"/>
-	<context:component-scan base-package="kr.or.kosta.stats.model"/>
 
 	<context:component-scan base-package="kr.or.kosta.member.controller"/>
 	<context:component-scan base-package="kr.or.kosta.member.model"/>
+
 	<context:component-scan base-package="kr.or.kosta.theater.model"/>
 	<context:component-scan base-package="kr.or.kosta.commoncode.model"/>
 	<context:component-scan base-package="kr.or.kosta.event.model"/>
-	<context:component-scan base-package="kr.or.kosta.admin.model"/>
 	<context:component-scan base-package="kr.or.kosta.movie.controller"/>
 	<context:component-scan base-package="kr.or.kosta.movie.model"/>
 	<context:component-scan base-package="kr.or.kosta.qa.controller"/>
-	<context:component-scan base-package="kr.or.kosta.admin.controller"/>
 	
 	<context:component-scan base-package="kr.or.kosta.qa.model"/>
 	<mvc:annotation-driven/>
@@ -35,10 +32,9 @@
 	
 	<!-- 단순 Link controller -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
-	<mvc:view-controller path="/member/joinForm.do" view-name="member/join_form.tiles"/>
-	<mvc:view-controller path="/member/joinsuccess.do" view-name="member/join_success.tiles"/>
-	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
 	
+	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
+	<mvc:view-controller path="/member/zipcodeForMember.do" view-name="/WEB-INF/view/member/zipcodeForMember.jsp"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

@@ -14,33 +14,36 @@
 			   mem_phoneno,
 			   mem_mileage,
 			   mem_membertype,
-			   mem_joindate,
+			   mem_joindate
 			   mem_lastlogin
 		from member 
 	</sql>
  
  	<resultMap type="memberVO" id="member-resultmap">
  		<id column="mem_no" property="memNo"/>
- 		<id column="zip_no" property="zipNo"/>
- 		<id column="mem_id" property="memId"/>
- 		<id column="mem_name" property="memName"/>
- 		<id column="mem_password" property="memPassword"/>
- 		<id column="mem_addressdetail" property="memAddressDetail"/>
- 		<id column="mem_birthdate" property="memBirthDate"/>
- 		<id column="mem_email" property="memEmail"/>
- 		<id column="mem_phoneno" property="memPhoneNo"/>
- 		<id column="mem_mileage" property="memMileage"/>
- 		<id column="mem_membertype" property="memberType"/>
- 		<id column="mem_joindate" property="memJoinDate"/>
- 		<id column="mem_lastlogin" property="memLastLogin"/>	
+ 		<result column="zip_no" property="zipNo"/>
+ 		<result column="mem_id" property="memId"/>
+ 		<result column="mem_name" property="memName"/>
+ 		<result column="mem_password" property="memPassword"/>
+ 		<result column="mem_addressdetail" property="memAddressDetail"/>
+ 		<result column="mem_birthdate" property="memBirthDate"/>
+ 		<result column="mem_email" property="memEmail"/>
+ 		<result column="mem_phoneno" property="memPhoneNo"/>
+ 		<result column="mem_mileage" property="memMileage"/>
+ 		<result column="mem_membertype" property="memMemberType"/>
+ 		<result column="mem_joindate" property="memJoinDate"/>
+ 		<result column="mem_lastlogin" property="memLastLogin"/>	
  	</resultMap>
  	
  	<insert id="insertMember" parameterType="memberVO">
- 		insert into member (mem_no,zip_no,mem_id,mem_name,mem_password,mem_address,
- 		mem_addressdetail,mem_birthdate,mem_email,mem_phoneno,mem_mileage,mem_membertype,mem_joindate,mem_lastlogin)
+ 		<selectKey keyProperty="memNo" resultType="_int" order="BEFORE">
+			select member_SEQ.nextval from dual
+		</selectKey>
+ 		insert into member (mem_no,zip_no,mem_id,mem_name,mem_password,
+ 		mem_addressdetail,mem_birthdate,mem_email,mem_phoneno,mem_mileage,mem_membertype,mem_joindate)
  		 values(#{memNo},#{zipNo},#{memId},#{memName},#{memPassword},
- 		 #{memAddressDetail},#{memBirthDate},#{memEmail},#{memPhoneNo},#{memMileage},
- 		 #{memberType},to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')
+ 		 #{memAddressDetail},#{memBirthDate},#{memEmail},#{memPhoneNo},0,
+ 		 #{memMemberType},to_char(sysdate,'yyyy-mm-dd hh24:mi:ss'))
  	</insert>
  	
  	<select id="selectAllMember" resultMap="member-resultmap">
@@ -66,10 +69,5 @@
  	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
  		<include refid="member-select"/>
  		where mem_id=#{memId}
- 	</select>
- 	
- 	 <select id="selectMemberByNo" parameterType="_int" resultMap="member-resultmap">
- 		<include refid="member-select"/>
- 		where mem_no=#{memNo}
  	</select>
 </mapper>
