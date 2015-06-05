@@ -131,21 +131,6 @@ table {
 </head>
 <body>
 
-	<!-- 제목 <input type="text" name="title"><br>
-줄거리 <input type="text" name="sysnopsis"><br>
-공식홈 <input type="text" name="officialSite"><br>
-상영등급 <input type="text" name="screeningGade"><br>
-포스터 <input type="text" name="poster"><br>
-개봉일 <input type="text" name="intheaters"><br>
-상영시간 <input type="number" name="runtime"><br>
-트레일러 <input type="text" name="trailer"><br>
-평점 <input type="number" name="movGrade"><br>
-평점참가인원  <input type="number" name="movCount"><br>
-장르 <input type="text" name="genre"><br>
-감독번호(후에 db불러오는걸로 수정) <input type="text" name="DIR_NO"><br>
-배우(db수정떔에 sysdate로 해놓음) <input type="text"  disabled ><br>
-제작사(후에 db불러오는걸로 수정) <input type="text" name="proNo"><br>
-<input type="submit"> -->
 
 	<h1>영화등록</h1>
 

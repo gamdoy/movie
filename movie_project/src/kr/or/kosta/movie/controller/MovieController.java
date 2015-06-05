@@ -2,7 +2,6 @@ package kr.or.kosta.movie.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -66,11 +65,12 @@ public class MovieController {
 		MultipartFile file = movie.getPoster();
 		if (file != null && !file.isEmpty()) {
 			String path = request.getServletContext().getRealPath("/images");
-			String fileName = System.currentTimeMillis() + "";
+			String fileName = System.currentTimeMillis()+".jpg";
 			File image = new File(path, fileName);
 			file.transferTo(image);
 			movie.setPosterName(fileName);
 		}
+		
 		service.registerMovie(movie);
 
 		System.out.println("db작업후 " + movie);
@@ -83,9 +83,6 @@ public class MovieController {
 	@RequestMapping("register_success.do")
 	public String registerSuccsess(@RequestParam String movNo, ModelMap map) {
 		MovieVO movie = service.getMovieByNo(movNo);
-
-		System.out.println("결과화면 무비객체 " + movie);
-
 		map.addAttribute("movie", movie);
 		return "movie/register_success.tiles";
 
@@ -114,16 +111,66 @@ public class MovieController {
 		map.addAttribute("proNo", production);
 
 		return "movie/modify_form.tiles";
+	}
+	
+	//수정페이지
+	@RequestMapping("modify_success.do")
+	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
+	
+		// 파일업로드 처리
+				MultipartFile file = movie.getPoster();
+				
+				System.out.println(movie.getMovieNo());
+				
+				String newFileName=null;
+				if (file != null && !file.isEmpty()) {
+					newFileName = System.currentTimeMillis()+".jpg";
+					System.out.println(newFileName+" : "+file.getOriginalFilename()+" : "+movie.getPosterName());
+					String path = request.getServletContext().getRealPath("/images");
+					File image = new File(path, newFileName);
+					file.transferTo(image);
+					//기존사진 있는 경우 삭제
+					if(movie.getPosterName()!=null){
+						File oldImage = new File(path,movie.getPosterName());
+						oldImage.delete();
+					}
+					movie.setPosterName(newFileName);
+				}
+				
+				int success = service.updateMovie(movie);
+				movie.setsuccess(success);
+				
+				System.out.println(success);
+				map.addAttribute("movie", movie);
+				
+				// commonCode 사용
+				List<CommonCodeVO> screenGrade = service2.getCodeList("104");
+				List<CommonCodeVO> genre = service2.getCodeList("110");
+				// 감독,배우,제작사
+				List<DirectorVO> director = service.getDirector();
+				List<ActorVO> actor = service.getActor();
+				List<ProductionVO> production = service.getProduction();
 
+				map.addAttribute("screenGrade", screenGrade);
+				map.addAttribute("genre", genre);
+				map.addAttribute("dirNo", director);
+				map.addAttribute("actNo", actor);
+				map.addAttribute("proNo", production);
+				
+				return "movie/modify_form.tiles";
 	}
 
+	
+	
 	// 전체 영화 조회
 	@RequestMapping("adminmovie_list.do")
 	public String adminMovieList(ModelMap map) {
 		List<MovieVO> movie = service.allMovieList();
+		
 		map.addAttribute("movie", movie);
 		return "movie/adminMovieList_form.tiles";
 
 	}
+	
 
 }

@@ -32,7 +32,7 @@ public class MovieDAOImpl implements MovieDAO {
 
 	@Override
 	public int updateMovie(MovieVO movie) {
-		return session.selectOne(namespace+"updateMovie",movie);
+		return session.update(namespace+"updateMovie",movie);
 		
 	}
 

@@ -4,17 +4,113 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript"	src="<%=request.getContextPath()%>/script/jquery.js"></script>
+<script type="text/javascript">
+	
+	
+	function submitCheck() {
+		var flag = true;
+		
+		$("input").each(function(){
+			if(!$(this).val()){
+				alert('['+$(this).prop("name")+"] 항목은 필수 입력사항 입니다");
+				flag = false;
+				return false;
+			} 
+		return flag;
+		});
+		$("select").each(function(){
+			if(this.selectedIndex==0){
+			alert('['+this.options[0].text+"] 항목은 필수 입력사항 입니다");
+				flag = false;
+				return false;
+			}
+		});
+		
+		return flag;
+	}
+
+	$(document).ready(function() {
+
+		/* 글자수 체크 */
+		$("#title").on("blur", function() {
+			var a = $(this).val();
+			if (a.length >= 10) {
+				alert("10글자 이하로 입력하세요");
+				$(this).focus();
+			}
+		});
+		$("#officialSite").on("blur", function() {
+			var a = $(this).val();
+			if (a.length >= 50) {
+				alert("영문 50글자 이하로 입력하세요");
+				$(this).focus();
+			}
+		});
+		$("#trailer").on("blur", function() {
+			var a = $(this).val();
+			if (a.length >= 50) {
+				alert("영문 50글자 이하로 입력하세요");
+				$(this).focus();
+			}
+		});
+
+		/* select문 0번값 체크		*/
+		$("#screeningGrade").on("change", function() {
+			var a = $(this).val();
+			if (a == 104000) {
+				alert("상영 등급을 선택해 주세요");
+				$(this).focus();
+			}
+		});
+		
+		$("#genre").on("change", function() {
+			var a = $(this).val();
+			if (a == 110000) {
+				alert("장르를 선택해 주세요");
+				$(this).focus()
+			}
+		});
+		
+		$("#dirNo").on("change", function() {
+			var a = $(this).val();
+			if (a == 1) {
+				alert("감독을 선택해 주세요");
+				$(this).focus();
+			}
+		});
+		$("#actNo").on("change", function() {
+			var a = $(this).val();
+			if (a == 1) {
+				alert("배우를 선택해 주세요");
+				$(this).focus();
+			}
+
+		});
+		$("#proNo").on("change", function() {
+			var a = $(this).val();
+			if (a == 1) {
+				alert("제작사를 선택해 주세요");
+				$(this).focus();
+			}
+		});
+		
+	});
+</script>
 <title>영화 정보 수정</title>
 </head>
 <body>
 <h1>영화 정보 수정<br>
+${requestScope.movie.success } 
+<br>
 </h1>
 <form method="post"
-		action="<%=request.getContextPath()%>/movie/register.do"
-		id="modifyForm" name="modifyForm" enctype="multipart/form-data"
-		onsubmit="return submitCheck();">
+		action="<%=request.getContextPath()%>/movie/modify_success.do"
+		id="modifyForm" name="modifyForm" enctype="multipart/form-data">
 		
-		<table>
+	
+<input type="hidden" id="movieNo" name="movieNo" value="${requestScope.movie.movieNo }">
+		<table onload="alert('등록성공')">
 			<tr>
 				<!-- 제목 -->
 				<td>제목</td>
@@ -26,8 +122,7 @@
 				<!-- 줄거리 -자동 줄넘김 적용 -->
 				<td>줄거리</td>
 				<td colspan="3"><textarea name="sysnopsis"
-						style="resize: none; wrap: hard;" rows="12" cols="70">
-						${requestScope.movie.sysnopsis }</textarea></td>
+						style="resize: none; wrap: hard;" rows="12" cols="70">${requestScope.movie.sysnopsis }</textarea></td>
 			</tr>
 
 			<tr>
@@ -87,9 +182,8 @@
 				</select></td>
 				<!-- 포스터 -->
 				<td>포스터</td>
-				<td><input type="file" name="poster">
+				<td><input type="file" name="poster" >
 					<br>
-					<img src="<%=request.getContextPath()%>/images/${requestScope.movie.posterName }">
 				</td>
 			</tr>
 

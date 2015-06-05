@@ -10,9 +10,9 @@ import kr.or.kosta.movie.vo.ProductionVO;
 public interface MovieService {
 
 	//영화등록 
-	public abstract void registerMovie(MovieVO movie);
+	public abstract int registerMovie(MovieVO movie);
 	//영화수정
-	public abstract void updateMovie(MovieVO movie);
+	public abstract int updateMovie(MovieVO movie);
 	//no로 영화조회
 	public abstract MovieVO getMovieByNo(String movNo);
 	//모든영화 조회
