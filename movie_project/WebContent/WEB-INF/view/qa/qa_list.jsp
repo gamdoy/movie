@@ -1,5 +1,6 @@
 <%@ page contentType= "text/html;charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -9,10 +10,21 @@
 <title>QA게시판</title>
 
 <script type="text/javascript">
+$(document).ready(function(){
+	$("tbody tr").on("click", function(){
+		var number = $(this).find(":first-child").text();
+		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
+	})
+});
+</script>
+
+<script type="text/javascript">
 function goUrl(){
 	window.location="<%=request.getContextPath() %>/qa/write.do";
 }
 </script>
+
+
 </head>
 <!-- CSS 영역 -->
     <style type="text/css">
@@ -60,7 +72,15 @@ function goUrl(){
                </tr>
            </thead>
            <tbody>
-         			<td align="center" colspan="5">글리스트페이지</td>
+           	<c:forEach items="${requestScope.qa_list }" var="QaVO">
+				<tr id="qa_content">
+					<td>${QaVO.fqNo}</td>
+					<td>${QaVO.qaTitle}</td>
+					<td>${QaVO.memNo}</td>
+					<td>${QaVO.fqRegdate}</td>
+					<td>${QaVO.qaCount}</td>
+				</tr> 
+			</c:forEach>
            </tbody>
            <tfoot>
                <tr>

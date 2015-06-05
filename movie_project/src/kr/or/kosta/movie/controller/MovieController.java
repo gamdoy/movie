@@ -40,8 +40,8 @@ public class MovieController {
 	public String registerForm(ModelMap map) {
 
 		// commonCode 사용
-		List<CommonCodeVO> screenGrade = service2.getCodeLIst("104");
-		List<CommonCodeVO> genre = service2.getCodeLIst("110");
+		List<CommonCodeVO> screenGrade = service2.getCodeList("104");
+		List<CommonCodeVO> genre = service2.getCodeList("110");
 		// 감독,배우,제작사
 		List<DirectorVO> director = service.getDirector();
 		List<ActorVO> actor = service.getActor();
@@ -100,8 +100,8 @@ public class MovieController {
 		map.addAttribute("movie", movie);
 
 		// commonCode 사용
-		List<CommonCodeVO> screenGrade = service2.getCodeLIst("104");
-		List<CommonCodeVO> genre = service2.getCodeLIst("110");
+		List<CommonCodeVO> screenGrade = service2.getCodeList("104");
+		List<CommonCodeVO> genre = service2.getCodeList("110");
 		// 감독,배우,제작사
 		List<DirectorVO> director = service.getDirector();
 		List<ActorVO> actor = service.getActor();
@@ -114,6 +114,7 @@ public class MovieController {
 		map.addAttribute("proNo", production);
 
 		return "movie/modify_form.tiles";
+
 	}
 
 	// 전체 영화 조회

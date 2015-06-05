@@ -13,12 +13,14 @@ public class QaVO {
 	private String qaPassword; //비밀번호
 	private int fqParentNumber; //부모번호
 	private int fileNo; //파일번호
+	private String memId; //글쓴이 Id
 	
 	public QaVO(){}
-	
+
 	public QaVO(int fqNo, int memNo, String qaTitle, String fqRegdate,
 			String fqLastdate, int qaCount, String qaText, String qaStatus,
-			String qaSecret, String qaPassword, int fqParentNumber, int fileNo) {
+			String qaSecret, String qaPassword, int fqParentNumber, int fileNo,
+			String memId) {
 		super();
 		this.fqNo = fqNo;
 		this.memNo = memNo;
@@ -32,6 +34,7 @@ public class QaVO {
 		this.qaPassword = qaPassword;
 		this.fqParentNumber = fqParentNumber;
 		this.fileNo = fileNo;
+		this.memId = memId;
 	}
 
 	public int getFqNo() {
@@ -130,95 +133,12 @@ public class QaVO {
 		this.fileNo = fileNo;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + fileNo;
-		result = prime * result
-				+ ((fqLastdate == null) ? 0 : fqLastdate.hashCode());
-		result = prime * result + fqNo;
-		result = prime * result + fqParentNumber;
-		result = prime * result
-				+ ((fqRegdate == null) ? 0 : fqRegdate.hashCode());
-		result = prime * result + memNo;
-		result = prime * result + qaCount;
-		result = prime * result
-				+ ((qaPassword == null) ? 0 : qaPassword.hashCode());
-		result = prime * result
-				+ ((qaSecret == null) ? 0 : qaSecret.hashCode());
-		result = prime * result
-				+ ((qaStatus == null) ? 0 : qaStatus.hashCode());
-		result = prime * result + ((qaText == null) ? 0 : qaText.hashCode());
-		result = prime * result + ((qaTitle == null) ? 0 : qaTitle.hashCode());
-		return result;
+	public String getMemId() {
+		return memId;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		QaVO other = (QaVO) obj;
-		if (fileNo != other.fileNo)
-			return false;
-		if (fqLastdate == null) {
-			if (other.fqLastdate != null)
-				return false;
-		} else if (!fqLastdate.equals(other.fqLastdate))
-			return false;
-		if (fqNo != other.fqNo)
-			return false;
-		if (fqParentNumber != other.fqParentNumber)
-			return false;
-		if (fqRegdate == null) {
-			if (other.fqRegdate != null)
-				return false;
-		} else if (!fqRegdate.equals(other.fqRegdate))
-			return false;
-		if (memNo != other.memNo)
-			return false;
-		if (qaCount != other.qaCount)
-			return false;
-		if (qaPassword == null) {
-			if (other.qaPassword != null)
-				return false;
-		} else if (!qaPassword.equals(other.qaPassword))
-			return false;
-		if (qaSecret == null) {
-			if (other.qaSecret != null)
-				return false;
-		} else if (!qaSecret.equals(other.qaSecret))
-			return false;
-		if (qaStatus == null) {
-			if (other.qaStatus != null)
-				return false;
-		} else if (!qaStatus.equals(other.qaStatus))
-			return false;
-		if (qaText == null) {
-			if (other.qaText != null)
-				return false;
-		} else if (!qaText.equals(other.qaText))
-			return false;
-		if (qaTitle == null) {
-			if (other.qaTitle != null)
-				return false;
-		} else if (!qaTitle.equals(other.qaTitle))
-			return false;
-		return true;
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 
-	@Override
-	public String toString() {
-		return "QaVO [fqNo=" + fqNo + ", memNo=" + memNo + ", qaTitle="
-				+ qaTitle + ", fqRegdate=" + fqRegdate + ", fqLastdate="
-				+ fqLastdate + ", qaCount=" + qaCount + ", qaText=" + qaText
-				+ ", qaStatus=" + qaStatus + ", qaSecret=" + qaSecret
-				+ ", qaPassword=" + qaPassword + ", fqParentNumber="
-				+ fqParentNumber + ", fileNo=" + fileNo + "]";
-	}
-	
 }

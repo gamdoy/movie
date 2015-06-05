@@ -1,7 +1,10 @@
 package kr.or.kosta.event.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.event.vo.EventVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -33,5 +36,23 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public int updateEvent(EventVO vo) {
 		return session.update(namespace+ "updateEvent",vo);
+	}
+	
+	@Override
+	public int deleteEventByEventNumber(int evtNo) {
+		return session.delete(namespace+"deleteEventByEventNumber",evtNo);
+	}
+	
+	@Override
+	public List<EventVO> selectAllEventPaging(int pageNo) {
+		Map param = new HashMap();
+		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		param.put("pageNo", pageNo);
+		return session.selectList(namespace+"selectAllEventPaging", param);
+	}
+	
+	@Override
+	public int selectTotalEventCount() {
+		return session.selectOne(namespace+"selectTotalEventCount");
 	}
 }

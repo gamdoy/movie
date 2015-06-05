@@ -10,9 +10,13 @@ ${evtVO }<br>
 
 ${evtVO.evtNo}
 
-<form method="POST" action="<%=request.getContextPath() %>/event/modifyForm.do" id="spec_event">
+<form method="POST" action="<%=request.getContextPath() %>/event/modifyEventNumber.do" id="spec_event">
 <input type="hidden" id="evtNo" name="evtNo" value="${evtVO.evtNo }">
 <input type="submit" value="수정하기"/>
+</form>
+<form method="POST" action="<%=request.getContextPath() %>/event/deleteEventByEventNumber.do" id="spec_event">
+<input type="hidden" id="evtNo" name="evtNo" value="${evtVO.evtNo }">
+<input type="submit" value="삭제하기"/>
 </form>
 </body>
 </html>

@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="event.dao.eventMapper">
 	
+	<sql id="event-select">
+		select 		evt_no,
+					evt_name,
+					evt_startdate,
+					evt_enddate,
+					evt_regdate,
+					evt_title
+		from		event		
+	</sql>
+	
 	<resultMap type="eventVO" id="event-resultmap">
 	
 		<id column="evt_no" property="evtNo"/>
@@ -14,9 +24,9 @@
 	</resultMap>
 
 	<select id="selectEventList" resultMap="event-resultmap">
-		select 	e.evt_no, e.evt_name, e.evt_startdate, e.evt_enddate, e.evt_regdate, e.evt_title
-		from		event e
-		order by e.evt_no
+		select 	evt_no, evt_name, evt_startdate, evt_enddate, evt_regdate, evt_title
+		from		event
+		order by evt_no
 	</select>
 	
 	<select id="selectEventByEvtNo" parameterType="_int" resultMap="event-resultmap">
@@ -31,15 +41,35 @@
 	</insert>
 	
 	<update id="updateEvent" parameterType="eventVO">
-		update theater
+		update event
 		set			evt_name=#{evtName},
 					evt_startdate=#{evtStartDate},
 					evt_enddate=#{evtEndDate},
 					evt_regdate=#{evtRegDate},
-					evt_title=#{evtTitle},
+					evt_title=#{evtTitle}
 					
 		where	evt_no=#{evtNo}
 	</update>
+	
+	<delete id="deleteEventByEventNumber" parameterType="_int">
+		delete from event where evt_no=#{evtNo}		
+	</delete>
+	
+	<select id="selectAllEventPaging" parameterType="map" resultMap="event-resultmap">
+		select 	evt_no, evt_name, evt_startdate, evt_enddate, evt_regdate, evt_title
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, evt_no, evt_name, evt_startdate, evt_enddate, evt_regdate, evt_title
+			from (
+					<include refid="event-select"/>
+					order by evt_no
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<select id="selectTotalEventCount" resultType="_int">
+		select count(evt_no) from event
+	</select>
 	
 	
 </mapper>

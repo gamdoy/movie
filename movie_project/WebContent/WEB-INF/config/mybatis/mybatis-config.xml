@@ -12,6 +12,8 @@
 		<package name="kr.or.kosta.common.vo"/> 
 		<package name="kr.or.kosta.movie.vo"/> 
 		<package name="kr.or.kosta.center.vo"/>
+		<package name="kr.or.kosta.schedule.vo"/> 
+		<package name="kr.or.kosta.ticket.vo"/> 
 	</typeAliases>
 	
 	<mappers>
