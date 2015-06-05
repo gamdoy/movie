@@ -21,6 +21,7 @@ public class MovieVO {
 	private int movCount; //참여인원
 	private String genre; //장르
 	private String genreName;
+	private int success;//수정 성공 유무 알림 변수
 	
 	//fk 
 	private int dirNo; //감독
@@ -64,6 +65,49 @@ public class MovieVO {
 		this.actName = actName;
 		this.proNo = proNo;
 		this.proName = proName;
+	}
+	
+
+
+	public MovieVO(int movieNo, String title, String sysnopsis,
+			String officialSite, String screeningGrade, String sgradeName,
+			MultipartFile poster, String posterName, String intheaters,
+			String runtime, String trailer, double movGrade, int movCount,
+			String genre, String genreName, int success, int dirNo,
+			String dirName, int actNo, String actName, int proNo, String proName) {
+		super();
+		this.movieNo = movieNo;
+		this.title = title;
+		this.sysnopsis = sysnopsis;
+		this.officialSite = officialSite;
+		this.screeningGrade = screeningGrade;
+		this.sgradeName = sgradeName;
+		this.poster = poster;
+		this.posterName = posterName;
+		this.intheaters = intheaters;
+		this.runtime = runtime;
+		this.trailer = trailer;
+		this.movGrade = movGrade;
+		this.movCount = movCount;
+		this.genre = genre;
+		this.genreName = genreName;
+		this.success = success;
+		this.dirNo = dirNo;
+		this.dirName = dirName;
+		this.actNo = actNo;
+		this.actName = actName;
+		this.proNo = proNo;
+		this.proName = proName;
+	}
+
+
+	public int getsuccess() {
+		return success;
+	}
+
+
+	public void setsuccess(int success) {
+		this.success = success;
 	}
 
 
@@ -425,10 +469,13 @@ public class MovieVO {
 				+ posterName + ", intheaters=" + intheaters + ", runtime="
 				+ runtime + ", trailer=" + trailer + ", movGrade=" + movGrade
 				+ ", movCount=" + movCount + ", genre=" + genre
-				+ ", genreName=" + genreName + ", dirNo=" + dirNo
-				+ ", dirName=" + dirName + ", actNo=" + actNo + ", actName="
-				+ actName + ", proNo=" + proNo + ", proName=" + proName + "]";
+				+ ", genreName=" + genreName + ", success=" + success
+				+ ", dirNo=" + dirNo + ", dirName=" + dirName + ", actNo="
+				+ actNo + ", actName=" + actName + ", proNo=" + proNo
+				+ ", proName=" + proName + "]";
 	}
+
+
 	
 
 
