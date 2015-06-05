@@ -43,6 +43,18 @@ public class EventDAOImpl implements EventDAO {
 		return session.delete(namespace+"deleteEventByEventNumber",evtNo);
 	}
 	
+	
+	/*
+	 * 문자열 찾기
+	 */
+	@Override
+	public List<EventVO> findEventByText(String text) {
+		return session.selectList(namespace+"findEventByText",text);
+	}
+	
+	/*
+	 * 페이징 처리
+	 */
 	@Override
 	public List<EventVO> selectAllEventPaging(int pageNo) {
 		Map param = new HashMap();
