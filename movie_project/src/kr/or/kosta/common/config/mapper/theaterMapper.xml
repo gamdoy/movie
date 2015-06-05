@@ -158,6 +158,19 @@
 		and tic_no=#{value}
 	</select>
 	
+	<!-- 티켓 정보를 입력 -->
+	<select id="selectTicketList" resultMap="ticket-resultmap">
+		select t.tic_no, mem.mem_no, mem.mem_id, mem_name, s.sch_no, 
+			t.tic_date, t.tic_price, t.tic_paytype, t.tic_seatno, t.tic_totalcustomer, 
+			thea.thea_location,mr.mr_name
+		from ticket t, member mem, schedule s, movieroom mr, theater thea
+    	where 1=1
+    		and t.mem_no = mem.mem_no
+    		and s.sch_no = t.sch_no
+    		and s.mr_no = mr.mr_no
+    		and mr.thea_no = thea.thea_no;
+	</select>
+	
 	<!--예매한 티켓 정보를 입력 -->
 	<select id="selectTicketByNo" resultMap="ticket-resultmap" parameterType="_int">
 		select tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer from ticket

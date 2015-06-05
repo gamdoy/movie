@@ -75,6 +75,11 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 
 	@Override
+	public List<TicketVO> getTicketList() {
+		return dao.selectTicketList();
+	}
+
+	@Override
 	public int registTicket(TicketVO vo) {
 		return dao.insertTicket(vo);
 	}
