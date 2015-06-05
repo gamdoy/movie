@@ -158,6 +158,13 @@
 		and tic_no=#{value}
 	</select>
 	
+	<!--예매한 티켓 정보를 입력 -->
+	<select id="selectTicketByNo" resultMap="ticket-resultmap" parameterType="_int">
+		select tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer from ticket
+		where 1=1
+		and tic_no=#{value}
+	</select>
+	
 	<!-- 예매된 좌석 정보를 입력 -->
 	<select id="selectReservedSeats" parameterType="ticketVO" resultType="String">
 		select tic_seatno 

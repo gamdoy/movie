@@ -3,11 +3,14 @@
 <mapper namespace="kr.or.kosta.common.config.movieMapper">
 	
 	<insert id="insertMovie" parameterType="movieVO">
+		<selectKey keyProperty="movieNo" resultType="_int" order="BEFORE">
+			SELECT  movie_seq.nextval from dual
+		</selectKey>
 		insert into MOVIE 
 		(MOV_NO, MOV_TITLE, MOV_SYNOPSIS, MOV_OFFICIALSITE, MOV_SCREENINGGRADE, MOV_POSTER, MOV_INTHEATERS,
-		 MOV_RUNTIME, MOV_TRAILER, MOV_GRADE, MOV_COUNT,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
-		  values(movie_seq.nextval, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{posterName},
-		   #{intheaters}, #{runtime}, #{trailer}, #{movGrade}, #{movCount} ,#{genre}, #{dirNo}, 33, #{proNo})
+		 MOV_RUNTIME, MOV_TRAILER,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
+		  values(#{movieNo}, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{posterName},
+		   #{intheaters}, #{runtime}, #{trailer},#{genre}, #{dirNo}, #{actNo }, #{proNo})
 	
 	</insert>
 	<!-- 공통관리 -->
@@ -20,6 +23,104 @@
 	<select id="commoncode" resultMap="commonCode-resultmap">
 		select * from commoncode
 	</select>
+	
+	<resultMap type="movieVO" id="movie-resultmap">
+		<id column="mov_no" property="movieNo"/>
+		<result column="mov_title" property="title"/>
+		<result column="MOV_SYNOPSIS" property="sysnopsis"/>
+		<result column="MOV_OFFICIALSITE" property="officialSite"/>
+		<result column="MOV_SCREENINGGRADE" property="screeningGrade"/>
+		<result column="MOV_POSTER" property="posterName"/>
+		<result column="MOV_INTHEATERS" property="intheaters"/>
+		<result column="MOV_RUNTIME" property="runtime"/>
+		<result column="MOV_TRAILER" property="trailer"/>
+		<result column="MOV_GRADE" property="movGrade"/>
+		<result column="MOV_COUNT" property="movCount"/>
+		<result column="MOV_GENRE" property="genre"/>
+		<result column="DIR_NO" property="dirNo"/>
+		<result column="ACT_NO" property="actNo"/>
+		<result column="PRO_NO" property="proNo"/>
+		<result column="DIR_NAME" property="dirName"/>
+		<result column="ACT_NAME" property="actName"/>
+		<result column="PRO_NAME" property="proName"/>
+		<result column="genre_name" property="genreName"/>
+		<result column="sgrade_name" property="sgradeName"/>
+		
+	</resultMap>
+	<!-- mov_no 값으로 조회 -->
+	<select id="getMovieByNo" resultMap="movie-resultmap" parameterType="_int" >
+		<!-- select * from MOVIE   where mov_no= ${value } -->
+		
+		select m.MOV_NO,
+			   m.MOV_TITLE, 
+			   m.MOV_SYNOPSIS,
+			   m.MOV_OFFICIALSITE,
+			   m.MOV_SCREENINGGRADE,
+			   m.MOV_POSTER,
+			   m.MOV_INTHEATERS,
+			   m.MOV_RUNTIME,
+			   m.MOV_TRAILER,
+			   m.MOV_GENRE,
+			   m.DIR_NO,
+			   m.ACT_NO,
+			   m.PRO_NO,
+			   a.act_name,
+			   d.dir_name,
+			   p.pro_name,
+			   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_SCREENINGGRADE) sgrade_name,
+         	   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_GENRE) genre_name
+		from movie m, director d, actor a, production p
+		where m.dir_No = d.dir_No and
+			  m.act_No = a.act_No and
+			  m.pro_No = p.pro_No and 
+       		  m.mov_no= ${value}
+	</select>
+	
+	<!-- 전체 영화조회 -->
+	<select id="allMovie" resultMap="movie-resultmap">
+		select m.MOV_NO,
+			   m.MOV_TITLE, 
+			   m.MOV_SYNOPSIS,
+			   m.MOV_OFFICIALSITE,
+			   m.MOV_SCREENINGGRADE,
+			   m.MOV_POSTER,
+			   m.MOV_INTHEATERS,
+			   m.MOV_RUNTIME,
+			   m.MOV_TRAILER,
+			   m.MOV_GENRE,
+			   m.DIR_NO,
+			   m.ACT_NO,
+			   m.PRO_NO,
+			   a.act_name,
+			   d.dir_name,
+			   p.pro_name,
+			   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_SCREENINGGRADE) sgrade_name,
+         	   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_GENRE) genre_name
+	 	 from movie m, director d, actor a, production p 
+		 where m.dir_No = d.dir_No and
+			  m.act_No = a.act_No and
+			  m.pro_No = p.pro_No
+	</select>
+	
+	<!-- 영화정보 수정 -->
+	<update id="updateMovie" parameterType="movieVO"  >
+		update movie
+		   set MOV_TITLE=#{title }, 
+			   MOV_SYNOPSIS=#{sysnopsis },
+			   MOV_OFFICIALSITE=#{officialSite },
+			   MOV_SCREENINGGRADE=#{screeningGrade },
+			   MOV_POSTER=#{posterName },
+			   MOV_INTHEATERS=#{intheaters },
+			   MOV_RUNTIME=#{runtime },
+			   MOV_TRAILER=#{trailer },
+			   MOV_GENRE=#{genre },
+			   DIR_NO=#{dirNo },
+			   ACT_NO=#{actNo },
+			   PRO_NO=#{proNo }
+		 where MOV_NO=321 
+	
+	</update>
+	
 	
 	<!-- 감독 -->
 	<resultMap type="directorVO" id="director-resultmap">

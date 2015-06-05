@@ -90,8 +90,7 @@ public class TheaterDAOImpl implements TheaterDAO {
 
 	@Override
 	public TicketVO selectTicketByNo(int ticNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(namespace + "selectTicketByNo", ticNo);
 	}
 
 	@Override
