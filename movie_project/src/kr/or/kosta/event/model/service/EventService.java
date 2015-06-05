@@ -18,5 +18,13 @@ public interface EventService {
 	
 	public int removeEventByEventNumber(int evtNo);
 	
+	/*
+	 * 문자열 검색
+	 */
+	public List<EventVO> searchEventByText(String text);
+	
+	/*
+	 *페이징 처리
+	 */
 	public abstract Map getEventListPaging(int pageNo);
 }
