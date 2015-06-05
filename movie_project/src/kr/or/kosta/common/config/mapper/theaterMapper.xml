@@ -168,7 +168,7 @@
     		and t.mem_no = mem.mem_no
     		and s.sch_no = t.sch_no
     		and s.mr_no = mr.mr_no
-    		and mr.thea_no = thea.thea_no;
+    		and mr.thea_no = thea.thea_no
 	</select>
 	
 	<!--예매한 티켓 정보를 입력 -->

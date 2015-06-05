@@ -130,7 +130,7 @@ public class TheaterController {
 	
 	@RequestMapping("ticketList")
 	public String ticketList(ModelMap map) {
-		map.addAttribute("reserveList", theaterService.getTicketList());
-		return "ticket/reserveSuccess.tiles";
+		map.addAttribute("ticketList", theaterService.getTicketList());
+		return "ticket/ticketList.tiles";
 	}
 }
