@@ -31,7 +31,7 @@
 	  <resultMap type="QaVo" id="qa_list-resultmap1">
 		<id column="fq_no" property="fqNo"/>
 		<result column="qa_title" property="qaTitle"/>
-		<result column="fq_regdate" property="fqRegdate"/>
+		<result column="fq_lastdate" property="fqLastdate"/>
 		<result column="qa_count" property="qaCount"/>
 		<result column="mem_no"  property="memNo"/>
 	  </resultMap>
@@ -39,27 +39,49 @@
 	  <resultMap type="QaVo" id="qa_list-resultmap2">
 		<id column="fq_no" property="fqNo"/>
 		<result column="qa_title" property="qaTitle"/>
-		<result column="fq_regdate" property="fqRegdate"/>
+		<result column="fq_lastdate" property="fqLastdate"/>
 		<result column="qa_text" property="qaText"/>
 		<result column="file_no"  property="fileNo"/>
+		<result column="qa_count" property="qaCount"/>
 	  </resultMap>
 	  
 	  <select id="selectQaList" resultMap="qa_list-resultmap1">
-	  		select q.fq_no, q.qa_title, q.fq_regdate, q.qa_count, m.mem_no
+	  		select q.fq_no, q.qa_title, substr(q.fq_lastdate,1,10) fq_lastdate, q.qa_count, m.mem_no
 	  		from qa q, member m
 	  		where m.mem_no = q.mem_no
-	  		order by q.fq_no
+	  		order by q.fq_no desc
 	  </select>
 	  
 	  <insert id="insertQa" parameterType="QaVo">
 	  		insert into qa(fq_no, mem_no, qa_title, fq_regdate, fq_lastdate, qa_count, qa_text, qa_status, qa_secret, qa_password, fq_parent_number, file_no)
-	  		values (QA_SEQ.nextval, #{memNo},#{qaTitle},#{fqRegdate},#{fqLastdate},#{qaCount},#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqParentNumber},#{fileNo})
+	  		values (QA_SEQ.nextval, #{memNo},#{qaTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),0,#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqParentNumber},#{fileNo})
 	  </insert>
 	  
 	    <select id="selectQa" resultMap="qa_list-resultmap2" parameterType="_int">
-	  		select fq_no, qa_title, fq_regdate, qa_text, file_no
+	  		select fq_no, qa_title, fq_lastdate, qa_text, file_no, qa_count
 	  		from qa 
 	  		where fq_no = #{number}	
 	  </select>
+	  
+	  <delete id="deleteQa" parameterType="_int">
+		delete  from qa 
+		where fq_no=#{number}		
+	</delete>
+	
+	<update id="modifyQa" parameterType="QaVo">
+		update qa
+		set		qa_title=#{qaTitle},
+					qa_text=#{qaText},
+					file_no=#{fileNo},
+					fq_lastdate=to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS')
+		where	fq_no=#{fqNo}	
+	</update>
+	
+	<update id="modifyCount" parameterType="QaVo">
+		update qa
+		set qa_count = #{qaCount}
+		where fq_no=#{fqNo}
+	</update>
+	
 </mapper>
 

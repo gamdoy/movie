@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.kosta.center.vo.QaVO;
+import kr.or.kosta.event.vo.EventVO;
 
 @Repository
 public class QaDAOImpl implements QaDAO{
@@ -28,6 +29,21 @@ public class QaDAOImpl implements QaDAO{
 	@Override
 	public QaVO selectQa(int num) {
 		return session.selectOne(namespace+"selectQa", num);
+	}
+
+	@Override
+	public int deleteQa(int num) {
+		return session.delete(namespace+"deleteQa", num);
+	}
+
+	@Override
+	public int modifyQa(QaVO vo) {
+		return session.update(namespace+"modifyQa", vo);
+	}
+
+	@Override
+	public int modifyCount(QaVO vo) {
+		return session.update(namespace+"modifyCount", vo);
 	}
 	
 	
