@@ -99,7 +99,7 @@ table {
 			var a = $(this).val();
 			if (a == 110000) {
 				alert("장르를 선택해 주세요");
-				$(this).focus();
+				$(this).focus()
 			}
 		});
 		
@@ -124,15 +124,8 @@ table {
 				alert("제작사를 선택해 주세요");
 				$(this).focus();
 			}
-			return true;
 		});
-		$("#screeningGrade").on("change", function() {
-			var a = $(this).val();
-			if (a == 104000) {
-				alert("상영 등급을 선택해 주세요");
-				$(this).focus();
-			}
-		});
+		
 	});
 </script>
 </head>
@@ -168,7 +161,7 @@ table {
 				<!-- 제목 -->
 				<td>제목</td>
 				<td colspan="3"><input type="text" id="title" name="title"
-					autofocus="autofocus"> <span id="알림 칸"></span></td>
+					autofocus="autofocus"> </td>
 			</tr>
 			<tr>
 				<!-- 줄거리 -자동 줄넘김 적용 -->

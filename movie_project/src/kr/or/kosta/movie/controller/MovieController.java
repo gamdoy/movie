@@ -31,73 +31,98 @@ import org.springframework.web.multipart.MultipartFile;
 public class MovieController {
 	@Autowired
 	private MovieService service;
-	
+
 	@Autowired
 	private CommonCodeService service2;
-	
-	//영화등록 페이지
+
+	// 영화등록 페이지
 	@RequestMapping("register_form.do")
-	public String registerForm(ModelMap map){
-		
-		//commonCode 사용 
+	public String registerForm(ModelMap map) {
+
+		// commonCode 사용
 		List<CommonCodeVO> screenGrade = service2.getCodeLIst("104");
 		List<CommonCodeVO> genre = service2.getCodeLIst("110");
-		//감독,배우,제작사
+		// 감독,배우,제작사
 		List<DirectorVO> director = service.getDirector();
 		List<ActorVO> actor = service.getActor();
 		List<ProductionVO> production = service.getProduction();
-		
-		map.addAttribute("screenGrade",screenGrade);
-		map.addAttribute("genre",genre);
-		map.addAttribute("dirNo",director);
-		map.addAttribute("actNo",actor);
-		map.addAttribute("proNo",production);
-		
+
+		map.addAttribute("screenGrade", screenGrade);
+		map.addAttribute("genre", genre);
+		map.addAttribute("dirNo", director);
+		map.addAttribute("actNo", actor);
+		map.addAttribute("proNo", production);
+
 		return "movie/register_form.tiles";
 	}
-	
-	//영화등록 로직
-	@RequestMapping(value ="register.do", method=RequestMethod.POST)
-	public String registerMovie(@ModelAttribute MovieVO movie, Errors errors, HttpServletRequest request) throws IllegalStateException, IOException{
-		
-		
-		//파일업로드 처리
+
+	// 영화등록 로직
+	@RequestMapping(value = "register.do")
+	public String registerMovie(@ModelAttribute MovieVO movie, Errors errors,
+			HttpServletRequest request) throws IllegalStateException,
+			IOException {
+
+		// 파일업로드 처리
 		MultipartFile file = movie.getPoster();
-		if(file != null && !file.isEmpty()){
+		if (file != null && !file.isEmpty()) {
 			String path = request.getServletContext().getRealPath("/images");
-			String fileName = System.currentTimeMillis()+"";
+			String fileName = System.currentTimeMillis() + "";
 			File image = new File(path, fileName);
 			file.transferTo(image);
 			movie.setPosterName(fileName);
 		}
 		service.registerMovie(movie);
-		
-		System.out.println("db작업후 "+movie);
-		
-		return "redirect:/movie/register_success.do?movNo="+movie.getMovieNo(); 
+
+		System.out.println("db작업후 " + movie);
+
+		return "redirect:/movie/register_success.do?movNo="
+				+ movie.getMovieNo();
 	}
-	
-	//등록 성공
+
+	// 등록 성공
 	@RequestMapping("register_success.do")
-	public String registerSuccsess(@RequestParam String movNo,ModelMap map){
+	public String registerSuccsess(@RequestParam String movNo, ModelMap map) {
+		MovieVO movie = service.getMovieByNo(movNo);
+
+		System.out.println("결과화면 무비객체 " + movie);
+
+		map.addAttribute("movie", movie);
+		return "movie/register_success.tiles";
+
+	}
+
+	// 영화 수정 페이지 이동
+	@RequestMapping("modify_form.do")
+	public String movieModify(@RequestParam String movNo, ModelMap map) {
 		
 		MovieVO movie = service.getMovieByNo(movNo);
-		
-		System.out.println("결과화면 무비객체 "+movie);
-		
-		map.addAttribute("movie",movie);
-		return "movie/register_success.tiles";
-		
+		System.out.println(movie);
+		map.addAttribute("movie", movie);
+
+		// commonCode 사용
+		List<CommonCodeVO> screenGrade = service2.getCodeLIst("104");
+		List<CommonCodeVO> genre = service2.getCodeLIst("110");
+		// 감독,배우,제작사
+		List<DirectorVO> director = service.getDirector();
+		List<ActorVO> actor = service.getActor();
+		List<ProductionVO> production = service.getProduction();
+
+		map.addAttribute("screenGrade", screenGrade);
+		map.addAttribute("genre", genre);
+		map.addAttribute("dirNo", director);
+		map.addAttribute("actNo", actor);
+		map.addAttribute("proNo", production);
+
+		return "movie/modify_form.tiles";
 	}
-	
-	
-	
-	
-	
-	
-		
+
+	// 전체 영화 조회
+	@RequestMapping("adminmovie_list.do")
+	public String adminMovieList(ModelMap map) {
+		List<MovieVO> movie = service.allMovieList();
+		map.addAttribute("movie", movie);
+		return "movie/adminMovieList_form.tiles";
+
+	}
+
 }
-	
-	
-
-

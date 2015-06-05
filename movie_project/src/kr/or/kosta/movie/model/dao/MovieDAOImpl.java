@@ -31,16 +31,20 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 
 	@Override
-	public int modifyMovie(MovieVO movie) {
-		return session.insert(namespace+"updateMovie",movie);
+	public int updateMovie(MovieVO movie) {
+		return session.selectOne(namespace+"updateMovie",movie);
 		
 	}
 
 	@Override
 	public MovieVO getMovieByNo(String movNo) {
-		
 		return session.selectOne(namespace+"getMovieByNo",movNo);
+	}
+	
+	@Override
+	public List<MovieVO> allMovieList() {
 		
+		return session.selectList(namespace+"allMovie");
 	}
 	
 	@Override
@@ -58,6 +62,8 @@ public class MovieDAOImpl implements MovieDAO {
 	public List<ProductionVO> getProduction() {
 		return session.selectList(namespace+"production");
 	}
+
+	
 
 
 

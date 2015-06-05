@@ -19,7 +19,7 @@ text-align: center;
 <title>결과 페이지</title>
 </head>
 <body>
-	<h1>등록및 수정내용</h1>
+	<h1>등록내용</h1>
 
 	<table border="1">
 		<tr>
@@ -92,9 +92,10 @@ text-align: center;
 			</td>
 			<td>${requestScope.movie.proName }</td>
 		</tr>
-
-
-
 	</table>
+	 <span style="background-color:#00FEFE">
+	<a href="<%=request.getContextPath()%>/movie/adminmovie_list.do"> 리스트 </a>
+	</span>
+	
 </body>
 </html>

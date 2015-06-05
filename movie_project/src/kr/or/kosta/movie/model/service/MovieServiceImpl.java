@@ -19,13 +19,16 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public void registerMovie(MovieVO movie) {
 		dao.insertMovie(movie);
-		
 	}
 
 	@Override
-	public void modifyMovie(MovieVO movie) {
-		dao.insertMovie(movie);
-		
+	public void updateMovie(MovieVO movie){
+		dao.updateMovie(movie);
+	}
+	
+	@Override
+	public List<MovieVO> allMovieList() {
+		return dao.allMovieList();
 	}
 
 	@Override
@@ -49,6 +52,8 @@ public class MovieServiceImpl implements MovieService {
 	public List<ProductionVO> getProduction() {
 		return dao.getProduction();
 	}
+
+	
 
 
 	

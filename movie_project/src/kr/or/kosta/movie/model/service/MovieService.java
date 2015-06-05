@@ -9,27 +9,21 @@ import kr.or.kosta.movie.vo.ProductionVO;
 
 public interface MovieService {
 
-	/**
-	 * 영화 등록 메소드
-	 * 
-	 * @param movie
-	 */
+	//영화등록 
 	public abstract void registerMovie(MovieVO movie);
-
-	/**
-	 * 영화 수정 메소드
-	 * 
-	 * @param movie
-	 */
-	public abstract void modifyMovie(MovieVO movie);
+	//영화수정
+	public abstract void updateMovie(MovieVO movie);
+	//no로 영화조회
+	public abstract MovieVO getMovieByNo(String movNo);
+	//모든영화 조회
+	public abstract List<MovieVO> allMovieList();
 	
-	public MovieVO getMovieByNo(String movNo);
-	
-	public List<DirectorVO> getDirector();
-
-	public List<ActorVO> getActor();
-
-	public List<ProductionVO> getProduction();
+	//개별table 감독 조회
+	public abstract List<DirectorVO> getDirector();
+	//개별table 배우 조회
+	public abstract List<ActorVO> getActor();
+	//개별table 제작사 조회
+	public abstract List<ProductionVO> getProduction();
 	
 	
 
