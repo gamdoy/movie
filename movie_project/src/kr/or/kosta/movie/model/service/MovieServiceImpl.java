@@ -17,13 +17,13 @@ public class MovieServiceImpl implements MovieService {
 	private MovieDAO dao;
 
 	@Override
-	public void registerMovie(MovieVO movie) {
-		dao.insertMovie(movie);
+	public int registerMovie(MovieVO movie) {
+		return dao.insertMovie(movie);
 	}
 
 	@Override
-	public void updateMovie(MovieVO movie){
-		dao.updateMovie(movie);
+	public int updateMovie(MovieVO movie){
+		return dao.updateMovie(movie);
 	}
 	
 	@Override

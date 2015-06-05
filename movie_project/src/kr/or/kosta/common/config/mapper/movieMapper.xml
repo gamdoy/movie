@@ -117,7 +117,7 @@
 			   DIR_NO=#{dirNo },
 			   ACT_NO=#{actNo },
 			   PRO_NO=#{proNo }
-		 where MOV_NO=321 
+		 where MOV_NO=#{movieNo }
 	
 	</update>
 	
