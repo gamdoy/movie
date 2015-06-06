@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.coupon.vo.CouponVO;
+import kr.or.kosta.member.vo.MemberVO;
 
 public interface AdminService {
 	public abstract List<AdminVO> getMemberList();
@@ -15,4 +16,6 @@ public interface AdminService {
 	public abstract int insertCoupon(CouponVO cvo);
 	
 	public List<CouponVO> selectCouponByMemberNo(int memNo);
+
+	public abstract int updateMemberMileage(MemberVO member);
 }

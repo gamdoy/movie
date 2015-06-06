@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.coupon.vo.CouponVO;
+import kr.or.kosta.member.vo.MemberVO;
 
 public interface AdminDAO {
 	public List<AdminVO> selectMemberList();
@@ -15,4 +16,6 @@ public interface AdminDAO {
 	public AdminVO selectMemberByNo(int memNo);
 	
 	public  List<CouponVO>  selectCouponByMemberNo(int memNo);
+
+	public int updateMemberMileage(MemberVO member);
 }
