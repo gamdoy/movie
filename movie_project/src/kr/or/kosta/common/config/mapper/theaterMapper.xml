@@ -21,11 +21,12 @@
 	</resultMap>
 	
 	<resultMap type="ticketVO" id="ticket-resultmap">
-		<id column="sch_no" property="ticNo"/>
+		<id column="tic_no" property="ticNo"/>
 		<result column="tic_date" property="ticDate"/>
 		<result column="tic_price" property="ticPrice"/>
 		<result column="tic_paytype" property="ticPaytype"/>
-		<result column="tic_paytypename" property="ticPayTypename"/>
+		<result column="tic_paytypename" property="ticPaytypename"/>
+		<result column="tic_paytypecode" property="ticPaytypecode"/>
 		<result column="tic_seatno" property="ticSeatno"/>
 		<result column="tic_totalcustomer" property="ticTotalcustomer"/>
 		<result column="sch_no" property="schNo"/>
@@ -37,7 +38,13 @@
 		<result column="mr_line" property="mrLine"/>
 		<result column="mr_seat" property="mrSeat"/>
 		<result column="thea_no" property="theaNo"/>
+		<result column="thea_location" property="theaLocation"/>
 		<result column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mov_No" property="movNo"/>
+		<result column="mov_Title" property="movTitle"/>
+		<result column="tic_status" property="ticStatus"/>
+		<result column="tic_statusname" property="ticStatusname"/>
 	</resultMap>
 	
 	<insert id="insertTheater" parameterType="theaterVO">
@@ -162,13 +169,17 @@
 	<select id="selectTicketList" resultMap="ticket-resultmap">
 		select t.tic_no, mem.mem_no, mem.mem_id, mem_name, s.sch_no, 
 			t.tic_date, t.tic_price, t.tic_paytype, t.tic_seatno, t.tic_totalcustomer, 
-			thea.thea_location,mr.mr_name
-		from ticket t, member mem, schedule s, movieroom mr, theater thea
+			thea.thea_location, mr.mr_name,  c.cmn_code_kor tic_paytypename, c.cmn_code_eng tic_paytypecode,
+			m.mov_no, m.mov_title, t.tic_status, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = t.tic_status) tic_statusname
+		from ticket t, member mem, schedule s, movieroom mr, theater thea, commoncode c, movie m
     	where 1=1
     		and t.mem_no = mem.mem_no
     		and s.sch_no = t.sch_no
     		and s.mr_no = mr.mr_no
     		and mr.thea_no = thea.thea_no
+    		and c.cmn_no = t.tic_paytype
+    		and s.mov_no = m.mov_no
+    	order by t.tic_no
 	</select>
 	
 	<!--예매한 티켓 정보를 입력 -->
