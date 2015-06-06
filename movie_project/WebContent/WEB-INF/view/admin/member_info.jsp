@@ -27,7 +27,6 @@ $(document).ready(function(){
 function checkMileage(){
 	var clientMileage = ${requestScope.member_info.memberMileage};
 	var useMileage = $("#memberMileage").val();
-	alert(useMileage)
 	if(!useMileage || useMileage.trim() == ""){
 		alert("값을 입력하세요.");
 		return false;
@@ -38,9 +37,9 @@ function checkMileage(){
 		alert("값을 입력하세요.");
 		return false;
 	}else if(useMileage <= clientMileage){
+		alert("발급되었습니다. \n잔여 마일리지 : "+(clientMileage-useMileage));
 		return true;
 	}
-	alert(4)
 	alert("잘못된 값입니다.");
 	return false;
 }

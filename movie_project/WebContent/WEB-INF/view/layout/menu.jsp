@@ -12,6 +12,7 @@
 	.movie_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.event_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.customer_menu {background-color: gray; height: 80px;width: 980px; display: none;}
+	.admin_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {

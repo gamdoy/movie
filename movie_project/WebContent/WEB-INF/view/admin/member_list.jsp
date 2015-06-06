@@ -7,6 +7,15 @@ $(document).ready(function(){
 		var id = $(this).find(":first-child").text();
 			location.href="<%=request.getContextPath() %>/admin/getMemberById.do?memberId="+id;
 	});
+	
+	var searchData = $("#memSearchData").val();
+	var searchColumn = $("#memberSearch").val();
+	$("#memSearch").on("click", function(){
+		
+		
+		
+		
+	});
 });
 </script>
 
@@ -17,7 +26,23 @@ table#listTB thead tr{
 	background: lightgray;
 }
 </style>
-<h2>회원목록</h2>
+
+
+	<div style="width:700px;" align="center">     
+			<h2>회원목록</h2>
+	</div>    
+	<div style="width:700px;" align="right">     
+		<select id="memberSearchColumn" name="memberSearchColumn">
+			<option value="id">ID</option>
+			<option value="name">이름</option>
+			<option value="type">등급</option>
+			<option value="phone">전화번호</option>
+		</select>
+		
+		<input type="text" id="memSearchData" name="memSearchData">
+		<input type="button" id="memSearch" value="검색">
+	</div> <p>
+	
 <c:if test="${fn:length(requestScope.member_list) != 0 }">
 	<table id="listTB" style="width:700px">
 		<thead>
