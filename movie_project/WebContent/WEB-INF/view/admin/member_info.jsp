@@ -27,15 +27,23 @@ $(document).ready(function(){
 function checkMileage(){
 	var clientMileage = ${requestScope.member_info.memberMileage};
 	var useMileage = $("#memberMileage").val();
-	if(useMileage > clientMileage){
+	alert(useMileage)
+	if(!useMileage || useMileage.trim() == ""){
+		alert("값을 입력하세요.");
+		return false;
+	}else if(useMileage > clientMileage){
 		alert("마일리지가 부족합니다.");
 		return false;
-	}else if(useMileage==null||useMileage==""){
-		alert("잘못된 값이 입력되었습니다.");
+	}else if(!useMileage){
+		alert("값을 입력하세요.");
 		return false;
+	}else if(useMileage <= clientMileage){
+		return true;
 	}
+	alert(4)
+	alert("잘못된 값입니다.");
+	return false;
 }
-
 
 </script>
 
@@ -70,7 +78,7 @@ function checkMileage(){
 		<tr align="center" height="30">
 			<td>사용할 마일리지</td>
 				<td>
-				<input type="number" id="memberMileage" name="memberMileage"><br>
+				<input type="text" id="memberMileage" name="memberMileage"><br>
 				사용 <input type="radio" name="milUse" value="use" checked="checked">
 				미사용 <input type="radio" name="milUse" value="unuse">
 			</td>
