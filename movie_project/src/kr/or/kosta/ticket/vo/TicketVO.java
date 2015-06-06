@@ -17,13 +17,16 @@ public class TicketVO {
 	private int mrLine;
 	private int mrSeat;
 	private int theaNo;
+	private String movTitle;
+	private String movNo;
 	
 	public TicketVO() {}
 
 	public TicketVO(int ticNo, String ticDate, int ticPrice, String ticPaytype,
 			String ticSeatno, int ticTotalcustomer, int memNo, int schNo,
 			String schDate, int mrNo, String mrName, String mrScreentype,
-			String mrScreenname, int mrLine, int mrSeat, int theaNo) {
+			String mrScreenname, int mrLine, int mrSeat, int theaNo,
+			String movTitle, String movNo) {
 		super();
 		this.ticNo = ticNo;
 		this.ticDate = ticDate;
@@ -41,6 +44,8 @@ public class TicketVO {
 		this.mrLine = mrLine;
 		this.mrSeat = mrSeat;
 		this.theaNo = theaNo;
+		this.movTitle = movTitle;
+		this.movNo = movNo;
 	}
 
 	public int getTicNo() {
@@ -171,6 +176,22 @@ public class TicketVO {
 		this.theaNo = theaNo;
 	}
 
+	public String getMovTitle() {
+		return movTitle;
+	}
+
+	public void setMovTitle(String movTitle) {
+		this.movTitle = movTitle;
+	}
+
+	public String getMovNo() {
+		return movNo;
+	}
+
+	public void setMovNo(String movNo) {
+		this.movNo = movNo;
+	}
+
 	@Override
 	public String toString() {
 		return "TicketVO [ticNo=" + ticNo + ", ticDate=" + ticDate
@@ -180,7 +201,8 @@ public class TicketVO {
 				+ ", schDate=" + schDate + ", mrNo=" + mrNo + ", mrName="
 				+ mrName + ", mrScreentype=" + mrScreentype + ", mrScreenname="
 				+ mrScreenname + ", mrLine=" + mrLine + ", mrSeat=" + mrSeat
-				+ ", theaNo=" + theaNo + "]";
+				+ ", theaNo=" + theaNo + ", movTitle=" + movTitle + ", movNo="
+				+ movNo + "]";
 	}
 
 	@Override
@@ -188,6 +210,9 @@ public class TicketVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + memNo;
+		result = prime * result + ((movNo == null) ? 0 : movNo.hashCode());
+		result = prime * result
+				+ ((movTitle == null) ? 0 : movTitle.hashCode());
 		result = prime * result + mrLine;
 		result = prime * result + ((mrName == null) ? 0 : mrName.hashCode());
 		result = prime * result + mrNo;
@@ -220,6 +245,16 @@ public class TicketVO {
 			return false;
 		TicketVO other = (TicketVO) obj;
 		if (memNo != other.memNo)
+			return false;
+		if (movNo == null) {
+			if (other.movNo != null)
+				return false;
+		} else if (!movNo.equals(other.movNo))
+			return false;
+		if (movTitle == null) {
+			if (other.movTitle != null)
+				return false;
+		} else if (!movTitle.equals(other.movTitle))
 			return false;
 		if (mrLine != other.mrLine)
 			return false;
