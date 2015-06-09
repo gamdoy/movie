@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
-<html>
+
 <head>
 
 <meta charset="UTF-8">
@@ -38,7 +38,7 @@ function goUrl(){
  <!-- //CSS 영역 -->
    
     </head>
-    <body>
+  
    	 
        <!-- 검색 폼 영역 -->
        <form name="searchForm" action="" method="get">
@@ -75,7 +75,7 @@ function goUrl(){
                </tr>
            </thead>
            <tbody>
-           	<c:forEach items="${requestScope.qa_list }" var="QaVO">
+           	<c:forEach items="${requestScope.pageMap.qa_list }" var="QaVO">
 				<tr id="qa_content">
 					<td>${QaVO.fqNo}</td>
 					<td>${QaVO.qaTitle}</td>
@@ -87,8 +87,73 @@ function goUrl(){
            </tbody>
            <tfoot>
                <tr>
-                    <td align="center" colspan="5">페이징페이지</td>
-               </tr>
+                    <td align="center" colspan="5">
+                    <c:choose>
+
+	<c:when test="${pageMap.pagingBean.previousPageGroup }">
+
+		<a href="<%=request.getContextPath() %>/qa/qa.do?page=${pageMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
+
+	</c:when>
+
+	<c:otherwise>
+
+		◀
+
+	</c:otherwise>
+
+</c:choose>	
+
+ 
+
+<!-- 페이지 번호 -->
+
+<c:forEach begin="${pageMap.pagingBean.startPageOfPageGroup }" end="${pageMap.pagingBean.endPageOfPageGroup}" var="pageNum">
+
+	<c:choose>
+
+		<c:when test="${pageNum == pagingBean.currentPage }">
+
+			<b>[${pageNum}]</b>
+
+		</c:when>
+
+		<c:otherwise>
+
+			<a  href="<%=request.getContextPath() %>/qa/qa.do?page=${pageNum}">
+
+				<font color="black">${pageNum}</font>
+
+			</a>
+
+		</c:otherwise>
+
+	</c:choose>
+
+	&nbsp;&nbsp;
+
+</c:forEach>
+
+<!-- 다음 페이지 그룹 -->
+
+<c:choose>
+
+	<c:when test="${pageMap.pagingBean.nextPageGroup }">
+
+		<a href="<%=request.getContextPath() %>/qa/qa.do?page=${pageMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
+
+	</c:when>
+
+	<c:otherwise>
+
+		▶
+
+	</c:otherwise>
+
+</c:choose>
+                    
+                    </td>
+             	</tr>
            </tfoot>
        </table>
        <!-- //게시판 목록 영역 -->
@@ -97,5 +162,4 @@ function goUrl(){
            <input type="button" value="글쓰기" onclick="goUrl()"/>
        </p>
        <!-- //버튼 영역 -->
-    </body>
-</html>
+ 
