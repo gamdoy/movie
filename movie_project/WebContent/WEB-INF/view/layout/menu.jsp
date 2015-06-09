@@ -12,6 +12,7 @@
 	.movie_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.event_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.customer_menu {background-color: gray; height: 80px;width: 980px; display: none;}
+	.admin_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -97,7 +98,7 @@
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/admin/member_list.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
+		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
 	</section>
 	<!-- 
 		<section class="stats_menu">

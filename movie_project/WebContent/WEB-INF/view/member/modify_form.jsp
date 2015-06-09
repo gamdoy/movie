@@ -57,24 +57,6 @@ $(document).ready(function(){
 				<input type="text" name="email"  value="${sessionScope.login_info.email }" id="email">  <span class="errorMessage"><form:errors path="member.email"/></span>
 			</td>
 		</tr>
-		<tr>
-			<td>사진변경</td>
-			<td>
-				<input type="file" name="picture">
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<c:choose>
-					<c:when test="${empty sessionScope.login_info.pictureName }">
-						<img src="${initParam.rootPath }/uploadPhoto/no-photo.png">
-					</c:when>
-					<c:otherwise>
-						<img src="${initParam.rootPath }/uploadPhoto/${sessionScope.login_info.pictureName}">
-					</c:otherwise>
-				</c:choose>
-			</td> 
-		</tr>
 		<tr> 
 			<td colspan="2" >
 				<input type="submit" value="수정">

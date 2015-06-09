@@ -45,5 +45,8 @@ public class MemberServiceImpl implements MemberService{
 		return dao.selectMemberById(id);
 	}
 
+	public MemberVO getMemberByNo(int memNo){
+		return dao.selectMemberByNo(memNo);
+	}
 	
 }

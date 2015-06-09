@@ -39,4 +39,6 @@ public interface TheaterDAO {
 	public abstract List<String> selectReservedSeats(TicketVO tvo);
 
 	public abstract TicketVO selectTicketByNo(int ticNo);
+
+	public abstract List<TicketVO> selectTicketList();
 }
