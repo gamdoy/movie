@@ -1,10 +1,15 @@
 package kr.or.kosta.event.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.event.vo.EventVO;
+import kr.or.kosta.event.vo.SingleVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +18,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/event/")
 public class EventController {
 	
+	
+	
 	@Autowired
 	private EventService service;
 	
-	@RequestMapping(value="nowEvent")
+	@RequestMapping(value="nowEvent.do")
 	public String nowEvent(ModelMap map){
 		List<EventVO> list= service.getEventList();
 		System.out.println(list.size());
@@ -55,6 +63,7 @@ public class EventController {
 		return "event/event_board.tiles";
 	}
 	
+	/*
 	@RequestMapping(value="addEvent")
 	@ResponseBody
 	public int addEvent(@ModelAttribute EventVO vo, ModelMap map){
@@ -62,13 +71,27 @@ public class EventController {
 		System.out.println(i);
 		return i;
 	}
+	*/
+	
 	
 	@RequestMapping(value="modifyEvent")
-	@ResponseBody
-	public String modifyEvent(@ModelAttribute EventVO vo,ModelMap map){
-		System.out.println("이벤트 수정");
+	public String modifyEvent(@ModelAttribute EventVO vo,ModelMap map,HttpServletRequest request)throws IllegalStateException, IOException{
+		
+
+		MultipartFile file = vo.getEvtImageFile();
+		if(file!=null && !file.isEmpty()){
+			String path=request.getServletContext().getRealPath("/images/event");
+			String fileName=System.currentTimeMillis()+".jpg";
+			File evtImage=new File(path,fileName);
+			file.transferTo(evtImage);
+			vo.setEvtFile(fileName);
+
+		}
+		
 		service.setEvent(vo);
-		return "event/now_event.tiles";
+		
+		return "/event/nowEvent.do";
+		
 	}
 	
 	@RequestMapping(value="modifyEventNumber")
@@ -84,12 +107,14 @@ public class EventController {
 	public String deleteEvent (@ModelAttribute EventVO vo){
 		int evtNo=vo.getEvtNo();
 		service.removeEventByEventNumber(evtNo);
-		return "event/now_event.tiles";
+		return "/event/nowEvent.do";
 	}
 	
 	@RequestMapping(value="eventListPaging")
 	public String eventListPaing(@RequestParam(defaultValue="1")int page,ModelMap map){
+		System.out.println(page);
 		Map pageMap = service.getEventListPaging(page);
+		System.out.println(page);
 		map.addAttribute("pageMap",pageMap);
 		return "event/event_list_paging.tiles";
 		
@@ -104,5 +129,45 @@ public class EventController {
 		map.addAttribute("search_event_list",searchEventList);
 		
 		return "event/search_event.tiles";
+	}
+	
+	/*파일 싱글 업로드
+	@RequestMapping(value="singleup")
+	public String singleUpload(SingleUpload svo,ModelMap map)throws IllegalStateException, IOException{
+		MultipartFile upfile = svo.getUpfile();
+		if(upfile!=null && !upfile.isEmpty()){
+			String fileName=upfile.getOriginalFilename();
+			long size=upfile.getSize();
+			File file=new File(imageDir,fileName);
+			upfile.transferTo(file);
+			map.addAttribute("filename",fileName);
+			map.addAttribute("filesize",size);
+			map.addAttribute("title",svo.getTitle());
+			map.addAttribute("info",svo.getInfo());
+		}else{
+			map.addAttribute("title","업로드된 파일이 없습니다.");
+		}
+		return "event/now_event.tiles";
+	}
+	*/
+	
+	@RequestMapping(value="addEvent")
+	public String addEvent(@ModelAttribute EventVO vo, ModelMap map,HttpServletRequest request)throws IllegalStateException, IOException{
+		
+		
+		
+		MultipartFile file = vo.getEvtImageFile();
+		if(file!=null && !file.isEmpty()){
+			String path=request.getServletContext().getRealPath("/images/event");
+			String fileName=System.currentTimeMillis()+".jpg";
+			File evtImage=new File(path,fileName);
+			file.transferTo(evtImage);
+			vo.setEvtFile(fileName);
+
+		}
+		
+		service.registEvent(vo);
+		
+		return "/event/nowEvent.do";
 	}
 }

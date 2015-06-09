@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 	$("#registerForm").on("submit", function(){
 		
-		if(!$("#evtName").val()){
+		if(!$("#evtTitle").val()){
 			alert("이벤트 분류명을 입력하세요");
 			$("#evtName").focus();
 			return false;
@@ -30,7 +30,7 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if(!$("#evtTitle").val()){
+		if(!$("#evtContent").val()){
 			alert("이벤트제목을 입력하세요");
 			$("#evtTitle").focus();
 			return false;
@@ -48,9 +48,9 @@ $(document).ready(function(){
 <form method="post" action="<%=request.getContextPath() %>/event/addEvent.do"  id="registerForm" enctype="multipart/form-data">
 	<table style="width:600px">
 		<tr>
-			<td width="100">이벤트 분류</td>
+			<td width="100">이벤트 이름</td>
 			<td>
-				<input type="text" name="evtName" id='evtName'> 
+				<input type="text" name="evtTitle" id='evtTitle'> 
 				
 			</td>
 		</tr>
@@ -73,9 +73,15 @@ $(document).ready(function(){
 			</td>
 		</tr>
 		<tr>
-			<td>이벤트 제목</td>
+			<td>이벤트 내용</td>
 			<td>
-				<input type="text" id="evtTitle" name="evtTitle"> 
+				<input type="text" id="evtContent" name="evtContent"> 
+			</td>
+		</tr>
+		<tr>
+			<td>이벤트이미지</td>
+			<td>
+				<input type="file" id="evtImageFile" name="evtImageFile">
 			</td>
 		</tr>
 		<tr>

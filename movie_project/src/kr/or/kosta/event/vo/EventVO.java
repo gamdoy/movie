@@ -1,24 +1,43 @@
  package kr.or.kosta.event.vo;
 
+
+import org.springframework.web.multipart.MultipartFile;
+
+
 public class EventVO {
 	private int evtNo;
-	private String evtName;
 	private String evtStartDate;
 	private String evtEndDate;
 	private String evtRegDate;
 	private String evtTitle;
+	private String evtContent;
+	private String evtFile;
+	
+	private MultipartFile evtImageFile;
 	
 	public EventVO(){}
 
-	public EventVO(int evtNo, String evtName, String evtStartDate,
-			String evtEndDate, String evtRegDate, String evtTitle) {
+	public EventVO(int evtNo, String evtStartDate, String evtEndDate,
+			String evtRegDate, String evtTitle, String evtContent,
+			String evtFile, MultipartFile evtImageFile) {
 		super();
 		this.evtNo = evtNo;
-		this.evtName = evtName;
 		this.evtStartDate = evtStartDate;
 		this.evtEndDate = evtEndDate;
 		this.evtRegDate = evtRegDate;
 		this.evtTitle = evtTitle;
+		this.evtContent = evtContent;
+		this.evtFile = evtFile;
+		this.evtImageFile = evtImageFile;
+	}
+
+	@Override
+	public String toString() {
+		return "EventVO [evtNo=" + evtNo + ", evtStartDate=" + evtStartDate
+				+ ", evtEndDate=" + evtEndDate + ", evtRegDate=" + evtRegDate
+				+ ", evtTitle=" + evtTitle + ", evtContent=" + evtContent
+				+ ", evtFile=" + evtFile + ", evtImageFile=" + evtImageFile
+				+ "]";
 	}
 
 	@Override
@@ -26,8 +45,12 @@ public class EventVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
+				+ ((evtContent == null) ? 0 : evtContent.hashCode());
+		result = prime * result
 				+ ((evtEndDate == null) ? 0 : evtEndDate.hashCode());
-		result = prime * result + ((evtName == null) ? 0 : evtName.hashCode());
+		result = prime * result + ((evtFile == null) ? 0 : evtFile.hashCode());
+		result = prime * result
+				+ ((evtImageFile == null) ? 0 : evtImageFile.hashCode());
 		result = prime * result + evtNo;
 		result = prime * result
 				+ ((evtRegDate == null) ? 0 : evtRegDate.hashCode());
@@ -47,15 +70,25 @@ public class EventVO {
 		if (getClass() != obj.getClass())
 			return false;
 		EventVO other = (EventVO) obj;
+		if (evtContent == null) {
+			if (other.evtContent != null)
+				return false;
+		} else if (!evtContent.equals(other.evtContent))
+			return false;
 		if (evtEndDate == null) {
 			if (other.evtEndDate != null)
 				return false;
 		} else if (!evtEndDate.equals(other.evtEndDate))
 			return false;
-		if (evtName == null) {
-			if (other.evtName != null)
+		if (evtFile == null) {
+			if (other.evtFile != null)
 				return false;
-		} else if (!evtName.equals(other.evtName))
+		} else if (!evtFile.equals(other.evtFile))
+			return false;
+		if (evtImageFile == null) {
+			if (other.evtImageFile != null)
+				return false;
+		} else if (!evtImageFile.equals(other.evtImageFile))
 			return false;
 		if (evtNo != other.evtNo)
 			return false;
@@ -77,28 +110,12 @@ public class EventVO {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "EventVO [evtNo=" + evtNo + ", evtName=" + evtName
-				+ ", evtStartDate=" + evtStartDate + ", evtEndDate="
-				+ evtEndDate + ", evtRegDate=" + evtRegDate + ", evtTitle="
-				+ evtTitle + "]";
-	}
-
 	public int getEvtNo() {
 		return evtNo;
 	}
 
 	public void setEvtNo(int evtNo) {
 		this.evtNo = evtNo;
-	}
-
-	public String getEvtName() {
-		return evtName;
-	}
-
-	public void setEvtName(String evtName) {
-		this.evtName = evtName;
 	}
 
 	public String getEvtStartDate() {
@@ -132,6 +149,30 @@ public class EventVO {
 	public void setEvtTitle(String evtTitle) {
 		this.evtTitle = evtTitle;
 	}
-	
+
+	public String getEvtContent() {
+		return evtContent;
+	}
+
+	public void setEvtContent(String evtContent) {
+		this.evtContent = evtContent;
+	}
+
+	public String getEvtFile() {
+		return evtFile;
+	}
+
+	public void setEvtFile(String evtFile) {
+		this.evtFile = evtFile;
+	}
+
+	public MultipartFile getEvtImageFile() {
+		return evtImageFile;
+	}
+
+	public void setEvtImageFile(MultipartFile evtImageFile) {
+		this.evtImageFile = evtImageFile;
+	}
+
 	
 }
