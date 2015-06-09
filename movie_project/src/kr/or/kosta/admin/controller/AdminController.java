@@ -7,6 +7,7 @@ import java.util.Map;
 
 import kr.or.kosta.admin.model.service.AdminService;
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.common.vo.PagingBean;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.coupon.vo.CouponVO;
 import kr.or.kosta.member.model.service.MemberService;
@@ -47,7 +48,8 @@ public class AdminController {
 	}
 	
 	//멤버 ID에서 멤버 No 추출하여 쿠폰리스트 출력
-	@RequestMapping("getMemberById")
+	@RequestMapping("getMem"
+			+ "berById")
 	public String getMemberById(ModelMap map,@RequestParam("memberId") String id){
 		AdminVO member = service.selectMemberById(id);
 		int memNo = member.getMemNo();
@@ -102,19 +104,17 @@ public class AdminController {
 		System.out.println("getMemberByKeyword"+searchType);
 		System.out.println("getMemberByKeyword"+searchKeyword);
 		SearchVO svo = new SearchVO();
-		Map memberList = new HashMap();
+		HashMap memberList = new HashMap();
 		AdminVO member;
 		svo.setSearchType(searchType);
 		System.out.println(searchType);
 		svo.setSearchKeyword(searchKeyword);
-		if(svo.getSearchType().equals("MEM_ID")){
-			member = service.selectMemberById(svo.getSearchKeyword());
-			memberList.put("member_list", member);
-			System.out.println("ID로검색 : "+memberList);
-		}else{
-			memberList = service.selectMemberBySearchVOPaging(svo, page);
-		}
-		map.addAttribute("memberMap", memberList);
-		return "admin/member_list.tiles";
+		System.out.println("컨트롤러 : "+page);
+		
+		memberList = service.selectMemberBySearchVOPaging(svo, page);
+		map.addAttribute("searchedMemberMap", memberList);
+		map.addAttribute("currentSearchType", searchType);
+		map.addAttribute("currentSearchKeyword", searchKeyword);
+		return "admin/searched_member_list.tiles";
 	}
 }

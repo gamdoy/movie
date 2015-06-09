@@ -3,9 +3,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript">
 $(document).ready(function(){
+	var searchType = $("#currentSearchType").val();
+	var searchKeyword =$("#currentSearchKeyword").val();
+	var pageNum;
+	
 	$("table#listTB tbody tr").on("click", function(){
 		var id = $(this).find(":first-child").text();
 			location.href="<%=request.getContextPath() %>/admin/getMemberById.do?memberId="+id;
+	});
+	
+	$("#nextPageGroupBtn").on("click", function(){
+		location.href="<%=request.getContextPath() %>/admin/getMemberByKeyword.do?page=${searchedMemberMap.pagingBean2.endPageOfPageGroup+1}&searchType="+searchType+"&searchKeyword="+searchKeyword;
+	});
+	
+	 $(".PageBtn").on("click", function(){
+		var label = $(this).text();
+		location.href="<%=request.getContextPath() %>/admin/getMemberByKeyword.do?page="+label+"&searchType="+searchType+"&searchKeyword="+searchKeyword;
+	});
+	
+	$("#previousPageGroupBtn").on("click", function(){
+		location.href="<%=request.getContextPath() %>/admin/getMemberByKeyword.do?page=${searchedMemberMap.pagingBean2.startPageOfPageGroup-1}&searchType="+searchType+"&searchKeyword="+searchKeyword;
 	});
 });
 
@@ -32,7 +49,11 @@ table#listTB thead tr{
 			<option value="MEM_PHONENO">전화번호</option>
 		</select>
 		
+		<input type="hidden" id="currentSearchType" value=${currentSearchType }>
+		
 		<input type="text" id="searchKeyword" name="searchKeyword">
+		<input type="hidden" id="currentSearchKeyword" value=${currentSearchKeyword }>
+		
 		<input type="submit" id="memSearch" value="검색">
 	</div> <p>
 	
@@ -51,7 +72,7 @@ table#listTB thead tr{
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.memberMap.member_list }" var="adminVO" varStatus="i">
+			<c:forEach items="${requestScope.searchedMemberMap.member_list }" var="adminVO" varStatus="i">
 				<tr id="search">
 					<td>${adminVO.memberId}</td>
 					<td>${adminVO.memberName}</td>
@@ -67,34 +88,36 @@ table#listTB thead tr{
 	</table>
 	<p/>
 	
-	<div style="width:700px;" align="center">  
+	<div style="width:700px;" align="center">     
 		<c:choose>
-			<c:when test="${memberMap.pagingBean.previousPageGroup }">
-				<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${memberMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
+			<c:when test="${searchedMemberMap.pagingBean2.previousPageGroup }">
+				<label id="previousPageGroupBtn" name="previousPageGroupBtn">
+					<font color="black">◀</font>
+				</label>
 			</c:when>
 			<c:otherwise>
 				◀
 			</c:otherwise>
 		</c:choose>	
-
-<!-- 페이지 번호 -->
-		<c:forEach begin="${memberMap.pagingBean.startPageOfPageGroup }" end="${memberMap.pagingBean.endPageOfPageGroup}" var="pageNum">
+		
+		<!-- 페이지 번호 -->
+		<c:forEach begin="${searchedMemberMap.pagingBean2.startPageOfPageGroup }" end="${searchedMemberMap.pagingBean2.endPageOfPageGroup}" var="pageNum">
 			<c:choose>
-				<c:when test="${pageNum == memberMap.pagingBean.currentPage }">
-					<b>[${pageNum}]</b>
+				<c:when test="${pageNum == searchedMemberMap.pagingBean2.currentPage}">
+					<b><i>[${pageNum}]</i></b>
 				</c:when>
 				<c:otherwise>
-					<a  href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${pageNum}">
-						<font color="black">${pageNum}</font>
-					</a>
+					<label class="PageBtn" name="${pageNum}" value="${pageNum}">
+						${pageNum}
+					</label>
 				</c:otherwise>
 			</c:choose>
 			&nbsp;&nbsp;
 		</c:forEach>
 		<!-- 다음 페이지 그룹 -->
 		<c:choose>
-			<c:when test="${memberMap.pagingBean.nextPageGroup }">
-				<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${memberMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
+			<c:when test="${searchedMemberMap.pagingBean2.nextPageGroup }">
+				<label id="nextPageGroupBtn" name="nextPageGroupBtn"><font color="black">▶</font></label>
 			</c:when>
 			<c:otherwise>
 				▶

@@ -41,7 +41,11 @@ public class AdminDAOImpl implements AdminDAO{
 		
 		System.out.println("AdminDAOImpl - selectMemberList : "+PagingBean.CONTENTS_PER_PAGE);
 		System.out.println("AdminDAOImpl - selectMemberList page값 : "+page);
-		return session.selectList(namespace+"selectMemberBySearchVOPaging", param);
+		System.out.println(param);
+		List<AdminVO> list = session.selectList(namespace+"selectMemberBySearchVOPaging", param);
+		System.out.println("selectMemberBySearchVO : "+list);
+		System.out.println("==================================");
+		return list;
 	}
 	
 	@Override
@@ -74,7 +78,9 @@ public class AdminDAOImpl implements AdminDAO{
 	@Override
 	public List<AdminVO> selectMemberBySearchVO(SearchVO svo) {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+"selectMemberBySearchVO", svo);
+		List<AdminVO> vo = session.selectList(namespace+"selectMemberBySearchVO", svo);
+	
+		return vo;
 	}
 	
 	
