@@ -94,6 +94,11 @@ public class TheaterDAOImpl implements TheaterDAO {
 	}
 
 	@Override
+	public List<TicketVO> selectTicketList() {
+		return session.selectList(namespace + "selectTicketList");
+	}
+
+	@Override
 	public List<String> selectReservedSeats(TicketVO tvo) {
 		return session.selectList(namespace + "selectReservedSeats", tvo);
 	}

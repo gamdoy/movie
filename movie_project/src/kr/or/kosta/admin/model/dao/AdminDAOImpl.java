@@ -1,9 +1,14 @@
 package kr.or.kosta.admin.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.common.vo.PagingBean;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.coupon.vo.CouponVO;
+import kr.or.kosta.member.vo.MemberVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +22,30 @@ public class AdminDAOImpl implements AdminDAO{
 	private SqlSessionTemplate session;
 	
 	@Override
-	public List<AdminVO> selectMemberList() {
-		return session.selectList(namespace+"selectMemberList");
+	public List<AdminVO> selectMemberList(int page) {
+		Map param = new HashMap();
+		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		param.put("pageNo", page);
+		System.out.println("AdminDAOImpl - selectMemberList : "+PagingBean.CONTENTS_PER_PAGE);
+		System.out.println("AdminDAOImpl - selectMemberList page값 : "+page);
+		return session.selectList(namespace+"selectMemberListPaging", param);
+	}
+	
+	@Override
+	public List<AdminVO> selectMemberBySearchVOPaging(SearchVO svo, int page) {
+		Map param = new HashMap();
+		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		param.put("pageNo", page);
+		param.put("searchType", svo.getSearchType());
+		param.put("searchKeyword", svo.getSearchKeyword());
+		
+		System.out.println("AdminDAOImpl - selectMemberList : "+PagingBean.CONTENTS_PER_PAGE);
+		System.out.println("AdminDAOImpl - selectMemberList page값 : "+page);
+		System.out.println(param);
+		List<AdminVO> list = session.selectList(namespace+"selectMemberBySearchVOPaging", param);
+		System.out.println("selectMemberBySearchVO : "+list);
+		System.out.println("==================================");
+		return list;
 	}
 	
 	@Override
@@ -43,4 +70,34 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectList(namespace+"selectCouponByMemberNo", memNo);
 	}
 		
+	public int updateMemberMileage(MemberVO member) {
+		// TODO Auto-generated method stub
+		return session.update(namespace+"updateMemberMileage", member);
+	}
+	
+	@Override
+	public List<AdminVO> selectMemberBySearchVO(SearchVO svo) {
+		// TODO Auto-generated method stub
+		List<AdminVO> vo = session.selectList(namespace+"selectMemberBySearchVO", svo);
+	
+		return vo;
+	}
+	
+	
+	
+	@Override
+	public int selectTotalMemberCount() {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectTotalMember");
+	}
+	
+	
+	@Override
+//서치VO 넣어서 조회할 데이터값 count 가져올것
+	public int selectSearchMemberCount(SearchVO svo) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectSearchMemberCount", svo);
+	}
+	
+	
 }
