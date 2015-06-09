@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.coupon.vo.CouponVO;
+import kr.or.kosta.member.vo.MemberVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,4 +44,8 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectList(namespace+"selectCouponByMemberNo", memNo);
 	}
 		
+	public int updateMemberMileage(MemberVO member) {
+		// TODO Auto-generated method stub
+		return session.update(namespace+"updateMemberMileage", member);
+	}
 }

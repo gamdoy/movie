@@ -205,6 +205,7 @@ public class MemberVO implements Serializable{
 	public void setMemPhoneNo(String memPhoneNo) {
 		this.memPhoneNo = memPhoneNo;
 	}
+
 	public String getMemMemberType() {
 		return memMemberType;
 	}

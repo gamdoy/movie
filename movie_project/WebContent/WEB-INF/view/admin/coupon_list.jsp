@@ -9,6 +9,7 @@ table#listTB thead tr{
 	font-weight: bold;
 	background: lightgray;
 }
+
 </style>
 <h2>쿠폰목록</h2>
 <c:if test="${fn:length(requestScope.coupon_list) != 0 }">

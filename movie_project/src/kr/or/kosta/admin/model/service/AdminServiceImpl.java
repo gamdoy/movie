@@ -44,7 +44,13 @@ public class AdminServiceImpl implements AdminService{
 		return i;
 	}
 	
+	@Override
 	public List<CouponVO> selectCouponByMemberNo(int memNo){
 		return dao.selectCouponByMemberNo(memNo);
+	}
+	
+	@Override
+	public int updateMemberMileage(MemberVO member) {
+		return dao.updateMemberMileage(member);
 	}
 }

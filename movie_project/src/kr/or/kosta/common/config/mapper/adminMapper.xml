@@ -60,4 +60,10 @@
 		INSERT INTO COUPON(COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE)
 		values(COUPON_SEQ.nextval,#{MemNo},#{coupType},#{coupUsed},#{coupUsedDate})
 	</insert>
+	
+	<update id="updateMemberMileage" parameterType="memberVO">
+ 		update member
+ 		set MEM_MILEAGE=#{memMileage}
+ 		where mem_id=#{memId}		
+ 	</update>
 </mapper>
