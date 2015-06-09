@@ -39,7 +39,7 @@ table#listTB thead tr{
 			<c:forEach items="${requestScope.event_list }" var="eventVO">
 				<tr>
 					<td><label onclick="getEvent(${eventVO.evtNo })">${eventVO.evtNo }</label> </td>
-					<td>${eventVO.evtName}</td>
+					<td>${eventVO.evtTitle}</td>
 					
 				</tr> 
 			</c:forEach>
