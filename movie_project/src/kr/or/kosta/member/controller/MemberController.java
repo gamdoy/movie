@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
@@ -35,11 +37,9 @@ public class MemberController {
 	
 	@RequestMapping(value="join.do",method=RequestMethod.POST)
 	public String joinMember(@ModelAttribute MemberVO membervo, Errors error)throws Exception{
-		System.out.println(error);
 		membervo.setMemMemberType("102100");
-		System.out.println(membervo);
 		service.joinMember(membervo);
-		return "redirect:member/join_success.tiles";
+		return "redirect:/member/join_success.do?memId="+membervo.getMemId();
 	}
 	@RequestMapping(value="joinForm.do")
 	public String joinForm(@ModelAttribute MemberVO membervo, Errors error,ModelMap map )throws Exception{
@@ -49,6 +49,30 @@ public class MemberController {
 		
 		return "member/join_form.tiles";	
 	}
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	public String login(String id,String password, HttpSession session, HttpServletResponse response, ModelMap map){
+		MemberVO m = service.getMemberById(id);
+		String url = null;
+		
+		if(m!=null){
+			if(password.equals(m.getMemPassword())){
+				session.setAttribute("login_info", m);
+				url = "main.tiles";
+			}else{
+				url = "member/login_form.tiles";
+				map.addAttribute("error_message", "Password를 확인하세요");
+			}
+		}else{
+			url = "member/login_form.tiles";
+			map.addAttribute("error_message","ID를 확인하세요");
+		}
+		return url;
+	}
+	@RequestMapping("logout")
+	public String logout(HttpSession session,HttpServletResponse response){
+		session.invalidate();
+		return "redirect:/main.do";
+	}
 	
 	@RequestMapping("idDuplicateCheck")
 	@ResponseBody
@@ -57,5 +81,4 @@ public class MemberController {
 		result.put("result", service.getMemberById(id)==null ? true:false);
 		return result;
 	}
-	
 }

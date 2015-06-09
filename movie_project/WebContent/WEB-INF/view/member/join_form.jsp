@@ -6,11 +6,14 @@
 .errorMessage{color: red;}
 </style>
 <script type="text/javascript">
-var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님) 
+var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님)
+var idflag = false;
+var idflag2 = false;
 $(document).ready(function(){
 	
 	//ID 중복 체크
 	$("#idconfirm").on("click", function(){
+		idflag2 = true;
 		var id = $("#memId").val();
 		$.ajax({
 			url:"<%=request.getContextPath() %>/member/idDuplicateCheck.do",
@@ -26,9 +29,12 @@ $(document).ready(function(){
 				if(!idDup){
 					$("#dupMessageLayer").text("중복된 아이디 입니다.");
 					$("#dupMessageLayer").prop("class","errorMessage");
+					idflag = false;
 				}else{
 					$("#dupMessageLayer").text("사용할 수 있는 아이디 입니다.");
 					$("#dupMessageLayer").prop("class","normalMessage");
+					idflag = true;
+
 				}
 			}
 		})
@@ -55,12 +61,13 @@ $(document).ready(function(){
 			}else{
 				$("#passwrodMessageLayer2").text("비밀번호가 일치하지 않습니다.");
 				$("#passwrodMessageLayer2").prop("class","errorMessage");
+
 			}
 		})	
 	});
 	
 	var emailType = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/; 
-	$("#memEmail").on("keyup", function(){
+	$("#memEmail").on("change", function(){
 		var email = this.value;
 		if(!emailType.test(email)){
 			$("#emailMessageLayer").text("이메일형식에 맞게 입력해주세요.");
@@ -87,11 +94,62 @@ $(document).ready(function(){
 	})
 });
 function setSubmit(){
-	if($(tel).val()=="phoneType"){
+	if(!$(memId).val()){
+		alert("Id를 입력하세요.");
+		return false;
+	}else if
+	(idflag2==false){
+		alert("중복확인버튼을 눌러주세요.");
+		return false;
+	}else if
+	(idflag==false){
+		alert("중복아이디입니다. 다른아이디를 사용해주세요.");
+		return false;
+	}else if
+	(!$(memPassword).val()){
+		alert("비밀번호를 입력하세요.");
+		return false;
+	}else if
+	(!($(memPassword).val()==$(password2).val())){
+		alert("비밀번호를 일치하게 입력하세요.");
+		return false;
+			
+	}else if(!$(memName).val()){
+		alert("이름을 입력하세요.");
+		return false;
+	}else if($(birthYear).val()=="default"){
+	alert("년도를 선택하세요.");
+	return false;
+	}
+	else if($(birthMonth).val()=="default"){
+		alert("월을 선택하세요.");
+		return false;
+	}
+	else if($(birthDay).val()=="default"){
+		alert("일을 선택하세요.");
+		return false;
+	}
+	else if(!$(memEmail).val()){
+		alert("이메일을 입력하세요.");
+		return false;
+	}	
+	else if(!$(memAddressDetail).val()){
+		alert("주소를 입력하세요.");
+		return false;
+	}
+	else if($(tel).val()=="phoneType"){
 		alert("번호를 선택하세요.");
 		return false;
 	}
-	$("#memBirthDate").val($("#birthyear").val()+"-"+$("#birthMonth").val()+"-"+$("#birthDay").val());
+	else if(!$(tel2).val()){
+		alert("전화번호를 입력하세요.");
+		return false;
+	}
+	else if(!$(tel3).val()){
+		alert("전화번호를 입력하세요.");
+		return false;
+	}
+	$("#memBirthDate").val($("#birthYear").val()+"-"+$("#birthMonth").val()+"-"+$("#birthDay").val());
 	$("#memPhoneNo").val($("#tel").val()+"-"+$("#tel2").val()+"-"+$("#tel3").val());
 }
 
@@ -133,17 +191,20 @@ function setSubmit(){
 		<tr>
 			<td>생년월일</td>
 			<td>
-				<select class="birthyear" id="birthyear" name="birthyear">
+				<select class="birthyear" id="birthYear" name="birthYear">
+				<option value="default">년</option>
 				<c:forEach begin="1950" end="2000" var="year">
 				<option>${year}</option>
 				</c:forEach>			
 				</select>년
 				<select class="birthMonth" id="birthMonth" name="birthMonth">
+				<option value="default">월</option>
 				<c:forEach begin="1" end="12" var="month">
 				<option>${month}</option>
 				</c:forEach>			
 				</select>월
 				<select class="birthDay" id="birthDay" name="birthDay">
+				<option value="default">일</option>
 				<c:forEach begin="1" end="31" var="day">
 				<option>${day}</option>
 				</c:forEach>			

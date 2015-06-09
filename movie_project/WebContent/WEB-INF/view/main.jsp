@@ -2,4 +2,4 @@
 
 <h1>메인페이지</h1>
 
-${name }님. 환영합니다.
+${sessionScope.login_info.memId} 님. 환영합니다.

@@ -28,13 +28,19 @@
 	
 	<context:component-scan base-package="kr.or.kosta.qa.model"/>
 	<mvc:annotation-driven/>
-	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/login/**/*"/>
+			<bean class="kr.or.kosta.member.interceptor.LoginCheckInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 	<!-- 단순 Link controller -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	
 	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
 	<mvc:view-controller path="/member/zipcodeForMember.do" view-name="/WEB-INF/view/member/zipcodeForMember.jsp"/>
+	<mvc:view-controller path="/member/join_success.do" view-name="member/join_success.tiles"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
