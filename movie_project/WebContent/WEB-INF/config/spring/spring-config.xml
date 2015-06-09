@@ -15,18 +15,20 @@
 	<context:component-scan base-package="kr.or.kosta.theater.controller"/>
 	<context:component-scan base-package="kr.or.kosta.event.controller"/>
 	<context:component-scan base-package="kr.or.kosta.commoncode.controller"/>
-
 	<context:component-scan base-package="kr.or.kosta.member.controller"/>
-	<context:component-scan base-package="kr.or.kosta.member.model"/>
+	<context:component-scan base-package="kr.or.kosta.movie.controller"/>
+	<context:component-scan base-package="kr.or.kosta.qa.controller"/>
+	<context:component-scan base-package="kr.or.kosta.stats.controller"/>
+	<context:component-scan base-package="kr.or.kosta.admin.controller"/>
 
 	<context:component-scan base-package="kr.or.kosta.theater.model"/>
-	<context:component-scan base-package="kr.or.kosta.commoncode.model"/>
 	<context:component-scan base-package="kr.or.kosta.event.model"/>
-	<context:component-scan base-package="kr.or.kosta.movie.controller"/>
+	<context:component-scan base-package="kr.or.kosta.commoncode.model"/>
+	<context:component-scan base-package="kr.or.kosta.member.model"/>
 	<context:component-scan base-package="kr.or.kosta.movie.model"/>
-	<context:component-scan base-package="kr.or.kosta.qa.controller"/>
-	
 	<context:component-scan base-package="kr.or.kosta.qa.model"/>
+	<context:component-scan base-package="kr.or.kosta.stats.model"/>
+	<context:component-scan base-package="kr.or.kosta.admin.model"/>
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
 		<mvc:interceptor>
