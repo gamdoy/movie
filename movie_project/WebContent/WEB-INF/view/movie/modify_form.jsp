@@ -1,5 +1,6 @@
 <%@ page contentType = "text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript"	src="<%=request.getContextPath()%>/script/jquery.js"></script>
 <style type="text/css">
 table, td {
@@ -16,6 +17,11 @@ table {
 
 <script type="text/javascript">
 	
+	/* function modifyEnable(){
+		for (var int = 0; int < ${requestScope.movie}.length; int++) {
+			
+		}
+	} */
 	
 	function submitCheck() {
 		var flag = true;
@@ -40,9 +46,12 @@ table {
 	}
 
 	$(document).ready(function() {
+		//alert('${requestScope.movie }');
 		if(${requestScope.movie.success==1 }){
 			alert("수정 성공");
 		}
+		
+		
 		/* 글자수 체크 */
 		$("#title").on("blur", function() {
 			var a = $(this).val();
@@ -109,7 +118,9 @@ table {
 	});
 </script>
 <h1>영화 정보 수정<br>
-<br>
+${fn:length(requestScope)}<br>
+${requestScope.movie }
+ <br>
 </h1>
 <form method="post"
 		action="<%=request.getContextPath()%>/movie/modify_success.do"
@@ -146,7 +157,7 @@ table {
 				
 				 <!-- 장르 -->
 				<td>장르</td>
-				<td width="50"><select name="genre" id="genre">
+				<td width="50"><select name="genre" id="genre" >
 						<c:forEach items="${genre }" var="genre">
 							<option value="${genre.cmnNo }"
 							 ${requestScope.movie.genre==genre.cmnNo? 'selected="selected"':""}>
