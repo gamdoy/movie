@@ -1,9 +1,13 @@
 package kr.or.kosta.admin.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.kosta.admin.model.dao.AdminDAO;
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.common.vo.PagingBean;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.coupon.vo.CouponVO;
 import kr.or.kosta.event.model.dao.EventDAO;
 import kr.or.kosta.member.model.dao.MemberDAO;
@@ -21,10 +25,20 @@ public class AdminServiceImpl implements AdminService{
 	private MemberDAO memberDao;
 	
 	@Override
-	public List<AdminVO> getMemberList() {
-		 List<AdminVO> list = dao.selectMemberList();
-		 return list;
+	public Map getMemberList(int page) {
+		 List<AdminVO> list = dao.selectMemberList(page);
+		 int totalContent = dao.selectTotalMemberCount();
+		 System.out.println("totalContent "+totalContent );
+		 PagingBean pagingbean = new PagingBean(totalContent, page);
+		 HashMap map = new HashMap();
+		 map.put("member_list", list);
+		 map.put("pagingBean", pagingbean);
+		 return map;
+	//페이징추가
+		 
 	}
+	
+	
 	
 	@Override
 	public AdminVO selectMemberById(String id) {
@@ -44,7 +58,37 @@ public class AdminServiceImpl implements AdminService{
 		return i;
 	}
 	
+	@Override
 	public List<CouponVO> selectCouponByMemberNo(int memNo){
 		return dao.selectCouponByMemberNo(memNo);
+	}
+	
+	@Override
+	public int updateMemberMileage(MemberVO member) {
+		return dao.updateMemberMileage(member);
+	}
+	
+	@Override
+	public List<AdminVO> selectMemberBySearchVO(SearchVO svo) {
+		// TODO Auto-generated method stub
+		return dao.selectMemberBySearchVO(svo);
+	}
+	
+	@Override
+	public HashMap selectMemberBySearchVOPaging(SearchVO svo, int page) {
+		List<AdminVO> list = dao.selectMemberBySearchVOPaging(svo, page);
+		 int totalSearchContent = dao.selectSearchMemberCount(svo);
+		
+		 System.out.println("totalContent "+totalSearchContent );
+		 PagingBean pagingbean = new PagingBean(totalSearchContent, page);
+		 HashMap map = new HashMap();
+		 map.put("member_list", list);
+		 map.put("pagingBean", pagingbean);
+		 return map;
+	}
+	
+	@Override
+	public int selectSearchMemberCount(SearchVO svo) {
+		return dao.selectSearchMemberCount(svo);
 	}
 }

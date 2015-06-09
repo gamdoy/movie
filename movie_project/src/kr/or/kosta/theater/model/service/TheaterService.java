@@ -30,4 +30,6 @@ public interface TheaterService {
 	public List<String> getReservedSeats(TicketVO tvo);
 
 	public TicketVO getTicketByNo(int ticNo);
+
+	public List<TicketVO> getTicketList();
 }

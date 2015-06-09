@@ -9,10 +9,11 @@ table#listTB thead tr{
 	font-weight: bold;
 	background: lightgray;
 }
+
 </style>
 <h2>쿠폰목록</h2>
 <c:if test="${fn:length(requestScope.coupon_list) != 0 }">
-	<table style="width:700px" border="1">
+	<table style="width:500px" border="1">
 		<thead>
 			<tr>
 				<td>쿠폰이름</td>
@@ -22,9 +23,9 @@ table#listTB thead tr{
 		</thead>
 		<tbody>
 			<c:forEach items="${requestScope.coupon_list }" var="couponVO" varStatus="i">
-				<tr>
+				<tr id="${couponVO.coupNo }">
 					<td>${couponVO.coupType}</td>
-					<td>${couponVO.coupUsed}</td>
+					<td>	${couponVO.coupUsed}	</td>
 					<td>${couponVO.coupUsedDate}</td>
 				</tr> 
 			</c:forEach>

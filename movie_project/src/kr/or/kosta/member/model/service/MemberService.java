@@ -19,6 +19,9 @@ public interface MemberService {
 	//회원id로 조회
 	public abstract MemberVO getMemberById(String id); 
 	
+	//회원번호로 조회
+	public abstract MemberVO getMemberByNo(int memNo);
+	
 	//전체회원 목록 조회 메소드
 	public abstract List<MemberVO> getMemberList();
 }

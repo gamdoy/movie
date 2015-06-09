@@ -17,6 +17,11 @@ public interface EventDAO {
 	
 	public abstract int deleteEventByEventNumber(int evtNo);
 	
+	/*
+	 * 문자열 검색
+	 */
+	public abstract List<EventVO> findEventByText(String text);
+	
 	/**
 	 * Event 테이블의 페이징 처리 전체 이벤트 조회 처리
 	 * @param pageNo 조회할 페이지 번호
