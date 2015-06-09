@@ -1,37 +1,31 @@
 package kr.or.kosta.common.vo;
 
 public class SearchVO {
-	private String serachType;
-	private String serachKeyword;
+	private String searchType;
+	private String searchKeyword;
 	
 	public SearchVO() {	}
 
-	public SearchVO(String serachType, String serachKeyword) {
+	public SearchVO(String searchType, String searchKeyword) {
 		super();
-		this.serachType = serachType;
-		this.serachKeyword = serachKeyword;
+		this.searchType = searchType;
+		this.searchKeyword = searchKeyword;
 	}
 
-	public String getSerachType() {
-		return serachType;
+	public String getSearchType() {
+		return searchType;
 	}
 
-	public void setSerachType(String serachType) {
-		this.serachType = serachType;
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 
-	public String getSerachKeyword() {
-		return serachKeyword;
+	public String getSearchKeyword() {
+		return searchKeyword;
 	}
 
-	public void setSerachKeyword(String serachKeyword) {
-		this.serachKeyword = serachKeyword;
-	}
-
-	@Override
-	public String toString() {
-		return "SearchVO [serachType=" + serachType + ", serachKeyword="
-				+ serachKeyword + "]";
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
 	}
 
 	@Override
@@ -39,9 +33,9 @@ public class SearchVO {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((serachKeyword == null) ? 0 : serachKeyword.hashCode());
+				+ ((searchKeyword == null) ? 0 : searchKeyword.hashCode());
 		result = prime * result
-				+ ((serachType == null) ? 0 : serachType.hashCode());
+				+ ((searchType == null) ? 0 : searchType.hashCode());
 		return result;
 	}
 
@@ -54,16 +48,23 @@ public class SearchVO {
 		if (getClass() != obj.getClass())
 			return false;
 		SearchVO other = (SearchVO) obj;
-		if (serachKeyword == null) {
-			if (other.serachKeyword != null)
+		if (searchKeyword == null) {
+			if (other.searchKeyword != null)
 				return false;
-		} else if (!serachKeyword.equals(other.serachKeyword))
+		} else if (!searchKeyword.equals(other.searchKeyword))
 			return false;
-		if (serachType == null) {
-			if (other.serachType != null)
+		if (searchType == null) {
+			if (other.searchType != null)
 				return false;
-		} else if (!serachType.equals(other.serachType))
+		} else if (!searchType.equals(other.searchType))
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "SearchVO [searchType=" + searchType + ", searchKeyword="
+				+ searchKeyword + "]";
+	}
+
 }

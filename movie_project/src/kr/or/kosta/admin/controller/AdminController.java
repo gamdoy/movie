@@ -1,11 +1,14 @@
 package kr.or.kosta.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.kosta.admin.model.service.AdminService;
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.coupon.vo.CouponVO;
-import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.member.model.service.MemberService;
 import kr.or.kosta.member.vo.MemberVO;
 
@@ -15,7 +18,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/admin/")
@@ -27,11 +29,20 @@ public class AdminController {
 	@Autowired
 	private MemberService mService;
 	
+/*	
 	@RequestMapping("member_list")
 	public String memberList(ModelMap map){
 		List<AdminVO> list = service.getMemberList();
 		map.addAttribute("member_list", list);
 		
+		return "admin/member_list.tiles";
+	}
+	*/
+	@RequestMapping("member_list_Paging")
+	public String memberListPaging(@RequestParam(defaultValue="1")int page,ModelMap map){
+		Map memberMap = service.getMemberList(page);
+		map.addAttribute("memberMap", memberMap);
+		System.out.println(memberMap);
 		return "admin/member_list.tiles";
 	}
 	
@@ -84,5 +95,26 @@ public class AdminController {
 		List<CouponVO> clist = service.selectCouponByMemberNo(memNo);
 		map.addAttribute("coupon_list", clist);
 		return "/WEB-INF/view/admin/coupon_list.jsp";
+	}
+	
+	@RequestMapping("getMemberByKeyword")
+	public String getMemberByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
+		System.out.println("getMemberByKeyword"+searchType);
+		System.out.println("getMemberByKeyword"+searchKeyword);
+		SearchVO svo = new SearchVO();
+		Map memberList = new HashMap();
+		AdminVO member;
+		svo.setSearchType(searchType);
+		System.out.println(searchType);
+		svo.setSearchKeyword(searchKeyword);
+		if(svo.getSearchType().equals("MEM_ID")){
+			member = service.selectMemberById(svo.getSearchKeyword());
+			memberList.put("member_list", member);
+			System.out.println("ID로검색 : "+memberList);
+		}else{
+			memberList = service.selectMemberBySearchVOPaging(svo, page);
+		}
+		map.addAttribute("memberMap", memberList);
+		return "admin/member_list.tiles";
 	}
 }
