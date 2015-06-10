@@ -12,6 +12,7 @@ import kr.or.kosta.commoncode.vo.CommonCodeVO;
 @Repository
 public class CommonCodeDAOImpl implements CommonCodeDAO {
 
+
 	private String nameSpace = "commoncode.dao.commoncodeMapper.";
 	/**
 	 * SqlSession을 받기 위한 SqlSessionTemplate 
@@ -32,4 +33,8 @@ public class CommonCodeDAOImpl implements CommonCodeDAO {
 		return session.selectList(nameSpace + "selectZipcodeByKeyword", keyword);
 	}
 
+	@Override
+	public String selectCommonNo(String searchKeyword) {
+		return session.selectOne(nameSpace + "selectCommonNo", searchKeyword);
+	}
 }
