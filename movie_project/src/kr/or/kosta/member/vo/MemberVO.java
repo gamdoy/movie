@@ -17,6 +17,7 @@ public class MemberVO implements Serializable{
 	private String memMemberType;
 	private String memJoinDate;
 	private String memLastLogin;
+	
 	public MemberVO() {
 		super();
 	}

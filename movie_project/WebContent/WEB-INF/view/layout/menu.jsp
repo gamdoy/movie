@@ -12,6 +12,7 @@
 	.movie_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.event_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 	.customer_menu {background-color: gray; height: 80px;width: 980px; display: none;}
+	.admin_menu {background-color: gray; height: 80px;width: 980px; display: none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -57,6 +58,11 @@
 				}
 			});
 		});
+		$("#logout").on("click", function(){
+			window.location="<%=request.getContextPath() %>/member/logout.do";
+		});
+		
+		
 	});
 	function hide_subMenu() {
 			$(".myinfo_menu").hide();
@@ -69,6 +75,7 @@
 	function join() {
 		window.location="<%=request.getContextPath() %>/member/joinForm.do";
 	}
+	
 </script>
 <section class="menu"><!-- 메뉴영역 -->
 	<section class="main_menu"><!-- 메인 메뉴영역 -->
@@ -97,7 +104,7 @@
 		공지사항&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/admin/member_list.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
+		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
 	</section>
 	<!-- 
 		<section class="stats_menu">
@@ -105,7 +112,11 @@
 		</section>
 	 -->
 </section>
+
 <section class="loginArea">
+<c:choose>
+	<c:when test="${sessionScope.login_info == null}">
+<form action="<%=request.getContextPath() %>/member/login.do" method="post" >
 	<table style=" width: 300px;">
 		<tr>
 			<td>아이디</td>
@@ -125,5 +136,28 @@
 		</tr>
 			
 	</table>
+</form>
+</c:when>
+<c:when test="${sessionScope.login_info != null}">
+<form>
+<table style=" width: 300px;">
+		<tr>	
+			<td colspan="2">${sessionScope.login_info.memId}님환영합니다.</td>
+		</tr>
+	
+		<tr>
+			<td><input type="button" name="mypage" id="mypage" value="마이페이지"></td>
+			<td><input type="button" name="" id="" value="예매내역"></td>
+		</tr>
+		<tr>
+			<td><input type="button" name="admin" id="admin" value="관리자모드"></td>
+			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
+		</tr>
 
+</form>		
+</table>
+
+</c:when>
+
+</c:choose>
 </section><!-- 로그인 영역 -->

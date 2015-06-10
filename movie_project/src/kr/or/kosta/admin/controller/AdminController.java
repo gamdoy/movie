@@ -1,11 +1,15 @@
 package kr.or.kosta.admin.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.kosta.admin.model.service.AdminService;
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.common.vo.PagingBean;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.coupon.vo.CouponVO;
-import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.member.model.service.MemberService;
 import kr.or.kosta.member.vo.MemberVO;
 
@@ -15,7 +19,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/admin/")
@@ -27,6 +30,7 @@ public class AdminController {
 	@Autowired
 	private MemberService mService;
 	
+/*	
 	@RequestMapping("member_list")
 	public String memberList(ModelMap map){
 		List<AdminVO> list = service.getMemberList();
@@ -34,9 +38,18 @@ public class AdminController {
 		
 		return "admin/member_list.tiles";
 	}
+	*/
+	@RequestMapping("member_list_Paging")
+	public String memberListPaging(@RequestParam(defaultValue="1")int page,ModelMap map){
+		Map memberMap = service.getMemberList(page);
+		map.addAttribute("memberMap", memberMap);
+		System.out.println(memberMap);
+		return "admin/member_list.tiles";
+	}
 	
 	//멤버 ID에서 멤버 No 추출하여 쿠폰리스트 출력
-	@RequestMapping("getMemberById")
+	@RequestMapping("getMem"
+			+ "berById")
 	public String getMemberById(ModelMap map,@RequestParam("memberId") String id){
 		AdminVO member = service.selectMemberById(id);
 		int memNo = member.getMemNo();
@@ -84,5 +97,24 @@ public class AdminController {
 		List<CouponVO> clist = service.selectCouponByMemberNo(memNo);
 		map.addAttribute("coupon_list", clist);
 		return "/WEB-INF/view/admin/coupon_list.jsp";
+	}
+	
+	@RequestMapping("getMemberByKeyword")
+	public String getMemberByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
+		System.out.println("getMemberByKeyword"+searchType);
+		System.out.println("getMemberByKeyword"+searchKeyword);
+		SearchVO svo = new SearchVO();
+		HashMap memberList = new HashMap();
+		AdminVO member;
+		svo.setSearchType(searchType);
+		System.out.println(searchType);
+		svo.setSearchKeyword(searchKeyword);
+		System.out.println("컨트롤러 : "+page);
+		
+		memberList = service.selectMemberBySearchVOPaging(svo, page);
+		map.addAttribute("searchedMemberMap", memberList);
+		map.addAttribute("currentSearchType", searchType);
+		map.addAttribute("currentSearchKeyword", searchKeyword);
+		return "admin/searched_member_list.tiles";
 	}
 }

@@ -38,7 +38,7 @@ article{
 		<tbody>
 			<c:forEach items="${requestScope.pageMap.event_list }" var="eventVO">
 				<tr>
-					<td>${eventVO.evtName }</td>
+					<td>${eventVO.evtTitle }</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -72,7 +72,7 @@ article{
 </c:forEach>
 <!-- 다음 페이지 그룹 -->
 <c:choose>
-	<c:when test="${pagingBean.nextPageGroup }">
+	<c:when test="${pageMap.pagingBean.nextPageGroup }">
 		<a href="<%=request.getContextPath() %>/event/eventListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">▶</a>
 	</c:when>
 	<c:otherwise>
