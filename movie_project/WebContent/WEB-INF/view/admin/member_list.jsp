@@ -81,7 +81,7 @@ table#listTB thead tr{
 		<c:forEach begin="${memberMap.pagingBean.startPageOfPageGroup }" end="${memberMap.pagingBean.endPageOfPageGroup}" var="pageNum">
 			<c:choose>
 				<c:when test="${pageNum == memberMap.pagingBean.currentPage }">
-					<b>[${pageNum}]</b>
+					<b><i>${pageNum}</i></b>
 				</c:when>
 				<c:otherwise>
 					<a  href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${pageNum}">

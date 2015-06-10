@@ -9,6 +9,7 @@ import kr.or.kosta.admin.model.service.AdminService;
 import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.common.vo.PagingBean;
 import kr.or.kosta.common.vo.SearchVO;
+import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.coupon.vo.CouponVO;
 import kr.or.kosta.member.model.service.MemberService;
 import kr.or.kosta.member.vo.MemberVO;
@@ -30,6 +31,8 @@ public class AdminController {
 	@Autowired
 	private MemberService mService;
 	
+	@Autowired
+	private CommonCodeService commonService;
 /*	
 	@RequestMapping("member_list")
 	public String memberList(ModelMap map){
@@ -99,19 +102,31 @@ public class AdminController {
 		return "/WEB-INF/view/admin/coupon_list.jsp";
 	}
 	
+	//검색된 화면페이지 처리(페이징, 검색)
 	@RequestMapping("getMemberByKeyword")
 	public String getMemberByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
-		System.out.println("getMemberByKeyword"+searchType);
-		System.out.println("getMemberByKeyword"+searchKeyword);
+		//SearchType : 검색조건 - ID, 이름, 등급, 전화번호 등등
+		//SearchKeyword : 검색키워드 - id-1, 홍길동, vip, 010-1234-5678 등..
+		
 		SearchVO svo = new SearchVO();
 		HashMap memberList = new HashMap();
-		AdminVO member;
-		svo.setSearchType(searchType);
-		System.out.println(searchType);
-		svo.setSearchKeyword(searchKeyword);
-		System.out.println("컨트롤러 : "+page);
 		
-		memberList = service.selectMemberBySearchVOPaging(svo, page);
+		svo.setSearchType(searchType);
+		
+//		검색 키워드에서 CommonNo를 가져온다.
+		String searchKeywordCommonNo = commonService.getCommonNo(searchKeyword.toUpperCase());
+//		CommonNo가 있으면 해당 CommonNo를 SearchVO에 넣어서 멤버조회
+		if(searchType != null && searchType.equals("MEM_MEMBERTYPE") && searchKeywordCommonNo != null){
+			System.out.println("searchKeywordCommonNo"+searchKeywordCommonNo);
+			svo.setSearchKeyword(searchKeywordCommonNo);
+			memberList = service.selectMemberBySearchVOPaging(svo, page);
+
+		}else{		//		CommonNo가 없으면 SearchVO를 이용하여 조회
+			svo.setSearchKeyword(searchKeyword);
+			memberList = service.selectMemberBySearchVOPaging(svo, page);
+		}
+		
+		System.out.println("searchKeyword"+searchKeyword );
 		map.addAttribute("searchedMemberMap", memberList);
 		map.addAttribute("currentSearchType", searchType);
 		map.addAttribute("currentSearchKeyword", searchKeyword);
