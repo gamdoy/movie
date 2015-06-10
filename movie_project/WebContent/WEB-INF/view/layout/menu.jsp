@@ -105,6 +105,9 @@
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
+		
+		<a href="<%=request.getContextPath() %>/movie/register_form.do">영화등록</a>
+		<a href="<%=request.getContextPath() %>/movie/adminmovie_list.do">영화리스트</a>
 	</section>
 	<!-- 
 		<section class="stats_menu">

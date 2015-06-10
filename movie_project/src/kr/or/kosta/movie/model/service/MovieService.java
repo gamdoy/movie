@@ -16,8 +16,10 @@ public interface MovieService {
 	public abstract int updateMovie(MovieVO movie);
 	//no로 영화조회
 	public abstract MovieVO getMovieByNo(String movNo);
-	//모든영화 조회
+	//모든영화 조회 - paging
 	public abstract Map allMovieList(int pageNo);
+	//모든영화 카운트
+	public abstract int totalCount();
 	
 	//개별table 감독 조회
 	public abstract List<DirectorVO> getDirector();
