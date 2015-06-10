@@ -1,6 +1,6 @@
-<%@ page contentType= "text/html;charset=UTF-8"%>
+ <%@ page contentType= "text/html;charset=UTF-8"%>
 <!DOCTYPE html>
-<html>
+
 <head>
 <meta charset="UTF-8">
 <title>글읽기</title>
@@ -21,9 +21,13 @@ function modifyUrl(){
 	window.location="<%=request.getContextPath() %>/qa/modify.do?number="+number;
 }
 
+function replyUrl(){
+	var 
+}
+
 </script>
 </head>
-<body>
+
 <input type="hidden" id="qaCount" name="qaCount" value="${qaCount}+1">	
 	<table style="width:600px">
 	<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
@@ -40,7 +44,8 @@ function modifyUrl(){
 			<td>${requestScope.qa_vo.fqLastdate}</td>
 		</tr>
 		<tr>   
-			<td  align="center">파일</td><td colspan="3"></td>
+			<td  align="center">파일</td>
+			<td colspan="3" ><a href="<%=request.getContextPath() %>/qa/download.do?filename=${requestScope.fileName }"><font color="black">${requestScope.fileName }</font></a></td>
 		</tr>
 		<tr height="1" bgcolor="#82B5DF">
 		<tr>
@@ -48,10 +53,11 @@ function modifyUrl(){
 		</tr>
 		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 	</table>
-	<div style="width:600px;" align="right">                                                                                                 
+	<div style="width:600px;" align="right">                                  
+			                                                               
 			<input type="button" value="수정" onclick="modifyUrl();">
+			<input type="button" value="Reply" onclick="replyUrl();">
 			<input type="button" value="삭제" onclick="deleteUrl();">
 			<input type="button" value="이전 페이지" onclick="goUrl();">
 	</div>    
-</body>
-</html>
+

@@ -17,12 +17,6 @@ table {
 
 <script type="text/javascript">
 	
-	/* function modifyEnable(){
-		for (var int = 0; int < ${requestScope.movie}.length; int++) {
-			
-		}
-	} */
-	
 	function submitCheck() {
 		var flag = true;
 		
@@ -46,10 +40,21 @@ table {
 	}
 
 	$(document).ready(function() {
-		//alert('${requestScope.movie }');
+		
+		/* // 연습용 - 수정 페이지 확인만 할경우 모든필드 disabled
+		$("#modifyForm input,textarea,select").attr("disabled",true);
+		
+		$("#modify").on("click",function(){
+		$("#modifyForm input,textarea,select").attr("disabled",false);
+		});
+		 */
+		
 		if(${requestScope.movie.success==1 }){
 			alert("수정 성공");
 		}
+		
+		
+		
 		
 		
 		/* 글자수 체크 */
@@ -118,22 +123,21 @@ table {
 	});
 </script>
 <h1>영화 정보 수정<br>
-${fn:length(requestScope)}<br>
-${requestScope.movie }
- <br>
+<br>
+
 </h1>
 <form method="post"
 		action="<%=request.getContextPath()%>/movie/modify_success.do"
 		id="modifyForm" name="modifyForm" enctype="multipart/form-data" onsubmit="return submitCheck();">
 		
-	
 <input type="hidden" id="movieNo" name="movieNo" value="${requestScope.movie.movieNo }">
+	
 		<table>
 			<tr>
 				<!-- 제목 -->
 				<td>제목</td>
 				<td colspan="3"><input type="text" id="title" name="title"
-					autofocus="autofocus"
+					autofocus="autofocus" 
 					value="${requestScope.movie.title }" ></td>
 			</tr>
 			<tr>
@@ -203,7 +207,7 @@ ${requestScope.movie }
 				<td><input type="file" name="poster" >
 					<span>
 					등록된 포스터<br>
-				<img src="<%=request.getContextPath()%>/images/${requestScope.movie.posterName }">
+				<img src="<%=request.getContextPath()%>/images/movie/${requestScope.movie.posterName }">
 				</span>
 				</td>
 			</tr>
@@ -233,11 +237,11 @@ ${requestScope.movie }
 			</tr>
 
 			<tr>
-				<td colspan="3"><input type="submit" value="수정"></td>
-				<td><input type="reset" value="리셋"></td>
+				<td  colspan="3"><input type="submit" value="수정"></td>
 			</tr>
 		</table>
 		<span style="background-color:#00FEFE">
 		<a href="<%=request.getContextPath()%>/movie/adminmovie_list.do"> 리스트 </a>
 		</span>
 	</form>
+		<!-- 연습용 <input type=submit id="modify" value="수정하기"> -->

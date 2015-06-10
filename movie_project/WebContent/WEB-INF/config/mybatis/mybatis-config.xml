@@ -15,8 +15,9 @@
 		<package name="kr.or.kosta.center.vo"/>
 		<package name="kr.or.kosta.admin.vo"/>
 		<package name="kr.or.kosta.coupon.vo"/>
-		<package name="kr.or.kosta.schedule.vo"/> 
+		<package name="kr.or.kosta.schedule.vo"></package> 
 		<package name="kr.or.kosta.ticket.vo"/> 
+		<package name="kr.or.kosta.files.vo"/>
 	</typeAliases>
 	
 	<mappers>

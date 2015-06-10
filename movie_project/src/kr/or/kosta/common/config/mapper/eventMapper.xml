@@ -13,6 +13,14 @@
 		from		event		
 	</sql>
 	
+	<sql id="winner-select">
+		select 		win_no,
+					win_regdate, 
+					win_text, 
+					win_title
+		from		winner		
+	</sql>
+	
 	<resultMap type="eventVO" id="event-resultmap">
 	
 		<id column="evt_no" property="evtNo"/>
@@ -24,6 +32,18 @@
 		<result column="evt_title" property="evtTitle"/>
 		
 	</resultMap>
+	
+	<resultMap type="winnerVO" id="winner-resultmap">
+	
+		<id column="win_no" property="winNo"/>
+		<result column="win_regdate" property="winRegdate"/>
+		<result column="win_text" property="winText"/>
+		<result column="win_title" property="winTitle"/>
+		
+		
+	</resultMap>
+	
+	<!-- ************************************************************************ -->
 
 	<select id="selectEventList" resultMap="event-resultmap">
 		select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
@@ -65,6 +85,18 @@
 			from (
 					<include refid="event-select"/>
 					order by evt_no
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<select id="selectAllWinnerPaging" parameterType="map" resultMap="winner-resultmap">
+		select 	win_no, win_regdate, win_text, win_title
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, win_no, win_regdate, win_text, win_title
+			from (
+					<include refid="winner-select"/>
+					order by win_no
 			)
 		) 
 		where page = #{pageNo}
