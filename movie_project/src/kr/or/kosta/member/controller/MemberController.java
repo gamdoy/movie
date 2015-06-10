@@ -52,6 +52,7 @@ public class MemberController {
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(String id,String password, HttpSession session, HttpServletResponse response, ModelMap map){
 		MemberVO m = service.getMemberById(id);
+		System.out.println(m);
 		String url = null;
 		
 		if(m!=null){
@@ -72,6 +73,25 @@ public class MemberController {
 	public String logout(HttpSession session,HttpServletResponse response){
 		session.invalidate();
 		return "redirect:/main.do";
+	}
+	@RequestMapping("modifyMemberInfo")
+	public String modifyMemberInfo(@ModelAttribute MemberVO membervo, HttpSession session, HttpServletRequest request,ModelMap map)throws Exception{
+		MemberVO loginInfo = (MemberVO)session.getAttribute("login_info");
+		map.addAttribute("message","true");
+		service.modifyMember(membervo);
+		loginInfo.setMemName(membervo.getMemName());
+		loginInfo.setMemPassword(membervo.getMemPassword());
+		loginInfo.setMemAddressDetail(membervo.getMemAddressDetail());
+		loginInfo.setMemBirthDate(membervo.getMemBirthDate());
+		loginInfo.setMemEmail(membervo.getMemEmail());
+		loginInfo.setMemPhoneNo(membervo.getMemPhoneNo());
+		
+		return "member/modify_form.tiles";	
+	}
+	@RequestMapping("modifyMember")
+	public String modifyMember(@ModelAttribute MemberVO membervo, HttpSession session)throws Exception{
+		MemberVO loginInfo = (MemberVO)session.getAttribute("login_info");
+		return "member/modify_form.tiles";
 	}
 	
 	@RequestMapping("idDuplicateCheck")

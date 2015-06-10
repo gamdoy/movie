@@ -16,6 +16,10 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
+		if(${sessionScope.login_info != null}){
+			hide_subMenu();
+			$(".myinfo_menu").show();
+		}
 		$("#myinfoBtn").on("click", function() {
 			hide_subMenu();
 			$(".myinfo_menu").show();
@@ -88,7 +92,12 @@
 		<label id="adminBtn">관리자</label>
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
-		정보수정&nbsp;&nbsp;&nbsp;관심영화&nbsp;&nbsp;&nbsp;관람작&nbsp;&nbsp;&nbsp;마일리지 관리&nbsp;&nbsp;&nbsp;예매내역&nbsp;&nbsp;&nbsp;회원탈퇴
+		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
+		관심영화&nbsp;&nbsp;&nbsp;
+		관람작&nbsp;&nbsp;&nbsp;
+		마일리지 관리&nbsp;&nbsp;&nbsp;
+		예매내역&nbsp;&nbsp;&nbsp;
+		회원탈퇴
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
@@ -146,7 +155,7 @@
 		</tr>
 	
 		<tr>
-			<td><input type="button" name="mypage" id="mypage" value="마이페이지"></td>
+			<td><input type="button" name="myinfoBtn" id="myinfoBtn" value="마이페이지"></td>
 			<td><input type="button" name="" id="" value="예매내역"></td>
 		</tr>
 		<tr>

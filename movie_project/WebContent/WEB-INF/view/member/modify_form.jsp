@@ -31,30 +31,28 @@ $(document).ready(function(){
 
 <h2>회원정보 수정 폼</h2>
 
-<form method="post" action="${initParam.rootPath }/member/login/modifyMemberInfo.do" id="modifyForm" 
+<form method="post" action="<%=request.getContextPath() %>/member/modifyMemberInfo.do" id="modifyForm" 
 	      enctype="multipart/form-data">
-	<input type="hidden" name="id" value="${sessionScope.login_info.id }">
+	<input type="hidden" name="memId" value="${sessionScope.login_info.memId }">
 	<table style="width:500px">
 		<tr>
 			<td>ID</td>
-			<td>${sessionScope.login_info.id }</td>
+			<td>${sessionScope.login_info }</td>
 		</tr>
 		<tr>
 			<td>Password</td>
 			<td>
-				<input type="password" name="password" id="password">  <span class="errorMessage"><form:errors path="member.password"/></span>
+				<input type="password" name="memPassword" id="memPassword">  <span class="errorMessage"><form:errors path="member.password"/></span>
 			</td>
 		</tr>
 		<tr>
 			<td>이름</td>
-			<td>
-				<input type="text" name="name" value="${sessionScope.login_info.name }" id="name">  <span class="errorMessage"><form:errors path="member.name"/></span>
-			</td>
+			<td>${sessionScope.login_info.memName }</td>
 		</tr>
 		<tr>
 			<td>이메일</td>
 			<td>
-				<input type="text" name="email"  value="${sessionScope.login_info.email }" id="email">  <span class="errorMessage"><form:errors path="member.email"/></span>
+				<input type="text" name="memEmail"  value="${sessionScope.login_info.memEmail }" id="email">  <span class="errorMessage"><form:errors path="member.email"/></span>
 			</td>
 		</tr>
 		<tr> 
