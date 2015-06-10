@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="/jQuery_class/jquery.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/script/jquery.js"></script>
 <style type="text/css"></style>
 <script type="text/javascript"></script>
 
