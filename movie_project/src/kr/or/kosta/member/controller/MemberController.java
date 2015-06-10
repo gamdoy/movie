@@ -1,15 +1,21 @@
 package kr.or.kosta.member.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import kr.or.kosta.commoncode.model.service.CommonCodeService;
+import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.member.model.service.MemberService;
 import kr.or.kosta.member.vo.MemberVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,17 +28,50 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/member/")
 public class MemberController {
 
+	
 	@Autowired
 	private MemberService service;
 	
+	@Autowired
+	private CommonCodeService service2;
+	
 	@RequestMapping(value="join.do",method=RequestMethod.POST)
-	public String joinMember(@ModelAttribute MemberVO membervo, Errors errors, HttpServletRequest request)throws Exception{
+	public String joinMember(@ModelAttribute MemberVO membervo, Errors error)throws Exception{
+		membervo.setMemMemberType("102100");
+		service.joinMember(membervo);
+		return "redirect:/member/join_success.do?memId="+membervo.getMemId();
+	}
+	@RequestMapping(value="joinForm.do")
+	public String joinForm(@ModelAttribute MemberVO membervo, Errors error,ModelMap map )throws Exception{
 		
+		List<CommonCodeVO> telList = service2.getCodeList("101");
+		map.addAttribute("telList",telList);
 		
+		return "member/join_form.tiles";	
+	}
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	public String login(String id,String password, HttpSession session, HttpServletResponse response, ModelMap map){
+		MemberVO m = service.getMemberById(id);
+		String url = null;
 		
-		return "member/join_form.tiles";
-		
-		
+		if(m!=null){
+			if(password.equals(m.getMemPassword())){
+				session.setAttribute("login_info", m);
+				url = "main.tiles";
+			}else{
+				url = "member/login_form.tiles";
+				map.addAttribute("error_message", "Password를 확인하세요");
+			}
+		}else{
+			url = "member/login_form.tiles";
+			map.addAttribute("error_message","ID를 확인하세요");
+		}
+		return url;
+	}
+	@RequestMapping("logout")
+	public String logout(HttpSession session,HttpServletResponse response){
+		session.invalidate();
+		return "redirect:/main.do";
 	}
 	
 	@RequestMapping("idDuplicateCheck")

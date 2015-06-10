@@ -46,11 +46,11 @@ text-align: center;
 			<td>포스터</td>
 			<td colspan="2"><c:choose>
 					<c:when test="${empty requestScope.movie.posterName }">
-						<img src="<%=request.getContextPath()%>/images/noimage.png">
+						<img src="<%=request.getContextPath()%>/images/movie/noimage.png">
 					</c:when>
 					<c:otherwise>
 						<img
-							src="<%=request.getContextPath()%>/images/${requestScope.movie.posterName }">
+							src="<%=request.getContextPath()%>/images/movie/${requestScope.movie.posterName }">
 					</c:otherwise>
 				</c:choose></td>
 			

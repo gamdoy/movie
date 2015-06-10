@@ -3,11 +3,11 @@ package kr.or.kosta.movie.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
-import kr.or.kosta.commoncode.model.service.CommonCodeServiceImpl;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.movie.model.service.MovieService;
 import kr.or.kosta.movie.vo.ActorVO;
@@ -21,7 +21,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -64,7 +63,7 @@ public class MovieController {
 		// 파일업로드 처리
 		MultipartFile file = movie.getPoster();
 		if (file != null && !file.isEmpty()) {
-			String path = request.getServletContext().getRealPath("/images");
+			String path = request.getServletContext().getRealPath("/images/movie");
 			String fileName = System.currentTimeMillis()+".jpg";
 			File image = new File(path, fileName);
 			file.transferTo(image);
@@ -125,7 +124,7 @@ public class MovieController {
 				if (file != null && !file.isEmpty()) {
 					newFileName = System.currentTimeMillis()+".jpg";
 					System.out.println(newFileName+" : "+file.getOriginalFilename()+" : "+movie.getPosterName());
-					String path = request.getServletContext().getRealPath("/images");
+					String path = request.getServletContext().getRealPath("/images/movie");
 					File image = new File(path, newFileName);
 					file.transferTo(image);
 					//기존사진 있는 경우 삭제
@@ -138,8 +137,8 @@ public class MovieController {
 				
 				int success = service.updateMovie(movie);
 				movie.setsuccess(success);
-				
 				System.out.println(success);
+				
 				map.addAttribute("movie", movie);
 				
 				// commonCode 사용
@@ -163,9 +162,9 @@ public class MovieController {
 	
 	// 전체 영화 조회
 	@RequestMapping("adminmovie_list.do")
-	public String adminMovieList(ModelMap map) {
-		List<MovieVO> movie = service.allMovieList();
-		
+	public String adminMovieList(@RequestParam(defaultValue="1")int pageNo, ModelMap map) {
+		Map movie = service.allMovieList(pageNo);
+		System.out.println(movie);
 		map.addAttribute("movie", movie);
 		return "movie/adminMovieList_form.tiles";
 

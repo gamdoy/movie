@@ -83,7 +83,8 @@ public class AdminServiceImpl implements AdminService{
 		 PagingBean pagingbean = new PagingBean(totalSearchContent, page);
 		 HashMap map = new HashMap();
 		 map.put("member_list", list);
-		 map.put("pagingBean", pagingbean);
+		 map.put("pagingBean2", pagingbean);
+		 System.out.println("서치페이징 현재페이지 : "+pagingbean.getCurrentPage());
 		 return map;
 	}
 	

@@ -1,6 +1,7 @@
 package kr.or.kosta.movie.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.kosta.movie.vo.ActorVO;
 import kr.or.kosta.movie.vo.DirectorVO;
@@ -16,7 +17,7 @@ public interface MovieService {
 	//no로 영화조회
 	public abstract MovieVO getMovieByNo(String movNo);
 	//모든영화 조회
-	public abstract List<MovieVO> allMovieList();
+	public abstract Map allMovieList(int pageNo);
 	
 	//개별table 감독 조회
 	public abstract List<DirectorVO> getDirector();
