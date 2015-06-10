@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
-<html>
+
 <head>
 
 <meta charset="UTF-8">
@@ -14,7 +14,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("tbody tr").on("click", function(){
+		
 		var number = $(this).find(":first-child").text();
+		if($(this).find(":first-child").next().prop("class")=="secret"){
+			var password = prompt('비밀번호를 입력하세요',"");
+			
+			if(!($("#secret" + number).val()==password)){
+				alert("비밀번호가 옳바르지 않습니다.");
+				return false;
+			}
+		}
 		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
 	})
 });
@@ -26,6 +35,17 @@ function goUrl(){
 }
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#searchForm").on("submit", function(){
+			if(!$("#searchKeyword").val().trim()){
+				alert("값을 입력하세요");
+				$("#searchKeyword").focus();
+				return false;
+		}
+	});
+});
+</script>
 
 </head>
 <!-- CSS 영역 -->
@@ -38,23 +58,19 @@ function goUrl(){
  <!-- //CSS 영역 -->
    
     </head>
-    <body>
-   	 
        <!-- 검색 폼 영역 -->
-       <form name="searchForm" action="" method="get">
+       <form name="searchForm" method="post" id="searchForm" action="<%=request.getContextPath() %>/qa/getQaByKeyword.do">
        <p>
-           <select name="searchType">
-               <option value="ALL">전체검색</option>
-               <option value="SUBJECT">제목</option>
-               <option value="WRITER">작성자</option>
-
+           <select name="searchType" id="searchType">
+            	  <option value="qa_title">제목</option>
+              	 <option value="WRITER">작성자</option>
+                 <option value="qa_text">내용</option>
            </select>
-           <input type="text" name="searchText" value="" />
-           <input type="submit" value="검색" />
+           <input type="text" name="searchKeyword" id="searchKeyword">
+           <input type="submit" id="QaSearch" value="검색">
        </p>
        </form>
        
- 
        <!-- 게시판 목록 영역 -->
        <table border="1" summary="게시판 목록">
            
@@ -75,10 +91,19 @@ function goUrl(){
                </tr>
            </thead>
            <tbody>
-           	<c:forEach items="${requestScope.qa_list }" var="QaVO">
+           	<c:forEach items="${requestScope.pageMap.qa_list }" var="QaVO">
 				<tr id="qa_content">
+				
 					<td>${QaVO.fqNo}</td>
-					<td>${QaVO.qaTitle}</td>
+					<c:choose>
+						<c:when test="${QaVO.qaSecret=='use' }">
+							<td class="secret"><input type="hidden" id="secret${QaVO.fqNo }" value="${QaVO.qaPassword }">
+							<img src="<%=request.getContextPath()%>/upload/kgpg.png" width="10px" height="10px">${QaVO.qaTitle}</td> 
+						</c:when>
+						<c:otherwise>
+							<td>${QaVO.qaTitle}</td> 
+						</c:otherwise>
+					</c:choose>
 					<td>${QaVO.memNo}</td>
 					<td>${QaVO.fqLastdate}</td>
 					<td>${QaVO.qaCount}</td>
@@ -87,8 +112,73 @@ function goUrl(){
            </tbody>
            <tfoot>
                <tr>
-                    <td align="center" colspan="5">페이징페이지</td>
-               </tr>
+                    <td align="center" colspan="5">
+                    <c:choose>
+
+	<c:when test="${pageMap.pagingBean.previousPageGroup }">
+
+		<a href="<%=request.getContextPath() %>/qa/qa.do?page=${pageMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
+
+	</c:when>
+
+	<c:otherwise>
+
+		◀
+
+	</c:otherwise>
+
+</c:choose>	
+
+ 
+
+<!-- 페이지 번호 -->
+
+<c:forEach begin="${pageMap.pagingBean.startPageOfPageGroup }" end="${pageMap.pagingBean.endPageOfPageGroup}" var="pageNum">
+
+	<c:choose>
+
+		<c:when test="${pageNum == pagingBean.currentPage }">
+
+			<b>[${pageNum}]</b>
+
+		</c:when>
+
+		<c:otherwise>
+
+			<a  href="<%=request.getContextPath() %>/qa/qa.do?page=${pageNum}">
+
+				<font color="black">${pageNum}</font>
+
+			</a>
+
+		</c:otherwise>
+
+	</c:choose>
+
+	&nbsp;&nbsp;
+
+</c:forEach>
+
+<!-- 다음 페이지 그룹 -->
+
+<c:choose>
+
+	<c:when test="${pageMap.pagingBean.nextPageGroup }">
+
+		<a href="<%=request.getContextPath() %>/qa/qa.do?page=${pageMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
+
+	</c:when>
+
+	<c:otherwise>
+
+		▶
+
+	</c:otherwise>
+
+</c:choose>
+                    
+                    </td>
+             	</tr>
            </tfoot>
        </table>
        <!-- //게시판 목록 영역 -->
@@ -97,5 +187,4 @@ function goUrl(){
            <input type="button" value="글쓰기" onclick="goUrl()"/>
        </p>
        <!-- //버튼 영역 -->
-    </body>
-</html>
+ 

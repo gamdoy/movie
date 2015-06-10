@@ -78,11 +78,18 @@
 		from
 		(
 			<include refid="member-select"/>
-		order by mem_no
+			
+			<if test="searchType=='MEM_ID'">
+			where ${searchType} = #{searchKeyword}
+			</if>
+			
+			<if test="searchType!='MEM_ID'">
+			where ${searchType} like '%'||#{searchKeyword}||'%'
+			</if>
+			order by mem_no
 		)
 	)
-	where ${searchType} like '%'||#{searchKeyword}||'%'
-	and page = #{pageNo}
+	where page = #{pageNo}
 	</select>
 	
 	<insert id="insertCoupon" parameterType="couponVO">

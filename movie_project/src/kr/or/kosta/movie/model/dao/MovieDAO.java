@@ -1,6 +1,7 @@
 package kr.or.kosta.movie.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.kosta.movie.vo.ActorVO;
 import kr.or.kosta.movie.vo.DirectorVO;
@@ -13,10 +14,12 @@ public interface MovieDAO {
 	public abstract int insertMovie(MovieVO movie);
 	//영화수정
 	public abstract int updateMovie(MovieVO movie);
-	//no로 영화조회
+	//movNo로 영화조회
 	public abstract MovieVO getMovieByNo(String movNo);
-	//모든영화 조회
-	public abstract List<MovieVO> allMovieList();
+	//모든영화 조회-paging
+	public abstract List<MovieVO> allMovieList(int pageNo);
+	//모든영화 카운트
+	public abstract int totalCount();
 	
 	//개별table 감독 조회
 	public abstract List<DirectorVO> getDirector();
