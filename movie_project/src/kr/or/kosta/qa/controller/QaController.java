@@ -130,6 +130,7 @@ public class QaController{
 	
 	@RequestMapping("download.do")
 	public String download(@RequestParam String filename, ModelMap map){
+		
 		map.addAttribute("downFile", filename); //다운로드 할 파일명을 넣어 view로 이동
 		return "downloadView";
 	}

@@ -29,6 +29,7 @@
 	<context:component-scan base-package="kr.or.kosta.qa.model"/>
 	<context:component-scan base-package="kr.or.kosta.stats.model"/>
 	<context:component-scan base-package="kr.or.kosta.admin.model"/>
+	<context:component-scan base-package="kr.or.kosta.files.view"/>
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -52,6 +53,9 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- DownloadView 등록 -->
+	<bean name="downloadView" class="kr.or.kosta.files.view.DownloadView"/>
 	
 	<!-- file upload 처리 multipartResolver 등록 -->
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
