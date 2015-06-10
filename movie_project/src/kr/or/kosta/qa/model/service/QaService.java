@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.kosta.center.vo.QaVO;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.files.vo.FilesVo;
 
 
@@ -19,5 +20,6 @@ public interface QaService {
 	public int modifyFile(FilesVo svo);
 	public int modifyQaFileNumber(QaVO svo);
 	public abstract Map getQaListPaging(int page);
+	public abstract List<QaVO> selectQaBySearchVO(SearchVO svo);
 	
 }

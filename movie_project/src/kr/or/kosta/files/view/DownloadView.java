@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
@@ -21,7 +22,7 @@ import org.springframework.web.servlet.view.AbstractView;
  */
 public class DownloadView extends AbstractView{
 	
-	private String uploadDir = "C:\\JAVA\\apache-tomcat-7.0.59\\webapps\\movie_project\\images";
+	private String uploadDir = "C:\\JAVA\\apache-tomcat-7.0.59\\webapps\\movie_project\\upload";
 	//응답할 내용의 타입(content-type)을 리턴
 	public String getContentType(){
 		return "application/octet-stream";//형식이 지정되지 않는 어플의 타입지정

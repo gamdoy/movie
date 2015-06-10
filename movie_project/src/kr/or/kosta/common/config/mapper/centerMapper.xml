@@ -6,7 +6,9 @@
 					qa_title, 
 					substr(fq_lastdate,1,10) fq_lastdate, 
 					qa_count, 
-					mem_no
+					mem_no,
+					qa_secret,
+					qa_password
 		from		qa			
 	</sql>
 	  
@@ -31,6 +33,8 @@
 		<result column="fq_lastdate" property="fqLastdate"/>
 		<result column="qa_count" property="qaCount"/>
 		<result column="mem_no"  property="memNo"/>
+		<result column="qa_secret"  property="qaSecret"/>
+		<result column="qa_password"  property="qaPassword"/>
 	  </resultMap>
 	  
 	  <resultMap type="QaVo" id="qa_list-resultmap2">
@@ -52,7 +56,7 @@
 	
 	  
 	  <select id="selectQaList" resultMap="qa_list-resultmap1">
-	  		select q.fq_no, q.qa_title, substr(q.fq_lastdate,1,10) fq_lastdate, q.qa_count, m.mem_no
+	  		select q.fq_no, q.qa_title, substr(q.fq_lastdate,1,10) fq_lastdate, q.qa_count, q.qa_secret, q.qa_password, m.mem_no
 	  		from qa q, member m
 	  		where m.mem_no = q.mem_no
 	  		order by q.fq_no desc
@@ -125,9 +129,9 @@
 	 <!-- Paging 추가 -->
 	<select id="selectAllQaPaging" parameterType="map" resultMap="qa_list-resultmap1">
 
-		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no
+			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password
 			from (
 					<include refid="qa-select"/>
 					order by fq_no desc
@@ -139,7 +143,20 @@
 	<select id="selectTotalQaCount" resultType="_int">
 		select count(fq_no) from qa
 	</select>
-
+	
+	<select id="selectQaBySearchVO"  parameterType="searchVO" resultMap="qa_list-resultmap1">
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no
+	  	from qa
+		<where>
+		 	<if test="searchType=='WRITER'">
+		 		mem_no = (select mem_no from member where mem_id=#{searchKeyword})
+			</if>
+			<if test="searchType!='WRITER'">
+		 		${searchType} like '%'||#{searchKeyword}||'%'
+		 	</if>
+		 	order by fq_no desc
+		</where> 
+	</select>
 	
 </mapper>
 

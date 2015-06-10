@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.kosta.center.vo.QaVO;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.files.vo.FilesVo;
@@ -85,6 +86,11 @@ public class QaDAOImpl implements QaDAO{
 	
 	public int selectTotalQaCount(){
 		return session.selectOne(namespace+"selectTotalQaCount");
+	}
+
+	@Override
+	public List<QaVO> selectQaBySearchVO(SearchVO svo){
+		return session.selectList(namespace+"selectQaBySearchVO", svo);
 	}
 
 }

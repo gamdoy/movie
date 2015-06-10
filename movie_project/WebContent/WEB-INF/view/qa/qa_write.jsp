@@ -34,7 +34,7 @@ function goUrl(){
 		<tr>   
 			<td  align="center">파일</td>
 			<td><input type="file" id="upfile" name="upfile" size="14"></td>
-			<td align="center">공개설정</td><td align="right"><input type="radio" name="qaSecret" value="use">공개<input type="radio" name="qaSecret" value="unuse">비공개</td>
+			<td align="center">공개설정</td><td align="right"><input type="radio" name="qaSecret" value="unuse">공개<input type="radio" name="qaSecret" value="use">비공개</td>
 		</tr>
 		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 		<tr>

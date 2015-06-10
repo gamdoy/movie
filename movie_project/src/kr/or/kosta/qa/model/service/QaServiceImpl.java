@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.center.vo.QaVO;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.files.vo.FilesVo;
@@ -89,6 +91,12 @@ public class QaServiceImpl implements QaService{
 		map.put("qa_list", list);
 		map.put("pagingBean",pagingBean);
 		return map;
+	}
+
+	@Override
+	public List<QaVO> selectQaBySearchVO(SearchVO svo) {
+		// TODO Auto-generated method stub
+		return dao.selectQaBySearchVO(svo);
 	}
 	
 	

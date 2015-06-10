@@ -5,12 +5,15 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.center.vo.QaVO;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.files.vo.FilesVo;
@@ -29,16 +32,18 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/qa/")
 public class QaController{
-	private String images="C:\\JAVA\\apache-tomcat-7.0.59\\webapps\\spring_mvc_05_fileUpload\\upimage";
+	private String images="C:\\JAVA\\apache-tomcat-7.0.59\\webapps\\movie_project\\upload";
 	@Autowired
 	private QaService service;
 	
 	@RequestMapping(value="qa.do")
 	public String qa_list(ModelMap map, @RequestParam(defaultValue="1")int page){
+		
 		Map pageMap = service.getQaListPaging(page);
 		map.addAttribute("pageMap",pageMap);
 		
 		List<QaVO> list= service.getQaList();
+		System.out.println("list다 : " +list);
 		map.addAttribute("qa_list",list);
 		
 		return "qa/qa_list.tiles";
@@ -64,7 +69,7 @@ public class QaController{
 	public String addQa(@ModelAttribute FilesVo svo, @ModelAttribute QaVO vo, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
 		MultipartFile file = svo.getUpfile();
 		if (file != null && !file.isEmpty()) {
-			String path = request.getServletContext().getRealPath("/images");
+			String path = request.getServletContext().getRealPath("/upload");
 			String fileName = file.getOriginalFilename();
 			File upfile = new File(path, fileName);
 			file.transferTo(upfile);
@@ -73,10 +78,11 @@ public class QaController{
 		}else{
 			System.out.println("파일이없어");
 		}
+		
 		vo.setMemId("ID-01");
 		vo.setQaStatus("stas");
 		vo.setMemNo(1);
-		vo.setQaSecret("111");
+		
 		service.registerQaList(vo);
 		svo.setFileParentNo(vo.getFqNo());
 		service.insertFiles(svo);
@@ -110,7 +116,7 @@ public class QaController{
 		MultipartFile file = svo.getUpfile();
 		svo.setFileNo(service.selectFiles(fqNo).getFileNo());
 		svo.setFileParentNo(service.selectFiles(fqNo).getFileNo());
-		String path = "C:\\JAVA\\apache-tomcat-7.0.59\\webapps\\movie_project\\images";
+		String path = "C:\\JAVA\\apache-tomcat-7.0.59\\webapps\\movie_project\\upload";
 		String name=file.getOriginalFilename();
 		File upfile = new File(path, name);
 		file.transferTo(upfile);
@@ -128,7 +134,24 @@ public class QaController{
 		return "downloadView";
 	}
 	
-
+	@RequestMapping("getQaByKeyword.do")
+	public String getQaByKeyword(ModelMap map, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
+		System.out.println("getMemberByKeyword"+searchType);
+		System.out.println("getMemberByKeyword"+searchKeyword);
+		
+		SearchVO svo = new SearchVO();
+		Map qaList = new HashMap();
+		QaVO qaVo;
+		svo.setSearchType(searchType);
+		System.out.println("searchType"+searchType);
+		svo.setSearchKeyword(searchKeyword);
+		List<QaVO> list = service.selectQaBySearchVO(svo);
+		System.out.println("list : "+list);
+		qaList.put("QaList", list);
+		map.addAttribute("qaMap", qaList);
+		return "qa/searched_qaList.tiles";
+		
+	}
 	
 	
 }

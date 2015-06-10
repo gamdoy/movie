@@ -21,6 +21,10 @@ function modifyUrl(){
 	window.location="<%=request.getContextPath() %>/qa/modify.do?number="+number;
 }
 
+function replyUrl(){
+	var 
+}
+
 </script>
 </head>
 
@@ -52,6 +56,7 @@ function modifyUrl(){
 	<div style="width:600px;" align="right">                                  
 			                                                               
 			<input type="button" value="수정" onclick="modifyUrl();">
+			<input type="button" value="Reply" onclick="replyUrl();">
 			<input type="button" value="삭제" onclick="deleteUrl();">
 			<input type="button" value="이전 페이지" onclick="goUrl();">
 	</div>    

@@ -3,7 +3,9 @@ package kr.or.kosta.qa.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.center.vo.QaVO;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.files.vo.FilesVo;
 
@@ -32,4 +34,6 @@ public interface QaDAO {
 	public abstract List<QaVO> selectAllQaPaging(int pageNo);
 	
 	public abstract int selectTotalQaCount();
+
+	List<QaVO> selectQaBySearchVO(SearchVO svo);
 }
