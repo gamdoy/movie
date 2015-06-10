@@ -28,17 +28,17 @@ article{
 </style>
 
 <h2>이벤트목록</h2> 	
-<c:if test="${fn:length(requestScope.pageMap.event_list) != 0 }">
+<c:if test="${fn:length(requestScope.pageMap.winner_list) != 0 }">
 	<table id="listTB" style="width:700px">
 		<thead>
 			<tr>
-				<td>이벤트명</td>
+				<td>당첨 제목</td>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${requestScope.pageMap.event_list }" var="eventVO">
+			<c:forEach items="${requestScope.pageMap.winner_list }" var="winnerVO">
 				<tr>
-					<td>${eventVO.evtTitle }</td>
+					<td>${winnerVO.winTitle }</td>
 				</tr> 
 			</c:forEach>
 		</tbody>
@@ -73,7 +73,7 @@ article{
 <!-- 다음 페이지 그룹 -->
 <c:choose>
 	<c:when test="${pageMap.pagingBean.nextPageGroup }">
-		<a href="<%=request.getContextPath() %>/event/eventListPaging.do?page=${pagingBean.endPageOfPageGroup+1}">▶</a>
+		<a href="<%=request.getContextPath() %>/event/eventListPaging.do?page=${pageMap.pagingBean.endPageOfPageGroup+1}">▶</a>
 	</c:when>
 	<c:otherwise>
 		▶

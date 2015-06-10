@@ -26,5 +26,7 @@ public interface EventService {
 	/*
 	 *페이징 처리
 	 */
-	public abstract Map getEventListPaging(int pageNo);
+	//public abstract Map getEventListPaging(int pageNo);
+	
+	public abstract Map getWinnerListPaging(int pageNo);
 }

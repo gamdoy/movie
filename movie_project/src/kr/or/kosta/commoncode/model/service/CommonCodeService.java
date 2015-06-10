@@ -9,4 +9,6 @@ public interface CommonCodeService {
 	public List<CommonCodeVO> getCodeList(String codeNo);
 
 	public List<ZipcodeVO> getZipcodeList(String keyword);
+
+	public String getCommonNo(String searchKeyword);
 }

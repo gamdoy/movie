@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="center.dao.centerMapper">
-	<!-- 
-	  <resultMap type="QaVo" id="qa_list-resultmap">
-		<id column="fq_no" property="fqNo"/>
-		<result column="qa_title" property="qaTitle"/>
-		<result column="fq_regdate" property="fqRegdate"/>
-		<result column="qa_count" property="qaCount"/>
-		<result column="mem_no" property="memNo"/>
-		
-		<associtation property="member" javaType="" resultMap="">
-		</associtation>
-	</resultMap>-->
+	<sql id="qa-select">
+		select 	 fq_no, 
+					qa_title, 
+					substr(fq_lastdate,1,10) fq_lastdate, 
+					qa_count, 
+					mem_no,
+					qa_secret,
+					qa_password
+		from		qa			
+	</sql>
 	  
 	  <resultMap type="QaVo" id="qa_insert-resultmap">
 	  	<id column="fq_no" property="fqNo"/>
@@ -34,6 +33,8 @@
 		<result column="fq_lastdate" property="fqLastdate"/>
 		<result column="qa_count" property="qaCount"/>
 		<result column="mem_no"  property="memNo"/>
+		<result column="qa_secret"  property="qaSecret"/>
+		<result column="qa_password"  property="qaPassword"/>
 	  </resultMap>
 	  
 	  <resultMap type="QaVo" id="qa_list-resultmap2">
@@ -45,22 +46,52 @@
 		<result column="qa_count" property="qaCount"/>
 	  </resultMap>
 	  
+	  <resultMap type="FilesVo" id="file_list-resultmap">
+	  	<id column="file_no" property="fileNo"/>
+		<result column="file_name" property="fileName"/>
+		<result column="file_orin_name" property="fileOrinName"/>
+		<result column="file_parentno" property="fileParentNo"/>
+	  </resultMap>
+	  
+	
+	  
 	  <select id="selectQaList" resultMap="qa_list-resultmap1">
-	  		select q.fq_no, q.qa_title, substr(q.fq_lastdate,1,10) fq_lastdate, q.qa_count, m.mem_no
+	  		select q.fq_no, q.qa_title, substr(q.fq_lastdate,1,10) fq_lastdate, q.qa_count, q.qa_secret, q.qa_password, m.mem_no
 	  		from qa q, member m
 	  		where m.mem_no = q.mem_no
 	  		order by q.fq_no desc
 	  </select>
 	  
 	  <insert id="insertQa" parameterType="QaVo">
-	  		insert into qa(fq_no, mem_no, qa_title, fq_regdate, fq_lastdate, qa_count, qa_text, qa_status, qa_secret, qa_password, fq_parent_number, file_no)
-	  		values (QA_SEQ.nextval, #{memNo},#{qaTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),0,#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqParentNumber},#{fileNo})
+	  		<selectKey keyProperty="fqNo" resultType="_int" order="BEFORE">
+			select QA_SEQ.nextval from dual
+			</selectKey>
+			
+	  		insert into qa
+	  			(fq_no, mem_no, qa_title, fq_regdate, fq_lastdate, qa_count, 
+	  			qa_text, qa_status, qa_secret, qa_password, fq_parent_number, 
+	  			file_no)
+	  		values (#{fqNo}, #{memNo},#{qaTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),0,#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqNo},#{fileNo})
+	  
 	  </insert>
 	  
-	    <select id="selectQa" resultMap="qa_list-resultmap2" parameterType="_int">
-	  		select fq_no, qa_title, fq_lastdate, qa_text, file_no, qa_count
+	  <insert id="insertFiles" parameterType="FilesVo">
+	  		
+	  	insert into files
+	  		(file_no, file_parentno, file_name, file_orin_name)
+	  		values(FILE_SEQ.nextval,#{fileParentNo}, #{fileName}, #{fileOrinName})
+	  </insert>
+	  <!-- fq_no, qa_title, fq_lastdate, qa_text, file_no, qa_count -->
+	    <select id="selectQa" resultMap="qa_insert-resultmap" parameterType="_int">
+	  		select *
 	  		from qa 
 	  		where fq_no = #{number}	
+	  </select>
+	  
+	  <select id="selectFiles" resultMap="file_list-resultmap" parameterType="_int">
+	  	select *
+	  	from files
+	  	where file_parentno=#{fileParentNo}
 	  </select>
 	  
 	  <delete id="deleteQa" parameterType="_int">
@@ -77,11 +108,55 @@
 		where	fq_no=#{fqNo}	
 	</update>
 	
+	<update id="modifyFile" parameterType="FilesVo">
+		update files
+		set file_name=#{fileName}
+		where file_no=#{fileNo}
+	</update>
+	
 	<update id="modifyCount" parameterType="QaVo">
 		update qa
 		set qa_count = #{qaCount}
 		where fq_no=#{fqNo}
 	</update>
+	
+	<update id="modify_Qa_FileNumber" parameterType="QaVo">
+		update qa
+		set file_no=#{fileNo}
+		where fq_no=#{fqNo}
+	</update>
+	 
+	 <!-- Paging 추가 -->
+	<select id="selectAllQaPaging" parameterType="map" resultMap="qa_list-resultmap1">
+
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password
+			from (
+					<include refid="qa-select"/>
+					order by fq_no desc
+			)
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<select id="selectTotalQaCount" resultType="_int">
+		select count(fq_no) from qa
+	</select>
+	
+	<select id="selectQaBySearchVO"  parameterType="searchVO" resultMap="qa_list-resultmap1">
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no
+	  	from qa
+		<where>
+		 	<if test="searchType=='WRITER'">
+		 		mem_no = (select mem_no from member where mem_id=#{searchKeyword})
+			</if>
+			<if test="searchType!='WRITER'">
+		 		${searchType} like '%'||#{searchKeyword}||'%'
+		 	</if>
+		 	order by fq_no desc
+		</where> 
+	</select>
 	
 </mapper>
 

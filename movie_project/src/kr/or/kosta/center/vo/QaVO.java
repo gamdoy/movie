@@ -141,4 +141,14 @@ public class QaVO {
 		this.memId = memId;
 	}
 
+	@Override
+	public String toString() {
+		return "QaVO [fqNo=" + fqNo + ", memNo=" + memNo + ", qaTitle="
+				+ qaTitle + ", fqRegdate=" + fqRegdate + ", fqLastdate="
+				+ fqLastdate + ", qaCount=" + qaCount + ", qaText=" + qaText
+				+ ", qaStatus=" + qaStatus + ", qaSecret=" + qaSecret
+				+ ", qaPassword=" + qaPassword + ", fqParentNumber="
+				+ fqParentNumber + ", fileNo=" + fileNo + ", memId=" + memId
+				+ "]";
+	}
 }

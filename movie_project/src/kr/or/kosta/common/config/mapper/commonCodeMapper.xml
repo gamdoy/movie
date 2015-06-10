@@ -32,4 +32,10 @@
 		<include refid="zipcode-select"/>
 		where ZIP_address like '%'||#{value}||'%'
 	</select>
+	
+	<select id="selectCommonNo" parameterType="string" resultType="string">
+		select	cmn_no
+		from commoncode
+		where cmn_code_kor = #{value}
+	</select>
 </mapper>

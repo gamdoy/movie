@@ -3,6 +3,7 @@ package kr.or.kosta.event.model.dao;
 import java.util.List;
 
 import kr.or.kosta.event.vo.EventVO;
+import kr.or.kosta.event.vo.WinnerVO;
 
 
 public interface EventDAO {
@@ -30,4 +31,6 @@ public interface EventDAO {
 	public abstract List<EventVO> selectAllEventPaging(int pageNo);
 	
 	public abstract int selectTotalEventCount();
+	
+	public List<WinnerVO> selectAllWinnerPaging(int pageNo); 
 }
