@@ -232,21 +232,16 @@ function submitCheck() {
 			<tr>
 				<!-- 개봉일 -->
 				<td>개봉일</td>
-				<td><input type="text" name="intheaters"
-					 value="${requestScope.movie.intheaters }"><br> <input
-					type="button" value="달력 선택"
-					onClick="datePicker(event,'intheaters')"></td>
+				<td><input type="text" name="intheaters" onClick="datePicker(event,'intheaters')" readonly="readonly"
+					 value="${requestScope.movie.intheaters }"><br> </td>
 				<!-- 상영시간 -->
 				<td>상영시간</td>
 				<td><input type="number" name="runtime"
 					 value="${requestScope.movie.runtime }"></td>
 			</tr>
-
 			<tr>
-				<td  colspan="3"><input type="submit" value="수정" ></td>
+				<td colspan="3"><input type="submit" value="수정" ></td>
+				<td colspan="3"><input type="button" value="취소" onclick="location.href='<%=request.getContextPath()%>/movie/adminmovie_list.do'"></td>
 			</tr>
 		</table>
-		<span style="background-color:#00FEFE">
-		<a href="<%=request.getContextPath()%>/movie/adminmovie_list.do"> 리스트 </a>
-		</span>
 	</form>

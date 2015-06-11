@@ -131,8 +131,6 @@ table {
 		action="<%=request.getContextPath()%>/movie/register.do"
 		id="registerForm" name="registerForm" enctype="multipart/form-data"
 		onsubmit="return submitCheck();">
-		
-
 
 		<table>
 			<tr>
@@ -208,9 +206,7 @@ table {
 			<tr>
 				<!-- 개봉일 -->
 				<td>개봉일</td>
-				<td><input type="text" name="intheaters"><br> <input
-					type="button" value="달력 선택"
-					onClick="datePicker(event,'intheaters')"></td>
+				<td><input type="text" name="intheaters" onClick="datePicker(event,'intheaters')" readonly="readonly"> </td>
 				<!-- 상영시간 -->
 				<td>상영시간</td>
 				<td><input type="number" name="runtime"></td>
