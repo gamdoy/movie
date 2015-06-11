@@ -1,7 +1,9 @@
 package kr.or.kosta.theater.model.service;
 
 import java.util.List;
+import java.util.Map;
 
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.vo.TheaterVO;
 import kr.or.kosta.ticket.vo.TicketVO;
@@ -32,4 +34,12 @@ public interface TheaterService {
 	public TicketVO getTicketByNo(int ticNo);
 
 	public List<TicketVO> getTicketList();
+
+	public List<TicketVO> getMovieListByDate(ScheduleVO vo);
+
+	public boolean isReservedSeats(TicketVO vo);
+
+	public List getTicketListPaging(int page, SearchVO vo);
+
+	public int modibyTicketByNo(TicketVO vo);
 }

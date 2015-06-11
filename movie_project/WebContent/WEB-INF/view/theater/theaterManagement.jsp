@@ -202,6 +202,9 @@ function toggleBtn(theaNo) {
 					<span id="submit${theater.theaNo}"><input  type="button" onclick="submitInfo('${theater.theaNo}');" value="저장"></span>
 					<span id="modifyZipcode${theater.theaNo}"><input  type="button" onclick="modifyZipcode('${theater.theaNo}');" value="우편번호 검색"></span>
 				</td>
+				<td>
+					<span id="modifyTheater${theater.theaNo}"><input type="button" onclick="modifyTheater(${theater.theaNo})"></span>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>

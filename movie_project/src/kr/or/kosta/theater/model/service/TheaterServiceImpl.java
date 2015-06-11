@@ -1,7 +1,12 @@
 package kr.or.kosta.theater.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import kr.or.kosta.common.vo.PagingBean;
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.model.dao.TheaterDAO;
 import kr.or.kosta.theater.vo.TheaterVO;
@@ -70,6 +75,39 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 
 	@Override
+	public boolean isReservedSeats(TicketVO vo) {
+		return dao.isReservedSeats(vo);
+	}
+
+	@Override
+	public List getTicketListPaging(int page, SearchVO vo) {
+		//목록에 뿌려줄 List<Member> 조회
+		//PagingBean 생성
+		HashMap map = new HashMap();
+		map.put("searchKeyword", vo.getSearchKeyword());
+		map.put("searchType", vo.getSearchType());
+		
+		int totalContent = dao.selectTotalTicketCount(map);
+		PagingBean pagingBean = new PagingBean(totalContent, page);
+		
+		map.put("contentsPerPage", pagingBean.CONTENTS_PER_PAGE);
+		map.put("pageNo", page);
+		List<TicketVO> ticketList = dao.selectTicketListPaging(map);
+		
+		//두개의 값(List, PagingBean)을 Map에 넣어 return
+		List list = new ArrayList();
+		list.add(pagingBean);
+		list.add(ticketList);
+		
+		return list;
+	}
+
+	@Override
+	public int modibyTicketByNo(TicketVO vo) {
+		return dao.updateTicketByNo(vo);
+	}
+
+	@Override
 	public TicketVO getMovieRoomByNo(int schNo) {
 		return dao.selectMovieRoomByNo(schNo);
 	}
@@ -97,5 +135,10 @@ public class TheaterServiceImpl implements TheaterService {
 	@Override
 	public TicketVO getTicketByNo(int ticNo) {
 		return dao.selectTicketByNo(ticNo);
+	}
+	
+	@Override
+	public List<TicketVO> getMovieListByDate(ScheduleVO vo){
+		return dao.selectMovieListByDate(vo);
 	}
 }
