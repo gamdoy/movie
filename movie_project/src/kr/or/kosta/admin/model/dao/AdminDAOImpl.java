@@ -62,6 +62,7 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 	
 	public AdminVO selectMemberByNo(int memNo){
+		System.out.println("selectMemberByNo"+memNo);
 		AdminVO vo = session.selectOne(namespace+"selectMemberByNo", memNo);
 		return vo;
 	}
@@ -70,7 +71,7 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectList(namespace+"selectCouponByMemberNo", memNo);
 	}
 		
-	public int updateMemberMileage(MemberVO member) {
+	public int updateMemberMileage(AdminVO member) {
 		// TODO Auto-generated method stub
 		return session.update(namespace+"updateMemberMileage", member);
 	}

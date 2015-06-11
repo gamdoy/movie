@@ -27,11 +27,12 @@ $(document).ready(function(){
 		$("#MEM_PHONENO").prop("selected","selected")
 	}
 	 */
+
 	$("table#listTB tbody tr").on("click", function(){
-		var id = $(this).find(":first-child").text();
-			location.href="<%=request.getContextPath() %>/admin/getMemberById.do?memberId="+id;
+			var no = $(this).find(":first-child").text();
+				location.href="<%=request.getContextPath() %>/admin/getMemberByNo.do?memNo="+no;
 	});
-	
+	 
 	$("#nextPageGroupBtn").on("click", function(){
 		location.href="<%=request.getContextPath() %>/admin/getMemberByKeyword.do?page=${searchedMemberMap.pagingBean2.endPageOfPageGroup+1}&searchType="+searchType+"&searchKeyword="+searchKeyword;
 	});
@@ -86,6 +87,7 @@ table#listTB thead tr{
 	<table id="listTB" style="width:700px">
 		<thead>
 			<tr>
+				<td hidden="hidden">회원번호</td>
 				<td>ID</td>
 				<td>이름</td>
 				<td>생년월일</td>
@@ -99,13 +101,14 @@ table#listTB thead tr{
 		<tbody>
 			<c:forEach items="${requestScope.searchedMemberMap.member_list }" var="adminVO" varStatus="i">
 				<tr id="search">
+					<td hidden="hidden">${adminVO.memNo}</td>
 					<td>${adminVO.memberId}</td>
 					<td>${adminVO.memberName}</td>
 					<td>${adminVO.memberBirthdate}</td>
 					<td>${adminVO.memberEmail}</td>
 					<td>${adminVO.memberPhone}</td>
 					<td>${adminVO.memberMileage}</td>
-					<td>${adminVO.memberType}</td>
+					<td>${adminVO.memberTypeName}</td>
 					<td>${adminVO.memberJoindate}</td>
 				</tr> 
 			</c:forEach>

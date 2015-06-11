@@ -50,13 +50,14 @@ public class AdminController {
 		return "admin/member_list.tiles";
 	}
 	
-	//멤버 ID에서 멤버 No 추출하여 쿠폰리스트 출력
-	@RequestMapping("getMem"
-			+ "berById")
-	public String getMemberById(ModelMap map,@RequestParam("memberId") String id){
-		AdminVO member = service.selectMemberById(id);
-		int memNo = member.getMemNo();
-		List<CouponVO> couponlist= service.selectCouponByMemberNo(memNo);
+	//멤버 No 로 쿠폰리스트 출력
+	@RequestMapping("getMemberByNo")
+	public String getMemberByNo(ModelMap map,@RequestParam("memNo") int number){
+		AdminVO member = service.selectMemberByNo(number);
+		System.out.println("회원번호 : "+number);
+		System.out.println("회원정보 : "+member);
+		
+		List<CouponVO> couponlist= service.selectCouponByMemberNo(number);
 		map.addAttribute("member_info", member);
 		map.addAttribute("coupon_list", couponlist);
 		System.out.println("쿠폰리스트 : "+couponlist);
@@ -65,16 +66,18 @@ public class AdminController {
 	
 	@RequestMapping("issueCouponById")
 	public String issueCouponById(@ModelAttribute  CouponVO vo,  @ModelAttribute  AdminVO aVo, ModelMap map){
+		System.out.println("issueCouponById 쿠폰발행전"+vo);
+		System.out.println("issueCouponById AdminVo"+aVo);
 		String couponType = vo.getCoupType();
 		int memNo = aVo.getMemNo();
 		int memMil = aVo.getMemberMileage();
 		
-		System.out.println("aVo"+aVo);
-		MemberVO member = mService.getMemberByNo(memNo);
-		int CurrentMileage = member.getMemMileage() - memMil;
+		AdminVO member = service.selectMemberByNo(memNo);
+		System.out.println("issueCouponById 멤버정보 : "+member);
+		int CurrentMileage = member.getMemberMileage() - memMil;
 		
 		System.out.println("Controller - issueCouponById : "+member);
-		member.setMemMileage(CurrentMileage);
+		member.setMemberMileage(CurrentMileage);
 		//업데이트멤버 추가
 		System.out.println("member:" + member);
 		service.updateMemberMileage(member);
@@ -84,14 +87,15 @@ public class AdminController {
 		CouponVO copVo = new CouponVO();
 		copVo.setMemNo(memNo);
 		copVo.setCoupType(couponType);
-		copVo.setCoupUsed("false");
-		copVo.setCoupTypeName("1");
-		copVo.setCoupUsedValue("1");
+		copVo.setCoupUsed("103100");
+		copVo.setCoupTypeName(null);
+		copVo.setCoupUsedValue(null);
 		copVo.setCoupUsedDate(null);
+		System.out.println("넣을 쿠폰VO : "+copVo);
 		service.insertCoupon(copVo);
 		System.out.println("issueCouponById : "+member);
-		
-		return "redirect:/admin/getMemberById.do?memberId="+member.getMemId();
+		System.out.println("넣은후 쿠폰 : "+service.selectCouponByMemberNo(memNo));
+		return "redirect:/admin/getMemberByNo.do?memNo="+member.getMemNo();
 	}
 	
 	//타일즈 안타는 쿠폰팝업창

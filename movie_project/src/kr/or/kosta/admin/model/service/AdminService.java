@@ -20,11 +20,11 @@ public interface AdminService {
 	
 	public List<CouponVO> selectCouponByMemberNo(int memNo);
 
-	public abstract int updateMemberMileage(MemberVO member);
-
 	public abstract List<AdminVO> selectMemberBySearchVO(SearchVO svo);
 
 	public HashMap selectMemberBySearchVOPaging(SearchVO svo, int page);
 	
 	public int selectSearchMemberCount(SearchVO svo);
+
+	public abstract int updateMemberMileage(AdminVO member);
 }

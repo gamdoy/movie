@@ -11,6 +11,7 @@ public class AdminVO {
 	private String memberPhone;
 	private int memberMileage;
 	private String memberType;
+	private String memberTypeName;
 	private String memberJoindate;
 	private CouponVO coupon;
 	
@@ -20,8 +21,8 @@ public class AdminVO {
 
 	public AdminVO(int memNo, String memberId, String memberName,
 			String memberBirthdate, String memberEmail, String memberPhone,
-			int memberMileage, String memberType, String memberJoindate,
-			CouponVO coupon) {
+			int memberMileage, String memberType, String memberTypeName,
+			String memberJoindate, CouponVO coupon) {
 		super();
 		this.memNo = memNo;
 		this.memberId = memberId;
@@ -31,6 +32,7 @@ public class AdminVO {
 		this.memberPhone = memberPhone;
 		this.memberMileage = memberMileage;
 		this.memberType = memberType;
+		this.memberTypeName = memberTypeName;
 		this.memberJoindate = memberJoindate;
 		this.coupon = coupon;
 	}
@@ -99,6 +101,14 @@ public class AdminVO {
 		this.memberType = memberType;
 	}
 
+	public String getMemberTypeName() {
+		return memberTypeName;
+	}
+
+	public void setMemberTypeName(String memberTypeName) {
+		this.memberTypeName = memberTypeName;
+	}
+
 	public String getMemberJoindate() {
 		return memberJoindate;
 	}
@@ -136,6 +146,8 @@ public class AdminVO {
 				+ ((memberPhone == null) ? 0 : memberPhone.hashCode());
 		result = prime * result
 				+ ((memberType == null) ? 0 : memberType.hashCode());
+		result = prime * result
+				+ ((memberTypeName == null) ? 0 : memberTypeName.hashCode());
 		return result;
 	}
 
@@ -192,6 +204,11 @@ public class AdminVO {
 				return false;
 		} else if (!memberType.equals(other.memberType))
 			return false;
+		if (memberTypeName == null) {
+			if (other.memberTypeName != null)
+				return false;
+		} else if (!memberTypeName.equals(other.memberTypeName))
+			return false;
 		return true;
 	}
 
@@ -202,9 +219,8 @@ public class AdminVO {
 				+ memberBirthdate + ", memberEmail=" + memberEmail
 				+ ", memberPhone=" + memberPhone + ", memberMileage="
 				+ memberMileage + ", memberType=" + memberType
-				+ ", memberJoindate=" + memberJoindate + ", coupon=" + coupon
-				+ "]";
+				+ ", memberTypeName=" + memberTypeName + ", memberJoindate="
+				+ memberJoindate + ", coupon=" + coupon + "]";
 	}
 
-	
 }

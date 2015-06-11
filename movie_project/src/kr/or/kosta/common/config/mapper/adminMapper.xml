@@ -3,11 +3,14 @@
 <mapper namespace="admin.dao.adminMapper">
   	<resultMap type="couponVO" id="coupon-resultmap">
   		<id column="cop_no" property="coupNo"/>
+  		<result column="mem_no" property="memNo"/>
   		<result column="cop_type" property="coupType"/>
   		<result column="cop_used" property="coupUsed"/>
+  		<result column="cop_type_name" property="coupTypeName"/>
+  		<result column="cop_used_value" property="coupUsedValue"/>
   		<result column="cop_usedate" property="coupUsedDate"/>
   	</resultMap>
-  	
+
 	<resultMap type="adminVO" id="admin-resultmap">
 		<id column="mem_no" property="memNo"/>
 		<result column="mem_id" property="memberId"/>
@@ -16,13 +19,14 @@
 		<result column="mem_email" property="memberEmail"/>
 		<result column="mem_phoneno" property="memberPhone"/>
 		<result column="mem_mileage" property="memberMileage"/>
+		<result column="mem_membertype_name" property="memberTypeName"/>
 		<result column="mem_membertype" property="memberType"/>
 		<result column="mem_joindate" property="memberJoindate"/>
 		<collection  property="coupon" ofType="couponVO" resultMap="coupon-resultmap"/>
 	</resultMap>
 
 	<sql id="member-select">
-		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype, mem_joindate
+		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
 		from member
 	</sql>
 	
@@ -32,13 +36,13 @@
 	</select>
 	
 	<select id="selectMemberListPaging" parameterType="map" resultMap="admin-resultmap">
-		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype, mem_joindate
+		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name, mem_membertype, mem_joindate
 		from
 		(
-			select ceil(rownum/#{contentsPerPage}) page, mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype, mem_joindate
+			select ceil(rownum/#{contentsPerPage}) page, mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name,mem_membertype, mem_joindate
 			from
 			(
-				select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype, mem_joindate
+				select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
     			from member
 				order by mem_no
 			)
@@ -48,37 +52,43 @@
 	
 	
 	<select id="selectCouponList" resultMap="coupon-resultmap">
-		select COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE
+		select COP_NO, MEM_NO, COP_TYPE, COP_USED, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = COP_TYPE) COP_TYPE_NAME, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = COP_USED) COP_USED_VALUE, COP_USEDATE
 		from coupon
 	</select>
 	
 	<select id="selectCouponByMemberNo"  parameterType="int" resultMap="coupon-resultmap">
-		select COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE
+		select COP_NO, MEM_NO,  COP_TYPE, COP_USED, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = COP_TYPE) COP_TYPE_NAME, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = COP_USED) COP_USED_VALUE, COP_USEDATE
 		from coupon
 		where mem_no = #{value}
 	</select>
 	
 	<select id="selectMemberById"  parameterType="string" resultMap="admin-resultmap">
-		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate
-		from member m
-		where m.mem_id = #{value}
+		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
+		from member
+		where mem_id = #{value}
+	</select>
+
+	<select id="selectMemberByNo"  parameterType="int" resultMap="admin-resultmap">
+		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
+		from member
+		where mem_no = #{value}
 	</select>
 	
 	<select id="selectMemberBySearchVO"  parameterType="searchVO" resultMap="admin-resultmap">
-		select m.mem_no, m.mem_id, m.mem_name, m.mem_birthdate, m.mem_email, m.mem_phoneno, m.mem_mileage, m.mem_membertype, m.mem_joindate
-		from member m
+		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
+		from member
 		where ${searchType} like '%'||#{searchKeyword}||'%'
 	</select>
 	
 	<!-- 검색결과화면에서 페이징 -->
 	<select id="selectMemberBySearchVOPaging"  parameterType="hashmap" resultMap="admin-resultmap">
-	select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype, mem_joindate
+	select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name, mem_membertype, mem_joindate
 	from
 	(
-		select ceil(rownum/#{contentsPerPage}) page, mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype, mem_joindate
+		select ceil(rownum/#{contentsPerPage}) page, mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name, mem_membertype, mem_joindate
 		from
 		(
-			select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype, mem_joindate
+			select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
     		from member
 			
 			<if test="searchType=='MEM_ID'">
@@ -95,14 +105,14 @@
 	</select>
 	
 	<insert id="insertCoupon" parameterType="couponVO">
-		INSERT INTO COUPON(COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE)
-		values(COUPON_SEQ.nextval,#{MemNo},#{coupType},#{coupUsed},#{coupUsedDate})
+		insert into coupon(COP_NO, MEM_NO, COP_TYPE, COP_USED, COP_USEDATE)
+		values(COUPON_SEQ.nextval,#{memNo},#{coupType},#{coupUsed},#{coupUsedDate})
 	</insert>
 	
-	<update id="updateMemberMileage" parameterType="memberVO">
+	<update id="updateMemberMileage" parameterType="adminVO">
  		update member
- 		set MEM_MILEAGE=#{memMileage}
- 		where mem_id=#{memId}		
+ 		set MEM_MILEAGE=#{memberMileage}
+ 		where mem_id=#{memberId}		
  	</update>
  	
  	<select id="selectTotalMember" resultType="_int">

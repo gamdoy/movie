@@ -18,8 +18,6 @@ public interface AdminDAO {
 	
 	public  List<CouponVO>  selectCouponByMemberNo(int memNo);
 
-	public int updateMemberMileage(MemberVO member);
-
 	public List<AdminVO> selectMemberBySearchVO(SearchVO svo);
 
 	public int selectTotalMemberCount();
@@ -27,6 +25,8 @@ public interface AdminDAO {
 	List<AdminVO> selectMemberBySearchVOPaging(SearchVO svo, int page);
 
 	public int selectSearchMemberCount(SearchVO svo);
+
+	public int updateMemberMileage(AdminVO member);
 	
 	
 }
