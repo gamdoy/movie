@@ -7,6 +7,7 @@ import java.util.Map;
 import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.event.model.dao.EventDAO;
 import kr.or.kosta.event.vo.EventVO;
+import kr.or.kosta.event.vo.WinnerVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,15 +60,15 @@ public class EventServiceImpl implements EventService {
 	 * 페이징 처리
 	 */
 	@Override
-	public Map getEventListPaging(int pageNo) {
+	public Map getWinnerListPaging(int pageNo) {
 		//목록에 뿌려줄 List<EventVO>조회
-		List<EventVO> list=dao.selectAllEventPaging(pageNo);
+		List<WinnerVO> list=dao.selectAllWinnerPaging(pageNo);
 		//PagingBean생성
 		int totalContent =dao.selectTotalEventCount();
 		PagingBean pagingBean= new PagingBean(totalContent, pageNo);
 		//두개의 값(List, PagingBean)을 Map에 넣어 return
 		HashMap map = new HashMap();
-		map.put("event_list", list);
+		map.put("winner_list", list);
 		map.put("pagingBean",pagingBean);
 		return map;
 	}

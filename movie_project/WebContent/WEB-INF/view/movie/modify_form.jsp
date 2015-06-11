@@ -16,13 +16,12 @@ table {
 </style>
 
 <script type="text/javascript">
-	
-	function submitCheck() {
+
+function submitCheck() {
 		var flag = true;
-		
 		$("#modifyForm input,textarea").each(function(){
-			if(!$(this).val()){
-				alert('['+$(this).prop("name")+"] 항목은 필수 입력사항 입니다");
+			if(!$(this).val()) {
+				alert('['+$(this).parent().prev().html()+"] 항목은 필수 입력사항 입니다");
 				flag = false;
 				return false;
 			} 
@@ -34,11 +33,10 @@ table {
 				flag = false;
 				return false;
 			}
-		});
-		
+		}); 
 		return flag;
 	}
-
+	
 	$(document).ready(function() {
 		
 		/* // 연습용 - 수정 페이지 확인만 할경우 모든필드 disabled
@@ -48,14 +46,18 @@ table {
 		$("#modifyForm input,textarea,select").attr("disabled",false);
 		});
 		 */
-		
+		 
+		 
 		if(${requestScope.movie.success==1 }){
 			alert("수정 성공");
 		}
 		
 		
-		
-		
+		 /*포스터 수정안할경우 기존 poster 파일로 전송*/
+		$("#posterCheck").on("click",function(){
+			 $("#btnArea").hide();	
+			 $("#poster").show();
+		});
 		
 		/* 글자수 체크 */
 		$("#title").on("blur", function() {
@@ -204,11 +206,15 @@ table {
 				</select></td>
 				<!-- 포스터 -->
 				<td>포스터</td>
-				<td><input type="file" name="poster" >
-					<span>
+				
+				<td>
 					등록된 포스터<br>
-				<img src="<%=request.getContextPath()%>/images/movie/${requestScope.movie.posterName }">
-				</span>
+						<img src="<%=request.getContextPath()%>/images/movie/${requestScope.movie.posterName }">
+					<br>
+					<span id="btnArea">
+						<input type="button" id="posterCheck" value="수정하기" > <br>
+					</span>
+					<input style="display: none;" type="file" name="poster" id="poster" >
 				</td>
 			</tr>
 
@@ -237,11 +243,10 @@ table {
 			</tr>
 
 			<tr>
-				<td  colspan="3"><input type="submit" value="수정"></td>
+				<td  colspan="3"><input type="submit" value="수정" ></td>
 			</tr>
 		</table>
 		<span style="background-color:#00FEFE">
 		<a href="<%=request.getContextPath()%>/movie/adminmovie_list.do"> 리스트 </a>
 		</span>
 	</form>
-		<!-- 연습용 <input type=submit id="modify" value="수정하기"> -->

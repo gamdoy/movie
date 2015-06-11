@@ -6,6 +6,7 @@ import java.util.Map;
 
 import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.event.vo.EventVO;
+import kr.or.kosta.event.vo.WinnerVO;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,13 @@ public class EventDAOImpl implements EventDAO {
 	@Override
 	public int selectTotalEventCount() {
 		return session.selectOne(namespace+"selectTotalEventCount");
+	}
+	
+	@Override
+	public List<WinnerVO> selectAllWinnerPaging(int pageNo) {
+		Map param = new HashMap();
+		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		param.put("pageNo", pageNo);
+		return session.selectList(namespace+"selectAllWinnerPaging", param);
 	}
 }

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.event.vo.EventVO;
-import kr.or.kosta.event.vo.SingleVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +36,16 @@ public class EventController {
 		map.addAttribute("event_list",list);
 		
 		return "event/now_event.tiles";
+	}
+	
+	@RequestMapping(value="endEvent.do")
+	public String endEvent(ModelMap map){
+		List<EventVO> list= service.getEventList();
+		System.out.println(list.size());
+		
+		map.addAttribute("event_list",list);
+		
+		return "event/end_event.tiles";
 	}
 	
 	@RequestMapping(value="specEvent")
@@ -113,7 +122,7 @@ public class EventController {
 	@RequestMapping(value="eventListPaging")
 	public String eventListPaing(@RequestParam(defaultValue="1")int page,ModelMap map){
 		System.out.println(page);
-		Map pageMap = service.getEventListPaging(page);
+		Map pageMap = service.getWinnerListPaging(page);
 		System.out.println(page);
 		map.addAttribute("pageMap",pageMap);
 		return "event/event_list_paging.tiles";

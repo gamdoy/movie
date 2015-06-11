@@ -1,5 +1,6 @@
 package kr.or.kosta.theater.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kr.or.kosta.schedule.vo.ScheduleVO;
@@ -41,4 +42,14 @@ public interface TheaterDAO {
 	public abstract TicketVO selectTicketByNo(int ticNo);
 
 	public abstract List<TicketVO> selectTicketList();
+	
+	public abstract List<TicketVO> selectMovieListByDate(ScheduleVO vo);
+	
+	public abstract boolean isReservedSeats(TicketVO vo);
+
+	public abstract List<TicketVO> selectTicketListPaging(HashMap map);
+
+	public abstract int selectTotalTicketCount(HashMap map);
+
+	public abstract int updateTicketByNo(TicketVO vo);
 }

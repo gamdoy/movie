@@ -25,4 +25,9 @@ public class CommonCodeServiceImpl implements CommonCodeService {
 		return dao.selectZipodeList(keyword);
 	}
 
+	@Override
+	public String getCommonNo(String searchKeyword) {
+		return dao.selectCommonNo(searchKeyword);
+	}
+
 }
