@@ -1,5 +1,6 @@
 package kr.or.kosta.theater.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -69,8 +70,34 @@ public class TheaterDAOImpl implements TheaterDAO {
 	}
 
 	@Override
+	public List<TicketVO> selectMovieListByDate(ScheduleVO vo) {
+		return session.selectList(namespace + "selectMovieListByDate", vo);
+	}
+
+	@Override
 	public List<ScheduleVO> selectScreenTimeList(ScheduleVO vo) {
 		return session.selectList(namespace + "selectScreenTimeList", vo);
+	}
+
+	@Override
+	public boolean isReservedSeats(TicketVO vo) {
+		int count = session.selectOne(namespace + "isReservedSeats", vo);
+		return count != 0;
+	}
+
+	@Override
+	public List<TicketVO> selectTicketListPaging(HashMap map) {
+		return session.selectList(namespace + "selectTicketListPaging", map);
+	}
+	
+	@Override
+	public int selectTotalTicketCount(HashMap map) {
+		return session.selectOne(namespace + "selectTotalTicketCount", map);
+	}
+	
+	@Override
+	public int updateTicketByNo(TicketVO vo) {
+		return session.update(namespace + "updateTicketByNo", vo);
 	}
 
 	@Override

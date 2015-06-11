@@ -28,7 +28,7 @@ table#listTB thead tr{
 		<select id="searchType" name="searchType">
 			<option value="MEM_ID">ID</option>
 			<option value="MEM_NAME">이름</option>
-			<option value="mem_membertype_name">등급</option>
+			<option value="MEM_MEMBERTYPE">등급</option>
 			<option value="MEM_PHONENO">전화번호</option>
 		</select>
 		

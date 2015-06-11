@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
@@ -15,10 +18,13 @@ import kr.or.kosta.ticket.vo.TicketVO;
 
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -77,6 +83,12 @@ public class TheaterController {
 		return "theater/movieSchedule.tiles";
 	}
 	
+	@RequestMapping("getMovieList")
+	@ResponseBody
+	public List<TicketVO> getMovieListByDate(@ModelAttribute ScheduleVO vo, Errors errors) {
+		return theaterService.getMovieListByDate(vo);
+	}
+	
 	@RequestMapping("getScheduleList")
 	@ResponseBody
 	public List<ScheduleVO> getScheduleList(@ModelAttribute TheaterVO vo) {
@@ -86,7 +98,11 @@ public class TheaterController {
 	@RequestMapping("getScreenTimeList")
 	@ResponseBody
 	public List<ScheduleVO> getScreenTimeList(@ModelAttribute ScheduleVO vo) {
-		return theaterService.getScreenTimeList(vo);
+		List<ScheduleVO> list = theaterService.getScreenTimeList(vo);
+		for (ScheduleVO sVO : list) {
+			sVO.setMovPoster("/images/movie/" +sVO.getMovPoster());
+		}
+		return list;
 	}
 	
 	@RequestMapping("reserveForm")
@@ -104,19 +120,27 @@ public class TheaterController {
 	
 	@RequestMapping("reserve")
 	@ResponseBody
-	public Map<String, String> reserve(@ModelAttribute TicketVO vo) {
+	public Map<String, String> reserve(@ModelAttribute TicketVO vo) throws Exception {
 		String seats = "";
+		Map<String, String> map = new HashMap<String, String>();
 		for (int seat = 0; seat < vo.getTicTotalcustomer(); seat++) {
-			seats += "|" + vo.getMrLine() + "-" + (vo.getMrSeat() + seat);
+			String seatNo = "|" + vo.getMrLine() + "-" + (vo.getMrSeat() + seat);
+			vo.setTicSeatno(seatNo);
+			boolean flag = theaterService.isReservedSeats(vo);
+			if(flag){
+				map.put("reserved", "true");
+				return map;
+			}
+			seats += seatNo;
 		}
 		
 		seats += "|";
-		vo.setMemNo(2);
-		vo.setTicPaytype("100000");
+		vo.setMemNo(2);//회원 정보 고정
+		vo.setTicStatus("112100");//결제완료 고정
 		vo.setTicPrice(8000);
 		vo.setTicSeatno(seats);
+		
 		theaterService.registTicket(vo);
-		Map<String, String> map = new HashMap<String, String>();
 		map.put("url", "/theater/reserveSuccess.do");
 		map.put("ticNo", vo.getTicNo()+"");
 		return map;
@@ -129,8 +153,24 @@ public class TheaterController {
 	}
 	
 	@RequestMapping("ticketList")
-	public String ticketList(ModelMap map) {
-		map.addAttribute("ticketList", theaterService.getTicketList());
+	public String ticketList(@RequestParam(defaultValue="1")int page, @ModelAttribute SearchVO vo, ModelMap map) {
+		if(vo.getSearchType() != null && (vo.getSearchType().equals("tic_paytype") || vo.getSearchType().equals("tic_status"))){
+			vo.setSearchKeyword(commonCodeService.getCommonNo(vo.getSearchKeyword()));
+		}
+		List list = theaterService.getTicketListPaging(page, vo);
+		
+		map.addAttribute("pagingBean", list.get(0));
+		map.addAttribute("ticketList", list.get(1));
+		map.addAttribute("searchVO", vo);
+		map.addAttribute("ticStatusList", commonCodeService.getCodeList("112"));
+		
 		return "ticket/ticketList.tiles";
+	}
+	
+	@RequestMapping("modifyTicketByNo")
+	@ResponseBody
+	public Boolean modifyTicketByNo(@ModelAttribute TicketVO vo) {
+		int count = theaterService.modibyTicketByNo(vo);
+		return count == 1;
 	}
 }

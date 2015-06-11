@@ -39,7 +39,7 @@
 		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name, mem_membertype, mem_joindate
 		from
 		(
-			select ceil(rownum/#{contentsPerPage}) page, mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name,mem_membertype, mem_joindate
+			select ceil(rownum/#{contentsPerPage}) page, mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, mem_membertype_name, mem_membertype, mem_joindate
 			from
 			(
 				select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate

@@ -111,11 +111,11 @@ public class AdminController {
 	public String getMemberByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
 		//SearchType : 검색조건 - ID, 이름, 등급, 전화번호 등등
 		//SearchKeyword : 검색키워드 - id-1, 홍길동, vip, 010-1234-5678 등..
-		
 		SearchVO svo = new SearchVO();
 		HashMap memberList = new HashMap();
-		
+		AdminVO member;
 		svo.setSearchType(searchType);
+		svo.setSearchKeyword(searchKeyword);
 		
 //		검색 키워드에서 CommonNo를 가져온다.
 		String searchKeywordCommonNo = commonService.getCommonNo(searchKeyword.toUpperCase());
@@ -124,7 +124,7 @@ public class AdminController {
 			System.out.println("searchKeywordCommonNo"+searchKeywordCommonNo);
 			svo.setSearchKeyword(searchKeywordCommonNo);
 			memberList = service.selectMemberBySearchVOPaging(svo, page);
-
+			System.out.println("컨트롤러 getMemberByKeyword 멤버값 : "+memberList);
 		}else{		//		CommonNo가 없으면 SearchVO를 이용하여 조회
 			svo.setSearchKeyword(searchKeyword);
 			memberList = service.selectMemberBySearchVOPaging(svo, page);

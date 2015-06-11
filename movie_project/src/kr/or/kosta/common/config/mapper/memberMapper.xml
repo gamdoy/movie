@@ -72,4 +72,9 @@
  		<include refid="member-select"/>
  		where mem_id=#{memId}
  	</select>
+ 	
+ 	<select id="selectMemberByNo" parameterType="_int" resultMap="member-resultmap">
+ 		<include refid="member-select"/>
+ 		where mem_no=#{memNo}
+ 	</select>
 </mapper>

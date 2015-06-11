@@ -45,14 +45,13 @@ public class MovieDAOImpl implements MovieDAO {
 		Map param = new HashMap();
 		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		param.put("pageNo", pageNo);
-		return session.selectList(namespace+"allMovie",pageNo);
+		return session.selectList(namespace+"allMovie",param);
 	}
 	 
 	//모든영화 카운트
 	@Override
 	public int totalCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.selectOne(namespace+"totalMovieCount");
 	}
 
 	//개별table 조회

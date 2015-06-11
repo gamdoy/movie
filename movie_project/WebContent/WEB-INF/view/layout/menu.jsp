@@ -26,7 +26,7 @@
 		});
 		$("#reserveBtn").on("click", function() {
 			hide_subMenu();
-			$(".reserve_menu").show();
+			window.location = "<%=request.getContextPath() %>/theater/movieSchedule.do";
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
@@ -47,16 +47,6 @@
 		$("#adminBtn").on("click", function() {
 			hide_subMenu();
 			$(".admin_menu").show();
-		});
-		$("#testBtn").on("click", function() {
-			$.ajax({
-				url:"<%=request.getContextPath() %>/theater/ajaxTest.do",
-				data:{"theaNo":"1"},
-				dataType:"JSON",
-				success:function(ret){
-					alert(ret.theaNo);
-				}
-			});
 		});
 		$("#logout").on("click", function(){
 			window.location="<%=request.getContextPath() %>/member/logout.do";
@@ -84,7 +74,6 @@
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="testBtn">test</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="adminBtn">관리자</label>
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
@@ -105,6 +94,9 @@
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
+		
+		<a href="<%=request.getContextPath() %>/movie/register_form.do">영화등록</a>
+		<a href="<%=request.getContextPath() %>/movie/adminmovie_list.do">영화리스트</a>
 	</section>
 	<!-- 
 		<section class="stats_menu">
@@ -154,8 +146,8 @@
 			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
 		</tr>
 
-</form>		
 </table>
+</form>		
 
 </c:when>
 

@@ -248,3 +248,8 @@ insert into production values(production_seq.nextval,'루커스필름');
 insert into production values(production_seq.nextval,'디어사일럼');
 insert into production values(production_seq.nextval,'드림웍스');
 
+
+/*영화 정보*/
+
+insert into movie '영화-1','1번영화','www.movie-1.com','104100','movie-1.jpg',2015-6-10 ,'trailer',110100,1,1,1
+                   

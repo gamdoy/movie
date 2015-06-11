@@ -43,6 +43,10 @@ public class MovieServiceImpl implements MovieService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
+	@Override
+	public int totalCount() {
+		return dao.totalCount();
+	}
 	//movNo로 영화조회
 	@Override
 	public MovieVO getMovieByNo(String movNo) {
@@ -63,6 +67,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<ProductionVO> getProduction() {
 		return dao.getProduction();
 	}
+	
 
 	
 

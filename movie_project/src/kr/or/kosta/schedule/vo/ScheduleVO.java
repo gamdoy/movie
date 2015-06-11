@@ -8,16 +8,20 @@ public class ScheduleVO implements Serializable{
 	private int mrNo;
 	private String schDate;
 	private int theaNo;
+	private String movPoster;
+	private int emptySeat;
 	
 	public ScheduleVO() {}
 
-	public ScheduleVO(int schNo, int movNo, int mrNo, String schDate, int theaNo) {
-		super();
+	public ScheduleVO(int schNo, int movNo, int mrNo, String schDate,
+			int theaNo, String movPoster, int emptySeat) {
 		this.schNo = schNo;
 		this.movNo = movNo;
 		this.mrNo = mrNo;
 		this.schDate = schDate;
 		this.theaNo = theaNo;
+		this.movPoster = movPoster;
+		this.emptySeat = emptySeat;
 	}
 
 	public int getSchNo() {
@@ -60,17 +64,37 @@ public class ScheduleVO implements Serializable{
 		this.theaNo = theaNo;
 	}
 
+	public String getMovPoster() {
+		return movPoster;
+	}
+
+	public void setMovPoster(String movPoster) {
+		this.movPoster = movPoster;
+	}
+
+	public int getEmptySeat() {
+		return emptySeat;
+	}
+
+	public void setEmptySeat(int emptySeat) {
+		this.emptySeat = emptySeat;
+	}
+
 	@Override
 	public String toString() {
 		return "ScheduleVO [schNo=" + schNo + ", movNo=" + movNo + ", mrNo="
-				+ mrNo + ", schDate=" + schDate + ", theaNo=" + theaNo + "]";
+				+ mrNo + ", schDate=" + schDate + ", theaNo=" + theaNo
+				+ ", movPoster=" + movPoster + ", emptySeat=" + emptySeat + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + emptySeat;
 		result = prime * result + movNo;
+		result = prime * result
+				+ ((movPoster == null) ? 0 : movPoster.hashCode());
 		result = prime * result + mrNo;
 		result = prime * result + ((schDate == null) ? 0 : schDate.hashCode());
 		result = prime * result + schNo;
@@ -87,7 +111,14 @@ public class ScheduleVO implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ScheduleVO other = (ScheduleVO) obj;
+		if (emptySeat != other.emptySeat)
+			return false;
 		if (movNo != other.movNo)
+			return false;
+		if (movPoster == null) {
+			if (other.movPoster != null)
+				return false;
+		} else if (!movPoster.equals(other.movPoster))
 			return false;
 		if (mrNo != other.mrNo)
 			return false;

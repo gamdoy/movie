@@ -114,7 +114,7 @@ public class MovieController {
 	
 	//수정페이지
 	@RequestMapping("modify_success.do")
-	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
+	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request, Errors errors) throws IllegalStateException, IOException{
 		// 파일업로드 처리
 				MultipartFile file = movie.getPoster();
 				
@@ -164,8 +164,9 @@ public class MovieController {
 	@RequestMapping("adminmovie_list.do")
 	public String adminMovieList(@RequestParam(defaultValue="1")int pageNo, ModelMap map) {
 		Map movie = service.allMovieList(pageNo);
-		System.out.println(movie);
-		map.addAttribute("movie", movie);
+		System.out.println(pageNo);
+		System.out.println(service.allMovieList(pageNo));
+		map.addAttribute("moviePaging", movie);
 		return "movie/adminMovieList_form.tiles";
 
 	}

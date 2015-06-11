@@ -9,12 +9,19 @@
 <meta charset="UTF-8">
 <title>QA게시판</title>
 
-
-
 <script type="text/javascript">
 $(document).ready(function(){
 	$("tbody tr").on("click", function(){
+		
 		var number = $(this).find(":first-child").text();
+		if($(this).find(":first-child").next().prop("class")=="secret"){
+			var password = prompt('비밀번호를 입력하세요',"");
+			
+			if(!($("#secret" + number).val()==password)){
+				alert("비밀번호가 옳바르지 않습니다.");
+				return false;
+			}
+		}
 		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
 	})
 });
@@ -60,10 +67,18 @@ function goUrl(){
                </tr>
            </thead>
            <tbody>
-           	<c:forEach items="${requestScope.qaMap.QaList }" var="QaVO">
+           	<c:forEach items="${requestScope.searchedQaMap.QaList }" var="QaVO">
 				<tr id="qa_content">
 					<td>${QaVO.fqNo}</td>
-					<td>${QaVO.qaTitle}</td>
+					<c:choose>
+						<c:when test="${QaVO.qaSecret=='use' }">
+							<td class="secret"><input type="hidden" id="secret${QaVO.fqNo }" value="${QaVO.qaPassword }">
+							<img src="<%=request.getContextPath()%>/upload/kgpg.png" width="10px" height="10px">${QaVO.qaTitle}</td> 
+						</c:when>
+						<c:otherwise>
+							<td>${QaVO.qaTitle}</td> 
+						</c:otherwise>
+					</c:choose>
 					<td>${QaVO.memNo}</td>
 					<td>${QaVO.fqLastdate}</td>
 					<td>${QaVO.qaCount}</td>
@@ -73,7 +88,43 @@ function goUrl(){
            <tfoot>
                <tr>
                     <td align="center" colspan="5">
-               
+               		
+	<div style="width:700px;" align="center">     
+		<c:choose>
+			<c:when test="${searchedQaMap.pagingBean2.previousPageGroup }">
+				<label id="previousPageGroupBtn" name="previousPageGroupBtn">
+					<font color="black">◀</font>
+				</label>
+			</c:when>
+			<c:otherwise>
+				◀
+			</c:otherwise>
+		</c:choose>	
+		
+		<!-- 페이지 번호 -->
+		<c:forEach begin="${searchedQaMap.pagingBean2.startPageOfPageGroup }" end="${searchedQaMap.pagingBean2.endPageOfPageGroup}" var="pageNum">
+			<c:choose>
+				<c:when test="${pageNum == searchedQaMap.pagingBean2.currentPage}">
+					<b><i>[${pageNum}]</i></b>
+				</c:when>
+				<c:otherwise>
+					<label class="PageBtn" name="${pageNum}" value="${pageNum}">
+						${pageNum}
+					</label>
+				</c:otherwise>
+			</c:choose>
+			&nbsp;&nbsp;
+		</c:forEach>
+		<!-- 다음 페이지 그룹 -->
+		<c:choose>
+			<c:when test="${searchedQaMap.pagingBean2.nextPageGroup }">
+				<label id="nextPageGroupBtn" name="nextPageGroupBtn"><font color="black">▶</font></label>
+			</c:when>
+			<c:otherwise>
+				▶
+			</c:otherwise>
+		</c:choose>	
+	</div>
                     </td>
              	</tr>
            </tfoot>
