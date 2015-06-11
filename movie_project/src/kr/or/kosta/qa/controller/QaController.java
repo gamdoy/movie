@@ -36,14 +36,14 @@ public class QaController{
 	@Autowired
 	private QaService service;
 	
-	@RequestMapping(value="qa.do")
+	
+	
 	public String qa_list(ModelMap map, @RequestParam(defaultValue="1")int page){
 		
 		Map pageMap = service.getQaListPaging(page);
 		map.addAttribute("pageMap",pageMap);
 		
 		List<QaVO> list= service.getQaList();
-		System.out.println("list다 : " +list);
 		map.addAttribute("qa_list",list);
 		
 		return "qa/qa_list.tiles";
@@ -135,22 +135,22 @@ public class QaController{
 		return "downloadView";
 	}
 	
-	@RequestMapping("getQaByKeyword.do")
-	public String getQaByKeyword(ModelMap map, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
-		System.out.println("getMemberByKeyword"+searchType);
-		System.out.println("getMemberByKeyword"+searchKeyword);
+	@RequestMapping(value="qa.do")
+	public String getQaByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @ModelAttribute SearchVO svo){
 		
-		SearchVO svo = new SearchVO();
 		Map qaList = new HashMap();
 		QaVO qaVo;
-		svo.setSearchType(searchType);
-		System.out.println("searchType"+searchType);
-		svo.setSearchKeyword(searchKeyword);
-		List<QaVO> list = service.selectQaBySearchVO(svo);
-		System.out.println("list : "+list);
-		qaList.put("QaList", list);
-		map.addAttribute("qaMap", qaList);
-		return "qa/searched_qaList.tiles";
+	
+		Map pageMap = service.getQaListPaging(page);
+		map.addAttribute("pageMap",pageMap);
+		
+		//selectQaBySearchVOPaging -> svo 의 searchType, searchKeyword, 현재 page 를 이용하여 페이징된 list 리턴
+		qaList = service.selectQaBySearchVOPaging(svo, page);
+		map.addAttribute("pageMap", qaList);
+		map.addAttribute("currentSearchType", svo.getSearchType());
+		map.addAttribute("currentSearchKeyword", svo.getSearchKeyword());
+		return "qa/qa_list.tiles";
+		
 		
 	}
 	

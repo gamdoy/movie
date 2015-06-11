@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
@@ -93,4 +94,21 @@ public class QaDAOImpl implements QaDAO{
 		return session.selectList(namespace+"selectQaBySearchVO", svo);
 	}
 
+	@Override
+	public List<QaVO> selectQaBySearchVOPaging(SearchVO svo, int page) {
+		Map param = new HashMap();
+		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
+		param.put("pageNo", page);
+		param.put("searchType", svo.getSearchType());
+		param.put("searchKeyword", svo.getSearchKeyword());
+		List<QaVO> list = session.selectList(namespace+"selectQaBySearchVOPaging", param);
+		return list;
+	}
+	@Override
+	public int selectSearchQaCount(SearchVO svo) {
+		
+		return session.selectOne(namespace+"selectSearchQaCount", svo);
+	}
+	
+	
 }

@@ -36,4 +36,8 @@ public interface QaDAO {
 	public abstract int selectTotalQaCount();
 
 	List<QaVO> selectQaBySearchVO(SearchVO svo);
+
+	List<QaVO> selectQaBySearchVOPaging(SearchVO svo, int page);
+
+	int selectSearchQaCount(SearchVO svo);
 }

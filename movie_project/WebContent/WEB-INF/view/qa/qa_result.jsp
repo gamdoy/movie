@@ -22,7 +22,7 @@ function modifyUrl(){
 }
 
 function replyUrl(){
-	var 
+	//var 
 }
 
 </script>

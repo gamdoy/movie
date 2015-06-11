@@ -145,7 +145,7 @@
 	</select>
 	
 	<select id="selectQaBySearchVO"  parameterType="searchVO" resultMap="qa_list-resultmap1">
-		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password
 	  	from qa
 		<where>
 		 	<if test="searchType=='WRITER'">
@@ -157,6 +157,45 @@
 		 	order by fq_no desc
 		</where> 
 	</select>
+	
+	
+	<!-- 검색결과화면에서 페이징 -->
+	<select id="selectQaBySearchVOPaging"  parameterType="hashmap" resultMap="qa_list-resultmap1">
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password
+			from (
+			<include refid="qa-select"/>
+			
+			<if test="searchType=='WRITER'">
+		 		where mem_no = (select mem_no from member where mem_id=#{searchKeyword})
+			</if>
+			
+			<if test="searchType!=null and searchType!='WRITER'">
+		 		where ${searchType} like '%'||#{searchKeyword}||'%'
+		 	</if>
+			order by fq_no desc
+		)
+	)
+	where page = #{pageNo}
+	</select>
+	
+	 <select id="selectSearchQaCount" parameterType="searchVO" resultType="_int">
+		select count(fq_no) 
+			from (
+			<include refid="qa-select"/>
+			
+			<if test="searchType=='WRITER'">
+		 		where mem_no = (select mem_no from member where mem_id=#{searchKeyword})
+			</if>
+			
+			<if test="searchType!=null and searchType!='WRITER'">
+		 		where ${searchType} like '%'||#{searchKeyword}||'%'
+		 	</if>
+			order by fq_no desc
+		)
+	</select>
+	
 	
 </mapper>
 

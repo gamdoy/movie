@@ -101,15 +101,12 @@ public class AdminController {
 	
 	@RequestMapping("getMemberByKeyword")
 	public String getMemberByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @RequestParam("searchType") String searchType, @RequestParam("searchKeyword") String searchKeyword){
-		System.out.println("getMemberByKeyword"+searchType);
-		System.out.println("getMemberByKeyword"+searchKeyword);
+		
 		SearchVO svo = new SearchVO();
 		HashMap memberList = new HashMap();
 		AdminVO member;
 		svo.setSearchType(searchType);
-		System.out.println(searchType);
 		svo.setSearchKeyword(searchKeyword);
-		System.out.println("컨트롤러 : "+page);
 		
 		memberList = service.selectMemberBySearchVOPaging(svo, page);
 		map.addAttribute("searchedMemberMap", memberList);

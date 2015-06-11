@@ -99,5 +99,17 @@ public class QaServiceImpl implements QaService{
 		return dao.selectQaBySearchVO(svo);
 	}
 	
-	
+	@Override
+	public HashMap selectQaBySearchVOPaging(SearchVO svo, int page) {
+		List<QaVO> list = dao.selectQaBySearchVOPaging(svo, page);
+		 int totalSearchContent = dao.selectSearchQaCount(svo);
+		
+		 System.out.println("totalContent "+totalSearchContent );
+		 PagingBean pagingbean = new PagingBean(totalSearchContent, page);
+		 HashMap map = new HashMap();
+		 map.put("qa_list", list);
+		 map.put("pagingBean", pagingbean);
+		 System.out.println("서치페이징 현재페이지 : "+pagingbean.getCurrentPage());
+		 return map;
+	}
 }
