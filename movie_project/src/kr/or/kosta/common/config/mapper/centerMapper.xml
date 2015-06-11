@@ -167,11 +167,11 @@
 			from (
 			<include refid="qa-select"/>
 			
-			<if test="searchType=='WRITER'">
+			<if test="searchType=='WRITER' and searchKeyword != null and searchKeyword != ''">
 		 		where mem_no = (select mem_no from member where mem_id=#{searchKeyword})
 			</if>
 			
-			<if test="searchType!=null and searchType!='WRITER'">
+			<if test="searchType!=null and searchType!='WRITER' and searchKeyword != null and searchKeyword != ''">
 		 		where ${searchType} like '%'||#{searchKeyword}||'%'
 		 	</if>
 			order by fq_no desc
@@ -185,11 +185,11 @@
 			from (
 			<include refid="qa-select"/>
 			
-			<if test="searchType=='WRITER'">
+			<if test="searchType=='WRITER' and searchKeyword != null and searchKeyword != ''">
 		 		where mem_no = (select mem_no from member where mem_id=#{searchKeyword})
 			</if>
 			
-			<if test="searchType!=null and searchType!='WRITER'">
+			<if test="searchType!=null and searchType!='WRITER' and searchKeyword != null and searchKeyword != ''">
 		 		where ${searchType} like '%'||#{searchKeyword}||'%'
 		 	</if>
 			order by fq_no desc
