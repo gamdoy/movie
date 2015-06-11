@@ -106,12 +106,38 @@
 		select count(evt_no) from event
 	</select>
 	
+	<select id="selectTotalWinnerCount" resultType="_int">
+		select count(win_no) from winner
+	</select>
+	
 	<select id="findEventByText" parameterType="String" resultMap="event-resultmap">
 		select *
 		from event
 		where evt_title like '%'||#{text}||'%'
 		order by evt_no
 	</select>
+	
+	<!-- *******************************당첨자 게시판****************************** -->
+	
+	<select id="selectWinnerByWinNo" parameterType="_int" resultMap="winner-resultmap">
+		select 	win_no, win_regdate, win_text, win_title
+		from 	winner
+		where win_no = #{value}
+	</select>
+	
+	<delete id="deleteWinner" parameterType="_int">
+		delete  from winner 
+		where win_no=#{winNo}		
+	</delete>
+	
+	<update id="modifyWinner" parameterType="winnerVO">
+		update winner
+		set		win_title=#{winTitle},
+				win_regdate=#{winRegdate},
+				win_text=#{winText}
+					
+		where	win_no=#{winNo}	
+	</update>
 	
 	
 </mapper>
