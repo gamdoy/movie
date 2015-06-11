@@ -64,7 +64,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
-	public int updateMemberMileage(MemberVO member) {
+	public int updateMemberMileage(AdminVO member) {
 		return dao.updateMemberMileage(member);
 	}
 	

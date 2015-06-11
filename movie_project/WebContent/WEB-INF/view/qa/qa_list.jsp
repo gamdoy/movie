@@ -13,8 +13,11 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+	var searchType = $("#currentSearchType").val();
+	var searchKeyword =$("#currentSearchKeyword").val();
+	
+	
 	$("tbody tr").on("click", function(){
-		
 		var number = $(this).find(":first-child").text();
 		if($(this).find(":first-child").next().prop("class")=="secret"){
 			var password = prompt('비밀번호를 입력하세요',"");
@@ -26,7 +29,13 @@ $(document).ready(function(){
 		}
 		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
 	})
-});
+	
+	 $(".PageBtn").on("click", function(){
+			var label = $(this).text();
+			location.href="<%=request.getContextPath() %>/qa/qa.do?page="+label+"&searchType="+searchType+"&searchKeyword="+searchKeyword;
+		});
+}); 
+
 </script>
 
 <script type="text/javascript">
@@ -59,13 +68,15 @@ $(document).ready(function(){
    
     </head>
        <!-- 검색 폼 영역 -->
-       <form name="searchForm" method="post" id="searchForm" action="<%=request.getContextPath() %>/qa/getQaByKeyword.do">
+       <form name="searchForm" method="post" id="searchForm" action="<%=request.getContextPath() %>/qa/qa.do">
        <p>
            <select name="searchType" id="searchType">
             	  <option value="qa_title">제목</option>
               	 <option value="WRITER">작성자</option>
                  <option value="qa_text">내용</option>
            </select>
+           <input type="hidden" id="currentSearchType" value=${currentSearchType }>
+			<input type="hidden" id="currentSearchKeyword" value=${currentSearchKeyword }>
            <input type="text" name="searchKeyword" id="searchKeyword">
            <input type="submit" id="QaSearch" value="검색">
        </p>
@@ -144,13 +155,17 @@ $(document).ready(function(){
 		</c:when>
 
 		<c:otherwise>
-
+		
+		<label class="PageBtn" name="${pageNum}" value="${pageNum}">
+			${pageNum}
+		</label>
+<!-- 
 			<a  href="<%=request.getContextPath() %>/qa/qa.do?page=${pageNum}">
 
 				<font color="black">${pageNum}</font>
 
 			</a>
-
+ -->
 		</c:otherwise>
 
 	</c:choose>
