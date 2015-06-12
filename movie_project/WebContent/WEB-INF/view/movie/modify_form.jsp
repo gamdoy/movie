@@ -226,7 +226,8 @@ function submitCheck() {
 				<!-- 트레일러 -->
 				<td>트레일러</td>
 				<td><input type="text" name="trailer" id="trailer"
-					 value="${requestScope.movie.trailer }"></td>
+					 value="${requestScope.movie.trailer }"><br>
+					 <iframe width="560" height="315" src="${requestScope.movie.trailer }" frameborder="0" allowfullscreen></iframe></td>
 			</tr>
 
 			<tr>

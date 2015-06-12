@@ -190,7 +190,7 @@ table {
 				</select></td>
 				<!-- 포스터 -->
 				<td>포스터</td>
-				<td><input type="file" name="poster" ></td>
+				<td ><input type="file" name="poster"></td>
 			</tr>
 
 			<tr>
@@ -209,7 +209,7 @@ table {
 				<td><input type="text" name="intheaters" onClick="datePicker(event,'intheaters')" readonly="readonly"> </td>
 				<!-- 상영시간 -->
 				<td>상영시간</td>
-				<td><input type="number" name="runtime"></td>
+				<td><input type="number" name="runtime" style="width:15%;">분</td>
 			</tr>
 
 			<tr>
