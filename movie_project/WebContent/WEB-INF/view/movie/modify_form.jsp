@@ -148,7 +148,6 @@ function submitCheck() {
 				<td colspan="3"><textarea name="sysnopsis"
 						style="resize: none; wrap: hard;" rows="12" cols="70">${requestScope.movie.sysnopsis }</textarea></td>
 			</tr>
-
 			<tr>
 				<!-- 상영등급 -->
 				<td>상영등급</td>
@@ -227,7 +226,7 @@ function submitCheck() {
 				<td>트레일러</td>
 				<td><input type="text" name="trailer" id="trailer"
 					 value="${requestScope.movie.trailer }"><br>
-					 <iframe width="560" height="315" src="${requestScope.movie.trailer }" frameborder="0" allowfullscreen></iframe></td>
+					<%--  <iframe width="560" height="315" src="${requestScope.movie.trailer }" frameborder="0" allowfullscreen></iframe> --%></td>
 			</tr>
 
 			<tr>
