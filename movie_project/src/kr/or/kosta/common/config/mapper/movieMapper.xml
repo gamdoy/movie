@@ -78,6 +78,12 @@
        		  and m.mov_no= ${value}
 	</select>
 	
+	<!-- 전체 영화조회-->
+	<select id="selectMovieList" resultMap="movie-resultmap">
+        <include refid="movie-select"/>
+        order by mov_no
+	</select>
+	
 	<!-- 전체 영화조회 -paging 추가 -->
 	<select id="allMovie" parameterType="map" resultMap="movie-resultmap">
 		    select

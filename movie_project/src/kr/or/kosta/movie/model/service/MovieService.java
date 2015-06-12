@@ -21,6 +21,9 @@ public interface MovieService {
 	public abstract Map allMovieList(int pageNo, SearchVO vo);
 	//모든영화 카운트
 	public abstract int totalCount(SearchVO vo);
+	//모든영화 조회
+	public abstract List<MovieVO> selectMovieList();
+	
 	
 	//개별table 감독 조회
 	public abstract List<DirectorVO> getDirector();

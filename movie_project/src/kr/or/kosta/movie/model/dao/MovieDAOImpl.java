@@ -51,6 +51,10 @@ public class MovieDAOImpl implements MovieDAO {
 		return session.selectList(namespace+"allMovie",param);
 	}
 	 
+	@Override
+	public List<MovieVO> selectMovieList() {
+		return session.selectList(namespace + "selectMovieList");
+	}
 	//모든영화 카운트
 	@Override
 	public int totalCount(SearchVO vo) {

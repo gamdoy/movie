@@ -28,6 +28,8 @@ public interface MovieDAO {
 	public abstract List<ActorVO> getActor();
 	//개별table 제작사 조회
 	public abstract List<ProductionVO> getProduction();
+	//모든영화 조회
+	public abstract List<MovieVO> selectMovieList();
 	
 	
 
