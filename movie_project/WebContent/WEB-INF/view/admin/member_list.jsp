@@ -18,26 +18,17 @@ table#listTB thead tr{
 	font-weight: bold;
 	background: lightgray;
 }
+
+table#listTB td{
+	width:100px;
+}
 </style>
 
 <form method="post" id="f_coupon" action="<%=request.getContextPath() %>/admin/getMemberByKeyword.do">
-	<div style="width:700px;" align="center">     
-			<h2>회원목록</h2>
-	</div>    
-	<div style="width:700px;" align="right">     
-		<select id="searchType" name="searchType">
-			<option value="MEM_ID">ID</option>
-			<option value="MEM_NAME">이름</option>
-			<option value="MEM_MEMBERTYPE">등급</option>
-			<option value="MEM_PHONENO">전화번호</option>
-		</select>
-		
-		<input type="text" id="searchKeyword" name="searchKeyword">
-		<input type="submit" id="memSearch" value="검색">
-	</div> <p>
-	
 
-	<table id="listTB" style="width:700px">
+	<h2 align="center">회원목록</h2>
+
+	<table id="listTB" style="width:800px" align="center">
 		<thead>
 			<tr>
 				<td hidden="hidden">회원번호</td>
@@ -66,42 +57,55 @@ table#listTB thead tr{
 				</tr> 
 			</c:forEach>
 		</tbody>
-	</table>
-	<p/>
 	
-	<div style="width:700px;" align="center">  
-		<c:choose>
-			<c:when test="${memberMap.pagingBean.previousPageGroup }">
-				<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${memberMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
-			</c:when>
-			<c:otherwise>
-				◀
-			</c:otherwise>
-		</c:choose>	
+		<tfoot>
+		<tr>
+			<td colspan="5" align="center">
+				<c:choose>
+					<c:when test="${memberMap.pagingBean.previousPageGroup }">
+						<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${memberMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
+					</c:when>
+					<c:otherwise>
+						◀
+					</c:otherwise>
+				</c:choose>	
 
-<!-- 페이지 번호 -->
-		<c:forEach begin="${memberMap.pagingBean.startPageOfPageGroup }" end="${memberMap.pagingBean.endPageOfPageGroup}" var="pageNum">
-			<c:choose>
-				<c:when test="${pageNum == memberMap.pagingBean.currentPage }">
-					<b><i>${pageNum}</i></b>
-				</c:when>
-				<c:otherwise>
-					<a  href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${pageNum}">
-						<font color="black">${pageNum}</font>
-					</a>
-				</c:otherwise>
-			</c:choose>
-			&nbsp;&nbsp;
-		</c:forEach>
-		<!-- 다음 페이지 그룹 -->
-		<c:choose>
-			<c:when test="${memberMap.pagingBean.nextPageGroup }">
-				<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${memberMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
-			</c:when>
-			<c:otherwise>
-				▶
-			</c:otherwise>
-		</c:choose>	
-	</div>
-	
+		<!-- 페이지 번호 -->
+				<c:forEach begin="${memberMap.pagingBean.startPageOfPageGroup }" end="${memberMap.pagingBean.endPageOfPageGroup}" var="pageNum">
+					<c:choose>
+						<c:when test="${pageNum == memberMap.pagingBean.currentPage }">
+							<b><i>${pageNum}</i></b>
+						</c:when>
+						<c:otherwise>
+							<a  href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${pageNum}">
+								<font color="black">${pageNum}</font>
+							</a>
+						</c:otherwise>
+					</c:choose>
+					&nbsp;&nbsp;
+				</c:forEach>
+				<!-- 다음 페이지 그룹 -->
+				<c:choose>
+					<c:when test="${memberMap.pagingBean.nextPageGroup }">
+						<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do?page=${memberMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
+					</c:when>
+					<c:otherwise>
+						▶
+					</c:otherwise>
+				</c:choose>	
+			</td>
+			<td colspan="3" align="center">     
+				<select id="searchType" name="searchType">
+					<option value="MEM_ID">ID</option>
+					<option value="MEM_NAME">이름</option>
+					<option value="MEM_MEMBERTYPE">등급</option>
+					<option value="MEM_PHONENO">전화번호</option>
+				</select>
+			
+				<input type="text" id="searchKeyword" name="searchKeyword">
+				<input type="submit" id="memSearch" value="검색">
+			</td>
+		</tr>
+		</tfoot>
+	</table><p>
 </form>
