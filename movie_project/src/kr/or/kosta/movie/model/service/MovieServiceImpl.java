@@ -45,6 +45,11 @@ public class MovieServiceImpl implements MovieService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
+	//모든영화 조회
+	@Override
+	public List<MovieVO> selectMovieList() {
+		return dao.selectMovieList();
+	}
 	@Override
 	public int totalCount(SearchVO vo) {
 		return dao.totalCount(vo);
