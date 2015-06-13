@@ -9,6 +9,9 @@ public interface MemberDAO {
 	//id로 회원정보 조회하여 return
 	public abstract MemberVO selectMemberById(String id);
 	
+	//이름으로 회원정보 조회하여 return
+	public abstract MemberVO selectMemberByname(MemberVO membervo);
+	
 	//회원정보 db에 insert
 	public abstract int insertMember(MemberVO membervo);
 	
