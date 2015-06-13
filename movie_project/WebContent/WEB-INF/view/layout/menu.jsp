@@ -159,8 +159,8 @@
 			<td><input type="button" name="admin" id="admin" value="관리자모드"></td>
 			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
 		</tr>
-</form>		
 </table>
+</form>		
 
 </c:when>
 </c:choose>

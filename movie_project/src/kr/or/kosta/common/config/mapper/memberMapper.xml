@@ -37,8 +37,7 @@
  		<id column="zip_address" property="zipAddress"/>
  		<id column="mem_membertype" property="memMemberType"/>
  		<id column="mem_joindate" property="memJoinDate"/>
- 		<id column="mem_lastlogin" property="memLastLogin"/>
- 			
+ 		<id column="mem_lastlogin" property="memLastLogin"/>	
  	</resultMap>
  	
  	<insert id="insertMember" parameterType="memberVO">
@@ -79,9 +78,14 @@
  		<include refid="member-select"/>
  		and mem_id=#{memId}
  	</select>
+
  	<select id="selectMemberByName" parameterType="memberVO" resultMap="member-resultmap">
  		<include refid="member-select"/>
  		and mem_name=#{memName} and mem_phoneno=#{memPhoneNo} and mem_birthdate=#{memBirthDate}
  	</select>
  	
+ 	<select id="selectMemberByNo" parameterType="_int" resultMap="member-resultmap">
+ 		<include refid="member-select"/>
+ 		where mem_no=#{memNo}
+ 	</select>
 </mapper>

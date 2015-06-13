@@ -2,7 +2,7 @@ package kr.or.kosta.coupon.vo;
 
 public class CouponVO {
 	private int coupNo;
-	private int MemNo;
+	private int memNo;
 	private String coupType;
 	private String coupUsed;
 	private String coupTypeName;
@@ -11,17 +11,21 @@ public class CouponVO {
 	public CouponVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public CouponVO(int coupNo, int memNo, String coupType, String coupUsed,
 			String coupTypeName, String coupUsedValue, String coupUsedDate) {
 		super();
 		this.coupNo = coupNo;
-		MemNo = memNo;
+		this.memNo = memNo;
 		this.coupType = coupType;
 		this.coupUsed = coupUsed;
 		this.coupTypeName = coupTypeName;
 		this.coupUsedValue = coupUsedValue;
 		this.coupUsedDate = coupUsedDate;
 	}
+
+
 	public int getCoupNo() {
 		return coupNo;
 	}
@@ -29,10 +33,10 @@ public class CouponVO {
 		this.coupNo = coupNo;
 	}
 	public int getMemNo() {
-		return MemNo;
+		return memNo;
 	}
 	public void setMemNo(int memNo) {
-		MemNo = memNo;
+		this.memNo = memNo;
 	}
 	public String getCoupType() {
 		return coupType;
@@ -68,7 +72,6 @@ public class CouponVO {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + MemNo;
 		result = prime * result + coupNo;
 		result = prime * result
 				+ ((coupType == null) ? 0 : coupType.hashCode());
@@ -80,6 +83,7 @@ public class CouponVO {
 				+ ((coupUsedDate == null) ? 0 : coupUsedDate.hashCode());
 		result = prime * result
 				+ ((coupUsedValue == null) ? 0 : coupUsedValue.hashCode());
+		result = prime * result + memNo;
 		return result;
 	}
 	@Override
@@ -91,8 +95,6 @@ public class CouponVO {
 		if (getClass() != obj.getClass())
 			return false;
 		CouponVO other = (CouponVO) obj;
-		if (MemNo != other.MemNo)
-			return false;
 		if (coupNo != other.coupNo)
 			return false;
 		if (coupType == null) {
@@ -120,15 +122,17 @@ public class CouponVO {
 				return false;
 		} else if (!coupUsedValue.equals(other.coupUsedValue))
 			return false;
+		if (memNo != other.memNo)
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "CouponVO [coupNo=" + coupNo + ", MemNo=" + MemNo
+		return "CouponVO [coupNo=" + coupNo + ", memNo=" + memNo
 				+ ", coupType=" + coupType + ", coupUsed=" + coupUsed
 				+ ", coupTypeName=" + coupTypeName + ", coupUsedValue="
 				+ coupUsedValue + ", coupUsedDate=" + coupUsedDate + "]";
 	}
 }
 	
-	
+		

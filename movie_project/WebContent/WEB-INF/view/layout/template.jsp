@@ -59,7 +59,7 @@ nav.template{
 	vertical-align:middle;
 	height:200px;
 	line-height:50px;
-	background-color:blue;
+	background-color:gray;
 	color:white;
 	font-weight:bold;
 	text-align:center;
