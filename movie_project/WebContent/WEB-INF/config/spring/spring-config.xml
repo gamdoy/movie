@@ -29,6 +29,7 @@
 	<context:component-scan base-package="kr.or.kosta.qa.model"/>
 	<context:component-scan base-package="kr.or.kosta.stats.model"/>
 	<context:component-scan base-package="kr.or.kosta.admin.model"/>
+	<context:component-scan base-package="kr.or.kosta.files.view"/>
 	<mvc:annotation-driven/>
 	<mvc:interceptors>
 		<mvc:interceptor>
@@ -43,6 +44,8 @@
 	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
 	<mvc:view-controller path="/member/zipcodeForMember.do" view-name="/WEB-INF/view/member/zipcodeForMember.jsp"/>
 	<mvc:view-controller path="/member/join_success.do" view-name="member/join_success.tiles"/>
+	<mvc:view-controller path="/member/membersearch.do" view-name="member/memberSearch.tiles"/>
+	<mvc:view-controller path="/member/idSearch.do" view-name="member/idSearch.tiles"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -52,6 +55,9 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- DownloadView 등록 -->
+	<bean name="downloadView" class="kr.or.kosta.files.view.DownloadView"/>
 	
 	<!-- file upload 처리 multipartResolver 등록 -->
 	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
