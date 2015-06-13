@@ -184,9 +184,10 @@ public class TheaterDAOImpl implements TheaterDAO {
 		return session.selectList(namespace + "selectTicketList");
 	}
 
+	//상영관의 예매된 좌석을 조회
 	@Override
-	public List<String> selectReservedSeats(TicketVO tvo) {
-		return session.selectList(namespace + "selectReservedSeats", tvo);
+	public List<String> selectReservedSeats(int schNo) {
+		return session.selectList(namespace + "selectReservedSeats", schNo);
 	}
 
 }

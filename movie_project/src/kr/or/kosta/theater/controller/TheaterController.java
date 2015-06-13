@@ -1,5 +1,6 @@
 package kr.or.kosta.theater.controller;
 
+import java.lang.reflect.Member;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -7,10 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
+import kr.or.kosta.member.vo.MemberVO;
 import kr.or.kosta.movie.model.service.MovieService;
 import kr.or.kosta.movie.model.service.MovieServiceImpl;
 import kr.or.kosta.movieroom.vo.MovieroomVO;
@@ -111,24 +114,24 @@ public class TheaterController {
 		return list;
 	}
 	
-	@RequestMapping("reserveForm")
-	public String reserveForm(@ModelAttribute ScheduleVO vo, ModelMap map) {
+	@RequestMapping("login/reserveForm")
+	public String reserveForm(@ModelAttribute ScheduleVO vo, ModelMap map, HttpSession session) {
 		TicketVO tvo = new TicketVO();
-		tvo.setMemNo(2);
-		tvo.setSchNo(vo.getSchNo());
-		map.addAttribute("movieRoom", theaterService.getMovieRoomByNo(vo.getSchNo()));
-		map.addAttribute("payTypeList", commonCodeService.getCodeList("108"));
-		map.addAttribute("memInfo", tvo);
-		JSONArray list = new JSONArray((Collection)theaterService.getReservedSeats(tvo));
+		map.addAttribute("movieRoom", theaterService.getMovieRoomByNo(vo.getSchNo()));//상영관 정보를 가져오는 메소드
+		map.addAttribute("payTypeList", commonCodeService.getCodeList("108"));//결제방식을 가져오는 메소드
+		JSONArray list = new JSONArray((Collection)theaterService.getReservedSeats(vo.getSchNo()));//예매된 좌석 정보를 가져오는 메소드
 		map.addAttribute("reservedSeatList", list);
 		return "ticket/reserveForm.tiles";
 	}
 	
 	@RequestMapping("reserve")
 	@ResponseBody
-	public Map<String, String> reserve(@ModelAttribute TicketVO vo) throws Exception {
+	public Map<String, String> reserve(@ModelAttribute TicketVO vo, HttpSession session) throws Exception {
+		MemberVO member = (MemberVO) session.getAttribute("login_info");
 		String seats = "";
 		Map<String, String> map = new HashMap<String, String>();
+		
+		//예매 좌석을 문자열로 만들어서 입력한다.
 		for (int seat = 0; seat < vo.getTicTotalcustomer(); seat++) {
 			String seatNo = "|" + vo.getMrLine() + "-" + (vo.getMrSeat() + seat);
 			vo.setTicSeatno(seatNo);
@@ -141,10 +144,10 @@ public class TheaterController {
 		}
 		
 		seats += "|";
-		vo.setMemNo(2);//회원 정보 고정
+		vo.setMemNo(member.getMemNo());//회원 정보 고정
 		vo.setTicStatus("112100");//결제완료 고정
-		vo.setTicPrice(8000);
-		vo.setTicSeatno(seats);
+		vo.setTicPrice(8000);//가격 고정
+		vo.setTicSeatno(seats);//
 		
 		theaterService.registTicket(vo);
 		map.put("url", "/theater/reserveSuccess.do");

@@ -177,9 +177,10 @@ public class TheaterServiceImpl implements TheaterService {
 		return dao.selectTicket(schNo);
 	}
 
+	//상영관의 예매된 좌석을 조회
 	@Override
-	public List<String> getReservedSeats(TicketVO tvo) {
-		return dao.selectReservedSeats(tvo);
+	public List<String> getReservedSeats(int schNo) {
+		return dao.selectReservedSeats(schNo);
 	}
 
 	@Override

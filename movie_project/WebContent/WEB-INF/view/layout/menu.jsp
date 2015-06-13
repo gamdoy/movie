@@ -5,14 +5,15 @@
 	a:hover	{text-decoration:underline; color: white;}/*링크에 마우스 올라갔을 때*/
 	a:active	{text-decoration:none; color: white;}/*링크 클릭시*/
 	a:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
-	.loginArea{background-color: gray; height: 30px;width: 300px; float:right;}
-	.menu {height: 160px;width: 980px; float:left;}/*메뉴영역*/
-	.main_menu {background-color: black; height: 80px;width: 980px;}/*메뉴영역*/
-	.myinfo_menu {height: 80px;width: 980px; display: none;}
-	.movie_menu {height: 80px;width: 980px; display: none;}
-	.event_menu {height: 80px;width: 980px; display: none;}
-	.customer_menu {height: 80px;width: 980px; display: none;}
-	.admin_menu {height: 80px;width: 980px; display: none;}
+	.loginArea{background-color: gray; height: 195px;width: 300px; float:right;}
+	.loginArea tr{height: 65px;}
+	.menu {height: 195px;width: 880px; float:left;}/*메뉴영역*/
+	.main_menu {background-color: black; height: 100px;width: 880px;}/*메뉴영역*/
+	.myinfo_menu {height: 95px;width: 880px; display: none;}
+	.movie_menu {height: 95px;width: 880px; display: none;}
+	.event_menu {height: 95px;width: 880px; display: none;}
+	.customer_menu {height: 95px;width: 880px; display: none;}
+	.admin_menu {height: 95px;width: 880px; display: none;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -76,8 +77,10 @@
 	}
 	
 </script>
-<section class="menu"><!-- 메뉴영역 -->
+<section style="float: left; width: 1180px; height: 80px;">
 	<iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/main@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
+</section>
+<section class="menu"><!-- 메뉴영역 -->
 	<section class="main_menu"><!-- 메인 메뉴영역 -->
 		<img src="<%=request.getContextPath()%>/upload/아이콘.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -125,7 +128,7 @@
 <c:choose>
 	<c:when test="${sessionScope.login_info == null}">
 <form action="<%=request.getContextPath() %>/member/login.do" method="post" >
-	<table style=" width: 300px;">
+	<table style=" width: 300px; height: 180px">
 		<tr>
 			<td>아이디</td>
 			<td><input type="text" name="id" size="5" placeholder="ID" onclick="id" autofocus="autofocus"></td>

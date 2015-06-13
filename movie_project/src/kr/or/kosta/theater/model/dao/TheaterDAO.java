@@ -39,7 +39,8 @@ public interface TheaterDAO {
 
 	public abstract List<TicketVO> selectTicket(int schNo);
 
-	public abstract List<String> selectReservedSeats(TicketVO tvo);
+	//상영관의 예매된 좌석을 조회
+	public abstract List<String> selectReservedSeats(int schNO);
 
 	public abstract TicketVO selectTicketByNo(int ticNo);
 

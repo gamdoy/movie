@@ -361,13 +361,11 @@
 	</select>
 	
 	<!-- 예매된 좌석 정보를 조회 -->
-	<select id="selectReservedSeats" parameterType="ticketVO" resultType="String">
+	<select id="selectReservedSeats" parameterType="_int" resultType="String">
 		select tic_seatno 
 		from ticket t
 		where 1=1
-			<if test="schNo != 0">
-				and sch_no=#{schNo}
-			</if>
+			and sch_no=#{value}
 	</select>
 	
 	<!-- 극장별 상영관 조회 -->

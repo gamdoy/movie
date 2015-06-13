@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 .theaArea1 {background-color: red; height: 800px; width: 300px; float: left;} 
-.theaArea2{background-color: red; height: 800px; width: 600px; float: left;}
+.theaArea2{background-color: red; height: 800px; width: 560px; float: left;}
 .theaArea3{background-color: red; height: 800px; width: 300px; float: left;}
-.posterArea {background-color: blue; height: 500px; width: 600px;float: left;} 
-.dateArea {background-color: gray; height: 300px; width: 300px; float: left;} 
-.movieArea {background-color: green; height: 300px; width: 300px; float: left;}
+.posterArea {background-color: blue; height: 500px; width: 560px;float: left;} 
+.dateArea {background-color: gray; height: 300px; width: 280px; float: left;} 
+.movieArea {background-color: green; height: 300px; width: 280px; float: left;}
 .scheduleArea {background-color: white; height: 700px; width: 300px;}
 .submitArea {background-color: white; height: 100px; width: 300px; display: none;}
 .screenTime {overflow : auto; height: 30px;} 
@@ -111,7 +111,7 @@
 		$(".submitArea").hide();
 	}
 </script>
-<form method="post" id="theaFrm" action="<%= request.getContextPath()%>\theater\reserveForm.do">
+<form method="post" id="theaFrm" action="<%= request.getContextPath()%>\theater\login\reserveForm.do">
 	<input type="hidden" name="theaNo" id="theaNo">
 	<input type="hidden" name="schDate" id="schDate">
 	<input type="hidden" name="schNo" id="schNo">

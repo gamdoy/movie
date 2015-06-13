@@ -30,7 +30,8 @@ public interface TheaterService {
 
 	public List<TicketVO> getReservedSeat(int schNo);
 
-	public List<String> getReservedSeats(TicketVO tvo);
+	//상영관의 예매된 좌석을 조회
+	public List<String> getReservedSeats(int schNo);
 
 	public TicketVO getTicketByNo(int ticNo);
 
