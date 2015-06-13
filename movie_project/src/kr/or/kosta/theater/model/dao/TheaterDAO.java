@@ -2,7 +2,9 @@ package kr.or.kosta.theater.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import kr.or.kosta.movieroom.vo.MovieroomVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.vo.TheaterVO;
 import kr.or.kosta.ticket.vo.TicketVO;
@@ -52,4 +54,18 @@ public interface TheaterDAO {
 	public abstract int selectTotalTicketCount(HashMap map);
 
 	public abstract int updateTicketByNo(TicketVO vo);
+
+	public abstract List<MovieroomVO> selectMovieRoomListByNo(int theaNo);
+
+	public abstract int insertMoovieroom(int theaNo, int count);
+
+	public abstract int updateMovieroomByNo(MovieroomVO vo);
+
+	public abstract int insertSchedule(ScheduleVO vo);
+
+	public abstract int selectScheduleCount(MovieroomVO vo);
+
+	public abstract List<ScheduleVO> selectScheduleListByDate(Map map);
+
+	public abstract int selectTotalScheduleListByDateCount(HashMap map);
 }

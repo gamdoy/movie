@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.kosta.common.vo.SearchVO;
+import kr.or.kosta.movieroom.vo.MovieroomVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.vo.TheaterVO;
 import kr.or.kosta.ticket.vo.TicketVO;
@@ -19,7 +20,7 @@ public interface TheaterService {
 
 	public List<ScheduleVO> getScheduleListByNo(int theaNo);
 
-	public List<ScheduleVO> getScheduleList(int theaNo);
+	public List<ScheduleVO> getScheduleListBytheaNo(int theaNo);
 
 	public List<ScheduleVO> getScreenTimeList(ScheduleVO vo);
 
@@ -41,5 +42,15 @@ public interface TheaterService {
 
 	public List getTicketListPaging(int page, SearchVO vo);
 
-	public int modibyTicketByNo(TicketVO vo);
+	public int modifyTicketByNo(TicketVO vo);
+
+	public List<MovieroomVO> getMovieRoomListByNo(int theaNo);
+
+	public int modifyMovieroomByNo(MovieroomVO vo);
+
+	public int addSchedule(ScheduleVO vo);
+
+	public int getScheduleCount(MovieroomVO vo);
+
+	public List getScheduleListByDate(ScheduleVO vo, SearchVO searchVo, int page);
 }

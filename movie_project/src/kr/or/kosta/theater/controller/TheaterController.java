@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
+import kr.or.kosta.movie.model.service.MovieService;
+import kr.or.kosta.movie.model.service.MovieServiceImpl;
+import kr.or.kosta.movieroom.vo.MovieroomVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.model.service.TheaterService;
 import kr.or.kosta.theater.vo.TheaterVO;
@@ -35,6 +38,9 @@ public class TheaterController {
 	
 	@Autowired
 	private CommonCodeService commonCodeService;
+	
+	@Autowired
+	private MovieService movieService;
 	
 
 	@RequestMapping("test")
@@ -92,7 +98,7 @@ public class TheaterController {
 	@RequestMapping("getScheduleList")
 	@ResponseBody
 	public List<ScheduleVO> getScheduleList(@ModelAttribute TheaterVO vo) {
-		return theaterService.getScheduleList(vo.getTheaNo());
+		return theaterService.getScheduleListBytheaNo(vo.getTheaNo());
 	}
 	
 	@RequestMapping("getScreenTimeList")
@@ -154,15 +160,18 @@ public class TheaterController {
 	
 	@RequestMapping("ticketList")
 	public String ticketList(@RequestParam(defaultValue="1")int page, @ModelAttribute SearchVO vo, ModelMap map) {
+		String tempSearchKeyword = vo.getSearchKeyword();
 		if(vo.getSearchType() != null && (vo.getSearchType().equals("tic_paytype") || vo.getSearchType().equals("tic_status"))){
 			vo.setSearchKeyword(commonCodeService.getCommonNo(vo.getSearchKeyword()));
 		}
 		List list = theaterService.getTicketListPaging(page, vo);
+		List ticStatusList = commonCodeService.getCodeList("112");
 		
+		vo.setSearchKeyword(tempSearchKeyword);
 		map.addAttribute("pagingBean", list.get(0));
 		map.addAttribute("ticketList", list.get(1));
 		map.addAttribute("searchVO", vo);
-		map.addAttribute("ticStatusList", commonCodeService.getCodeList("112"));
+		map.addAttribute("ticStatusList", ticStatusList);
 		
 		return "ticket/ticketList.tiles";
 	}
@@ -170,7 +179,52 @@ public class TheaterController {
 	@RequestMapping("modifyTicketByNo")
 	@ResponseBody
 	public Boolean modifyTicketByNo(@ModelAttribute TicketVO vo) {
-		int count = theaterService.modibyTicketByNo(vo);
+		int count = theaterService.modifyTicketByNo(vo);
 		return count == 1;
+	}
+	
+	@RequestMapping("modifyMovieroomForm")
+	public String modifyMovieroomForm(@RequestParam int theaNo, ModelMap map) {
+		List<MovieroomVO> list = theaterService.getMovieRoomListByNo(theaNo);
+		List<CommonCodeVO> codeList = commonCodeService.getCodeList("109");
+		map.addAttribute("movieroomList", list);
+		map.addAttribute("codeList", codeList);
+		map.addAttribute("theaNo", theaNo);
+		return "theater/modifyMovieroom.tiles";
+	}
+	
+	@RequestMapping("setScheduleForm")
+	public String setScheduleForm(@ModelAttribute ScheduleVO vo, SearchVO searchVO, @RequestParam(defaultValue="1")int page, ModelMap map) {
+		map.addAttribute("searchVO", searchVO);
+		map.addAttribute("mrNo", vo.getMrNo());
+		map.addAttribute("theaNo", vo.getTheaNo());
+		map.addAttribute("movNo", vo.getMovNo());
+		map.addAttribute("movieList", movieService.selectMovieList());
+		List list = theaterService.getScheduleListByDate(vo, searchVO, page);
+		System.out.println(searchVO);
+		System.out.println(list);
+		map.addAttribute("pagingBean", list.get(0));
+		map.addAttribute("scheduleList", list.get(1));
+		return "schedule/schduleList.tiles";
+	}
+	
+	@RequestMapping("setSchedule")
+	@ResponseBody
+	public String setSchedule(@ModelAttribute ScheduleVO vo, ModelMap map) {
+		int count = theaterService.addSchedule(vo);
+		map.addAttribute("mrNo", vo.getMrNo());
+		return count == 5 ? "1" : "0";
+	}
+	
+	@RequestMapping("modifyMovieroom")
+	@ResponseBody
+	public int modifyMovieroom(@ModelAttribute MovieroomVO vo) {
+		return theaterService.modifyMovieroomByNo(vo);
+	}
+	
+	@RequestMapping("getScheduleCount")
+	@ResponseBody
+	public int getScheduleCount(@ModelAttribute MovieroomVO vo) {
+		return theaterService.getScheduleCount(vo);
 	}
 }
