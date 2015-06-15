@@ -71,14 +71,18 @@ public class MemberController {
 	@RequestMapping("idSearch")
 	public String idSearch(@ModelAttribute MemberVO vo,HttpSession session,ModelMap map)throws Exception{
 		MemberVO m = service.getMemberByname(vo);
-		System.out.println("vo : " + vo);
-		System.out.println("m" + m);
 		map.addAttribute("member_info",m);
 		List<CommonCodeVO> telList = service2.getCodeList("101");
 		map.addAttribute("telList",telList);
-		return "/WEB-INF/view/member/idSearch.jsp";
-		
+		return "/WEB-INF/view/member/idSearch.jsp";	
 	}
+	@RequestMapping("pwSearch")
+	public String pwSearch(@ModelAttribute MemberVO vo,ModelMap map)throws Exception{
+		MemberVO m = service.getMemberPassword(vo);
+		map.addAttribute("member_info",m);
+		return "/WEB-INF/view/member/pwSearch.jsp";
+	}
+	
 	
 	@RequestMapping("logout")
 	public String logout(HttpSession session,HttpServletResponse response){
@@ -114,11 +118,15 @@ public class MemberController {
 		map.addAttribute("telList",telList);
 		return "member/modify_form.tiles";
 	}
-	@RequestMapping("search_form")
+	@RequestMapping("idsearch_form")
 	public String searchMember(HttpSession session,ModelMap map)throws Exception{
 		List<CommonCodeVO> telList = service2.getCodeList("101");
 		map.addAttribute("telList",telList);
 		return "/WEB-INF/view/member/idSearch.jsp";
+	}
+	@RequestMapping("pwsearch_form")
+	public String pwsearchMember()throws Exception{
+		return "/WEB-INF/view/member/pwSearch.jsp";
 	}
 	@RequestMapping("idDuplicateCheck")
 	@ResponseBody

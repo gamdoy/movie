@@ -15,6 +15,9 @@ public interface MemberDAO {
 	//회원정보 db에 insert
 	public abstract int insertMember(MemberVO membervo);
 	
+	//회원아이디로 비밀번호조회
+	public abstract MemberVO selectMemberPassword(MemberVO membervo);
+	
 	//회원정보 수정 
 	public abstract int updateMember(MemberVO membervo);
 	

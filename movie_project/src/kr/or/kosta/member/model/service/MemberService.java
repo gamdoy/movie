@@ -22,6 +22,9 @@ public interface MemberService {
 	//회원이름으로 조회
 	public abstract MemberVO getMemberByname(MemberVO membervo);
 	
+	//회원id로 비밀번호 조회
+	public abstract MemberVO getMemberPassword(MemberVO membervo);
+	
 	//회원번호로 조회
 	public abstract MemberVO getMemberByNo(int memNo);
 	
