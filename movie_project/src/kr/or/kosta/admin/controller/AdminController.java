@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import kr.or.kosta.admin.model.service.AdminService;
 import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.common.vo.PagingBean;
@@ -20,6 +23,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.SessionScope;
 
 @Controller
 @RequestMapping("/admin/")
@@ -42,6 +46,27 @@ public class AdminController {
 		return "admin/member_list.tiles";
 	}
 	*/
+	
+	@RequestMapping("myinfo")
+	public String myInfo(HttpSession session, ModelMap map){
+		MemberVO member = (MemberVO) session.getAttribute("login_info");
+		int memberNum = member.getMemNo();
+		AdminVO avo = service.selectMemberByNo(memberNum);
+		
+		List<CouponVO> couponlist= service.selectCouponByMemberNo(memberNum);
+		map.addAttribute("member_info", avo);
+		map.addAttribute("coupon_list", couponlist);
+		
+		
+		MemberVO login_member = (MemberVO) session.getAttribute("login_info");
+		//관리자일경우
+		if(login_member.getMemMemberType().equals("102300")){
+			return "admin/member_info.tiles";
+		}
+		else{		//관리자가 아닐경우
+			return "admin/my_info.tiles";
+		}
+	}
 	@RequestMapping("member_list_Paging")
 	public String memberListPaging(@RequestParam(defaultValue="1")int page,ModelMap map){
 		Map memberMap = service.getMemberList(page);
@@ -52,7 +77,7 @@ public class AdminController {
 	
 	//멤버 No 로 쿠폰리스트 출력
 	@RequestMapping("getMemberByNo")
-	public String getMemberByNo(ModelMap map,@RequestParam("memNo") int number){
+	public String getMemberByNo(HttpSession session, ModelMap map,@RequestParam("memNo") int number){
 		AdminVO member = service.selectMemberByNo(number);
 		System.out.println("회원번호 : "+number);
 		System.out.println("회원정보 : "+member);
@@ -61,7 +86,15 @@ public class AdminController {
 		map.addAttribute("member_info", member);
 		map.addAttribute("coupon_list", couponlist);
 		System.out.println("쿠폰리스트 : "+couponlist);
-		return "admin/member_info.tiles";
+		
+		MemberVO login_member = (MemberVO) session.getAttribute("login_info");
+		//관리자일경우
+		if(login_member.getMemMemberType().equals("102300")){
+			return "admin/member_info.tiles";
+		}
+		else{		//관리자가 아닐경우
+			return "admin/my_info.tiles";
+		}
 	}
 	
 	@RequestMapping("issueCouponById")
@@ -71,7 +104,7 @@ public class AdminController {
 		String couponType = vo.getCoupType();
 		int memNo = aVo.getMemNo();
 		int memMil = aVo.getMemberMileage();
-		
+		System.out.println("뺄 마일리지 : "+memMil);
 		AdminVO member = service.selectMemberByNo(memNo);
 		System.out.println("issueCouponById 멤버정보 : "+member);
 		int CurrentMileage = member.getMemberMileage() - memMil;

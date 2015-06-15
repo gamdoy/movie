@@ -72,7 +72,7 @@ function modifyInfo(theaNo) {
 	
 	$(theaId).next().html("<input type='text'  size='8' id='modifyLocation' value='" + theaLocation + "'>");
 	$(theaId).next().next().empty().append(phoneSel);
-	$(theaId).next().next().next().html("<input type='text' id='modifyAddress1' value='" + theaAddress1 + "' readonly='readonly'>");
+	$(theaId).next().next().next().html("<input type='text' id='modifyAddress1' value='" + theaAddress1 + "' readonly='readonly' onclick=\"modifyZipcode('" + theaNo + "');\">");
 	$(theaId).next().next().next().next().html("<input type='text' id='modifyAddress2' value='" + theaAddress2 + "'>");
 }
 
@@ -115,6 +115,12 @@ function submitInfo(theaNo) {
 		}	
 	});
 }
+
+//상영관 정보 수정
+function modifyMovieroom(theaNo) {
+	location.href="<%=request.getContextPath() %>/theater/modifyMovieroomForm.do?theaNo=" + theaNo;
+}
+
 //극장추가DIV 출력
 function addTheaterFrom() {
 	if(!addable){
@@ -175,6 +181,16 @@ function toggleBtn(theaNo) {
 <div id="TheaterInfoLayer">
 <table>
 	<thead id="thead">
+		<tr>
+			<td>번호</td>
+			<td>지점명</td>
+			<td>전화번호</td>
+			<td>주소1</td>
+			<td>주소2</td>
+			<td>영업여부</td>
+			<td>극장정보수정</td>
+			<td>상영관수정</td>
+		</tr>
 	</thead>
 	<tbody id="tbody">
 		<c:forEach items="${theaterList }" var="theater" varStatus="status">
@@ -200,10 +216,9 @@ function toggleBtn(theaNo) {
 				<td>
 					<span id="modify${theater.theaNo}"><input  type="button" onclick="modifyInfo('${theater.theaNo}');" value="극장정보수정"></span>
 					<span id="submit${theater.theaNo}"><input  type="button" onclick="submitInfo('${theater.theaNo}');" value="저장"></span>
-					<span id="modifyZipcode${theater.theaNo}"><input  type="button" onclick="modifyZipcode('${theater.theaNo}');" value="우편번호 검색"></span>
 				</td>
 				<td>
-					<span id="modifyTheater${theater.theaNo}"><input type="button" onclick="modifyTheater(${theater.theaNo})"></span>
+					<span id="modifyMovieroom${theater.theaNo}"><input type="button" onclick="modifyMovieroom(${theater.theaNo})" value="상영관 수정"></span>
 				</td>
 			</tr>
 		</c:forEach>

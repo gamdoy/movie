@@ -7,6 +7,7 @@ import java.util.Map;
 
 import kr.or.kosta.common.vo.PagingBean;
 import kr.or.kosta.common.vo.SearchVO;
+import kr.or.kosta.movieroom.vo.MovieroomVO;
 import kr.or.kosta.schedule.vo.ScheduleVO;
 import kr.or.kosta.theater.model.dao.TheaterDAO;
 import kr.or.kosta.theater.vo.TheaterVO;
@@ -38,6 +39,32 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 
 	/**
+	 * 상영일을 기준으로 스케줄을 조회 
+	 */
+	@Override
+	public List getScheduleListByDate(ScheduleVO vo, SearchVO searchVo, int page) {
+		HashMap map = new HashMap();
+		map.put("searchKeyword", searchVo.getSearchKeyword());
+		map.put("searchType", searchVo.getSearchType());
+		map.put("mrNo", vo.getMrNo());
+		
+		int totalContent = dao.selectTotalScheduleListByDateCount(map);
+		
+		PagingBean pagingBean = new PagingBean(totalContent, page);
+		
+		map.put("contentsPerPage", pagingBean.CONTENTS_PER_PAGE);
+		map.put("page", page);
+		List<ScheduleVO> scheduleList = dao.selectScheduleListByDate(map);
+		
+		//두개의 값(List, PagingBean)을 Map에 넣어 return
+		List list = new ArrayList();
+		list.add(pagingBean);
+		list.add(scheduleList);
+		
+		return list;
+	}
+
+	/**
 	 * 극장을 수정하는 메소드
 	 */
 	@Override
@@ -50,7 +77,10 @@ public class TheaterServiceImpl implements TheaterService {
 	 */
 	@Override
 	public int registTheater(TheaterVO vo) {
-		return dao.insertTheater(vo);
+		int cnt = dao.insertTheater(vo);
+		/*임시적으로 극장 생성시 3개의 상영관을 생성한다.*/
+		dao.insertMoovieroom(vo.getTheaNo(),3);
+		return cnt;
 	}
 
 	/**
@@ -65,7 +95,7 @@ public class TheaterServiceImpl implements TheaterService {
 	 * 상영일을 스케줄에서 조회하는 메소드
 	 */
 	@Override
-	public List<ScheduleVO> getScheduleList(int theaNo) {
+	public List<ScheduleVO> getScheduleListBytheaNo(int theaNo) {
 		return dao.selectScheduleList(theaNo);
 	}
 
@@ -103,13 +133,33 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 
 	@Override
-	public int modibyTicketByNo(TicketVO vo) {
+	public int modifyTicketByNo(TicketVO vo) {
 		return dao.updateTicketByNo(vo);
+	}
+
+	@Override
+	public int modifyMovieroomByNo(MovieroomVO vo) {
+		return dao.updateMovieroomByNo(vo);
+	}
+
+	@Override
+	public int addSchedule(ScheduleVO vo) {
+		return dao.insertSchedule(vo);
+	}
+
+	@Override
+	public int getScheduleCount(MovieroomVO vo) {
+		return dao.selectScheduleCount(vo);
 	}
 
 	@Override
 	public TicketVO getMovieRoomByNo(int schNo) {
 		return dao.selectMovieRoomByNo(schNo);
+	}
+
+	@Override
+	public List<MovieroomVO> getMovieRoomListByNo(int theaNo) {
+		return dao.selectMovieRoomListByNo(theaNo);
 	}
 
 	@Override
@@ -127,9 +177,10 @@ public class TheaterServiceImpl implements TheaterService {
 		return dao.selectTicket(schNo);
 	}
 
+	//상영관의 예매된 좌석을 조회
 	@Override
-	public List<String> getReservedSeats(TicketVO tvo) {
-		return dao.selectReservedSeats(tvo);
+	public List<String> getReservedSeats(int schNo) {
+		return dao.selectReservedSeats(schNo);
 	}
 
 	@Override

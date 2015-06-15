@@ -44,4 +44,9 @@ public class MemberDAOImpl implements MemberDAO{
 		System.out.println("selectMemberByNo : "+memNo);
 		return session.selectOne(namespace+"selectMemberByNo", memNo);
 	}
+
+	@Override
+	public MemberVO selectMemberByname(MemberVO membervo) {
+		return session.selectOne(namespace+"selectMemberByName",membervo);
+	}
 }

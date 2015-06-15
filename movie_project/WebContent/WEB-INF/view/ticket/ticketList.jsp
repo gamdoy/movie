@@ -29,15 +29,16 @@ function changeTicStatus(ticNo) {
 					ticStatus:$("#ticStatusSel"+ticNo).val()
 				},
 		success:function(ret){
-			if(ret == "false"){
+			if(ret == "1"){
+				alert("수정에 성공하였습니다.");
+			} else {
 				alert("수정에 실패하였습니다.");
-				location.reload();
 			}
 		}	
 	});
 }
 </script>
-<form action="<%=request.getContextPath() %>/theater/ticketList.do" method="post" onsubmit="return checkVal();" id="ticketForm">
+<form action="<%=request.getContextPath() %>/theater/ticketList.do" method="post" onsubmit="checkVal();" id="ticketForm">
 	<input type="hidden" id="page" name="page" value="${pageNum}">
 	<table>
 	  <thead>

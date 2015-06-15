@@ -7,6 +7,8 @@ public class MemberVO implements Serializable{
 	private int memNo;
 	private int zipNo;
 	private int memMileage;
+	private String zipZipcode;
+	private String zipAddress;
 	private String memId;
 	private String memName;
 	private String memPassword;
@@ -21,14 +23,18 @@ public class MemberVO implements Serializable{
 	public MemberVO() {
 		super();
 	}
-	public MemberVO(int memNo, int zipNo, int memMileage, String memId,
-			String memName, String memPassword, String memAddressDetail,
-			String memBirthDate, String memEmail, String memPhoneNo,
-			String memMemberType, String memJoinDate, String memLastLogin) {
+
+	public MemberVO(int memNo, int zipNo, int memMileage, String zipZipcode,
+			String zipAddress, String memId, String memName,
+			String memPassword, String memAddressDetail, String memBirthDate,
+			String memEmail, String memPhoneNo, String memMemberType,
+			String memJoinDate, String memLastLogin) {
 		super();
 		this.memNo = memNo;
 		this.zipNo = zipNo;
 		this.memMileage = memMileage;
+		this.zipZipcode = zipZipcode;
+		this.zipAddress = zipAddress;
 		this.memId = memId;
 		this.memName = memName;
 		this.memPassword = memPassword;
@@ -40,10 +46,12 @@ public class MemberVO implements Serializable{
 		this.memJoinDate = memJoinDate;
 		this.memLastLogin = memLastLogin;
 	}
+
 	@Override
 	public String toString() {
 		return "MemberVO [memNo=" + memNo + ", zipNo=" + zipNo
-				+ ", memMileage=" + memMileage + ", memId=" + memId
+				+ ", memMileage=" + memMileage + ", zipZipcode=" + zipZipcode
+				+ ", zipAddress=" + zipAddress + ", memId=" + memId
 				+ ", memName=" + memName + ", memPassword=" + memPassword
 				+ ", memAddressDetail=" + memAddressDetail + ", memBirthDate="
 				+ memBirthDate + ", memEmail=" + memEmail + ", memPhoneNo="
@@ -51,6 +59,127 @@ public class MemberVO implements Serializable{
 				+ ", memJoinDate=" + memJoinDate + ", memLastLogin="
 				+ memLastLogin + "]";
 	}
+
+	public int getMemNo() {
+		return memNo;
+	}
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
+	public int getZipNo() {
+		return zipNo;
+	}
+
+	public void setZipNo(int zipNo) {
+		this.zipNo = zipNo;
+	}
+
+	public int getMemMileage() {
+		return memMileage;
+	}
+
+	public void setMemMileage(int memMileage) {
+		this.memMileage = memMileage;
+	}
+
+	public String getZipZipcode() {
+		return zipZipcode;
+	}
+
+	public void setZipZipcode(String zipZipcode) {
+		this.zipZipcode = zipZipcode;
+	}
+
+	public String getZipAddress() {
+		return zipAddress;
+	}
+
+	public void setZipAddress(String zipAddress) {
+		this.zipAddress = zipAddress;
+	}
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+	public String getMemName() {
+		return memName;
+	}
+
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+
+	public String getMemPassword() {
+		return memPassword;
+	}
+
+	public void setMemPassword(String memPassword) {
+		this.memPassword = memPassword;
+	}
+
+	public String getMemAddressDetail() {
+		return memAddressDetail;
+	}
+
+	public void setMemAddressDetail(String memAddressDetail) {
+		this.memAddressDetail = memAddressDetail;
+	}
+
+	public String getMemBirthDate() {
+		return memBirthDate;
+	}
+
+	public void setMemBirthDate(String memBirthDate) {
+		this.memBirthDate = memBirthDate;
+	}
+
+	public String getMemEmail() {
+		return memEmail;
+	}
+
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
+	}
+
+	public String getMemPhoneNo() {
+		return memPhoneNo;
+	}
+
+	public void setMemPhoneNo(String memPhoneNo) {
+		this.memPhoneNo = memPhoneNo;
+	}
+
+	public String getMemMemberType() {
+		return memMemberType;
+	}
+
+	public void setMemMemberType(String memMemberType) {
+		this.memMemberType = memMemberType;
+	}
+
+	public String getMemJoinDate() {
+		return memJoinDate;
+	}
+
+	public void setMemJoinDate(String memJoinDate) {
+		this.memJoinDate = memJoinDate;
+	}
+
+	public String getMemLastLogin() {
+		return memLastLogin;
+	}
+
+	public void setMemLastLogin(String memLastLogin) {
+		this.memLastLogin = memLastLogin;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -76,9 +205,14 @@ public class MemberVO implements Serializable{
 				+ ((memPassword == null) ? 0 : memPassword.hashCode());
 		result = prime * result
 				+ ((memPhoneNo == null) ? 0 : memPhoneNo.hashCode());
+		result = prime * result
+				+ ((zipAddress == null) ? 0 : zipAddress.hashCode());
 		result = prime * result + zipNo;
+		result = prime * result
+				+ ((zipZipcode == null) ? 0 : zipZipcode.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -142,89 +276,22 @@ public class MemberVO implements Serializable{
 				return false;
 		} else if (!memPhoneNo.equals(other.memPhoneNo))
 			return false;
+		if (zipAddress == null) {
+			if (other.zipAddress != null)
+				return false;
+		} else if (!zipAddress.equals(other.zipAddress))
+			return false;
 		if (zipNo != other.zipNo)
+			return false;
+		if (zipZipcode == null) {
+			if (other.zipZipcode != null)
+				return false;
+		} else if (!zipZipcode.equals(other.zipZipcode))
 			return false;
 		return true;
 	}
-	public int getMemNo() {
-		return memNo;
-	}
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
-	}
-	public int getZipNo() {
-		return zipNo;
-	}
-	public void setZipNo(int zipNo) {
-		this.zipNo = zipNo;
-	}
-	public int getMemMileage() {
-		return memMileage;
-	}
-	public void setMemMileage(int memMileage) {
-		this.memMileage = memMileage;
-	}
-	public String getMemId() {
-		return memId;
-	}
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
-	public String getMemName() {
-		return memName;
-	}
-	public void setMemName(String memName) {
-		this.memName = memName;
-	}
-	public String getMemPassword() {
-		return memPassword;
-	}
-	public void setMemPassword(String memPassword) {
-		this.memPassword = memPassword;
-	}
-	public String getMemAddressDetail() {
-		return memAddressDetail;
-	}
-	public void setMemAddressDetail(String memAddressDetail) {
-		this.memAddressDetail = memAddressDetail;
-	}
-	public String getMemBirthDate() {
-		return memBirthDate;
-	}
-	public void setMemBirthDate(String memBirthDate) {
-		this.memBirthDate = memBirthDate;
-	}
-	public String getMemEmail() {
-		return memEmail;
-	}
-	public void setMemEmail(String memEmail) {
-		this.memEmail = memEmail;
-	}
-	public String getMemPhoneNo() {
-		return memPhoneNo;
-	}
-	public void setMemPhoneNo(String memPhoneNo) {
-		this.memPhoneNo = memPhoneNo;
-	}
+	
 
-	public String getMemMemberType() {
-		return memMemberType;
-	}
-	public void setMemMemberType(String memMemberType) {
-		this.memMemberType = memMemberType;
-	}
-	public String getMemJoinDate() {
-		return memJoinDate;
-	}
-	public void setMemJoinDate(String memJoinDate) {
-		this.memJoinDate = memJoinDate;
-	}
-	public String getMemLastLogin() {
-		return memLastLogin;
-	}
-	public void setMemLastLogin(String memLastLogin) {
-		this.memLastLogin = memLastLogin;
-	}
 	
 	
 	

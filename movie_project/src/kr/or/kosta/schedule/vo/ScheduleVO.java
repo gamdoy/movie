@@ -2,24 +2,32 @@ package kr.or.kosta.schedule.vo;
 
 import java.io.Serializable;
 
+import kr.or.kosta.movie.vo.MovieVO;
+
 public class ScheduleVO implements Serializable{
 	private int schNo;
 	private int movNo;
+	private String movTitle;
 	private int mrNo;
-	private String schDate;
+	private String mrName;
 	private int theaNo;
+	private String schDate;
 	private String movPoster;
 	private int emptySeat;
 	
 	public ScheduleVO() {}
 
-	public ScheduleVO(int schNo, int movNo, int mrNo, String schDate,
-			int theaNo, String movPoster, int emptySeat) {
+	public ScheduleVO(int schNo, int movNo, String movTitle, int mrNo,
+			String mrName, int theaNo, String schDate, String movPoster,
+			int emptySeat) {
+		super();
 		this.schNo = schNo;
 		this.movNo = movNo;
+		this.movTitle = movTitle;
 		this.mrNo = mrNo;
-		this.schDate = schDate;
+		this.mrName = mrName;
 		this.theaNo = theaNo;
+		this.schDate = schDate;
 		this.movPoster = movPoster;
 		this.emptySeat = emptySeat;
 	}
@@ -40,6 +48,14 @@ public class ScheduleVO implements Serializable{
 		this.movNo = movNo;
 	}
 
+	public String getMovTitle() {
+		return movTitle;
+	}
+
+	public void setMovTitle(String movTitle) {
+		this.movTitle = movTitle;
+	}
+
 	public int getMrNo() {
 		return mrNo;
 	}
@@ -48,12 +64,12 @@ public class ScheduleVO implements Serializable{
 		this.mrNo = mrNo;
 	}
 
-	public String getSchDate() {
-		return schDate;
+	public String getMrName() {
+		return mrName;
 	}
 
-	public void setSchDate(String schDate) {
-		this.schDate = schDate;
+	public void setMrName(String mrName) {
+		this.mrName = mrName;
 	}
 
 	public int getTheaNo() {
@@ -62,6 +78,14 @@ public class ScheduleVO implements Serializable{
 
 	public void setTheaNo(int theaNo) {
 		this.theaNo = theaNo;
+	}
+
+	public String getSchDate() {
+		return schDate;
+	}
+
+	public void setSchDate(String schDate) {
+		this.schDate = schDate;
 	}
 
 	public String getMovPoster() {
@@ -82,8 +106,9 @@ public class ScheduleVO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ScheduleVO [schNo=" + schNo + ", movNo=" + movNo + ", mrNo="
-				+ mrNo + ", schDate=" + schDate + ", theaNo=" + theaNo
+		return "ScheduleVO [schNo=" + schNo + ", movNo=" + movNo
+				+ ", movTitle=" + movTitle + ", mrNo=" + mrNo + ", mrName="
+				+ mrName + ", theaNo=" + theaNo + ", schDate=" + schDate
 				+ ", movPoster=" + movPoster + ", emptySeat=" + emptySeat + "]";
 	}
 
@@ -95,6 +120,9 @@ public class ScheduleVO implements Serializable{
 		result = prime * result + movNo;
 		result = prime * result
 				+ ((movPoster == null) ? 0 : movPoster.hashCode());
+		result = prime * result
+				+ ((movTitle == null) ? 0 : movTitle.hashCode());
+		result = prime * result + ((mrName == null) ? 0 : mrName.hashCode());
 		result = prime * result + mrNo;
 		result = prime * result + ((schDate == null) ? 0 : schDate.hashCode());
 		result = prime * result + schNo;
@@ -119,6 +147,16 @@ public class ScheduleVO implements Serializable{
 			if (other.movPoster != null)
 				return false;
 		} else if (!movPoster.equals(other.movPoster))
+			return false;
+		if (movTitle == null) {
+			if (other.movTitle != null)
+				return false;
+		} else if (!movTitle.equals(other.movTitle))
+			return false;
+		if (mrName == null) {
+			if (other.mrName != null)
+				return false;
+		} else if (!mrName.equals(other.mrName))
 			return false;
 		if (mrNo != other.mrNo)
 			return false;
