@@ -15,9 +15,13 @@
 	<resultMap type="scheduleVO" id="schdule-resultmap">
 		<id column="sch_no" property="schNo"/>
 		<result column="mov_no" property="movNo"/>
+		<result column="mov_poster" property="movPoster"/>
+		<result column="mov_title" property="movTitle"/>
 		<result column="mr_no" property="mrNo"/>
+		<result column="mr_name" property="mrName"/>
 		<result column="sch_date" property="schDate"/>
 		<result column="thea_no" property="theaNo"/>
+		<result column="empty_seat" property="emptySeat"/>
 	</resultMap>
 	
 	<resultMap type="ticketVO" id="ticket-resultmap">
@@ -47,6 +51,19 @@
 		<result column="tic_statusname" property="ticStatusname"/>
 	</resultMap>
 	
+	<resultMap type="movieroomVO" id="movieroom-resultmap">
+		<id column="mr_no" property="mrNo"/>
+		<result column="thea_no" property="theaNo"/>
+		<result column="mov_no" property="movNo"/>
+		<result column="sch_no" property="schNo"/>
+		<result column="mr_name" property="mrName"/>
+		<result column="mr_screentype" property="mrScreentype"/>
+		<result column="mr_screenname" property="mrScreenname"/>
+		<result column="mr_line" property="mrLine"/>
+		<result column="mr_seat" property="mrSeat"/>
+		<result column="sch_date" property="schDate"/>
+	</resultMap>
+	
 	<insert id="insertTheater" parameterType="theaterVO">
 		<selectKey keyProperty="theaNo" resultType="_int" order="BEFORE">
 			select THEATER_SEQ.nextval from dual
@@ -64,6 +81,14 @@
 					thea_address2=#{theaAddress2},
 					thea_status=#{theaStatus}
 		where	thea_no=#{theaNo}
+	</update>
+	
+	<update id="updateMovieroomByNo" parameterType="movieroomVO">
+		update movieroom
+		set		mr_screentype=#{mrScreentype},
+					mr_line=#{mrLine},
+					mr_seat=#{mrSeat}
+		where	mr_no=#{mrNo}
 	</update>
 	
 	<delete id="deleteMemberById" parameterType="string">
@@ -95,6 +120,34 @@
 		order by sch_date
 	</select>
 	
+	<!-- 일자별 상영 영화리스트 조회 -->
+	<select id="selectMovieListByDate" parameterType="scheduleVO" resultMap="ticket-resultmap">
+		select distinct substr(sch_date,1,10) sch_date, mov.mov_title, mov.mov_no, mov.mov_poster
+		from schedule s, movieroom mr, theater t, movie mov
+		where sch_date > to_char(sysdate, 'yyyy-mm-dd hh24:mi')
+			and mr.mr_no = s.mr_no
+			and mr.thea_no = t.thea_no
+      		and mov.mov_no = s.MOV_NO
+			and t.thea_no = #{theaNo}
+			and s.sch_date  <![CDATA[>=]]>  #{schDate} || ' 00:00:00'
+			and s.sch_date  <![CDATA[<=]]> #{schDate} || ' 23:59:59'
+		order by sch_date
+	</select>
+	
+	<!-- 예매 여부 확인 -->
+	<select id="isReservedSeats" parameterType="ticketVO" resultType="_int">
+		select count(tic_seatno) 
+		from ticket
+		where sch_no=#{schNo}
+			and tic_seatno like '%' ||#{ticSeatno}||'%'
+	</select>
+	
+	<!-- 상영관 생성 -->
+	<insert id="insertMovieroom" parameterType="movieroomVO">
+		insert into movieroom (mr_no, thea_no, mr_name, mr_screentype, mr_line, mr_seat) 
+		values (movieroom_seq.nextval, #{theaNo}, #{mrName}, #{mrScreentype}, #{mrLine}, #{mrSeat})
+	</insert>
+	
 	<!-- 극장별 상영 정보 조회  -->
 	<select id="selectSechduleListByTheater" parameterType="_int" resultMap="schdule-resultmap">
 		select s.sch_no, s.sch_no, s.mr_no, s.sch_date, m.thea_no
@@ -108,11 +161,14 @@
 	
 	<!-- 극장별 해당 상영일 시간표 조회  -->
 	<select id="selectScreenTimeList" parameterType="scheduleVO" resultMap="schdule-resultmap">
-		select SUBSTR(s.sch_date, 12) sch_date, s.sch_no
-		from schedule s, movieroom mr, theater t
+		select SUBSTR(s.sch_date, 12) sch_date, s.sch_no, s.mr_no, mov.mov_no, mov.mov_poster
+    	, (select nvl((movieroom.mr_line * movieroom.mr_seat) - (select sum(TIC_TOTALCUSTOMER) from ticket where ticket.sch_no = s.sch_no), mr.MR_LINE * mr.MR_SEAT) from movieroom, schedule where movieroom.mr_no = schedule.mr_no and schedule.sch_no=s.sch_no) empty_seat
+		from schedule s, movieroom mr, theater t, movie mov
 		where 1=1
 			and mr.mr_no = s.mr_no
 			and mr.thea_no = t.thea_no
+			and s.mov_no = mov.mov_no
+			and mov.mov_no = #{movNo}
 		<if test="theaNo != 0">
 			and mr.thea_no = #{theaNo}
 		</if>
@@ -158,6 +214,62 @@
 		values (#{ticNo}, #{memNo}, #{schNo}, #{ticDate}, #{ticPrice}, #{ticPaytype}, #{ticSeatno}, #{ticTotalcustomer})
 	</insert>
 	
+	<!-- 스케쥴 생성 -->
+	<insert id="insertSchedule" parameterType="scheduleVO">
+		<selectKey keyProperty="schNo" resultType="_int" order="BEFORE">
+			select schedule_seq.nextval from dual
+		</selectKey>
+		insert into schedule (sch_no, mov_no, mr_no, sch_date) 
+		values (#{schNo}, #{movNo}, #{mrNo}, #{schDate})
+	</insert>
+	
+	<!-- 상영관의 스케쥴 갯수 조회 -->
+	<select id="selectScheduleCount" parameterType="movieroomVO" resultType="_int">
+		select count(*)
+		from schedule
+		where mov_no = #{movNo}
+		and mr_no = #{mrNo}
+		and sch_date  <![CDATA[>=]]> #{schDate} || ' 00:00:00'
+		and sch_date  <![CDATA[<=]]> #{schDate} || ' 23:59:59'
+	</select>
+	
+	<!-- 상영관의 스케쥴 조회(paging) -->
+	<select id="selectScheduleListByDate" parameterType="map" resultMap="schdule-resultmap">
+		select sch_no, mov_no, mr_no, mov_title, mr_name, sch_date
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, sch_no, mov_no, mr_no, mov_title, mr_name, sch_date
+			from (
+					select s.sch_no, s.mov_no, s.mr_no, mov.mov_title, mr.mr_name, s.sch_date
+					from schedule s, movieroom mr, movie mov
+			    	where 1=1
+            and s.mr_no = mr.mr_no
+            and s.mov_no = mov.mov_no
+            and s.mr_no = #{mrNo}
+			    	order by s.sch_date
+			)
+			<if test="searchKeyword != null and searchKeyword != ''">
+				where ${searchType} = #{searchKeyword}
+			</if>
+      ) 
+		where page = #{page}
+	</select>
+	<!-- 상영관의 스케쥴 갯수 조회(paging) -->
+	<select id="selectTotalScheduleListByDateCount" parameterType="map" resultType="_int">
+		select count(sch_no)
+		from (
+				select s.sch_no, s.mov_no, s.mr_no, mov.mov_title, mr.mr_name, s.sch_date
+				from schedule s, movieroom mr, movie mov
+		    	where 1=1
+           and s.mr_no = mr.mr_no
+           and s.mov_no = mov.mov_no
+           and s.mr_no = #{mrNo}
+		    	order by s.sch_date
+		)
+		<if test="searchKeyword != null and searchKeyword != ''">
+			where ${searchType} = #{searchKeyword}
+		</if>
+	</select>
+	
 	<!-- 티켓 정보를 입력 -->
 	<select id="selectTicket" resultMap="ticket-resultmap" parameterType="_int">
 		select tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer from ticket
@@ -165,7 +277,59 @@
 		and tic_no=#{value}
 	</select>
 	
-	<!-- 티켓 정보를 입력 -->
+	<!-- 티켓 정보를 출력(paging) -->
+	<select id="selectTicketListPaging" parameterType="map" resultMap="ticket-resultmap">
+		select tic_no, mem_no, mem_id, mem_name, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer, 
+		thea_location, mr_name,  tic_paytypename,  tic_paytypecode, mov_no, mov_title, tic_status,  tic_statusname
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, tic_no, mem_no, mem_id, mem_name, sch_no, tic_date, tic_price, 
+			tic_paytype, tic_seatno, tic_totalcustomer, thea_location, mr_name,  tic_paytypename,  tic_paytypecode,
+			mov_no, mov_title, tic_status,  tic_statusname
+			from (
+					select t.tic_no, mem.mem_no, mem.mem_id, mem_name, s.sch_no, 
+					t.tic_date, t.tic_price, t.tic_paytype, t.tic_seatno, t.tic_totalcustomer, 
+					thea.thea_location, mr.mr_name,  c.cmn_code_kor tic_paytypename, c.cmn_code_eng tic_paytypecode,
+					m.mov_no, m.mov_title, t.tic_status, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = t.tic_status) tic_statusname
+					from ticket t, member mem, schedule s, movieroom mr, theater thea, commoncode c, movie m
+			    	where 1=1
+			    		and t.mem_no = mem.mem_no
+			    		and s.sch_no = t.sch_no
+			    		and s.mr_no = mr.mr_no
+			    		and mr.thea_no = thea.thea_no
+			    		and c.cmn_no = t.tic_paytype
+			    		and s.mov_no = m.mov_no
+			    	order by t.tic_no
+			)
+			<if test="searchKeyword != null and searchKeyword != ''">
+				where ${searchType} = #{searchKeyword}
+			</if>
+		) 
+		where page = #{pageNo}
+	</select>
+	
+	<select id="selectTotalTicketCount" parameterType="map" resultType="_int">
+		select count(tic_no)
+			from (
+					select t.tic_no, mem.mem_no, mem.mem_id, mem_name, s.sch_no, 
+					t.tic_date, t.tic_price, t.tic_paytype, t.tic_seatno, t.tic_totalcustomer, 
+					thea.thea_location, mr.mr_name,  c.cmn_code_kor tic_paytypename, c.cmn_code_eng tic_paytypecode,
+					m.mov_no, m.mov_title, t.tic_status, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = t.tic_status) tic_statusname
+					from ticket t, member mem, schedule s, movieroom mr, theater thea, commoncode c, movie m
+			    	where 1=1
+			    		and t.mem_no = mem.mem_no
+			    		and s.sch_no = t.sch_no
+			    		and s.mr_no = mr.mr_no
+			    		and mr.thea_no = thea.thea_no
+			    		and c.cmn_no = t.tic_paytype
+			    		and s.mov_no = m.mov_no
+			    	order by t.tic_no
+			)
+			<if test="searchKeyword != null and searchKeyword != ''">
+				where ${searchType} = #{searchKeyword}
+			</if>
+	</select>
+	
+	<!-- 티켓 정보를 조회 -->
 	<select id="selectTicketList" resultMap="ticket-resultmap">
 		select t.tic_no, mem.mem_no, mem.mem_id, mem_name, s.sch_no, 
 			t.tic_date, t.tic_price, t.tic_paytype, t.tic_seatno, t.tic_totalcustomer, 
@@ -182,21 +346,37 @@
     	order by t.tic_no
 	</select>
 	
-	<!--예매한 티켓 정보를 입력 -->
+	<!-- 티켓 결제정보 수정 -->
+	<update id="updateTicketByNo" parameterType="ticketVO">
+		update ticket
+		set tic_status = #{ticStatus}
+		where tic_no = #{ticNo}
+	</update>
+	
+	<!--예매한 티켓 정보를 조회 -->
 	<select id="selectTicketByNo" resultMap="ticket-resultmap" parameterType="_int">
 		select tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer from ticket
 		where 1=1
 		and tic_no=#{value}
 	</select>
 	
-	<!-- 예매된 좌석 정보를 입력 -->
-	<select id="selectReservedSeats" parameterType="ticketVO" resultType="String">
+	<!-- 예매된 좌석 정보를 조회 -->
+	<select id="selectReservedSeats" parameterType="_int" resultType="String">
 		select tic_seatno 
 		from ticket t
 		where 1=1
-			<if test="schNo != 0">
-				and sch_no=#{schNo}
-			</if>
+			and sch_no=#{value}
+	</select>
+	
+	<!-- 극장별 상영관 조회 -->
+	<select id="selectMovieRoomListByNo" parameterType="_int" resultMap="movieroom-resultmap">
+		select room.mr_no, room.mr_name, room.mr_screentype, c.cmn_code_kor mr_screenname , room.mr_line, room.mr_seat, t.thea_no
+		from movieroom room, theater t, commoncode c
+		where 1=1
+			and t.thea_no = room.thea_no
+			and room.mr_screentype = c.cmn_no
+			and t.thea_no = #{value}
+		order by room.mr_no
 	</select>
 	
 	

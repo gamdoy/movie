@@ -11,4 +11,6 @@ public interface CommonCodeDAO {
 
 	public List<ZipcodeVO> selectZipodeList(String keyword);
 
+	public String selectCommonNo(String searchKeyword);
+
 }

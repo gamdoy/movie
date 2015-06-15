@@ -53,6 +53,16 @@
 			hide_subMenu();
 			$(".admin_menu").show();
 		});
+<<<<<<< HEAD
+=======
+		$("#logout").on("click", function(){
+			window.location="<%=request.getContextPath() %>/member/logout.do";
+		});
+		
+		$("#mypage").on("click", function(){
+			window.location="<%=request.getContextPath() %>/admin/myinfo.do"
+		});
+>>>>>>> branch 'master' of https://github.com/gamdoy/movie.git
 	});
 	function hide_subMenu() {
 			$(".myinfo_menu").hide();
@@ -68,6 +78,10 @@
 	function membersearch(){
 		window.location="<%=request.getContextPath() %>/member/membersearch.do";
 	}
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'master' of https://github.com/gamdoy/movie.git
 </script>
 <section style="float: left; width: 1180px; height: 80px;">
 	<iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/main@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
@@ -116,6 +130,12 @@
 	 -->
 </section>
 <section class="loginArea">
+<<<<<<< HEAD
+=======
+<c:choose>
+	<c:when test="${sessionScope.login_info == null}">
+<form action="<%=request.getContextPath() %>/member/login.do" method="post" >
+>>>>>>> branch 'master' of https://github.com/gamdoy/movie.git
 	<table style=" width: 300px; height: 180px">
 		<tr>
 			<td>아이디</td>
@@ -133,4 +153,29 @@
 			</td>
 		</tr>			
 	</table>
+<<<<<<< HEAD
+=======
+</form>
+</c:when>
+<c:when test="${sessionScope.login_info != null}">
+<form>
+<table style=" width: 300px;">
+		<tr>	
+			<td colspan="2">${sessionScope.login_info.memId}님환영합니다.</td>
+		</tr>
+	
+		<tr>
+			<td><input type="button" name="myinfoBtn" id="myinfoBtn" value="마이페이지"></td>
+			<td><input type="button" name="" id="" value="예매내역"></td>
+		</tr>
+		<tr>
+			<td><input type="button" name="admin" id="admin" value="관리자모드"></td>
+			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
+		</tr>
+</table>
+</form>		
+
+</c:when>
+</c:choose>
+>>>>>>> branch 'master' of https://github.com/gamdoy/movie.git
 </section><!-- 로그인 영역 -->

@@ -4,7 +4,7 @@
 	
 	<sql id="member-select">
 		select mem_no,
-			   zip_no,
+			   zipcode.zip_no,
 			   mem_id,
 			   mem_name,
 			   mem_password,
@@ -15,8 +15,11 @@
 			   mem_mileage,
 			   mem_membertype,
 			   mem_joindate,
-			   mem_lastlogin
-		from member 
+			   mem_lastlogin,
+			   zip_zipcode,
+			   zip_address
+		from member,zipcode 
+		where member.zip_no=zipcode.zip_no
 	</sql>
  
  	<resultMap type="memberVO" id="member-resultmap">
@@ -30,6 +33,8 @@
  		<id column="mem_email" property="memEmail"/>
  		<id column="mem_phoneno" property="memPhoneNo"/>
  		<id column="mem_mileage" property="memMileage"/>
+ 		<id column="zip_zipcode" property="zipZipcode"/>
+ 		<id column="zip_address" property="zipAddress"/>
  		<id column="mem_membertype" property="memMemberType"/>
  		<id column="mem_joindate" property="memJoinDate"/>
  		<id column="mem_lastlogin" property="memLastLogin"/>	
@@ -49,6 +54,7 @@
  	
  	<select id="selectAllMember" resultMap="member-resultmap">
  		<include refid="member-select"/>
+ 		order by mem_no
  	</select>
  	
  	<update id="updateMember" parameterType="memberVO">
@@ -70,6 +76,16 @@
  	
  	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
  		<include refid="member-select"/>
- 		where mem_id=#{memId}
+ 		and mem_id=#{memId}
+ 	</select>
+
+ 	<select id="selectMemberByName" parameterType="memberVO" resultMap="member-resultmap">
+ 		<include refid="member-select"/>
+ 		and mem_name=#{memName} and mem_phoneno=#{memPhoneNo} and mem_birthdate=#{memBirthDate}
+ 	</select>
+ 	
+ 	<select id="selectMemberByNo" parameterType="_int" resultMap="member-resultmap">
+ 		<include refid="member-select"/>
+ 		where mem_no=#{memNo}
  	</select>
 </mapper>

@@ -5,6 +5,8 @@
 .normalMessage{color: blue;}
 .errorMessage{color: red;}
 </style>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/script/date_picker.js"></script>
 <script type="text/javascript">
 var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님)
 var idflag = false;
@@ -39,7 +41,7 @@ $(document).ready(function(){
 			}
 		})
 	});
-	var passwordType = /[a-z]+[A-Z0-9]/;
+	var passwordType = /[a-z0-9A-Z]/;
 	$("#memPassword").on("keyup", function(){
 		var password = this.value;
 		if(password.length<8){
@@ -117,18 +119,11 @@ function setSubmit(){
 	}else if(!$(memName).val()){
 		alert("이름을 입력하세요.");
 		return false;
-	}else if($(birthYear).val()=="default"){
-	alert("년도를 선택하세요.");
+	}else if(!$(memBirthDate).val()){
+	alert("생년월일을 입력하세요.");
 	return false;
 	}
-	else if($(birthMonth).val()=="default"){
-		alert("월을 선택하세요.");
-		return false;
-	}
-	else if($(birthDay).val()=="default"){
-		alert("일을 선택하세요.");
-		return false;
-	}
+	
 	else if(!$(memEmail).val()){
 		alert("이메일을 입력하세요.");
 		return false;
@@ -149,7 +144,6 @@ function setSubmit(){
 		alert("전화번호를 입력하세요.");
 		return false;
 	}
-	$("#memBirthDate").val($("#birthYear").val()+"-"+$("#birthMonth").val()+"-"+$("#birthDay").val());
 	$("#memPhoneNo").val($("#tel").val()+"-"+$("#tel2").val()+"-"+$("#tel3").val());
 }
 
@@ -159,7 +153,6 @@ function setSubmit(){
 <h2>가입양식</h2>
 
 <form method="post" action="<%=request.getContextPath() %>/member/join.do"  id="registerForm" onsubmit=" return setSubmit();" enctype="multipart/form-data">
-	<input type="hidden" id="memBirthDate" name="memBirthDate">
 	<input type="hidden" id="memPhoneNo" name="memPhoneNo">
 	<input type="hidden" id="zipNo" name="zipNo">
 	<table style="width:600px">
@@ -171,13 +164,13 @@ function setSubmit(){
 			</td>
 		</tr>
 		<tr>
-			<td>Password</td>
+			<td>비밀번호</td>
 			<td>
 				<input type="password" id="memPassword" name="memPassword"><span id="passwrodMessageLayer"></span> <span class="errorMessage"><form:errors path="member.password"/></span>
 			</td>
 		</tr>
 		<tr>
-			<td>Password확인</td>
+			<td>비밀번호확인</td>
 			<td>
 				<input type="password" id="password2" name="password2"><span id="passwrodMessageLayer2"></span> <span class="errorMessage"><form:errors path="member.password"/></span>
 			</td>
@@ -191,24 +184,7 @@ function setSubmit(){
 		<tr>
 			<td>생년월일</td>
 			<td>
-				<select class="birthyear" id="birthYear" name="birthYear">
-				<option value="default">년</option>
-				<c:forEach begin="1950" end="2000" var="year">
-				<option>${year}</option>
-				</c:forEach>			
-				</select>년
-				<select class="birthMonth" id="birthMonth" name="birthMonth">
-				<option value="default">월</option>
-				<c:forEach begin="1" end="12" var="month">
-				<option>${month}</option>
-				</c:forEach>			
-				</select>월
-				<select class="birthDay" id="birthDay" name="birthDay">
-				<option value="default">일</option>
-				<c:forEach begin="1" end="31" var="day">
-				<option>${day}</option>
-				</c:forEach>			
-				</select>일
+				<input type="text" name="memBirthDate" id="memBirthDate" readonly="readonly" onClick="datePicker(event,'memBirthDate')" onClick="datePicker(event,'memBirthDate')"><br>
 			</td>
 		</tr>
 		

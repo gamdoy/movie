@@ -38,12 +38,11 @@ td, th{
 	padding: 5px;
 }
 
-
 div.template{
 	margin-top:0px;
 	margin-right:auto;/*margin을 auto로 주면 좌우마진이 같게 되어 가운데 정렬 효과가 있다.*/
 	margin-left:auto;
-	width:1280px;
+	width:1180px;
 	scrollbar-arrow-color : #FFFFFF; 
 	scrollbar-face-color : #FFFFFF;
 	scrollbar-highlight-color : #FFFFFF;
@@ -57,9 +56,9 @@ div.template{
 nav.template{
 	
 	vertical-align:middle;
-	height:200px;
+	height:276px;
 	line-height:50px;
-	background-color:blue;
+	background-color:gray;
 	color:white;
 	font-weight:bold;
 	text-align:center;

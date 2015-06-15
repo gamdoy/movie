@@ -1,5 +1,6 @@
 package kr.or.kosta.qa.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,5 +22,6 @@ public interface QaService {
 	public int modifyQaFileNumber(QaVO svo);
 	public abstract Map getQaListPaging(int page);
 	public abstract List<QaVO> selectQaBySearchVO(SearchVO svo);
+	public HashMap selectQaBySearchVOPaging(SearchVO svo, int page);
 	
 }

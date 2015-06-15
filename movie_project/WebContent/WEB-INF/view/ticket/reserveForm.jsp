@@ -70,11 +70,15 @@ $(document).ready(function() {
 				ticDate:"${movieRoom.schDate}",
 				mrNo:"${movieRoom.mrNo}",
 				schNo:"${movieRoom.schNo}",
-				ticPaytype:$("#ticPaytype").val(),
-				memNo:"${memInfo.memNo}"
+				ticPaytype:$("#ticPaytype").val()
 			},
 			dataType:"JSON",
 			success:function(ret){
+				if(ret.reserved=="true"){
+					alert("이미 예매된 자리입니다.");
+					location.reload();
+					return false;
+				}
 				location.href="<%=request.getContextPath() %>" + ret.url + "?ticNo="+ret.ticNo;
 			},
 			error:errorCallback
@@ -107,8 +111,8 @@ function changeBackground(_this, event){
 	row = _this.prop("id").substr(0,4);//선택된 열을 뽑는다.
 	no = Number(_this.prop("id").substr(4));//선택된 좌석을 뽑는다.
 	var maxNo = Number(no) + Number(peopleNo);//선택된 좌석을 기준으로 예약 인원 값 처리
-	if(maxNo > 10){//좌석이 마지막 자리를 넘어갈경우 예약 인원에 맞게 진행되도록 처리
-		no -= (maxNo -11);
+	if(maxNo > ${movieRoom.mrSeat}){//좌석이 마지막 자리를 넘어갈경우 예약 인원에 맞게 진행되도록 처리
+		no -= (maxNo - ${movieRoom.mrSeat} -1);
 	}
 	for (var _no = no; _no < maxNo; _no++) {
 		if($("#" + row + _no).prop("className") == "reserved"){

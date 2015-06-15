@@ -19,6 +19,7 @@
 		<package name="kr.or.kosta.ticket.vo"/> 
 		<package name="kr.or.kosta.files.vo"/>
 		<package name="kr.or.kosta.notice.vo"/>
+		<package name="kr.or.kosta.movieroom.vo"/>
 	</typeAliases>
 	
 	<mappers>

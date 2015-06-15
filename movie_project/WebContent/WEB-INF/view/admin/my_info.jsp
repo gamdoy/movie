@@ -11,22 +11,22 @@ $(document).ready(function(){
 		window.open('getCouponList.do?memNo='+memNo, "post", "height=400, width=550, scrollbars=yes");
 	});
 	
-	$(':radio[name="milUse"]').on("click", function(){
-		var mcheck = $(':radio[name="milUse"]:checked').val();
-		if(mcheck == "use"){
-			$("#memberMileage").prop("disabled",false);	
-			$("#memberMileage").prop("value","");
-		}
-		else if(mcheck == "unuse"){
-			$("#memberMileage").prop("disabled",true);
-			$("#memberMileage").prop("value","0");
-		}
-	});
+	$("#coupType").on("click", function() {
+	      if($(this).val() == "113100"){
+	         $(".memberMileage").prop("value","8000");
+	      }
+	      if($(this).val() == "113200"){
+		         $(".memberMileage").val("5000");
+		  }
+	      if($(this).val() == "113300"){
+		         $(".memberMileage").val("3000");
+		  }
+	 });
 });
 
 function checkMileage(){
 	var clientMileage = ${requestScope.member_info.memberMileage};
-	var useMileage = $("#memberMileage").val();
+	var useMileage = $(".memberMileage").val();
 	if(!useMileage || useMileage.trim() == ""){
 		alert("값을 입력하세요.");
 		return false;
@@ -66,6 +66,7 @@ function checkMileage(){
 		<tr align="center" height="30">	
 			<td colspan="2">쿠폰발급
 				<select id="coupType" name="coupType">
+					<option value="null">종류</option>
 					<option value="113100">콤보</option>
 					<option value="113200">팝콘</option>
 					<option value="113300">콜라</option>
@@ -77,11 +78,9 @@ function checkMileage(){
 		<tr align="center" height="30">
 			<td>사용할 마일리지</td>
 				<td>
-				<input type="text" id="memberMileage" name="memberMileage"><br>
-				사용 <input type="radio" name="milUse" value="use" checked="checked">
-				미사용 <input type="radio" name="milUse" value="unuse">
+				<input type="text" class="memberMileage" disabled="disabled">
+				<input type="hidden" class="memberMileage" name="memberMileage"><br>
 			</td>
 		</tr>
 	</table>
-		<input type="button" id="goModifyMemberBtn" name="goModifyMemberBtn" value="회원정보수정">
 </form>

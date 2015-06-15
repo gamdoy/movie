@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.movie.model.service.MovieService;
@@ -114,7 +115,7 @@ public class MovieController {
 	
 	//수정페이지
 	@RequestMapping("modify_success.do")
-	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
+	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request, Errors errors) throws IllegalStateException, IOException{
 		// 파일업로드 처리
 				MultipartFile file = movie.getPoster();
 				
@@ -162,10 +163,14 @@ public class MovieController {
 	
 	// 전체 영화 조회
 	@RequestMapping("adminmovie_list.do")
-	public String adminMovieList(@RequestParam(defaultValue="1")int pageNo, ModelMap map) {
-		Map movie = service.allMovieList(pageNo);
+	public String adminMovieList(@RequestParam(defaultValue="1")int pageNo, @ModelAttribute SearchVO vo,ModelMap map) {
+		System.out.println("서치 " +vo);
+		if(vo.getSearchType() != null && (vo.getSearchType().equals("mov_genre"))){
+			vo.setSearchKeyword(service2.getCommonNo(vo.getSearchKeyword()));
+		}
+		Map movie = service.allMovieList(pageNo, vo);
 		System.out.println(movie);
-		map.addAttribute("movie", movie);
+		map.addAttribute("moviePaging", movie);
 		return "movie/adminMovieList_form.tiles";
 
 	}
