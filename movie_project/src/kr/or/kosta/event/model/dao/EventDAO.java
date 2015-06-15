@@ -2,6 +2,7 @@ package kr.or.kosta.event.model.dao;
 
 import java.util.List;
 
+import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.event.vo.WinnerVO;
 
@@ -32,5 +33,16 @@ public interface EventDAO {
 	
 	public abstract int selectTotalEventCount();
 	
+	public abstract int selectTotalWinnerCount();
+	
 	public List<WinnerVO> selectAllWinnerPaging(int pageNo); 
+	
+	/*
+	 * 당첨자 게시판
+	 */
+	public abstract WinnerVO selectWinnerByWinNo(int winNo);
+	
+	public int deleteWinner(int winNo);
+	
+	public int modifyWinner(WinnerVO vo);
 }
