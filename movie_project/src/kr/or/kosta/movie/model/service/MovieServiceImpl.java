@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.movie.model.dao.MovieDAO;
 import kr.or.kosta.movie.vo.ActorVO;
@@ -31,10 +32,11 @@ public class MovieServiceImpl implements MovieService {
 	}
 	//모든영화 조회-paging
 	@Override
-	public Map allMovieList(int pageNo) {
+	public Map allMovieList(int pageNo,SearchVO vo) {
 		//목록에 뿌려줄 List<MovieVO> 조회
-		List<MovieVO> list = dao.allMovieList(pageNo);
-		int count = dao.totalCount();
+		List<MovieVO> list = dao.allMovieList(pageNo, vo);
+		int count = dao.totalCount(vo);
+		System.out.println("토탈카운트 "+count);
 		//PagingBean 생성
 		PagingBean pagingBean = new PagingBean(count, pageNo);
 		//두개의 값(List, PagingBean)을 Map에 넣어 return
@@ -43,9 +45,14 @@ public class MovieServiceImpl implements MovieService {
 		map.put("pagingBean", pagingBean);
 		return map;
 	}
+	//모든영화 조회
 	@Override
-	public int totalCount() {
-		return dao.totalCount();
+	public List<MovieVO> selectMovieList() {
+		return dao.selectMovieList();
+	}
+	@Override
+	public int totalCount(SearchVO vo) {
+		return dao.totalCount(vo);
 	}
 	//movNo로 영화조회
 	@Override

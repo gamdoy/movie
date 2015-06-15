@@ -17,10 +17,10 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-		if(${sessionScope.login_info != null}){
+		/*if(${sessionScope.login_info != null}){
 			hide_subMenu();
 			$(".myinfo_menu").show();
-		}
+		}*/
 		$("#myinfoBtn").on("click", function() {
 			hide_subMenu();
 			$(".myinfo_menu").show();
@@ -59,7 +59,9 @@
 		
 		$("#mypage").on("click", function(){
 			window.location="<%=request.getContextPath() %>/admin/myinfo.do"
+
 		});
+
 	});
 	function hide_subMenu() {
 			$(".myinfo_menu").hide();
@@ -75,7 +77,7 @@
 	function membersearch(){
 		window.location="<%=request.getContextPath() %>/member/membersearch.do";
 	}
-	
+
 </script>
 <section style="float: left; width: 1180px; height: 80px;">
 	<iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/main@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
@@ -127,7 +129,9 @@
 <section class="loginArea">
 <c:choose>
 	<c:when test="${sessionScope.login_info == null}">
+
 <form action="<%=request.getContextPath() %>/member/login.do" method="post" >
+
 	<table style=" width: 300px; height: 180px">
 		<tr>
 			<td>아이디</td>
@@ -144,7 +148,9 @@
 				<input type="button" value="Id/PW찾기" onclick="membersearch()">
 			</td>
 		</tr>			
+
 	</table>
+
 </form>
 </c:when>
 <c:when test="${sessionScope.login_info != null}">
@@ -161,10 +167,15 @@
 		<tr>
 			<td><input type="button" name="admin" id="admin" value="관리자모드"></td>
 			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
+
+
 		</tr>
+
 </table>
 </form>		
 
 </c:when>
+
 </c:choose>
+
 </section><!-- 로그인 영역 -->

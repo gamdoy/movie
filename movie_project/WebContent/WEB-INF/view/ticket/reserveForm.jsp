@@ -70,8 +70,7 @@ $(document).ready(function() {
 				ticDate:"${movieRoom.schDate}",
 				mrNo:"${movieRoom.mrNo}",
 				schNo:"${movieRoom.schNo}",
-				ticPaytype:$("#ticPaytype").val(),
-				memNo:"${memInfo.memNo}"
+				ticPaytype:$("#ticPaytype").val()
 			},
 			dataType:"JSON",
 			success:function(ret){

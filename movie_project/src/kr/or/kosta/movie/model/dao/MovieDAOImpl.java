@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
 import kr.or.kosta.movie.vo.ActorVO;
 import kr.or.kosta.movie.vo.DirectorVO;
@@ -41,17 +42,23 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 	//모든영화 조회-paging
 	@Override
-	public List<MovieVO> allMovieList(int pageNo) {
+	public List<MovieVO> allMovieList(int pageNo, SearchVO vo) {
 		Map param = new HashMap();
 		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		param.put("pageNo", pageNo);
+		param.put("searchType", vo.getSearchType());
+		param.put("searchKeyword", vo.getSearchKeyword());
 		return session.selectList(namespace+"allMovie",param);
 	}
 	 
+	@Override
+	public List<MovieVO> selectMovieList() {
+		return session.selectList(namespace + "selectMovieList");
+	}
 	//모든영화 카운트
 	@Override
-	public int totalCount() {
-		return session.selectOne(namespace+"totalMovieCount");
+	public int totalCount(SearchVO vo) {
+		return session.selectOne(namespace+"totalMovieCount",vo);
 	}
 
 	//개별table 조회

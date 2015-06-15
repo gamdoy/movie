@@ -16,21 +16,21 @@ public class MemberServiceImpl implements MemberService{
 	private MemberDAO dao;
 	
 	@Override
-	public void joinMember(MemberVO membervo) throws DuplicatedIdException {
+	public int joinMember(MemberVO membervo) throws DuplicatedIdException {
 		if(dao.selectMemberById(membervo.getMemId())!=null){
 			throw new DuplicatedIdException(membervo.getMemId()+"는 이미 등록된 아이디입니다.");
 		}
-		dao.insertMember(membervo);
+		return dao.insertMember(membervo);
 	}
 
 	@Override
-	public void modifyMember(MemberVO membervo) {
-		dao.updateMember(membervo);
+	public int modifyMember(MemberVO membervo) {
+		return dao.updateMember(membervo);
 	}
 
 	@Override
-	public void removeMember(String id) {
-		dao.deleteMemberById(id);
+	public int removeMember(String id) {
+		return dao.deleteMemberById(id);
 	}
 
 	@Override
@@ -47,6 +47,11 @@ public class MemberServiceImpl implements MemberService{
 
 	public MemberVO getMemberByNo(int memNo){
 		return dao.selectMemberByNo(memNo);
+	}
+
+	@Override
+	public MemberVO getMemberByname(MemberVO membervo) {
+		return dao.selectMemberByname(membervo);
 	}
 	
 }

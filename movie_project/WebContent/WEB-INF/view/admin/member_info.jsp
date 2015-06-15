@@ -8,7 +8,7 @@ $(document).ready(function(){
 	var memNo=$("#memNo").val();
 	
 	$("#couponlistBtn").on("click", function(){
-		window.open('getCouponList.do?memNo='+memNo, "post", "height=400, width=700");
+		window.open('getCouponList.do?memNo='+memNo, "post", "height=400, width=550, scrollbars=yes");
 	});
 	
 	$(':radio[name="milUse"]').on("click", function(){
@@ -53,7 +53,7 @@ function checkMileage(){
 			<td colspan="2">"${requestScope.member_info.memberName}" 고객님의 현재 회원등급 입니다</td>
 		</tr>
 		<tr align="center" height="50">
-			<td colspan="2">${requestScope.member_info.memberType}</td>
+			<td colspan="2">${requestScope.member_info.memberTypeName}</td>
 		</tr>
 		<tr align="center" height="30">
 			<td>쿠폰내역</td>
@@ -66,9 +66,9 @@ function checkMileage(){
 		<tr align="center" height="30">	
 			<td colspan="2">쿠폰발급
 				<select id="coupType" name="coupType">
-					<option value="combo">콤보</option>
-					<option value="popcorn">팝콘</option>
-					<option value="cola">콜라</option>
+					<option value="113100">콤보</option>
+					<option value="113200">팝콘</option>
+					<option value="113300">콜라</option>
 				</select>
 				<input type="submit" id="coupBtn" value="확인">
 			</td>

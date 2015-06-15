@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.or.kosta.common.config.movieMapper">
 	<sql id="movie-select">
-	select m.MOV_NO,
+	    select m.MOV_NO,
 			   m.MOV_TITLE, 
 			   m.MOV_SYNOPSIS,
 			   m.MOV_OFFICIALSITE,
@@ -78,9 +78,16 @@
        		  and m.mov_no= ${value}
 	</select>
 	
+	<!-- 전체 영화조회-->
+	<select id="selectMovieList" resultMap="movie-resultmap">
+        <include refid="movie-select"/>
+        order by mov_no
+	</select>
+	
 	<!-- 전체 영화조회 -paging 추가 -->
 	<select id="allMovie" parameterType="map" resultMap="movie-resultmap">
-		    select MOV_NO,
+		    select
+		       MOV_NO,
 			   MOV_TITLE, 
 			   MOV_SYNOPSIS,
 			   MOV_OFFICIALSITE,
@@ -99,7 +106,7 @@
   		       sgrade_name,
         	   genre_name
 			from (
-			  select ceil(rownum/#{contentsPerPage}) page,
+			   select ceil(rownum/#{contentsPerPage}) page,
 			   MOV_NO,
 			   MOV_TITLE, 
 			   MOV_SYNOPSIS,
@@ -118,19 +125,27 @@
 			   pro_name,
       		   sgrade_name,
       		   genre_name
-     
 		from(
          <include refid="movie-select"/>
         order by mov_no
 			) 
+			<if test="searchKeyword != null and searchKeyword != ''">
+				where ${searchType} = #{searchKeyword}
+			</if>
       )
 		where page = #{pageNo}
+		
 	</select>
 	
-	<select id="totalMovieCount" resultType="_int">
-	select count(mov_no) from movie
+	<select id="totalMovieCount" resultType="_int" parameterType="searchVO"> 
+		select count(mov_no)
+		from(
+         <include refid="movie-select"/>
+			) 
+		<if test="searchKeyword != null and searchKeyword != ''">
+				where ${searchType} = #{searchKeyword}
+		</if>
 	</select>
-	
 	  
 	<!-- 영화정보 수정 -->
 	<update id="updateMovie" parameterType="movieVO"  >
@@ -148,9 +163,7 @@
 			   ACT_NO=#{actNo },
 			   PRO_NO=#{proNo }
 		 where MOV_NO=#{movieNo }
-	
 	</update>
-	
 	
 	<!-- 감독 -->
 	<resultMap type="directorVO" id="director-resultmap">
