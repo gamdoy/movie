@@ -14,6 +14,7 @@ $(document).ready(function(){
 </script>
 
 
+
    <!-- 게시판 목록 영역 -->
        <table border="1" summary="게시판 목록">
            
