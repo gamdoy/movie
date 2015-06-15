@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="notice.dao.noticeMapper">
+	
+	<sql id="notice-select">
+		select 		noti_no,
+					mem_no,
+					noti_title,
+					noti_regdate,
+					noti_count,
+					noti_text,
+					file_no
+		from		notice		
+	</sql>
+	
+	<resultMap type="noticeVO" id="notice-resultmap">
+	
+		<id column="noti_no" property="notiNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="noti_title" property="notiTitle"/>
+		<result column="noti_regdate" property="notiRegdate"/>
+		<result column="noti_count" property="notiCount"/>
+		<result column="noti_text" property="notiText"/>
+		<result column="file_no" property="fileNo"/>
+		
+	</resultMap>
+	
+	<resultMap type="FilesVo" id="file_list-resultmap">
+	  	<id column="file_no" property="fileNo"/>
+		<result column="file_name" property="fileName"/>
+		<result column="file_orin_name" property="fileOrinName"/>
+		<result column="file_parentno" property="fileParentNo"/>
+	  </resultMap>
+	
+	<!-- ************************************************************************ -->
+
+			
+	  <select id="selectNoticeList" resultMap="notice-resultmap">
+	  		select n.noti_no, n.noti_title, substr(n.noti_regdate,1,10) noti_regdate, n.noti_count, m.mem_no
+	  		from notice n, member m
+	  		where m.mem_no = n.mem_no
+	  		order by n.noti_no desc
+	  </select>
+	  
+	  <insert id="insertNotice" parameterType="NoticeVO">
+	  		<selectKey keyProperty="notiNo" resultType="_int" order="BEFORE">
+			select NOTICE_SEQ.nextval from dual
+			</selectKey>
+			
+	  		insert into notice
+	  			(noti_no, mem_no, noti_title, noti_regdate, noti_text, file_no, noti_count)
+	  		values (#{notiNo}, #{memNo},#{notiTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),#{notiText}, #{fileNo}, 0)
+	  
+	  </insert>
+	  
+	  <insert id="insertFiles" parameterType="FilesVo">
+	  		
+	  	insert into files
+	  	(file_no, file_parentno, file_name, file_orin_name)
+	  	values(FILE_SEQ.nextval,#{fileParentNo}, #{fileName}, #{fileOrinName})
+	  </insert>
+	  
+	  <!-- fq_no, qa_title, fq_lastdate, qa_text, file_no, qa_count -->
+	  <select id="selectNotice" resultMap="notice-resultmap" parameterType="_int">
+	  	select *
+	  	from notice 
+	  	where noti_no = #{number}	
+	  </select>
+	  
+	  <select id="selectFiles" resultMap="file_list-resultmap" parameterType="_int">
+	  	select *
+	  	from files
+	  	where file_parentno=#{fileParentNo}
+	  </select>
+	  
+	  <delete id="deleteNotice" parameterType="_int">
+		delete  from notice 
+		where noti_no=#{number}		
+	  </delete>
+		
+	  <update id="modifyNotice" parameterType="NoticeVO">
+		update  notice
+		set		noti_title=#{notiTitle},
+				noti_text=#{notiText},
+				file_no=#{fileNo},
+				noti_regdate=to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS')
+		where	noti_no=#{notiNo}	
+	  </update>
+	
+	  <update id="modifyFile" parameterType="FilesVo">
+		update files
+		set file_name=#{fileName}
+		where file_no=#{fileNo}
+	  </update>
+	
+	  <update id="modifyCount" parameterType="NoticeVO">
+		update notice
+		set noti_count = #{notiCount}
+		where noti_no=#{notiNo}
+	  </update>
+	
+	  <update id="modify_Notice_FileNumber" parameterType="NoticeVO">
+		update notice
+		set file_no=#{fileNo}
+		where noti_no=#{notiNo}
+	  </update>
+	 
+	  <!-- Paging 추가 -->
+	  <select id="selectAllNoticePaging" parameterType="map" resultMap="notice-resultmap">
+
+		select noti_no, noti_title, substr(noti_regdate,1,10) noti_regdate, noti_count, mem_no
+		from (
+			select ceil(rownum/#{contentsPerPage}) page, noti_no, noti_title, substr(noti_regdate,1,10) noti_regdate, noti_count, mem_no
+			from (
+					<include refid="notice-select"/>
+					order by noti_no desc
+			)
+		) 
+		where page = #{pageNo}
+	  </select>
+	
+	  <select id="selectTotalNoticeCount" resultType="_int">
+		select count(noti_no) from notice
+	  </select>
+	
+	  <select id="selectNoticeBySearchVO"  parameterType="searchVO" resultMap="notice-resultmap">
+		select noti_no, noti_title, substr(noti_regdate,1,10) noti_regdate, noti_count, mem_no
+	  	from notice
+		<where>
+		 	<if test="searchType=='WRITER'">
+		 		mem_no = (select mem_no from member where mem_id=#{searchKeyword})
+			</if>
+			<if test="searchType!='WRITER'">
+		 		${searchType} like '%'||#{searchKeyword}||'%'
+		 	</if>
+		 	order by noti_no desc
+		</where> 
+	  </select>
+	
+</mapper>
+  

@@ -70,10 +70,34 @@ public class EventDAOImpl implements EventDAO {
 	}
 	
 	@Override
+	public int selectTotalWinnerCount() {
+		return session.selectOne(namespace+"selectTotalWinnerCount");
+	}
+	
+	@Override
 	public List<WinnerVO> selectAllWinnerPaging(int pageNo) {
 		Map param = new HashMap();
 		param.put("contentsPerPage", PagingBean.CONTENTS_PER_PAGE);
 		param.put("pageNo", pageNo);
 		return session.selectList(namespace+"selectAllWinnerPaging", param);
+	}
+	
+	/*
+	 * 당첨자 게시판
+	 */
+	
+	@Override
+	public WinnerVO selectWinnerByWinNo(int winNo) {
+		return session.selectOne(namespace+"selectWinnerByWinNo",winNo);
+	}
+	
+	@Override
+	public int deleteWinner(int winNo) {
+		return session.delete(namespace+"deleteWinner", winNo);
+	}
+	
+	@Override
+	public int modifyWinner(WinnerVO vo) {
+		return session.update(namespace+"modifyWinner", vo);
 	}
 }

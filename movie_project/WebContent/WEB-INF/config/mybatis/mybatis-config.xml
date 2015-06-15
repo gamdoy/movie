@@ -18,6 +18,7 @@
 		<package name="kr.or.kosta.schedule.vo"/> 
 		<package name="kr.or.kosta.ticket.vo"/> 
 		<package name="kr.or.kosta.files.vo"/>
+		<package name="kr.or.kosta.notice.vo"/>
 		<package name="kr.or.kosta.movieroom.vo"/>
 	</typeAliases>
 	
@@ -30,6 +31,7 @@
 		<mapper resource="kr/or/kosta/common/config/mapper/statsMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/centerMapper.xml"/>
 		<mapper resource="kr/or/kosta/common/config/mapper/adminMapper.xml"/>
+		<mapper resource="kr/or/kosta/common/config/mapper/noticeMapper.xml"/>
 		
 	</mappers>
 </configuration>

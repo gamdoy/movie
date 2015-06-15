@@ -7,8 +7,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.event.vo.EventVO;
+import kr.or.kosta.event.vo.WinnerVO;
+import kr.or.kosta.files.vo.FilesVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,12 +52,9 @@ public class EventController {
 	}
 	
 	@RequestMapping(value="specEvent")
-	public String specEvent(@ModelAttribute EventVO vo,ModelMap map){
-		
-		int evtNo=vo.getEvtNo();
+	public String specEvent(@RequestParam int evtNo,ModelMap map){
 		
 		EventVO evtVO=service.getEventByEvtNo(evtNo);
-		System.out.println(evtNo);
 		map.addAttribute("evtVO",evtVO);
 		
 		return "event/spec_event.tiles";
@@ -86,7 +86,7 @@ public class EventController {
 	@RequestMapping(value="modifyEvent")
 	public String modifyEvent(@ModelAttribute EventVO vo,ModelMap map,HttpServletRequest request)throws IllegalStateException, IOException{
 		
-
+		System.out.println(vo);
 		MultipartFile file = vo.getEvtImageFile();
 		if(file!=null && !file.isEmpty()){
 			String path=request.getServletContext().getRealPath("/images/event");
@@ -179,4 +179,44 @@ public class EventController {
 		
 		return "/event/nowEvent.do";
 	}
+	
+	/*********************************************************
+	 * 
+	 * 				    당첨자 게시판 컨트롤러
+	 * 
+	 *********************************************************/
+	
+	@RequestMapping(value="specWinner")
+	public String specWinner(@ModelAttribute WinnerVO vo,ModelMap map){
+		
+		int winNo=vo.getWinNo();
+		
+		WinnerVO winVO=service.getWinnerByWinNo(winNo);
+		System.out.println(winVO);
+		map.addAttribute("winVO",winVO);
+		
+		return "event/spec_winner.tiles";
+	}
+	
+	@RequestMapping(value="deleteWinner")
+	public String deleteWinner(ModelMap map, @RequestParam("winNo")int winNo){
+		service.deleteWinner(winNo);
+		return "/event/eventListPaging.do";
+	}
+	
+	@RequestMapping(value="modifyForm")
+	public String  modifyForm(ModelMap map, @RequestParam("winNo")int winNo){
+		WinnerVO winVO=service.getWinnerByWinNo(winNo);
+		map.addAttribute("winVO",winVO);
+	
+		return "event/modify_winner.tiles";
+	}
+	
+	@RequestMapping(value="modifyWinner")
+	public String modifyWinner(@ModelAttribute WinnerVO vo, ModelMap map){
+		
+		service.modifyWinner(vo);
+		return "/event/eventListPaging.do";
+	}
+
 }
