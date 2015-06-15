@@ -33,7 +33,7 @@ public class MovieController {
 
 	@Autowired
 	private CommonCodeService service2;
-
+	
 	// 영화등록 페이지
 	@RequestMapping("register_form.do")
 	public String registerForm(ModelMap map) {
@@ -158,10 +158,8 @@ public class MovieController {
 				
 				return "movie/modify_form.tiles";
 	}
-
 	
-	
-	// 전체 영화 조회
+	//관리자 전체 영화 조회
 	@RequestMapping("adminmovie_list.do")
 	public String adminMovieList(@RequestParam(defaultValue="1")int pageNo, @ModelAttribute SearchVO vo,ModelMap map) {
 		System.out.println("서치 " +vo);
@@ -172,8 +170,27 @@ public class MovieController {
 		System.out.println(movie);
 		map.addAttribute("moviePaging", movie);
 		return "movie/adminMovieList_form.tiles";
-
 	}
+	
+	//사용자 영화 리스트
+	@RequestMapping("user_movie_list.do")
+	public String userMovieList(ModelMap map){
+		List movie= service.selectMovieList();
+		map.put("movie", movie);
+		System.out.println(movie);
+		
+		return "movie/userMovieList_form.tiles";
+	}
+	
+	//사용자 영화조회
+	@RequestMapping("user_movie_info.do")
+	public String userMovieInfo(@RequestParam String movNo, ModelMap map){
+		MovieVO movie = service.getMovieByNo(movNo);
+		map.put("movie", movie);
+		return "movie/userMovieInfo.tiles";
+		
+	}
+	
 	
 
 }

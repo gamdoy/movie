@@ -23,6 +23,7 @@
 		$("#movieBtn").on("click", function() {
 			hide_subMenu();
 			$(".movie_menu").show();
+			
 		});
 		$("#reserveBtn").on("click", function() {
 			hide_subMenu();
@@ -80,6 +81,7 @@
 		정보수정&nbsp;&nbsp;&nbsp;관심영화&nbsp;&nbsp;&nbsp;관람작&nbsp;&nbsp;&nbsp;마일리지 관리&nbsp;&nbsp;&nbsp;예매내역&nbsp;&nbsp;&nbsp;회원탈퇴
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
+		<a href="<%=request.getContextPath() %>/movie/user_movie_list.do">영화</a>
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
 	</section>
 	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->

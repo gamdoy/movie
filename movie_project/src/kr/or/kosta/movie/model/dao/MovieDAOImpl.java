@@ -40,6 +40,11 @@ public class MovieDAOImpl implements MovieDAO {
 	public MovieVO getMovieByNo(String movNo) {
 		return session.selectOne(namespace+"getMovieByNo",movNo);
 	}
+	public List<MovieVO> publicAllMovie(){
+		
+		return session.selectList(namespace+"selectMovieList");
+		
+	}
 	//모든영화 조회-paging
 	@Override
 	public List<MovieVO> allMovieList(int pageNo, SearchVO vo) {
@@ -50,7 +55,7 @@ public class MovieDAOImpl implements MovieDAO {
 		param.put("searchKeyword", vo.getSearchKeyword());
 		return session.selectList(namespace+"allMovie",param);
 	}
-	 
+	 //모든영화조회
 	@Override
 	public List<MovieVO> selectMovieList() {
 		return session.selectList(namespace + "selectMovieList");
