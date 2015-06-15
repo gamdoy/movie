@@ -8,7 +8,10 @@
 					qa_count, 
 					mem_no,
 					qa_secret,
-					qa_password
+					qa_password,
+					fq_parent_number,
+					 reply_level, 
+					 reply_step
 		from		qa			
 	</sql>
 	  
@@ -25,6 +28,8 @@
 		<result column="qa_password" property="qaPassword"/>
 		<result column="fq_parent_number" property="fqParentNumber"/>
 		<result column="file_no" property="fileNo"/>
+		<result column="reply_level" property="replyLevel"/>
+		<result column="reply_step" property="replyStep"/>
 	  </resultMap>
 	  
 	  <resultMap type="QaVo" id="qa_list-resultmap1">
@@ -35,6 +40,8 @@
 		<result column="mem_no"  property="memNo"/>
 		<result column="qa_secret"  property="qaSecret"/>
 		<result column="qa_password"  property="qaPassword"/>
+		<result column="fq_parent_number" property="fqParentNumber"/>
+		<result column="reply_level" property="replyLevel"/>
 	  </resultMap>
 	  
 	  <resultMap type="QaVo" id="qa_list-resultmap2">
@@ -53,8 +60,69 @@
 		<result column="file_parentno" property="fileParentNo"/>
 	  </resultMap>
 	  
+	  <resultMap type="CommentVo" id="comment_list-resultmap">
+	  	<id column="com_no" property="comNo"/>
+	  	<result column="mem_no" property="memNo"/>
+	  	<result column="com_text" property="comText"/>
+	  	<result column="com_regdate" property="comRegDate"/>
+	  	<result column="com_parent_number" property="comParentNumber"/>
+	  </resultMap>
+	  
 	
 	  
+	  
+	  
+	 
+			
+	  <!-- COMMENT MAPPER -->
+	  	 
+	 <update id="updateReply" parameterType="QaVO">
+	 	update qa
+	 	set	reply_step=reply_step+1
+	 	where reply_step <![CDATA[>=]]> #{replyStep} 
+	 </update>		
+	  
+	  
+	 <insert id="insertComment" parameterType="CommentVo">
+	  		insert into comments
+	  		(com_no, mem_no, com_text, com_regdate, com_parent_number)
+	  		values (COMMENT_SEQ.nextval , #{memNo},#{comText},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),#{comParentNumber})
+	  </insert>
+	  
+	   <select id="selectComment" resultMap="comment_list-resultmap">
+	  		select com_no, mem_no, com_text, com_regdate, com_parent_number
+	  		from comments
+	  		where com_parent_number = #{fqNo}
+	  </select>
+	 
+	  <delete id="deleteComment" parameterType="_int">
+		delete from comments 
+		where com_no=#{number}		
+	 </delete>
+
+	 
+	 
+	 <update id="modifyComment" parameterType="CommentVO">
+		update comments
+		set		com_text=#{comText},
+					com_regdate=to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS')
+		where	com_no=#{comNo}	
+	</update>
+	
+	<select id="getCommentByComNo" resultMap="comment_list-resultmap">
+	  		select com_no, mem_no, com_text, com_regdate, com_parent_number
+	  		from comments
+	  		where com_no = #{comNo}
+	 </select>
+	
+	<select id="getCountComment"  resultType="_int">
+	  		select count(com_no)
+			from COMMENTS
+			where com_parent_number=#{comParentNumber}
+	 </select>
+	
+	<!-- QA MAPPER -->
+	
 	  <select id="selectQaList" resultMap="qa_list-resultmap1">
 	  		select q.fq_no, q.qa_title, substr(q.fq_lastdate,1,10) fq_lastdate, q.qa_count, q.qa_secret, q.qa_password, m.mem_no
 	  		from qa q, member m
@@ -70,16 +138,33 @@
 	  		insert into qa
 	  			(fq_no, mem_no, qa_title, fq_regdate, fq_lastdate, qa_count, 
 	  			qa_text, qa_status, qa_secret, qa_password, fq_parent_number, 
-	  			file_no)
-	  		values (#{fqNo}, #{memNo},#{qaTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),0,#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqNo},#{fileNo})
+	  			file_no, reply_level, reply_step)
+	  		values (#{fqNo}, #{memNo},#{qaTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),0,#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqNo},#{fileNo}
+	  					,#{replyLevel}, #{replyStep})
 	  
 	  </insert>
 	  
+	   <insert id="insertQa_Re" parameterType="QaVo">
+	  		<selectKey keyProperty="fqNo" resultType="_int" order="BEFORE">
+			select QA_SEQ.nextval from dual
+			</selectKey>	
+	  		insert into qa
+	  			(fq_no, mem_no, qa_title, fq_regdate, fq_lastdate, qa_count, 
+	  			qa_text, qa_status, qa_secret, qa_password, fq_parent_number, 
+	  			file_no, reply_level, reply_step)
+	  		values (#{fqNo}, #{memNo},#{qaTitle},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),0,#{qaText},#{qaStatus},#{qaSecret},#{qaPassword},#{fqParentNumber},#{fileNo}
+	  					,#{replyLevel}, #{replyStep})
+		
+	
+	  </insert>
+	  
 	  <insert id="insertFiles" parameterType="FilesVo">
-	  		
+  		<selectKey keyProperty="fileNo" resultType="_int" order="BEFORE">
+		select FILE_SEQ.nextval from dual
+		</selectKey>
 	  	insert into files
-	  		(file_no, file_parentno, file_name, file_orin_name)
-	  		values(FILE_SEQ.nextval,#{fileParentNo}, #{fileName}, #{fileOrinName})
+	  		(file_no, file_name, file_orin_name)
+	  		values(#{fileNo}, #{fileName}, #{fileOrinName})
 	  </insert>
 	  <!-- fq_no, qa_title, fq_lastdate, qa_text, file_no, qa_count -->
 	    <select id="selectQa" resultMap="qa_insert-resultmap" parameterType="_int">
@@ -91,7 +176,7 @@
 	  <select id="selectFiles" resultMap="file_list-resultmap" parameterType="_int">
 	  	select *
 	  	from files
-	  	where file_parentno=#{fileParentNo}
+	  	where file_no=#{fileParentNo}
 	  </select>
 	  
 	  <delete id="deleteQa" parameterType="_int">
@@ -129,12 +214,12 @@
 	 <!-- Paging 추가 -->
 	<select id="selectAllQaPaging" parameterType="map" resultMap="qa_list-resultmap1">
 
-		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password, fq_parent_number
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password
+			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password, fq_parent_number
 			from (
 					<include refid="qa-select"/>
-					order by fq_no desc
+					order by fq_parent_number desc
 			)
 		) 
 		where page = #{pageNo}
@@ -161,9 +246,9 @@
 	
 	<!-- 검색결과화면에서 페이징 -->
 	<select id="selectQaBySearchVOPaging"  parameterType="hashmap" resultMap="qa_list-resultmap1">
-		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password
+		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password,fq_parent_number, reply_level
 		from (
-			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password
+			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password,fq_parent_number, reply_level
 			from (
 			<include refid="qa-select"/>
 			
@@ -174,7 +259,7 @@
 			<if test="searchType!=null and searchType!='WRITER' and searchKeyword != null and searchKeyword != ''">
 		 		where ${searchType} like '%'||#{searchKeyword}||'%'
 		 	</if>
-			order by fq_no desc
+			order by reply_step desc
 		)
 	)
 	where page = #{pageNo}
