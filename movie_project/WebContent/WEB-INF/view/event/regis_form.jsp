@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/script/date_picker.js"></script>
+
 <script type="text/javascript">
+	
 var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님) 
 $(document).ready(function(){
 
@@ -57,19 +62,19 @@ $(document).ready(function(){
 		<tr>
 			<td>시작일</td>
 			<td>
-				<input type="text" id="evtStartDate" name="evtStartDate"> 
+				<input type="text" id="evtStartDate" name="evtStartDate" onClick="datePicker(event,'evtStartDate')" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
 			<td>종료일</td>
 			<td>
-				<input type="text" id="evtEndDate" name="evtEndDate"> 
+				<input type="text" id="evtEndDate" name="evtEndDate" onClick="datePicker(event,'evtEndDate')" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
 			<td>등록일</td>
 			<td>
-				<input type="text" id="evtRegDate" name="evtRegDate"> 
+				<input type="text" id="evtRegDate" name="evtRegDate" onClick="datePicker(event,'evtRegDate')" readonly="readonly">
 			</td>
 		</tr>
 		<tr>

@@ -13,6 +13,12 @@ $(document).ready(function(){
 });
 </script>
 
+<script type="text/javascript">
+function goUrl(){
+	window.location="<%=request.getContextPath() %>/event/addWinnerForm.do";
+}
+</script>
+
 
 
    <!-- 게시판 목록 영역 -->
@@ -76,4 +82,5 @@ $(document).ready(function(){
 </tr>
 </tbody>	
 </table>
+<input type="button" value="글쓰기" onclick="goUrl();">
 </p>
