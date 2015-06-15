@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.files.vo.FilesVo;
+import kr.or.kosta.member.vo.MemberVO;
 import kr.or.kosta.notice.model.service.NoticeService;
 import kr.or.kosta.notice.vo.NoticeVO;
 import kr.or.kosta.qa.model.service.QaService;
@@ -60,7 +62,12 @@ public class NoticeController{
 	}
 	
 	@RequestMapping(value="addNotice.do")
-	public String addNotice(@ModelAttribute FilesVo svo, @ModelAttribute NoticeVO vo, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
+	public String addNotice(@ModelAttribute FilesVo svo, @ModelAttribute NoticeVO vo, HttpServletRequest request, HttpSession session) throws IllegalStateException, IOException{
+		MemberVO member = (MemberVO) session.getAttribute("login_info");
+		if(member.getMemMemberType().equals(102300)){
+			
+		}
+		
 		MultipartFile file = svo.getUpfile();
 		if (file != null && !file.isEmpty()) {
 			String path = request.getServletContext().getRealPath("/upload");
@@ -69,17 +76,18 @@ public class NoticeController{
 			file.transferTo(upfile);
 			svo.setFileOrinName(fileName);
 			svo.setFileName(fileName);		
+			service.insertFiles(svo);
 		}else{
 			System.out.println("파일이없어");
 		}
 			
-		service.registerNoticeList(vo);
+	
 		svo.setFileParentNo(vo.getNotiNo());
-		service.insertFiles(svo);
 		FilesVo fvo = service.selectFiles(vo.getNotiNo());
 		vo.setFileNo(fvo.getFileNo());
 		service.modifyNoticeFileNumber(vo);
 		System.out.println("작성 후 VO : "+vo);
+		service.registerNoticeList(vo);
 		return "/notice/notice.do";
 	}
 	
