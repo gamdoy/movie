@@ -16,11 +16,13 @@
 	.admin_menu {height: 95px;width: 880px; display: none;}
 </style>
 <script type="text/javascript">
+var flag = false;
+
 	$(document).ready(function() {
-		/*if(${sessionScope.login_info != null}){
+		if(${sessionScope.login_info != null}){
 			hide_subMenu();
 			$(".myinfo_menu").show();
-		}*/
+		}
 		$("#myinfoBtn").on("click", function() {
 			hide_subMenu();
 			$(".myinfo_menu").show();
@@ -59,9 +61,7 @@
 		
 		$("#mypage").on("click", function(){
 			window.location="<%=request.getContextPath() %>/admin/myinfo.do"
-
 		});
-
 	});
 	function hide_subMenu() {
 			$(".myinfo_menu").hide();
@@ -77,7 +77,13 @@
 	function membersearch(){
 		window.location="<%=request.getContextPath() %>/member/membersearch.do";
 	}
-
+	function memberleave(){
+		flag = confirm("정말 탈퇴하시겠습니까?");
+		if(flag){
+			location.href="<%=request.getContextPath() %>/member/memberLeave.do";
+		}
+	}
+	
 </script>
 <section style="float: left; width: 1180px; height: 80px;">
 	<iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/main@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
@@ -98,7 +104,7 @@
 		관람작&nbsp;&nbsp;&nbsp;
 		마일리지 관리&nbsp;&nbsp;&nbsp;
 		예매내역&nbsp;&nbsp;&nbsp;
-		회원탈퇴
+		<label style="cursor: pointer;" onclick="memberleave()">회원탈퇴</label>	
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
@@ -114,8 +120,7 @@
 		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
-		
+		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황	
 		<a href="<%=request.getContextPath() %>/movie/register_form.do">영화등록</a>
 		<a href="<%=request.getContextPath() %>/movie/adminmovie_list.do">영화리스트</a>
 	</section>
@@ -129,9 +134,7 @@
 <section class="loginArea">
 <c:choose>
 	<c:when test="${sessionScope.login_info == null}">
-
 <form action="<%=request.getContextPath() %>/member/login.do" method="post" >
-
 	<table style=" width: 300px; height: 180px">
 		<tr>
 			<td>아이디</td>
@@ -148,9 +151,7 @@
 				<input type="button" value="Id/PW찾기" onclick="membersearch()">
 			</td>
 		</tr>			
-
 	</table>
-
 </form>
 </c:when>
 <c:when test="${sessionScope.login_info != null}">
@@ -167,15 +168,10 @@
 		<tr>
 			<td><input type="button" name="admin" id="admin" value="관리자모드"></td>
 			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
-
-
 		</tr>
-
 </table>
 </form>		
 
 </c:when>
-
 </c:choose>
-
 </section><!-- 로그인 영역 -->

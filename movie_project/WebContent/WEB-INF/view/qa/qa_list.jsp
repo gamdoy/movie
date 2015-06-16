@@ -42,9 +42,7 @@ $(document).ready(function(){
 function goUrl(){
 	window.location="<%=request.getContextPath() %>/qa/write.do";
 }
-</script>
 
-<script type="text/javascript">
 $(document).ready(function(){
 		$("#searchForm").on("submit", function(){
 			if(!$("#searchKeyword").val().trim()){
@@ -56,7 +54,7 @@ $(document).ready(function(){
 });
 </script>
 
-</head>
+
 <!-- CSS 영역 -->
     <style type="text/css">
         * {font-size: 9pt;}
@@ -120,14 +118,14 @@ $(document).ready(function(){
 						</c:when>
 						
 						<c:otherwise>
-						<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
+						
 								<td>
 									<c:forEach begin="1" end="${QaVO.replyLevel}">
 										<img src="<%=request.getContextPath()%>/upload/화살표.png" width="10px" height="10px">
 									</c:forEach>	
 									${QaVO.qaTitle}
 								</td> 
-						</c:when>
+						
 						</c:otherwise>
 						
 						
