@@ -108,12 +108,22 @@ $(document).ready(function() {
 
 //좌석에 mouseover, mouseout, click callback 처리 함수
 function changeBackground(_this, event){
+	/*
+	row = _this.prop("id").substr(0,4);//선택된 열을 뽑는다.
+	no = Number(_this.prop("id").substr(4));//선택된 좌석을 뽑는다.
+	var maxNo = Number(no) + Number(peopleNo) -1;//선택된 좌석을 기준으로 예약 인원 값 처리
+	alert(maxNo);
+	if(maxNo > Number(${movieRoom.mrSeat})){//좌석이 마지막 자리를 넘어갈경우 예약 인원에 맞게 진행되도록 처리
+		no -= (maxNo - ${movieRoom.mrSeat});
+	}
+	*/
 	row = _this.prop("id").substr(0,4);//선택된 열을 뽑는다.
 	no = Number(_this.prop("id").substr(4));//선택된 좌석을 뽑는다.
 	var maxNo = Number(no) + Number(peopleNo);//선택된 좌석을 기준으로 예약 인원 값 처리
-	if(maxNo > ${movieRoom.mrSeat}){//좌석이 마지막 자리를 넘어갈경우 예약 인원에 맞게 진행되도록 처리
-		no -= (maxNo - ${movieRoom.mrSeat} -1);
+	if(maxNo > ${movieRoom.mrSeat} + 1){//좌석이 마지막 자리를 넘어갈경우 예약 인원에 맞게 진행되도록 처리
+		no -= (maxNo -${movieRoom.mrSeat} -1);
 	}
+	
 	for (var _no = no; _no < maxNo; _no++) {
 		if($("#" + row + _no).prop("className") == "reserved"){
 			return false;
@@ -163,8 +173,8 @@ function setReservedSeat(){
 		<span	id="seatArea">
 			<table id="seatTable">
 				<tbody>
-					<c:forEach	 begin="1" end="${movieRoom.mrLine }" var="idx">
-						<tr id="row${idx }"><td>${idx }열</td></tr>
+					<c:forEach	 items="${lineList }" var="line">
+						<tr id="row${line }"><td>${line }열</td></tr>
 					</c:forEach>
 				</tbody>
 			</table>
@@ -185,3 +195,4 @@ function setReservedSeat(){
 			<input type="button" id="reset" value="초기화">
 		</span>
 	</div>
+</body>

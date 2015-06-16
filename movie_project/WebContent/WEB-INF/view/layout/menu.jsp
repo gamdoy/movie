@@ -173,5 +173,6 @@ var flag = false;
 </form>		
 
 </c:when>
+
 </c:choose>
 </section><!-- 로그인 영역 -->

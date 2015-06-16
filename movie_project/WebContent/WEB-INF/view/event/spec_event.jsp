@@ -26,11 +26,25 @@ ${evtVO.evtNo}
 
 <form method="POST" action="<%=request.getContextPath() %>/event/modifyEventNumber.do" id="spec_event">
 <input type="hidden" id="evtNo" name="evtNo" value="${evtVO.evtNo }">
-<input type="submit" value="수정하기"/>
+<c:choose>
+	<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
+		<input type="submit" value="수정하기"/>
+	</c:when>
+	<c:otherwise>
+		
+	</c:otherwise>
+</c:choose>
 </form>
 <form method="POST" action="<%=request.getContextPath() %>/event/deleteEventByEventNumber.do" id="spec_event">
 <input type="hidden" id="evtNo" name="evtNo" value="${evtVO.evtNo }">
-<input type="submit" value="삭제하기"/>
+<c:choose>
+	<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
+		<input type="submit" value="삭제하기"/>
+	</c:when>
+	<c:otherwise>
+		
+	</c:otherwise>
+</c:choose>
 </form>
 </body>
 </html>

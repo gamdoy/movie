@@ -100,4 +100,9 @@ public class EventDAOImpl implements EventDAO {
 	public int modifyWinner(WinnerVO vo) {
 		return session.update(namespace+"modifyWinner", vo);
 	}
+	
+	@Override
+	public int insertWinner(WinnerVO vo) {
+		return session.update(namespace+"insertWinner", vo);
+	}
 }

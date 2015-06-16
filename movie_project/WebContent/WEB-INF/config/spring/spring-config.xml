@@ -43,11 +43,11 @@
 	<!-- 단순 Link controller -->
 	<mvc:view-controller path="/main.do" view-name="main.tiles"/>
 	
-	<mvc:view-controller path="/event/regisForm.do" view-name="event/regis_form.tiles"/>
 	<mvc:view-controller path="/member/zipcodeForMember.do" view-name="/WEB-INF/view/member/zipcodeForMember.jsp"/>
 	<mvc:view-controller path="/member/join_success.do" view-name="member/join_success.tiles"/>
 	<mvc:view-controller path="/member/membersearch.do" view-name="member/memberSearch.tiles"/>
 	<mvc:view-controller path="/member/idSearch.do" view-name="member/idSearch.tiles"/>
+	<mvc:view-controller path="/event/addWinnerForm.do" view-name="event/addWinner_Form.tiles"/>
 	
 	<!-- TilesConfigurer 설정 -->
 	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">

@@ -10,13 +10,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.center.vo.CommentVO;
 import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.files.vo.FilesVo;
+import kr.or.kosta.member.vo.MemberVO;
 import kr.or.kosta.qa.model.service.QaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,71 @@ public class QaController{
 	@Autowired
 	private QaService service;
 	
+	@RequestMapping(value="reply.do")
+	public String reply_write(@RequestParam("fqNo")int fqNo, ModelMap map, @RequestParam("fqParentNumber")int fqParentNumber){
+		
+		map.addAttribute("fqNo",fqNo);
+		map.addAttribute("fqParentNumber",fqParentNumber);
+		return "qa/reply_write.tiles";
+	}
+	
+	@RequestMapping(value="register_reply.do")
+	public String addReply(@ModelAttribute FilesVo svo, @ModelAttribute QaVO vo, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
+		MultipartFile file = svo.getUpfile();
+		if (file != null && !file.isEmpty()) {
+			
+			String path = request.getServletContext().getRealPath("/upload");
+			String fileName = file.getOriginalFilename();
+			File upfile = new File(path, fileName);
+			file.transferTo(upfile);
+			svo.setFileOrinName(fileName);
+			svo.setFileName(fileName);		
+			service.insertFiles(svo);
+		}else{
+			System.out.println("선택된 파일이 없습니다.");
+		}
+		vo.setQaStatus("stas");
+		vo.setMemNo(1);
+		QaVO reVo = service.getQa(vo.getFqNo());
+		System.out.println("reVO의 Level");
+		vo.setReplyStep(reVo.getReplyStep());
+		vo.setReplyLevel(reVo.getReplyLevel());
+		vo.setFileNo(svo.getFileNo());
+		service.updateReply(vo);
+		System.out.println("변경후 : "+vo.getFqNo());
+		vo.setReplyStep(reVo.getReplyStep());
+		vo.setReplyLevel(reVo.getReplyLevel()+1);
+		service.register_reply(vo);
+		System.out.println("rvo : "+vo);
+		return "redirect:/qa/qa.do";
+	}
+	
+	@RequestMapping(value="comment.do")
+	public String addComment(@ModelAttribute QaVO vo, @RequestParam("fqNo")int fqNo, @ModelAttribute CommentVO cvo, ModelMap map, HttpServletRequest request) {
+		cvo.setComParentNumber(fqNo);
+		service.registerComment(cvo);
+		List list =service.getComment(fqNo);
+		map.addAttribute("comment_list", list);
+		return "redirect:/qa/selectQa.do?number="+fqNo;	
+	}
+	
+	@RequestMapping(value="deleteComment.do")
+	public String deleteQa(@RequestParam("comNo")int comNo, @RequestParam("fqNo")int fqNo){
+		service.deleteComment(comNo);
+		return "/qa/selectQa.do?number="+fqNo;	
+	}
+	
+	@RequestMapping(value="selectComment_toModify.do")
+	public String  selectComment_toModify(ModelMap map, @RequestParam("comNo")int comNo, @RequestParam("fqNo")int fqNo){
+		return "redirect:/qa/selectQaToModifyComment.do?number="+fqNo+"&comNo="+comNo;		
+	}
+	
+	@RequestMapping(value="comment_modify.do")
+	public String  comment_modify(@RequestParam("fqNo")int fqNo, @ModelAttribute CommentVO cvo){
+		
+		service.modifyComment(cvo);
+		return "/qa/selectQa.do?number="+fqNo;	
+	}
 	
 	
 	public String qa_list(ModelMap map, @RequestParam(defaultValue="1")int page){
@@ -46,7 +114,7 @@ public class QaController{
 		List<QaVO> list= service.getQaList();
 		map.addAttribute("qa_list",list);
 		
-		return "qa/qa_list.tiles";
+		return "/qa/qa_list.tiles";
 	}
 	
 	@RequestMapping(value="write.do")
@@ -54,17 +122,16 @@ public class QaController{
 		return "qa/qa_write.tiles";
 	}
 	
+	//QA 수정페이지 이동 
 	@RequestMapping(value="modify.do")
 	public String  qa_modify(ModelMap map, @RequestParam("number")int fqNo, @ModelAttribute FilesVo svo){
-		
 		QaVO vo = service.getQa(fqNo);
-		System.out.println("야호 : " +vo);
 		map.addAttribute("svo", svo);
 		map.addAttribute("qaVO",vo);
-	
-		return "qa/qa_modify.tiles";
-		
+		return "qa/qa_modify.tiles";	
 	}
+	
+	//QAVO 등록
 	@RequestMapping(value="addQa.do")
 	public String addQa(@ModelAttribute FilesVo svo, @ModelAttribute QaVO vo, ModelMap map, HttpServletRequest request) throws IllegalStateException, IOException{
 		MultipartFile file = svo.getUpfile();
@@ -75,42 +142,66 @@ public class QaController{
 			file.transferTo(upfile);
 			svo.setFileOrinName(fileName);
 			svo.setFileName(fileName);		
+			service.insertFiles(svo);
 		}else{
-			System.out.println("파일이없어");
+			System.out.println("선택된 파일이 없습니다.");
 		}
-		
-		vo.setMemId("ID-01");
-		vo.setQaStatus("stas");
+		vo.setQaStatus("status");
 		vo.setMemNo(1);
-		
+		vo.setReplyStep(0);
+		vo.setReplyLevel(0);
+		vo.setFileNo(svo.getFileNo());
 		service.registerQaList(vo);
-		svo.setFileParentNo(vo.getFqNo());
-		service.insertFiles(svo);
-		FilesVo fvo = service.selectFiles(vo.getFqNo());
-		vo.setFileNo(fvo.getFileNo());
-		service.modifyQaFileNumber(vo);
-		System.out.println("작성 후 VO : "+vo);
-		return "/qa/qa.do";
+		return "redirect:/qa/qa.do";
 	}
 	
+	//게시판 목록 선택
 	@RequestMapping(value="selectQa.do")
 	public String selectQa(@RequestParam("number")int fqNo, ModelMap map){
+		int countComment = service.getCountComment(fqNo);
+		map.addAttribute("countComment",  countComment);
 		QaVO vo = service.getQa(fqNo);
-		System.out.println("111:" +vo);
-		FilesVo temp =service.selectFiles(fqNo);
+		if(vo.getFileNo() != 0){
+			FilesVo temp =service.selectFiles(vo.getFileNo());
+			System.out.println(temp);
+			map.addAttribute("fileName", temp.getFileName());	
+		}
+		vo.setQaCount(vo.getQaCount()+1);
+		service.modifyCount(vo);
+		vo.setQaText(vo.getQaText().replace("\r\n", "<br>"));
+		map.addAttribute("qa_vo",vo);
+		List list =service.getComment(fqNo);
+		map.addAttribute("comment_list", list);
+		System.out.println("select : "+vo);
+		return "qa/qa_result.tiles";	
+		
+	}
+	
+	//코맨트 수정
+	@RequestMapping(value="selectQaToModifyComment.do")
+	public String selectQaToModifyComment(@RequestParam("number")int fqNo, ModelMap map, @RequestParam("comNo")int comNo){
+		CommentVO cvo = service.getCommentByComNo(comNo);
+		QaVO  vo = service.getQa(fqNo);
+		FilesVo temp =service.selectFiles(vo.getFileNo());
 		map.addAttribute("fileName", temp.getFileName());
 		vo.setQaCount(vo.getQaCount()+1);
-		
 		service.modifyCount(vo);
-		System.out.println("select 후 : "+vo);
+		vo.setQaText(vo.getQaText().replace("\r\n", "<br>"));
 		map.addAttribute("qa_vo",vo);
-		return "qa/qa_result.tiles";	
+		List list =service.getComment(fqNo);
+		map.addAttribute("comment_list", list);
+		map.addAttribute("cvo",cvo);
+		return "qa/qa_comment_modify.tiles";	
 	}
+	
+	//QA 삭제
 	@RequestMapping(value="deleteQa.do")
 	public String deleteQa(ModelMap map, @RequestParam("number")int fqNo){
 		service.deleteQa(fqNo);
 		return "/qa/qa.do";
 	}
+	
+	//QA수정
 	@RequestMapping(value="modifyQa.do")
 	public String modifyQa(@RequestParam("fqNo")int fqNo, ModelMap map, @ModelAttribute QaVO vo , @ModelAttribute FilesVo svo, HttpServletRequest request) throws IllegalStateException, IOException{
 		MultipartFile file = svo.getUpfile();
@@ -128,31 +219,32 @@ public class QaController{
 		return "/qa/qa.do";
 	}
 	
+	//다운로드 뷰 
 	@RequestMapping("download.do")
-	public String download(@RequestParam String filename, ModelMap map){
-		
-		map.addAttribute("downFile", filename); //다운로드 할 파일명을 넣어 view로 이동
+	public String download(@RequestParam String filename, ModelMap map){	
+		map.addAttribute("downFile", filename); 
 		return "downloadView";
 	}
-	
+	//QA리스트
 	@RequestMapping(value="qa.do")
-	public String getQaByKeyword(ModelMap map, @RequestParam(defaultValue="1")int page, @ModelAttribute SearchVO svo){
-		
+	public String getQaByKeyword(HttpSession session, ModelMap map, @RequestParam(defaultValue="1")int page, @ModelAttribute SearchVO svo){
+		MemberVO mvo = (MemberVO) session.getAttribute("login_info");
 		Map qaList = new HashMap();
 		QaVO qaVo;
-	
-		Map pageMap = service.getQaListPaging(page);
-		map.addAttribute("pageMap",pageMap);
-		
-		//selectQaBySearchVOPaging -> svo 의 searchType, searchKeyword, 현재 page 를 이용하여 페이징된 list 리턴
 		qaList = service.selectQaBySearchVOPaging(svo, page);
+		System.out.println("ㅇㅇㅇgetQaByKeyword : "+qaList);
 		map.addAttribute("pageMap", qaList);
 		map.addAttribute("currentSearchType", svo.getSearchType());
 		map.addAttribute("currentSearchKeyword", svo.getSearchKeyword());
-		return "qa/qa_list.tiles";
 		
-		
+		if(mvo==null){
+			//비회원
+			return "main.tiles";
+		}else if(mvo.equals(102300)){
+		//관리자모드
+			return "qa/qa_list_admin.tiles";
+		}else{
+			return "qa/qa_list.tiles";	
+		}
 	}
-	
-	
 }

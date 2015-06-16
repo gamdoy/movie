@@ -19,7 +19,14 @@ table#listTB thead tr{
 }
 </style>
 <h2>진행중인 이벤트</h2>
-<a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
+<c:choose>
+	<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
+		<a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
+	</c:when>
+	<c:otherwise>
+		
+	</c:otherwise>
+</c:choose>
 <form method="POST" action="<%=request.getContextPath() %>/event/searchEventText.do" id="search_event">
 <input type="text" id="searchText" name="searchText">
 <input type="submit" value="검색">
@@ -35,7 +42,7 @@ table#listTB thead tr{
 					<c:if test="${idx.index%4==0 }">
 						<tr>
 					</c:if>
-							<td width="15" height="20" align="center">
+							<td width="15" height="20" align="center" style="width: 200px;">
 								<div style="width:200;">
 									<div onclick="getEvent(${eventVO.evtNo })">
 										<c:choose>

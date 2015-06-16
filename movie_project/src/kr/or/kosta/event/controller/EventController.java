@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.event.model.service.EventService;
 import kr.or.kosta.event.vo.EventVO;
 import kr.or.kosta.event.vo.WinnerVO;
 import kr.or.kosta.files.vo.FilesVo;
+import kr.or.kosta.member.vo.MemberVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,6 +84,20 @@ public class EventController {
 	}
 	*/
 	
+	@RequestMapping(value="regisForm")
+	public String regisForm(@ModelAttribute MemberVO membervo, HttpSession session, HttpServletRequest request,ModelMap map){
+		MemberVO loginInfo = (MemberVO)session.getAttribute("login_info");
+		String url=null;
+		
+		if(loginInfo.getMemMemberType().equals("102300")){
+			map.addAttribute("login_info",loginInfo);
+			url="event/regis_form.tiles";
+		}else{
+			url="event/nowEvent.do";
+			map.addAttribute("error_message", "관리자만 사용가능한 메뉴입니다.");
+		}
+		return url;
+	}
 	
 	@RequestMapping(value="modifyEvent")
 	public String modifyEvent(@ModelAttribute EventVO vo,ModelMap map,HttpServletRequest request)throws IllegalStateException, IOException{
@@ -216,6 +232,13 @@ public class EventController {
 	public String modifyWinner(@ModelAttribute WinnerVO vo, ModelMap map){
 		
 		service.modifyWinner(vo);
+		return "/event/eventListPaging.do";
+	}
+	
+	@RequestMapping(value="insertWinner")
+	public String insertWinner(@ModelAttribute WinnerVO vo, ModelMap map){
+		
+		service.insertWinner(vo);
 		return "/event/eventListPaging.do";
 	}
 
