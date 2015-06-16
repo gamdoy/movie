@@ -108,7 +108,7 @@ function setSubmit(){
 	}else if(!$("#memPassword").val()){
 		alert("비밀번호를 입력하세요.");
 		return false;
-	}else if(!($("#memPassword").val()==$(password2).val())){
+	}else if(!($("#memPassword").val()==$("#password2").val())){
 		alert("비밀번호를 일치하게 입력하세요.");
 		return false;			
 	}else if(!$("#memName").val()){
