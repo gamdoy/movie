@@ -153,7 +153,6 @@ function submitCheck() {
 				<td>상영등급</td>
 				<td><select name="screeningGrade" id="screeningGrade">
 						<c:forEach items="${screenGrade }" var="sgrade">
-							
 							<option value="${sgrade.cmnNo }"
 							 ${requestScope.movie.screeningGrade==sgrade.cmnNo? 'selected="selected"':""}>
 							${sgrade.cmnCodeKor }</option>

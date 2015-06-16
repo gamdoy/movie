@@ -17,7 +17,6 @@ $(document).ready(function() {
 	});
 });
 </script>
-${moviePaging.pagingBean.currentPage }
 <form method="post"
 		action="<%=request.getContextPath()%>/movie/adminmovie_list.do"
 		id="registerForm" name="registerForm" enctype="multipart/form-data"	>

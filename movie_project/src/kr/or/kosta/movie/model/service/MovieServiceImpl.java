@@ -59,6 +59,21 @@ public class MovieServiceImpl implements MovieService {
 	public MovieVO getMovieByNo(String movNo) {
 		return dao.getMovieByNo(movNo);
 	}
+	//movNo로 영화조회-list
+	public List<MovieVO> getMovieByNoList(String movNo){
+		return dao.getMovieByNoList(movNo);
+	}
+	
+	//관심영화
+	public  int addFavorite(Map map){
+		return dao.addFavorite(map);		
+	}
+	//관심영화 조회
+	@Override
+	public List selFavorite() {
+		return dao.selFavorite();
+	}
+	
 	
 	
 	//개별table 조회
@@ -74,6 +89,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<ProductionVO> getProduction() {
 		return dao.getProduction();
 	}
+	
 	
 
 	
