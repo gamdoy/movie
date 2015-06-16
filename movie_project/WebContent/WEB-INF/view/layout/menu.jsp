@@ -37,7 +37,7 @@ var flag = false;
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
-			window.location = "<%=request.getContextPath() %>/theater/movieSchedule.do";
+			window.location = "<%=request.getContextPath() %>/theater/theaterManagement.do";
 		});
 		$("#eventBtn").on("click", function() {
 			hide_subMenu();
@@ -93,7 +93,9 @@ var flag = false;
 		<img src="<%=request.getContextPath()%>/upload/icon.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<c:if test="${sessionScope.login_info != null && sessionScope.login_info.memMemberType == '102300'}">
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:if>
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="adminBtn">관리자</label>
@@ -176,4 +178,3 @@ var flag = false;
 </c:when>
 </c:choose>
 </section><!-- 로그인 영역 -->
-

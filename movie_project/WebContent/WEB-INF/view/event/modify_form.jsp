@@ -10,6 +10,20 @@
 $(document).ready(function(){
 	$("#modifyForm").on("submit", function(){
 		
+		var startDate=$("#evtStartDate").val();
+		var endDate=$("#evtEndDate").val();
+		
+		var arr1=startDate.split('-');
+		var arr2=endDate.split('-');
+		
+		var evtStartDate=new Date(arr1[0],arr1[1],arr1[2]);
+		var evtEndDate=new Date(arr2[0],arr2[1],arr2[2]);
+		
+		if(evtStartDate>evtEndDate){
+			alert("이벤트 종료일은 시작일 이후여야합니다.");
+			return false;
+		}
+		
 		if(!$("#evtTitle").val()){
 			alert("이벤트 이름을 입력하세요");
 			$("#evtTitle").focus();
@@ -70,8 +84,8 @@ $(document).ready(function(){
 		</tr>	
 		<tr>
 			<td>이벤트 내용</td>
-			<td>
-				<input type="text" id="evtContent" name="evtContent"> 
+			<td><br>
+				<textarea name="evtContent" id="evtContent"	cols="50" rows='5'></textarea>
 			</td>
 		</tr>
 		<tr>
