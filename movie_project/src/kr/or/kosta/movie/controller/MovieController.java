@@ -86,7 +86,7 @@ public class MovieController {
 
 	// 등록 성공
 	@RequestMapping("register_success.do")
-	public String registerSuccsess(@RequestParam String movNo, ModelMap map) {
+	public String registerSuccsess(@RequestParam int movNo, ModelMap map) {
 		MovieVO movie = service.getMovieByNo(movNo);
 		map.addAttribute("movie", movie);
 		return "movie/register_success.tiles";
@@ -95,7 +95,7 @@ public class MovieController {
 
 	// 영화 수정 페이지 이동
 	@RequestMapping("modify_form.do")
-	public String movieModify(@RequestParam String movNo, ModelMap map) {
+	public String movieModify(@RequestParam int movNo, ModelMap map) {
 		MovieVO movie = service.getMovieByNo(movNo);
 		System.out.println(movie);
 		map.addAttribute("movie", movie);
@@ -183,8 +183,11 @@ public class MovieController {
 	
 	//사용자 영화조회
 	@RequestMapping("user_movie_info.do")
-	public String userMovieInfo(@RequestParam String movNo, ModelMap map){
+	public String userMovieInfo(@RequestParam int movNo, ModelMap map, HttpSession session){
+		
 		MovieVO movie = service.getMovieByNo(movNo);
+		MovieVO list = service.selFavorite(movNo);
+		map.put("list",list);
 		
 		DecimalFormat format = new DecimalFormat(".#");
 		double i= movie.getMovGrade() / movie.getMovCount();
@@ -195,8 +198,8 @@ public class MovieController {
 		
 	}
 	//영화 평점
-	@RequestMapping("movieGrade.do")
-	public String movieGrade(@RequestParam int star, @RequestParam String movNo, HttpSession session,ModelMap map){
+	@RequestMapping("/login/movieGrade.do")
+	public String movieGrade(@RequestParam int star, @RequestParam int movNo, HttpSession session,ModelMap map){
 		System.out.println("이건 나오나 "+star);
 		System.out.println("건너온 영화번호 "+movNo);
 		MovieVO movie = service.getMovieByNo(movNo);
@@ -219,30 +222,42 @@ public class MovieController {
 		return "movie/userMovieInfo.tiles";
 	}
 	
-	//관심영화
-	@RequestMapping("addFavorite.do")
-	public String addFavorate(@RequestParam int memNo, @RequestParam String movNo,   ModelMap map){
+	//관심영화 추가
+	@RequestMapping("/login/addFavorite.do")
+	public String addFavorate(@RequestParam int memNo, @RequestParam int movNo,   ModelMap map){
 		//db 회원번호, 영화번호로 저장
 		Map fav = new HashMap();
 		fav.put("memNo",memNo);
 		fav.put("movNo",movNo);
-		int check = service.addFavorite(fav);
-		System.out.println("성공 "+check);
-		
-		List list = service.selFavorite();
+		service.addFavorite(fav);
+		return "redirect:/movie/user_favorite2.do";
+	}
+	//redirect용
+	@RequestMapping("user_favorite2.do")
+	public String redirectFav(ModelMap map){
+		List list = service.selFavoriteAll();
 		System.out.println(list);
 		map.put("movie", list);
-		map.put("check", check); 
 		
+		return "movie/user_favorite.tiles";
+		
+	}
+	//관심영화 전체 조회
+	@RequestMapping("user_favorate.do")
+	public String favorList(ModelMap map){
+		List list = service.selFavoriteAll();
+		System.out.println(list);
+		map.put("movie", list);
 		return "movie/user_favorite.tiles";
 	}
 	
-	@RequestMapping("user_favorate.do")
-	public String favList(ModelMap map){
-		List list = service.selFavorite();
-		System.out.println(list);
-		map.put("movie", list);
-		return "movie/user_favorite.tiles";
+	//관심영화 삭제
+	@RequestMapping("delFavor.do")
+	public String delFavor(@RequestParam int movNo){
+		System.out.println("넘어온번호 "+movNo);
+		int i = service.delFavorite(movNo);
+		System.out.println(i);
+	return "/movie/user_favorate.do";
 		
 	}
 	

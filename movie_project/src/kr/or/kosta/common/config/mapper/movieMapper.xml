@@ -61,7 +61,7 @@
 		<result column="PRO_NAME" property="proName"/>
 		<result column="genre_name" property="genreName"/>
 		<result column="sgrade_name" property="sgradeName"/>
-		<result column="mem_id" property="favor"/>
+		<result column="mov_no" property="favor"/>
 		
 			
 	</resultMap>
@@ -164,11 +164,17 @@
 		insert into favmovie values(#{memNo },#{movNo })
 	</insert>
 	
-	<select id="selFavorite" resultMap="movie-resultmap">
+	<select id="selFavoriteAll" resultMap="movie-resultmap">
 		select mem_id,f.mov_no, m.mov_title, m.mov_poster
 		from FAVMOVIE f, movie m
 		where f.mov_no = m.mov_no
-		
+	</select>
+	
+	<select id="selFavorite" resultMap="movie-resultmap" parameterType="_int">
+		select mem_id,f.mov_no, m.mov_title, m.mov_poster
+		from FAVMOVIE f, movie m
+		where f.mov_no = m.mov_no
+		 and f.mov_no = #{movNo}
 	</select>
 	
 	<delete id="delFavorite" parameterType="_int">
