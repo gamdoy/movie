@@ -234,5 +234,12 @@ public class EventController {
 		service.modifyWinner(vo);
 		return "/event/eventListPaging.do";
 	}
+	
+	@RequestMapping(value="insertWinner")
+	public String insertWinner(@ModelAttribute WinnerVO vo, ModelMap map){
+		
+		service.insertWinner(vo);
+		return "/event/eventListPaging.do";
+	}
 
 }
