@@ -17,6 +17,13 @@ public interface MovieService {
 	public abstract int updateMovie(MovieVO movie);
 	//no로 영화조회
 	public abstract MovieVO getMovieByNo(String movNo);
+	//no로 영화조회-List
+	public abstract List<MovieVO> getMovieByNoList(String movNo);
+	//관심영화
+	public abstract int addFavorite(Map map);
+	//관심영화 조회
+	public abstract List selFavorite();
+	
 	//모든영화 조회 - paging
 	public abstract Map allMovieList(int pageNo, SearchVO vo);
 	//모든영화 카운트

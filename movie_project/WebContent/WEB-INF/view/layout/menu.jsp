@@ -93,7 +93,7 @@
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
-		관심영화&nbsp;&nbsp;&nbsp;
+		<a href="<%=request.getContextPath() %>/movie/user_favorate.do">관심영화</a>
 		관람작&nbsp;&nbsp;&nbsp;
 		마일리지 관리&nbsp;&nbsp;&nbsp;
 		예매내역&nbsp;&nbsp;&nbsp;

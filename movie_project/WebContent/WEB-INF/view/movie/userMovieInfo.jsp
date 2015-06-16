@@ -1,20 +1,28 @@
 <%@ page contentType = "text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <meta charset="UTF-8">
+
+
 <style type="text/css">
 tr{
 text-align: center;
 }
-
-
 </style>
-<!--
+<script type="text/javascript">
+	var flag=false;
+ 	function submitCheck(){
+ 		$.each($(".star"), function() {
+			if($(this).prop("checked")==true){
+				alert("점수가 반영 되었습니다.")
+				flag=true;
+			}
+		});
+ 		return flag;
+	}
+		 
+</script>
 
--->
-</style>
-<h1>영화 정보<br>
-<br>
-</h1>
-<form >
+<h1>영화 정보</h1>
 		<table >
 			<tr>
 				<!-- 제목 -->
@@ -71,5 +79,33 @@ text-align: center;
 				<td>상영시간</td>
 				<td>${requestScope.movie.runtime } </td>
 			</tr>
+			<tr>
+			
+			<td>평점</td>
+			<td colspan="2">현제평점:${requestScope.movie.avgGrade }<br>
+			
+			<c:if test="${sessionScope.login_info != null }">
+			평가하기
+			<form action="<%=request.getContextPath()%>/movie/movieGrade.do" id="mg" onsubmit="return submitCheck();">
+				1<input name="star" id="star" type="radio" class="star" value="1"/>
+			 	2<input name="star" id="star" type="radio" class="star" value="2"/>
+			 	3<input name="star" id="star" type="radio" class="star" value="3"/>
+		 	 	4<input name="star" id="star" type="radio" class="star" value="4"/>
+		 	 	5<input name="star" id="star" type="radio" class="star" value="5"/>
+		 	 	<input type="hidden" name="movNo" value="${requestScope.movie.movieNo }">
+		 	 	<input type="submit" value="평가" >
+			</form>
+			</c:if>
+			
+			<td>
+			<form action="<%=request.getContextPath()%>/movie/addFavorite.do">
+			<input type="hidden" name="movNo" value="${requestScope.movie.movieNo }">
+			<input type="hidden" name="memNo" value="${sessionScope.login_info.memNo}">
+		 		
+		 		 	<input type="submit" value="관심영화 추가">
+		 	
+		 	</form>
+		 	</td>
+		 	</tr>
+		 	
 		</table>
-	</form>

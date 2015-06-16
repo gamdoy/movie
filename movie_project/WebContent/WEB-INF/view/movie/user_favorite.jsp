@@ -1,16 +1,11 @@
-<%@ page contentType = "text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script type="text/javascript">
+
 
 </script>
 <style type="text/css">
 table{
-width: 80%;
 border: 1px solid gray;
 border-spacing:10px;
 }
@@ -24,10 +19,8 @@ height:50px;
 
 </style>
 
-
-</head>
-<body>
-	<table id="list1" >
+	<h1>관심영화</h1>
+	<table>
 	<c:forEach items="${requestScope.movie }" var="movie" varStatus="idx">
                <c:if test="${idx.index%4==0 }">
                   <tr>
@@ -56,6 +49,3 @@ height:50px;
                </c:if>
                </c:forEach>
 	</table>
-	
-</body>
-</html>

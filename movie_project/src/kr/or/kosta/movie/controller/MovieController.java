@@ -2,14 +2,19 @@ package kr.or.kosta.movie.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
 import kr.or.kosta.commoncode.vo.CommonCodeVO;
+import kr.or.kosta.member.vo.MemberVO;
 import kr.or.kosta.movie.model.service.MovieService;
 import kr.or.kosta.movie.vo.ActorVO;
 import kr.or.kosta.movie.vo.DirectorVO;
@@ -91,11 +96,10 @@ public class MovieController {
 	// 영화 수정 페이지 이동
 	@RequestMapping("modify_form.do")
 	public String movieModify(@RequestParam String movNo, ModelMap map) {
-		
 		MovieVO movie = service.getMovieByNo(movNo);
 		System.out.println(movie);
 		map.addAttribute("movie", movie);
-
+		
 		// commonCode 사용
 		List<CommonCodeVO> screenGrade = service2.getCodeList("104");
 		List<CommonCodeVO> genre = service2.getCodeList("110");
@@ -118,9 +122,7 @@ public class MovieController {
 	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request, Errors errors) throws IllegalStateException, IOException{
 		// 파일업로드 처리
 				MultipartFile file = movie.getPoster();
-				
 				System.out.println(movie.getMovieNo());
-				
 				String newFileName=null;
 				if (file != null && !file.isEmpty()) {
 					newFileName = System.currentTimeMillis()+".jpg";
@@ -135,11 +137,8 @@ public class MovieController {
 					}
 					movie.setPosterName(newFileName);
 				}
-				
 				int success = service.updateMovie(movie);
-				movie.setsuccess(success);
-				System.out.println(success);
-				
+				movie.setSuccess(success);
 				map.addAttribute("movie", movie);
 				
 				// commonCode 사용
@@ -186,11 +185,66 @@ public class MovieController {
 	@RequestMapping("user_movie_info.do")
 	public String userMovieInfo(@RequestParam String movNo, ModelMap map){
 		MovieVO movie = service.getMovieByNo(movNo);
+		
+		DecimalFormat format = new DecimalFormat(".#");
+		double i= movie.getMovGrade() / movie.getMovCount();
+		movie.setAvgGrade(format.format(i));
+		
 		map.put("movie", movie);
 		return "movie/userMovieInfo.tiles";
 		
 	}
+	//영화 평점
+	@RequestMapping("movieGrade.do")
+	public String movieGrade(@RequestParam int star, @RequestParam String movNo, HttpSession session,ModelMap map){
+		System.out.println("이건 나오나 "+star);
+		System.out.println("건너온 영화번호 "+movNo);
+		MovieVO movie = service.getMovieByNo(movNo);
+		//평점 set
+		movie.setMovGrade(movie.getMovGrade()+star);
+		//세션로그인정보가 true 이면 평가 인원에 +1
+		MemberVO member = (MemberVO) session.getAttribute("login_info");
+		
+		if(member!=null){
+			movie.setMovCount(movie.getMovCount()+1);
+		}
+		// 평점/평가인원수 결과를 소수점1자리 까지만 표현
+		DecimalFormat format = new DecimalFormat(".#");
+		double i= movie.getMovGrade() / movie.getMovCount();
+		movie.setAvgGrade(format.format(i));
+		System.out.println(movie.getAvgGrade());
+		service.updateMovie(movie);
+		
+		map.addAttribute("movie",movie);
+		return "movie/userMovieInfo.tiles";
+	}
 	
+	//관심영화
+	@RequestMapping("addFavorite.do")
+	public String addFavorate(@RequestParam int memNo, @RequestParam String movNo,   ModelMap map){
+		//db 회원번호, 영화번호로 저장
+		Map fav = new HashMap();
+		fav.put("memNo",memNo);
+		fav.put("movNo",movNo);
+		int check = service.addFavorite(fav);
+		System.out.println("성공 "+check);
+		
+		List list = service.selFavorite();
+		System.out.println(list);
+		map.put("movie", list);
+		map.put("check", check); 
+		
+		return "movie/user_favorite.tiles";
+	}
+	
+	@RequestMapping("user_favorate.do")
+	public String favList(ModelMap map){
+		List list = service.selFavorite();
+		System.out.println(list);
+		map.put("movie", list);
+		return "movie/user_favorite.tiles";
+		
+	}
 	
 
 }
