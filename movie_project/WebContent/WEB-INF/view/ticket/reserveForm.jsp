@@ -62,10 +62,11 @@ $(document).ready(function() {
 		var rowNo = row.substr(3);
 		$.ajax({
 			type:"POST",
-			url:"<%= request.getContextPath()%>/theater/reserve.do",
+			url:"<%= request.getContextPath()%>/theater/login/reserve.do",
 			data:{
 				ticTotalcustomer:peopleNo,
-				mrLine:rowNo,
+				mrLine:0,
+				mrLineStr:rowNo,
 				mrSeat:no,
 				ticDate:"${movieRoom.schDate}",
 				mrNo:"${movieRoom.mrNo}",
