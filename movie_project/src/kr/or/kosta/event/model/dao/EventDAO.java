@@ -11,6 +11,8 @@ public interface EventDAO {
 
 	public abstract List<EventVO> selectEventList();
 	
+	public abstract List<EventVO> selectEndEventList();
+	
 	public abstract EventVO selectEventByEvtNo(int evtNo);
 	
 	public abstract int insertEvent(EventVO vo);
@@ -23,6 +25,8 @@ public interface EventDAO {
 	 * 문자열 검색
 	 */
 	public abstract List<EventVO> findEventByText(String text);
+	
+	public abstract List<EventVO> findEndEventByText(String text);
 	
 	/**
 	 * Event 테이블의 페이징 처리 전체 이벤트 조회 처리

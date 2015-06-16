@@ -25,6 +25,11 @@ public class EventDAOImpl implements EventDAO {
 	}
 	
 	@Override
+	public List<EventVO> selectEndEventList() {
+		return session.selectList(namespace+"selectEndEventList");		
+	}
+	
+	@Override
 	public EventVO selectEventByEvtNo(int evtNo) {
 		return session.selectOne(namespace+"selectEventByEvtNo",evtNo);
 	}
@@ -52,6 +57,12 @@ public class EventDAOImpl implements EventDAO {
 	public List<EventVO> findEventByText(String text) {
 		return session.selectList(namespace+"findEventByText",text);
 	}
+	
+	@Override
+	public List<EventVO> findEndEventByText(String text) {
+		return session.selectList(namespace+"findEndEventByText",text);
+	}
+	
 	
 	/*
 	 * 페이징 처리
