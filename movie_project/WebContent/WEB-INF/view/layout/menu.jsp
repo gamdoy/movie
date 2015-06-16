@@ -90,7 +90,7 @@ var flag = false;
 </section>
 <section class="menu"><!-- 메뉴영역 -->
 	<section class="main_menu"><!-- 메인 메뉴영역 -->
-		<img src="<%=request.getContextPath()%>/upload/아이콘.png" width="100px" height="50px" alt="183box" />
+		<img src="<%=request.getContextPath()%>/upload/icon.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -100,13 +100,14 @@ var flag = false;
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
-		관심영화&nbsp;&nbsp;&nbsp;
+		<a href="<%=request.getContextPath() %>/movie/user_favorate.do">관심영화</a>
 		관람작&nbsp;&nbsp;&nbsp;
 		마일리지 관리&nbsp;&nbsp;&nbsp;
 		예매내역&nbsp;&nbsp;&nbsp;
 		<label style="cursor: pointer;" onclick="memberleave()">회원탈퇴</label>	
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
+		<a href="<%=request.getContextPath() %>/movie/user_movie_list.do">영화</a>
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
 	</section>
 	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->
@@ -175,3 +176,4 @@ var flag = false;
 </c:when>
 </c:choose>
 </section><!-- 로그인 영역 -->
+
