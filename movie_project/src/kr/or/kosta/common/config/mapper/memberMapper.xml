@@ -89,4 +89,8 @@
  		and mem_id=#{memId} and mem_name=#{memName} and mem_email=#{memEmail}
  	</select>
  	
+ 	<update id="leaveMember" parameterType="memberVO">
+ 		update member
+ 		set MEM_MEMBERTYPE=#{memMemberType}	where mem_no=#{memNo}				
+ 	</update>
 </mapper>
