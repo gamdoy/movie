@@ -21,7 +21,7 @@ function goUrl(){
 			</td>
 		</tr>
 		<tr>
-			<td  align="center">기간</td>
+			<td  align="center">등록일</td>
 			<td><input type="text" id="winRegdate" name="winRegdate" size="30"></td>
 		</tr>
 		

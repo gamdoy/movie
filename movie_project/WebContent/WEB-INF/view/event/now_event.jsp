@@ -42,7 +42,7 @@ table#listTB thead tr{
 					<c:if test="${idx.index%4==0 }">
 						<tr>
 					</c:if>
-							<td width="15" height="20" align="center">
+							<td width="15" height="20" align="center" style="width: 200px;">
 								<div style="width:200;">
 									<div onclick="getEvent(${eventVO.evtNo })">
 										<c:choose>

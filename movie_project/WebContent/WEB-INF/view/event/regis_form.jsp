@@ -29,15 +29,34 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if(!$("#evtRegDate").val()){
-			alert("등록일을 입력하세요");
-			$("#evtRegDate").focus();
-			return false;
-		}
-		
+	
 		if(!$("#evtContent").val()){
 			alert("이벤트제목을 입력하세요");
 			$("#evtTitle").focus();
+			return false;
+		}
+		
+		
+		
+		
+		if(!$("#evtStartDate").val() "#evtEndDate").val()){
+			alert("이벤트제목을 입력하세요");
+			$("#evtTitle").focus();
+			return false;
+		}
+	
+		var startDate=$("#evtStartDate").val();
+		var endDate=$("#evtEndDate").val();
+		
+		var arr1=startDate.split('-');
+		var arr2=endDate.split('-');
+		
+		var evtStartDate=new Date(arr1[0],arr1[1],arr1[2]);
+		var evtEndDate=new Date(arr2[0],arr2[1],arr2[2]);
+		
+		if(evtStartDate<evtEndDate){
+			$("#endDateLabel").prop("value","이벤트 종료일은 시작일 이후여야합니다.");
+			alert("이벤트 종료일은 시작일 이후여야합니다.");
 			return false;
 		}
 	
@@ -45,6 +64,19 @@ $(document).ready(function(){
 	});
 	
 });
+
+function day_check(value){
+	var arr=value.split('-');
+	
+	var startDate=new Date(arr[0],arr[1],arr[2]);
+	var endDate=new Date(arr[0],arr[1],arr[2]);
+	
+	if(startDate<endDate){
+		alert("이벤트 종료일은 시작일 이후여야합니다.");
+		$("#evtEndDate").prop("value","");
+		return false;
+	}
+}
 
 </script>
 
@@ -68,13 +100,8 @@ $(document).ready(function(){
 		<tr>
 			<td>종료일</td>
 			<td>
-				<input type="text" id="evtEndDate" name="evtEndDate" onClick="datePicker(event,'evtEndDate')" readonly="readonly">
-			</td>
-		</tr>
-		<tr>
-			<td>등록일</td>
-			<td>
-				<input type="text" id="evtRegDate" name="evtRegDate" onClick="datePicker(event,'evtRegDate')" readonly="readonly">
+				<input type="text" id="evtEndDate" name="evtEndDate" onClick="datePicker(event,'evtEndDate')" onclick="day_check(value)" readonly="readonly">
+				<label id="endDateLabel" name="endDateLabel" ></label>
 			</td>
 		</tr>
 		<tr>
