@@ -53,5 +53,15 @@ public class MemberServiceImpl implements MemberService{
 	public MemberVO getMemberByname(MemberVO membervo) {
 		return dao.selectMemberByname(membervo);
 	}
+
+	@Override
+	public MemberVO getMemberPassword(MemberVO membervo) {
+		return dao.selectMemberPassword(membervo);
+	}
+
+	@Override
+	public int leaveMember(MemberVO membervo) {
+		return dao.memberLeave(membervo);
+	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.center.vo.CommentVO;
 import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
@@ -109,6 +110,45 @@ public class QaDAOImpl implements QaDAO{
 		
 		return session.selectOne(namespace+"selectSearchQaCount", svo);
 	}
+
+	@Override
+	public int updateReply(QaVO vo) {
+		return session.update(namespace+"updateReply",vo);
+	}
 	
+	@Override
+	public int registerComment(CommentVO cvo) {
+		return session.insert(namespace+ "insertComment", cvo);
+	}
+	@Override
+	public List<CommentVO> getComment(int fqNo) {
+		return session.selectList(namespace+"selectComment",fqNo);
+	}
+
+	@Override
+	public int deleteComment(int comNo) {
+		return session.delete(namespace+"deleteComment",comNo);
+	}
+
+	@Override
+	public CommentVO getCommentByComNo(int comNo) {
+		
+		return session.selectOne(namespace+"getCommentByComNo",comNo);
+	}
+
+	@Override
+	public int modifyComment(CommentVO cvo) {
+		return session.update(namespace+"modifyComment", cvo);
+	}
+
+	@Override
+	public int getCountComment(int fqNo) {
+		return session.selectOne(namespace+"getCountComment", fqNo);
+	}
+
+	@Override
+	public int register_reply(QaVO rvo) {
+		return session.insert(namespace+"insertQa_Re",rvo);
+	}
 	
 }

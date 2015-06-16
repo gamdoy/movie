@@ -16,6 +16,8 @@
 	.admin_menu {height: 95px;width: 880px; display: none;}
 </style>
 <script type="text/javascript">
+var flag = false;
+
 	$(document).ready(function() {
 		if(${sessionScope.login_info != null}){
 			hide_subMenu();
@@ -75,14 +77,20 @@
 	function membersearch(){
 		window.location="<%=request.getContextPath() %>/member/membersearch.do";
 	}
-	
+	function memberleave(){
+		flag = confirm("정말 탈퇴하시겠습니까?");
+		if(flag){
+			location.href="<%=request.getContextPath() %>/member/memberLeave.do";
+		}
+	}
+
 </script>
 <section style="float: left; width: 1180px; height: 80px;">
 	<iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/main@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
 </section>
 <section class="menu"><!-- 메뉴영역 -->
 	<section class="main_menu"><!-- 메인 메뉴영역 -->
-		<img src="<%=request.getContextPath()%>/upload/아이콘.png" width="100px" height="50px" alt="183box" />
+		<img src="<%=request.getContextPath()%>/upload/icon.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -96,7 +104,7 @@
 		관람작&nbsp;&nbsp;&nbsp;
 		마일리지 관리&nbsp;&nbsp;&nbsp;
 		예매내역&nbsp;&nbsp;&nbsp;
-		회원탈퇴
+		<label style="cursor: pointer;" onclick="memberleave()">회원탈퇴</label>	
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
@@ -109,11 +117,10 @@
 		<a href="<%=request.getContextPath() %>/event/nowEvent.do">진행중인 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/endEvent.do">종료된 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/eventListPaging.do">당첨자 확인</a>
 	</section>
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>
+		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">Q & A</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황
-		
+		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황	
 		<a href="<%=request.getContextPath() %>/movie/register_form.do">영화등록</a>
 		<a href="<%=request.getContextPath() %>/movie/adminmovie_list.do">영화리스트</a>
 	</section>
