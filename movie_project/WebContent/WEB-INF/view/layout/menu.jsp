@@ -58,7 +58,7 @@
 		});
 		
 		$("#mypage").on("click", function(){
-			window.location="<%=request.getContextPath() %>/admin/myinfo.do"
+			window.location="<%=request.getContextPath() %>/admin/myinfo.do";
 		});
 	});
 	function hide_subMenu() {

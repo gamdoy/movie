@@ -86,7 +86,7 @@ public class AdminController {
 		map.addAttribute("member_info", member);
 		map.addAttribute("coupon_list", couponlist);
 		System.out.println("쿠폰리스트 : "+couponlist);
-		
+		System.out.println("멤버정보 : "+member);
 		MemberVO login_member = (MemberVO) session.getAttribute("login_info");
 		//관리자일경우
 		if(login_member.getMemMemberType().equals("102300")){
