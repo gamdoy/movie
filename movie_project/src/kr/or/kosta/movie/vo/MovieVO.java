@@ -2,6 +2,8 @@ package kr.or.kosta.movie.vo;
 
 import java.util.List;
 
+import kr.or.kosta.member.vo.MemberVO;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class MovieVO {
@@ -19,6 +21,7 @@ public class MovieVO {
 	private String trailer;//트레일러
 	private double movGrade;// 영화평점
 	private int movCount; //참여인원
+	private String avgGrade;//평점평균
 	private String genre; //장르
 	private String genreName;
 	private int success;//수정 성공 유무 알림 변수
@@ -31,18 +34,20 @@ public class MovieVO {
 	private int proNo; //제작사 
 	private String proName;
 	
+	//관심 영화
+	private String favor;
 
 	public MovieVO() {
 		super();
 	}
 
-
 	public MovieVO(int movieNo, String title, String sysnopsis,
 			String officialSite, String screeningGrade, String sgradeName,
 			MultipartFile poster, String posterName, String intheaters,
 			String runtime, String trailer, double movGrade, int movCount,
-			String genre, String genreName, int dirNo, String dirName,
-			int actNo, String actName, int proNo, String proName) {
+			String avgGrade, String genre, String genreName, int success,
+			int dirNo, String dirName, int actNo, String actName, int proNo,
+			String proName, String favor) {
 		super();
 		this.movieNo = movieNo;
 		this.title = title;
@@ -57,38 +62,7 @@ public class MovieVO {
 		this.trailer = trailer;
 		this.movGrade = movGrade;
 		this.movCount = movCount;
-		this.genre = genre;
-		this.genreName = genreName;
-		this.dirNo = dirNo;
-		this.dirName = dirName;
-		this.actNo = actNo;
-		this.actName = actName;
-		this.proNo = proNo;
-		this.proName = proName;
-	}
-	
-
-
-	public MovieVO(int movieNo, String title, String sysnopsis,
-			String officialSite, String screeningGrade, String sgradeName,
-			MultipartFile poster, String posterName, String intheaters,
-			String runtime, String trailer, double movGrade, int movCount,
-			String genre, String genreName, int success, int dirNo,
-			String dirName, int actNo, String actName, int proNo, String proName) {
-		super();
-		this.movieNo = movieNo;
-		this.title = title;
-		this.sysnopsis = sysnopsis;
-		this.officialSite = officialSite;
-		this.screeningGrade = screeningGrade;
-		this.sgradeName = sgradeName;
-		this.poster = poster;
-		this.posterName = posterName;
-		this.intheaters = intheaters;
-		this.runtime = runtime;
-		this.trailer = trailer;
-		this.movGrade = movGrade;
-		this.movCount = movCount;
+		this.avgGrade = avgGrade;
 		this.genre = genre;
 		this.genreName = genreName;
 		this.success = success;
@@ -98,228 +72,200 @@ public class MovieVO {
 		this.actName = actName;
 		this.proNo = proNo;
 		this.proName = proName;
+		this.favor = favor;
 	}
-
-
-	public int getsuccess() {
-		return success;
-	}
-
-
-	public void setsuccess(int success) {
-		this.success = success;
-	}
-
 
 	public int getMovieNo() {
 		return movieNo;
 	}
 
-
 	public void setMovieNo(int movieNo) {
 		this.movieNo = movieNo;
 	}
-
 
 	public String getTitle() {
 		return title;
 	}
 
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 	public String getSysnopsis() {
 		return sysnopsis;
 	}
 
-
 	public void setSysnopsis(String sysnopsis) {
 		this.sysnopsis = sysnopsis;
 	}
-
 
 	public String getOfficialSite() {
 		return officialSite;
 	}
 
-
 	public void setOfficialSite(String officialSite) {
 		this.officialSite = officialSite;
 	}
-
 
 	public String getScreeningGrade() {
 		return screeningGrade;
 	}
 
-
 	public void setScreeningGrade(String screeningGrade) {
 		this.screeningGrade = screeningGrade;
 	}
-
 
 	public String getSgradeName() {
 		return sgradeName;
 	}
 
-
 	public void setSgradeName(String sgradeName) {
 		this.sgradeName = sgradeName;
 	}
-
 
 	public MultipartFile getPoster() {
 		return poster;
 	}
 
-
 	public void setPoster(MultipartFile poster) {
 		this.poster = poster;
 	}
-
 
 	public String getPosterName() {
 		return posterName;
 	}
 
-
 	public void setPosterName(String posterName) {
 		this.posterName = posterName;
 	}
-
 
 	public String getIntheaters() {
 		return intheaters;
 	}
 
-
 	public void setIntheaters(String intheaters) {
 		this.intheaters = intheaters;
 	}
-
 
 	public String getRuntime() {
 		return runtime;
 	}
 
-
 	public void setRuntime(String runtime) {
 		this.runtime = runtime;
 	}
-
 
 	public String getTrailer() {
 		return trailer;
 	}
 
-
 	public void setTrailer(String trailer) {
 		this.trailer = trailer;
 	}
-
 
 	public double getMovGrade() {
 		return movGrade;
 	}
 
-
 	public void setMovGrade(double movGrade) {
 		this.movGrade = movGrade;
 	}
-
 
 	public int getMovCount() {
 		return movCount;
 	}
 
-
 	public void setMovCount(int movCount) {
 		this.movCount = movCount;
 	}
 
+	public String getAvgGrade() {
+		return avgGrade;
+	}
+
+	public void setAvgGrade(String avgGrade) {
+		this.avgGrade = avgGrade;
+	}
 
 	public String getGenre() {
 		return genre;
 	}
 
-
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
 
 	public String getGenreName() {
 		return genreName;
 	}
 
-
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
 	}
 
+	public int getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(int success) {
+		this.success = success;
+	}
 
 	public int getDirNo() {
 		return dirNo;
 	}
 
-
 	public void setDirNo(int dirNo) {
 		this.dirNo = dirNo;
 	}
-
 
 	public String getDirName() {
 		return dirName;
 	}
 
-
 	public void setDirName(String dirName) {
 		this.dirName = dirName;
 	}
-
 
 	public int getActNo() {
 		return actNo;
 	}
 
-
 	public void setActNo(int actNo) {
 		this.actNo = actNo;
 	}
-
 
 	public String getActName() {
 		return actName;
 	}
 
-
 	public void setActName(String actName) {
 		this.actName = actName;
 	}
-
 
 	public int getProNo() {
 		return proNo;
 	}
 
-
 	public void setProNo(int proNo) {
 		this.proNo = proNo;
 	}
-
 
 	public String getProName() {
 		return proName;
 	}
 
-
 	public void setProName(String proName) {
 		this.proName = proName;
 	}
 
+	public String getFavor() {
+		return favor;
+	}
+
+	public void setFavor(String favor) {
+		this.favor = favor;
+	}
 
 	@Override
 	public int hashCode() {
@@ -327,8 +273,11 @@ public class MovieVO {
 		int result = 1;
 		result = prime * result + ((actName == null) ? 0 : actName.hashCode());
 		result = prime * result + actNo;
+		result = prime * result
+				+ ((avgGrade == null) ? 0 : avgGrade.hashCode());
 		result = prime * result + ((dirName == null) ? 0 : dirName.hashCode());
 		result = prime * result + dirNo;
+		result = prime * result + ((favor == null) ? 0 : favor.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result
 				+ ((genreName == null) ? 0 : genreName.hashCode());
@@ -351,13 +300,13 @@ public class MovieVO {
 				+ ((screeningGrade == null) ? 0 : screeningGrade.hashCode());
 		result = prime * result
 				+ ((sgradeName == null) ? 0 : sgradeName.hashCode());
+		result = prime * result + success;
 		result = prime * result
 				+ ((sysnopsis == null) ? 0 : sysnopsis.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((trailer == null) ? 0 : trailer.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -375,12 +324,22 @@ public class MovieVO {
 			return false;
 		if (actNo != other.actNo)
 			return false;
+		if (avgGrade == null) {
+			if (other.avgGrade != null)
+				return false;
+		} else if (!avgGrade.equals(other.avgGrade))
+			return false;
 		if (dirName == null) {
 			if (other.dirName != null)
 				return false;
 		} else if (!dirName.equals(other.dirName))
 			return false;
 		if (dirNo != other.dirNo)
+			return false;
+		if (favor == null) {
+			if (other.favor != null)
+				return false;
+		} else if (!favor.equals(other.favor))
 			return false;
 		if (genre == null) {
 			if (other.genre != null)
@@ -441,6 +400,8 @@ public class MovieVO {
 				return false;
 		} else if (!sgradeName.equals(other.sgradeName))
 			return false;
+		if (success != other.success)
+			return false;
 		if (sysnopsis == null) {
 			if (other.sysnopsis != null)
 				return false;
@@ -459,7 +420,6 @@ public class MovieVO {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "MovieVO [movieNo=" + movieNo + ", title=" + title
@@ -468,12 +428,14 @@ public class MovieVO {
 				+ sgradeName + ", poster=" + poster + ", posterName="
 				+ posterName + ", intheaters=" + intheaters + ", runtime="
 				+ runtime + ", trailer=" + trailer + ", movGrade=" + movGrade
-				+ ", movCount=" + movCount + ", genre=" + genre
-				+ ", genreName=" + genreName + ", success=" + success
-				+ ", dirNo=" + dirNo + ", dirName=" + dirName + ", actNo="
-				+ actNo + ", actName=" + actName + ", proNo=" + proNo
-				+ ", proName=" + proName + "]";
+				+ ", movCount=" + movCount + ", avgGrade=" + avgGrade
+				+ ", genre=" + genre + ", genreName=" + genreName
+				+ ", success=" + success + ", dirNo=" + dirNo + ", dirName="
+				+ dirName + ", actNo=" + actNo + ", actName=" + actName
+				+ ", proNo=" + proNo + ", proName=" + proName + ", favor="
+				+ favor + "]";
 	}
+
 
 
 	

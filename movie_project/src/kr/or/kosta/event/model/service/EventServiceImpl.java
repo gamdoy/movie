@@ -26,6 +26,12 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
+	public List<EventVO> getEndEventList() {
+		List<EventVO> list =dao.selectEndEventList();
+		return list;
+	}
+	
+	@Override
 	public EventVO getEventByEvtNo(int evtNo) {
 		EventVO vo=dao.selectEventByEvtNo(evtNo);
 		return vo;
@@ -53,6 +59,11 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<EventVO> searchEventByText(String text) {
 		return dao.findEventByText(text);
+	}
+	
+	@Override
+	public List<EventVO> searchEndEventByText(String text) {
+		return dao.findEndEventByText(text);
 	}
 	
 	

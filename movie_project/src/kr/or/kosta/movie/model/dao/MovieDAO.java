@@ -17,6 +17,12 @@ public interface MovieDAO {
 	public abstract int updateMovie(MovieVO movie);
 	//movNo로 영화조회
 	public abstract MovieVO getMovieByNo(String movNo);
+	//movNo로 영화조회-list
+	public abstract List<MovieVO> getMovieByNoList(String movNo);
+	//관심영화 추가
+	public abstract int addFavorite(Map map);
+	//관심영화 조회
+	public abstract List selFavorite();
 	//모든영화 조회-paging
 	public abstract List<MovieVO> allMovieList(int pageNo,SearchVO vo);
 	//모든영화 카운트
