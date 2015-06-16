@@ -83,7 +83,7 @@ var flag = false;
 			location.href="<%=request.getContextPath() %>/member/memberLeave.do";
 		}
 	}
-	
+
 </script>
 <section style="float: left; width: 1180px; height: 80px;">
 	<iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/main@TopBar_EX" width="100%" height="80" title="" frameborder="0" scrolling="no" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0" name="TopBanner" id="TopBanner"></iframe>
@@ -117,7 +117,7 @@ var flag = false;
 		<a href="<%=request.getContextPath() %>/event/nowEvent.do">진행중인 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/endEvent.do">종료된 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/eventListPaging.do">당첨자 확인</a>
 	</section>
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;Q & A&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">F & Q</a>
+		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">Q & A</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황	

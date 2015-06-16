@@ -42,9 +42,7 @@ $(document).ready(function(){
 function goUrl(){
 	window.location="<%=request.getContextPath() %>/qa/write.do";
 }
-</script>
 
-<script type="text/javascript">
 $(document).ready(function(){
 		$("#searchForm").on("submit", function(){
 			if(!$("#searchKeyword").val().trim()){
@@ -56,7 +54,7 @@ $(document).ready(function(){
 });
 </script>
 
-</head>
+
 <!-- CSS 영역 -->
     <style type="text/css">
         * {font-size: 9pt;}
@@ -105,19 +103,37 @@ $(document).ready(function(){
            	<c:forEach items="${requestScope.pageMap.qa_list }" var="QaVO">
 				<tr id="qa_content">
 				
-					<td>${QaVO.fqNo}</td>
+					<td align="center">${QaVO.fqNo}</td>
+					
+					
+					
 					<c:choose>
 						<c:when test="${QaVO.qaSecret=='use' }">
 							<td class="secret"><input type="hidden" id="secret${QaVO.fqNo }" value="${QaVO.qaPassword }">
-							<img src="<%=request.getContextPath()%>/upload/kgpg.png" width="10px" height="10px">${QaVO.qaTitle}</td> 
+								<c:forEach begin="1" end="${QaVO.replyLevel}">
+									<img src="<%=request.getContextPath()%>/upload/화살표.png" width="10px" height="10px">
+								</c:forEach>	
+								<img src="<%=request.getContextPath()%>/upload/kgpg.png" width="10px" height="10px">${QaVO.qaTitle}
+							</td> 
 						</c:when>
+						
 						<c:otherwise>
-							<td>${QaVO.qaTitle}</td> 
+						
+								<td>
+									<c:forEach begin="1" end="${QaVO.replyLevel}">
+										<img src="<%=request.getContextPath()%>/upload/화살표.png" width="10px" height="10px">
+									</c:forEach>	
+									${QaVO.qaTitle}
+								</td> 
+						
 						</c:otherwise>
+						
+						
+						
 					</c:choose>
-					<td>${QaVO.memNo}</td>
-					<td>${QaVO.fqLastdate}</td>
-					<td>${QaVO.qaCount}</td>
+					<td align="center">${QaVO.memNo}</td>
+					<td align="center">${QaVO.fqLastdate}</td>
+					<td align="center">${QaVO.qaCount}</td>
 				</tr> 
 			</c:forEach>
            </tbody>
