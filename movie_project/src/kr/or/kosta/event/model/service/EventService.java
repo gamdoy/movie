@@ -41,4 +41,6 @@ public interface EventService {
 	public int deleteWinner(int winNo);
 	
 	public int modifyWinner(WinnerVO vo);
+	
+	public int insertWinner(WinnerVO vo);
 }

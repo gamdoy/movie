@@ -92,4 +92,9 @@ public class EventServiceImpl implements EventService {
 	public int modifyWinner(WinnerVO vo) {
 		return dao.modifyWinner(vo);
 	}
+	
+	@Override
+	public int insertWinner(WinnerVO vo) {
+		return dao.insertWinner(vo);
+	}
 }
