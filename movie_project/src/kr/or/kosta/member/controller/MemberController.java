@@ -52,33 +52,38 @@ public class MemberController {
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(String id,String password, HttpSession session, HttpServletResponse response, ModelMap map){
 		MemberVO m = service.getMemberById(id);
-		String url = null;
 		
 		if(m!=null){
 			if(password.equals(m.getMemPassword())){
 				session.setAttribute("login_info", m);
-				url = "main.tiles";
+				System.out.println(m.getMemMemberType());
+				if(m.getMemMemberType().equals("102400")){
+					session.invalidate();
+					map.addAttribute("error_message","탈퇴된 회원입니다");	
+					}
 			}else{
-				url = "member/login_form.tiles";
 				map.addAttribute("error_message", "Password를 확인하세요");
 			}
 		}else{
-			url = "member/login_form.tiles";
 			map.addAttribute("error_message","ID를 확인하세요");
 		}
-		return url;
+		return "main.tiles";
 	}
 	@RequestMapping("idSearch")
 	public String idSearch(@ModelAttribute MemberVO vo,HttpSession session,ModelMap map)throws Exception{
 		MemberVO m = service.getMemberByname(vo);
-		System.out.println("vo : " + vo);
-		System.out.println("m" + m);
 		map.addAttribute("member_info",m);
 		List<CommonCodeVO> telList = service2.getCodeList("101");
 		map.addAttribute("telList",telList);
-		return "/WEB-INF/view/member/idSearch.jsp";
-		
+		return "/WEB-INF/view/member/idSearch.jsp";	
 	}
+	@RequestMapping("pwSearch")
+	public String pwSearch(@ModelAttribute MemberVO vo,ModelMap map)throws Exception{
+		MemberVO m = service.getMemberPassword(vo);
+		map.addAttribute("member_info",m);
+		return "/WEB-INF/view/member/pwSearch.jsp";
+	}
+	
 	
 	@RequestMapping("logout")
 	public String logout(HttpSession session,HttpServletResponse response){
@@ -114,11 +119,24 @@ public class MemberController {
 		map.addAttribute("telList",telList);
 		return "member/modify_form.tiles";
 	}
-	@RequestMapping("search_form")
+	@RequestMapping("idsearch_form")
 	public String searchMember(HttpSession session,ModelMap map)throws Exception{
 		List<CommonCodeVO> telList = service2.getCodeList("101");
 		map.addAttribute("telList",telList);
 		return "/WEB-INF/view/member/idSearch.jsp";
+	}
+	@RequestMapping("pwsearch_form")
+	public String pwsearchMember()throws Exception{
+		return "/WEB-INF/view/member/pwSearch.jsp";
+	}
+	@RequestMapping("memberLeave")
+	public String memberLeave(HttpSession session)throws Exception{
+		MemberVO loginInfo = (MemberVO)session.getAttribute("login_info");
+		loginInfo.setMemMemberType("102400");
+		service.leaveMember(loginInfo);
+		session.invalidate();
+		return "/main.do";
+		
 	}
 	@RequestMapping("idDuplicateCheck")
 	@ResponseBody

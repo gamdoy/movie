@@ -12,8 +12,14 @@ public interface MemberDAO {
 	//이름으로 회원정보 조회하여 return
 	public abstract MemberVO selectMemberByname(MemberVO membervo);
 	
+	//회원탈퇴 확인시 멤버타입교체하여 return
+	public abstract int memberLeave(MemberVO membervo);
+	
 	//회원정보 db에 insert
 	public abstract int insertMember(MemberVO membervo);
+	
+	//회원아이디로 비밀번호조회
+	public abstract MemberVO selectMemberPassword(MemberVO membervo);
 	
 	//회원정보 수정 
 	public abstract int updateMember(MemberVO membervo);
