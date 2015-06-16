@@ -3,7 +3,9 @@ package kr.or.kosta.event.model.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.event.vo.EventVO;
+import kr.or.kosta.event.vo.WinnerVO;
 
 
 public interface EventService {
@@ -29,4 +31,16 @@ public interface EventService {
 	//public abstract Map getEventListPaging(int pageNo);
 	
 	public abstract Map getWinnerListPaging(int pageNo);
+	
+	/*
+	 * 당첨자 게시판 
+	 */
+	
+	public abstract WinnerVO getWinnerByWinNo(int winNo);
+	
+	public int deleteWinner(int winNo);
+	
+	public int modifyWinner(WinnerVO vo);
+	
+	public int insertWinner(WinnerVO vo);
 }

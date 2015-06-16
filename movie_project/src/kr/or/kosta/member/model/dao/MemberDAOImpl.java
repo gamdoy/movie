@@ -49,4 +49,14 @@ public class MemberDAOImpl implements MemberDAO{
 	public MemberVO selectMemberByname(MemberVO membervo) {
 		return session.selectOne(namespace+"selectMemberByName",membervo);
 	}
+
+	@Override
+	public MemberVO selectMemberPassword(MemberVO membervo) {
+		return session.selectOne(namespace+"selectMemberPassword",membervo);
+	}
+
+	@Override
+	public int memberLeave(MemberVO membervo) {
+		return session.update(namespace+"leaveMember",membervo);
+	}
 }

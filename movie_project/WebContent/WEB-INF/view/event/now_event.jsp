@@ -19,7 +19,14 @@ table#listTB thead tr{
 }
 </style>
 <h2>진행중인 이벤트</h2>
-<a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
+<c:choose>
+	<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
+		<a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
+	</c:when>
+	<c:otherwise>
+		
+	</c:otherwise>
+</c:choose>
 <form method="POST" action="<%=request.getContextPath() %>/event/searchEventText.do" id="search_event">
 <input type="text" id="searchText" name="searchText">
 <input type="submit" value="검색">
@@ -27,22 +34,41 @@ table#listTB thead tr{
 <form method="POST" action="<%=request.getContextPath() %>/event/specEvent.do" id="now_event">
 <input type="hidden" name="evtNo" id="evtNo"> 	
 <c:if test="${fn:length(requestScope.event_list) != 0 }">
-	<table id="listTB" style="width:700px">
-		<thead>
-			<tr>
-				<td>NO</td>
-				<td>이름</td>
-				
-			</tr>
-		</thead>
+	<table id="listTB" style="width:800px; color: gray; border: 10ex; border-color: white;" >
+		
 		<tbody>
-			<c:forEach items="${requestScope.event_list }" var="eventVO">
-				<tr>
-					<td><label onclick="getEvent(${eventVO.evtNo })">${eventVO.evtNo }</label> </td>
-					<td>${eventVO.evtTitle}</td>
-					
-				</tr> 
-			</c:forEach>
+			
+					<c:forEach items="${requestScope.event_list }" var="eventVO" varStatus="idx">
+					<c:if test="${idx.index%4==0 }">
+						<tr>
+					</c:if>
+							<td width="15" height="20" align="center" style="width: 200px;">
+								<div style="width:200;">
+									<div onclick="getEvent(${eventVO.evtNo })">
+										<c:choose>
+											<c:when test="${empty eventVO.evtFile }">
+												<img src="<%=request.getContextPath()%>/images/noimage.png">
+											</c:when>
+											<c:otherwise>
+												<img src="<%=request.getContextPath()%>/images/event/${eventVO.evtFile }">
+											</c:otherwise>
+										</c:choose>
+									</div>
+									
+									<div style="color: black;">
+										${eventVO.evtTitle }
+									</div>
+									
+									<div style="color: black;">
+										${eventVO.evtStartDate }~${eventVO.evtEndDate }
+									</div>
+								</div>
+							</td>
+					<c:if test="${(idx.index+1)%4==0 }">
+						</tr>
+					</c:if>
+					</c:forEach>
+			
 		</tbody>
 	</table>
 </c:if>

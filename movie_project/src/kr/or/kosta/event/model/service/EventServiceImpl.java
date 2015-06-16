@@ -64,12 +64,37 @@ public class EventServiceImpl implements EventService {
 		//목록에 뿌려줄 List<EventVO>조회
 		List<WinnerVO> list=dao.selectAllWinnerPaging(pageNo);
 		//PagingBean생성
-		int totalContent =dao.selectTotalEventCount();
+		int totalContent =dao.selectTotalWinnerCount();
 		PagingBean pagingBean= new PagingBean(totalContent, pageNo);
 		//두개의 값(List, PagingBean)을 Map에 넣어 return
 		HashMap map = new HashMap();
 		map.put("winner_list", list);
 		map.put("pagingBean",pagingBean);
 		return map;
+	}
+	
+	/*
+	 * 당첨자 게시판
+	 */
+	
+	@Override
+	public WinnerVO getWinnerByWinNo(int winNo) {
+		WinnerVO vo=dao.selectWinnerByWinNo(winNo);
+		return vo;
+	}
+	
+	@Override
+	public int deleteWinner(int winNo) {
+		return dao.deleteWinner(winNo);
+	}
+	
+	@Override
+	public int modifyWinner(WinnerVO vo) {
+		return dao.modifyWinner(vo);
+	}
+	
+	@Override
+	public int insertWinner(WinnerVO vo) {
+		return dao.insertWinner(vo);
 	}
 }

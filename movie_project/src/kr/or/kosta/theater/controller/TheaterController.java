@@ -116,11 +116,21 @@ public class TheaterController {
 	
 	@RequestMapping("login/reserveForm")
 	public String reserveForm(@ModelAttribute ScheduleVO vo, ModelMap map, HttpSession session) {
-		TicketVO tvo = new TicketVO();
-		map.addAttribute("movieRoom", theaterService.getMovieRoomByNo(vo.getSchNo()));//상영관 정보를 가져오는 메소드
+		TicketVO tvo = theaterService.getMovieRoomByNo(vo.getSchNo());
+		map.addAttribute("movieRoom", tvo);//상영관 정보를 가져오는 메소드
 		map.addAttribute("payTypeList", commonCodeService.getCodeList("108"));//결제방식을 가져오는 메소드
 		JSONArray list = new JSONArray((Collection)theaterService.getReservedSeats(vo.getSchNo()));//예매된 좌석 정보를 가져오는 메소드
+		int lineCount = tvo.getMrLine();
+		
+		List<String> lineList = new ArrayList<String>();
+		for (int i = 0; i < lineCount; i++) {
+			char l = (char) ('A' + i);
+			String line = l + "";
+			lineList.add(line);
+		}
+		
 		map.addAttribute("reservedSeatList", list);
+		map.addAttribute("lineList", lineList);
 		return "ticket/reserveForm.tiles";
 	}
 	

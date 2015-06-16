@@ -48,6 +48,8 @@
 	<select id="selectEventList" resultMap="event-resultmap">
 		select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
 		from		event
+		where evt_enddate > to_char(sysdate, 'yyyy-mm-dd hh24:mi')
+		and to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_startdate
 		order by evt_no
 	</select>
 	
@@ -59,14 +61,14 @@
 	
 	<insert id="insertEvent" parameterType="eventVO">
 		insert into event (evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title)
-		values (EVENT_SEQ.nextval, #{evtStartDate}, #{evtEndDate}, #{evtRegDate}, #{evtContent} , #{evtFile} , #{evtTitle})
+		values (EVENT_SEQ.nextval, #{evtStartDate}, #{evtEndDate},to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'), #{evtContent} , #{evtFile} , #{evtTitle})
 	</insert>
 	
 	<update id="updateEvent" parameterType="eventVO">
 		update event
 		set			evt_startdate=#{evtStartDate},
 					evt_enddate=#{evtEndDate},
-					evt_regdate=#{evtRegDate},
+					evt_regdate=to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),
 					evt_content=#{evtContent},
 					evt_file=#{evtFile},
 					evt_title=#{evtTitle}
@@ -106,12 +108,43 @@
 		select count(evt_no) from event
 	</select>
 	
+	<select id="selectTotalWinnerCount" resultType="_int">
+		select count(win_no) from winner
+	</select>
+	
 	<select id="findEventByText" parameterType="String" resultMap="event-resultmap">
 		select *
 		from event
 		where evt_title like '%'||#{text}||'%'
 		order by evt_no
 	</select>
+	
+	<!-- *******************************당첨자 게시판****************************** -->
+	
+	<select id="selectWinnerByWinNo" parameterType="_int" resultMap="winner-resultmap">
+		select 	win_no, win_regdate, win_text, win_title
+		from 	winner
+		where win_no = #{value}
+	</select>
+	
+	<delete id="deleteWinner" parameterType="_int">
+		delete  from winner 
+		where win_no=#{winNo}		
+	</delete>
+	
+	<insert id="insertWinner" parameterType="winnerVO">
+		insert into winner (win_no, win_title, win_regdate, win_text)
+		values (WINNER_SEQ.nextval, #{winTitle}, #{winRegdate}, #{winText})
+	</insert>
+	
+	<update id="modifyWinner" parameterType="winnerVO">
+		update winner
+		set		win_title=#{winTitle},
+				win_regdate=#{winRegdate},
+				win_text=#{winText}
+					
+		where	win_no=#{winNo}	
+	</update>
 	
 	
 </mapper>

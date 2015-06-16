@@ -13,6 +13,9 @@ public interface MemberService {
 	//회원정보수정 메소드
 	public abstract int modifyMember(MemberVO membervo);
 	
+	//회원탈퇴 확인시 멤버타입교체하여 return
+	public abstract int leaveMember(MemberVO membervo);
+	
 	//회원 탈퇴 메소드
 	public abstract int removeMember(String id);
 	
@@ -21,6 +24,9 @@ public interface MemberService {
 	
 	//회원이름으로 조회
 	public abstract MemberVO getMemberByname(MemberVO membervo);
+	
+	//회원id로 비밀번호 조회
+	public abstract MemberVO getMemberPassword(MemberVO membervo);
 	
 	//회원번호로 조회
 	public abstract MemberVO getMemberByNo(int memNo);
