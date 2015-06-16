@@ -13,16 +13,15 @@ public class QaVO {
 	private String qaPassword; //비밀번호
 	private int fqParentNumber; //부모번호
 	private int fileNo; //파일번호
-	private String memId; //글쓴이 Id
 	private int replyLevel;
 	private int replyStep;
 	
 	public QaVO(){}
-	
+
 	public QaVO(int fqNo, int memNo, String qaTitle, String fqRegdate,
 			String fqLastdate, int qaCount, String qaText, String qaStatus,
 			String qaSecret, String qaPassword, int fqParentNumber, int fileNo,
-			String memId, int replyLevel, int replyStep) {
+			int replyLevel, int replyStep) {
 		super();
 		this.fqNo = fqNo;
 		this.memNo = memNo;
@@ -36,7 +35,6 @@ public class QaVO {
 		this.qaPassword = qaPassword;
 		this.fqParentNumber = fqParentNumber;
 		this.fileNo = fileNo;
-		this.memId = memId;
 		this.replyLevel = replyLevel;
 		this.replyStep = replyStep;
 	}
@@ -137,14 +135,6 @@ public class QaVO {
 		this.fileNo = fileNo;
 	}
 
-	public String getMemId() {
-		return memId;
-	}
-
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
-
 	public int getReplyLevel() {
 		return replyLevel;
 	}
@@ -168,9 +158,8 @@ public class QaVO {
 				+ fqLastdate + ", qaCount=" + qaCount + ", qaText=" + qaText
 				+ ", qaStatus=" + qaStatus + ", qaSecret=" + qaSecret
 				+ ", qaPassword=" + qaPassword + ", fqParentNumber="
-				+ fqParentNumber + ", fileNo=" + fileNo + ", memId=" + memId
-				+ ", replyLevel=" + replyLevel + ", replyStep=" + replyStep
-				+ "]";
+				+ fqParentNumber + ", fileNo=" + fileNo + ", replyLevel="
+				+ replyLevel + ", replyStep=" + replyStep + "]";
 	}
 	
 	

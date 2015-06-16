@@ -19,17 +19,8 @@ $(document).ready(function(){
 	
 	$("tbody tr").on("click", function(){
 		var number = $(this).find(":first-child").text();
-		if($(this).find(":first-child").next().prop("class")=="secret"){
-			var password = prompt('비밀번호를 입력하세요',"");
-			
-			if(!($("#secret" + number).val()==password)){
-				alert("비밀번호가 옳바르지 않습니다.");
-				return false;
-			}
-		}
 		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
 	})
-	
 	 $(".PageBtn").on("click", function(){
 			var label = $(this).text();
 			location.href="<%=request.getContextPath() %>/qa/qa.do?page="+label+"&searchType="+searchType+"&searchKeyword="+searchKeyword;
@@ -104,33 +95,12 @@ $(document).ready(function(){
 				<tr id="qa_content">
 				
 					<td align="center">${QaVO.fqNo}</td>
-					
-					
-					
-					<c:choose>
-						<c:when test="${QaVO.qaSecret=='use' }">
-							<td class="secret"><input type="hidden" id="secret${QaVO.fqNo }" value="${QaVO.qaPassword }">
-								<c:forEach begin="1" end="${QaVO.replyLevel}">
-									<img src="<%=request.getContextPath()%>/upload/reply.png" width="10px" height="10px">
-								</c:forEach>	
-								<img src="<%=request.getContextPath()%>/upload/kgpg.png" width="10px" height="10px">${QaVO.qaTitle}
-							</td> 
-						</c:when>
-						
-						<c:otherwise>
-						
-								<td>
-									<c:forEach begin="1" end="${QaVO.replyLevel}">
-										<img src="<%=request.getContextPath()%>/upload/reply.png" width="10px" height="10px">
-									</c:forEach>	
-									${QaVO.qaTitle}
-								</td> 
-						
-						</c:otherwise>
-						
-						
-						
-					</c:choose>
+					<td>
+						<c:forEach begin="1" end="${QaVO.replyLevel}">
+							<img src="<%=request.getContextPath()%>/upload/화살표.png" width="10px" height="10px">
+						</c:forEach>	
+						${QaVO.qaTitle}
+					</td> 
 					<td align="center">${QaVO.memNo}</td>
 					<td align="center">${QaVO.fqLastdate}</td>
 					<td align="center">${QaVO.qaCount}</td>

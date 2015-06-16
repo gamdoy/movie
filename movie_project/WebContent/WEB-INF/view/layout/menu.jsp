@@ -90,7 +90,7 @@ var flag = false;
 </section>
 <section class="menu"><!-- 메뉴영역 -->
 	<section class="main_menu"><!-- 메인 메뉴영역 -->
-		<img src="<%=request.getContextPath()%>/upload/아이콘.png" width="100px" height="50px" alt="183box" />
+		<img src="<%=request.getContextPath()%>/upload/icon.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
