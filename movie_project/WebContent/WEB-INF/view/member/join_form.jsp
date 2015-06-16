@@ -96,58 +96,45 @@ $(document).ready(function(){
 	})
 });
 function setSubmit(){
-	if(!$(memId).val()){
+	if(!$("#memId").val()){
 		alert("Id를 입력하세요.");
 		return false;
-	}else if
-	(idflag2==false){
+	}else if(idflag2==false){
 		alert("중복확인버튼을 눌러주세요.");
 		return false;
-	}else if
-	(idflag==false){
+	}else if(idflag==false){
 		alert("중복아이디입니다. 다른아이디를 사용해주세요.");
 		return false;
-	}else if
-	(!$(memPassword).val()){
+	}else if(!$("#memPassword").val()){
 		alert("비밀번호를 입력하세요.");
 		return false;
-	}else if
-	(!($(memPassword).val()==$(password2).val())){
+	}else if(!($("#memPassword").val()==$(password2).val())){
 		alert("비밀번호를 일치하게 입력하세요.");
-		return false;
-			
-	}else if(!$(memName).val()){
+		return false;			
+	}else if(!$("#memName").val()){
 		alert("이름을 입력하세요.");
 		return false;
-	}else if(!$(memBirthDate).val()){
+	}else if(!$("#memBirthDate").val()){
 	alert("생년월일을 입력하세요.");
 	return false;
-	}
-	
-	else if(!$(memEmail).val()){
+	}else if(!$("#memEmail").val()){
 		alert("이메일을 입력하세요.");
 		return false;
-	}	
-	else if(!$(memAddressDetail).val()){
+	}else if(!$("#memAddressDetail").val()){
 		alert("주소를 입력하세요.");
 		return false;
-	}
-	else if($(tel).val()=="phoneType"){
+	}else if($("#tel").val()=="phoneType"){
 		alert("번호를 선택하세요.");
 		return false;
-	}
-	else if(!$(tel2).val()){
+	}else if(!$("#tel2").val()){
 		alert("전화번호를 입력하세요.");
 		return false;
-	}
-	else if(!$(tel3).val()){
+	}else if(!$("#tel3").val()){
 		alert("전화번호를 입력하세요.");
 		return false;
 	}
 	$("#memPhoneNo").val($("#tel").val()+"-"+$("#tel2").val()+"-"+$("#tel3").val());
 }
-
-
 </script>
 
 <h2>가입양식</h2>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.kosta.admin.vo.AdminVO;
+import kr.or.kosta.center.vo.CommentVO;
 import kr.or.kosta.center.vo.QaVO;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.event.controller.PagingBean;
@@ -111,5 +112,46 @@ public class QaServiceImpl implements QaService{
 		 map.put("pagingBean", pagingbean);
 		 System.out.println("서치페이징 현재페이지 : "+pagingbean.getCurrentPage());
 		 return map;
+	}
+
+	@Override
+	public int registerComment(CommentVO cvo) {
+		return dao.registerComment(cvo);
+	}
+
+	@Override
+	public List<CommentVO> getComment(int fqNo) {
+		return dao.getComment(fqNo);
+	}
+
+	@Override
+	public int deleteComment(int comNo) {
+		return dao.deleteComment(comNo);
+	}
+
+	@Override
+	public CommentVO getCommentByComNo(int comNo) {	
+		return dao.getCommentByComNo(comNo);
+	}
+
+	@Override
+	public int modifyComment(CommentVO cvo) {	
+		return dao.modifyComment(cvo);
+	}
+
+	@Override
+	public int getCountComment(int fqNo) {
+		return dao.getCountComment(fqNo);
+	}
+
+	@Override
+	public int register_reply(QaVO rvo) {
+		
+		return dao.register_reply(rvo);
+	}
+	
+	@Override
+	public int updateReply(QaVO vo) {
+		return dao.updateReply(vo);
 	}
 }
