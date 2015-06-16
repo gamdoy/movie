@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/script/date_picker.js"></script>
+
 <script type="text/javascript">
 function goUrl(){
 	window.location="<%=request.getContextPath() %>/event/eventListPaging.do";
@@ -22,9 +25,9 @@ function goUrl(){
 		</tr>
 		<tr>
 			<td  align="center">등록일</td>
-			<td><input type="text" id="winRegdate" name="winRegdate" size="30"></td>
+			<td><input type="text" id="winRegdate" name="winRegdate" size="30" onClick="datePicker(event,'winRegdate')" readonly="readonly"></td>
 		</tr>
-		
+
 		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 		<tr>
 			 <td colspan="4"><textarea name="winText" id="winText" cols="70" rows="13"></textarea></td>
