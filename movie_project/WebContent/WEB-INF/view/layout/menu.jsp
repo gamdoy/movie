@@ -176,4 +176,3 @@ var flag = false;
 </c:when>
 </c:choose>
 </section><!-- 로그인 영역 -->
-

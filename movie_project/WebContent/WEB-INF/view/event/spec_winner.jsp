@@ -31,7 +31,7 @@ function modifyFormUrl(){
 			</td>
 		</tr>
 		<tr>
-			<td  align="center" width="100">기간</td>
+			<td  align="center" width="100">등록일</td>
 			<td>${requestScope.winVO.winRegdate}</td>
 		</tr>
 		

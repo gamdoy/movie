@@ -11,6 +11,8 @@
 			   m.MOV_INTHEATERS,
 			   m.MOV_RUNTIME,
 			   m.MOV_TRAILER,
+			   m.MOV_GRADE,
+			   m.MOV_COUNT,
 			   m.MOV_GENRE,
 			   m.DIR_NO,
 			   m.ACT_NO,
@@ -19,8 +21,9 @@
 			   d.dir_name,
 			   p.pro_name,
 			   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_SCREENINGGRADE) sgrade_name,
-         	   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_GENRE) genre_name
-		from movie m, director d, actor a, production p
+         	   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_GENRE) genre_name,
+         	   m2.mem_id
+		from movie m, director d, actor a, production p,member m2
 		where m.dir_No = d.dir_No and
 			  m.act_No = a.act_No and
 			  m.pro_No = p.pro_No
@@ -58,6 +61,9 @@
 		<result column="PRO_NAME" property="proName"/>
 		<result column="genre_name" property="genreName"/>
 		<result column="sgrade_name" property="sgradeName"/>
+		<result column="mem_id" property="favor"/>
+		
+			
 	</resultMap>
 	
 	<!-- 영화등록 -->
@@ -69,11 +75,17 @@
 		(MOV_NO, MOV_TITLE, MOV_SYNOPSIS, MOV_OFFICIALSITE, MOV_SCREENINGGRADE, MOV_POSTER, MOV_INTHEATERS,
 		 MOV_RUNTIME, MOV_TRAILER,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
 		  values(#{movieNo}, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{posterName},
-		   #{intheaters}, #{runtime}, #{trailer},#{genre}, #{dirNo}, #{actNo }, #{proNo})
+		   #{intheaters}, #{runtime}, #{trailer},#{movieGrade},#{movieCount},#{genre}, #{dirNo}, #{actNo }, #{proNo})
 	</insert>
 	
 	<!-- mov_no 값으로 조회 -->
 	<select id="getMovieByNo" resultMap="movie-resultmap" parameterType="_int" >
+		<include refid="movie-select"/>
+       		  and m.mov_no= ${value}
+	</select>
+	
+	<!-- mov_no 값으로 조회 List-->
+	<select id="getMovieByNoList" resultMap="movie-resultmap" parameterType="_int" >
 		<include refid="movie-select"/>
        		  and m.mov_no= ${value}
 	</select>
@@ -136,7 +148,7 @@
 		where page = #{pageNo}
 		
 	</select>
-	
+	<!-- 총 영화수 -->
 	<select id="totalMovieCount" resultType="_int" parameterType="searchVO"> 
 		select count(mov_no)
 		from(
@@ -146,6 +158,22 @@
 				where ${searchType} = #{searchKeyword}
 		</if>
 	</select>
+	
+	<!-- 관심영화 -->
+	<insert id="addFavorite" parameterType="map"> 
+		insert into favmovie values(#{memNo },#{movNo })
+	</insert>
+	
+	<select id="selFavorite" resultMap="movie-resultmap">
+		select mem_id,f.mov_no, m.mov_title, m.mov_poster
+		from FAVMOVIE f, movie m
+		where f.mov_no = m.mov_no
+		
+	</select>
+	
+	<delete id="delFavorite" parameterType="_int">
+		delete from favmovie where mov_no=#{movNo}
+	</delete>
 	  
 	<!-- 영화정보 수정 -->
 	<update id="updateMovie" parameterType="movieVO"  >
@@ -158,6 +186,8 @@
 			   MOV_INTHEATERS=#{intheaters },
 			   MOV_RUNTIME=#{runtime },
 			   MOV_TRAILER=#{trailer },
+			   MOV_GRADE=#{movGrade },
+			   MOV_COUNT=#{movCount },
 			   MOV_GENRE=#{genre },
 			   DIR_NO=#{dirNo },
 			   ACT_NO=#{actNo },

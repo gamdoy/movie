@@ -6,10 +6,11 @@
 <meta charset="UTF-8">
 <style type="text/css">
 table, td{
-dorfer: 1px;
+border: 1px;
 
 }
 table{
+border:1px;
 width:500px;
 height:100px;
 magin:auto;

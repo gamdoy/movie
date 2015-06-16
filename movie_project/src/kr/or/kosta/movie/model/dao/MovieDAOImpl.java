@@ -40,6 +40,22 @@ public class MovieDAOImpl implements MovieDAO {
 	public MovieVO getMovieByNo(String movNo) {
 		return session.selectOne(namespace+"getMovieByNo",movNo);
 	}
+	//movNo로 영화조회-list
+	@Override
+	public List<MovieVO> getMovieByNoList(String movNo) {
+		return session.selectList(namespace+"getMovieByNo",movNo);
+	}
+	//관심영화 추가
+	@Override
+	public int addFavorite(Map map) {
+		return session.insert(namespace+"addFavorite",map);
+	}
+	//관심영화 조회
+	@Override
+	public List selFavorite() {
+		return session.selectList(namespace+"selFavorite");
+	}
+	
 	//모든영화 조회-paging
 	@Override
 	public List<MovieVO> allMovieList(int pageNo, SearchVO vo) {
@@ -50,7 +66,7 @@ public class MovieDAOImpl implements MovieDAO {
 		param.put("searchKeyword", vo.getSearchKeyword());
 		return session.selectList(namespace+"allMovie",param);
 	}
-	 
+	 //모든영화조회
 	@Override
 	public List<MovieVO> selectMovieList() {
 		return session.selectList(namespace + "selectMovieList");
@@ -74,6 +90,8 @@ public class MovieDAOImpl implements MovieDAO {
 	public List<ProductionVO> getProduction() {
 		return session.selectList(namespace+"production");
 	}
+	
+	
 
 	
 	
