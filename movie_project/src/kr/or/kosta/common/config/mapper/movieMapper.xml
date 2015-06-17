@@ -73,9 +73,9 @@
 		</selectKey>
 		insert into MOVIE 
 		(MOV_NO, MOV_TITLE, MOV_SYNOPSIS, MOV_OFFICIALSITE, MOV_SCREENINGGRADE, MOV_POSTER, MOV_INTHEATERS,
-		 MOV_RUNTIME, MOV_TRAILER,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
+		 MOV_RUNTIME, MOV_TRAILER,MOV_GRADE,MOV_COUNT,MOV_GENRE, DIR_NO, ACT_NO, PRO_NO)
 		  values(#{movieNo}, #{title}, #{sysnopsis}, #{officialSite}, #{screeningGrade}, #{posterName},
-		   #{intheaters}, #{runtime}, #{trailer},#{movieGrade},#{movieCount},#{genre}, #{dirNo}, #{actNo }, #{proNo})
+		   #{intheaters}, #{runtime}, #{trailer},#{movGrade},#{movCount},#{genre}, #{dirNo}, #{actNo }, #{proNo})
 	</insert>
 	
 	<!-- mov_no 값으로 조회 -->
@@ -188,7 +188,9 @@
 			   MOV_SYNOPSIS=#{sysnopsis },
 			   MOV_OFFICIALSITE=#{officialSite },
 			   MOV_SCREENINGGRADE=#{screeningGrade },
+			   <if test="posterName != null and posterName!=''">
 			   MOV_POSTER=#{posterName },
+			   </if>
 			   MOV_INTHEATERS=#{intheaters },
 			   MOV_RUNTIME=#{runtime },
 			   MOV_TRAILER=#{trailer },

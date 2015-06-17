@@ -21,6 +21,8 @@ function submitCheck() {
 		var flag = true;
 		$("#modifyForm input,textarea").each(function(){
 			if(!$(this).val()) {
+				if($(("#poster").val()=="")){
+				}
 				alert('['+$(this).parent().prev().html()+"] 항목은 필수 입력사항 입니다");
 				flag = false;
 				return false;
@@ -47,17 +49,16 @@ function submitCheck() {
 		});
 		 */
 		 
-		 
 		if(${requestScope.movie.success==1 }){
 			alert("수정 성공");
 		}
 		
 		
 		 /*포스터 수정안할경우 기존 poster 파일로 전송*/
-		$("#posterCheck").on("click",function(){
+		 $("#posterCheck").on("click",function(){
 			 $("#btnArea").hide();	
 			 $("#poster").show();
-		});
+		}); 
 		
 		/* 글자수 체크 */
 		$("#title").on("blur", function() {

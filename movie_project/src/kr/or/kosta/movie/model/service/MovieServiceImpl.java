@@ -36,7 +36,6 @@ public class MovieServiceImpl implements MovieService {
 		//목록에 뿌려줄 List<MovieVO> 조회
 		List<MovieVO> list = dao.allMovieList(pageNo, vo);
 		int count = dao.totalCount(vo);
-		System.out.println("토탈카운트 "+count);
 		//PagingBean 생성
 		PagingBean pagingBean = new PagingBean(count, pageNo);
 		//두개의 값(List, PagingBean)을 Map에 넣어 return

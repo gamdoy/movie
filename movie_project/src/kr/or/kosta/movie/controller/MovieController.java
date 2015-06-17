@@ -28,6 +28,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -78,8 +79,6 @@ public class MovieController {
 		
 		service.registerMovie(movie);
 
-		System.out.println("db작업후 " + movie);
-
 		return "redirect:/movie/register_success.do?movNo="
 				+ movie.getMovieNo();
 	}
@@ -97,7 +96,6 @@ public class MovieController {
 	@RequestMapping("modify_form.do")
 	public String movieModify(@RequestParam int movNo, ModelMap map) {
 		MovieVO movie = service.getMovieByNo(movNo);
-		System.out.println(movie);
 		map.addAttribute("movie", movie);
 		
 		// commonCode 사용
@@ -122,19 +120,19 @@ public class MovieController {
 	public String moditySuccess(@ModelAttribute MovieVO movie, ModelMap map, HttpServletRequest request, Errors errors) throws IllegalStateException, IOException{
 		// 파일업로드 처리
 				MultipartFile file = movie.getPoster();
-				System.out.println(movie.getMovieNo());
+				
 				String newFileName=null;
 				if (file != null && !file.isEmpty()) {
 					newFileName = System.currentTimeMillis()+".jpg";
-					System.out.println(newFileName+" : "+file.getOriginalFilename()+" : "+movie.getPosterName());
 					String path = request.getServletContext().getRealPath("/images/movie");
 					File image = new File(path, newFileName);
 					file.transferTo(image);
+					
 					//기존사진 있는 경우 삭제
-					if(movie.getPosterName()!=null){
+					/*if(movie.getPosterName()!=null){
 						File oldImage = new File(path,movie.getPosterName());
 						oldImage.delete();
-					}
+					}*/
 					movie.setPosterName(newFileName);
 				}
 				int success = service.updateMovie(movie);
@@ -161,12 +159,10 @@ public class MovieController {
 	//관리자 전체 영화 조회
 	@RequestMapping("adminmovie_list.do")
 	public String adminMovieList(@RequestParam(defaultValue="1")int pageNo, @ModelAttribute SearchVO vo,ModelMap map) {
-		System.out.println("서치 " +vo);
 		if(vo.getSearchType() != null && (vo.getSearchType().equals("mov_genre"))){
 			vo.setSearchKeyword(service2.getCommonNo(vo.getSearchKeyword()));
 		}
 		Map movie = service.allMovieList(pageNo, vo);
-		System.out.println(movie);
 		map.addAttribute("moviePaging", movie);
 		return "movie/adminMovieList_form.tiles";
 	}
@@ -176,7 +172,6 @@ public class MovieController {
 	public String userMovieList(ModelMap map){
 		List movie= service.selectMovieList();
 		map.put("movie", movie);
-		System.out.println(movie);
 		
 		return "movie/userMovieList_form.tiles";
 	}
@@ -199,14 +194,14 @@ public class MovieController {
 	}
 	//영화 평점
 	@RequestMapping("/login/movieGrade.do")
-	public String movieGrade(@RequestParam int star, @RequestParam int movNo, HttpSession session,ModelMap map){
-		System.out.println("이건 나오나 "+star);
-		System.out.println("건너온 영화번호 "+movNo);
+	@ResponseBody
+	public int movieGrade(@RequestParam int star, @RequestParam int movNo, HttpSession session,ModelMap map){
 		MovieVO movie = service.getMovieByNo(movNo);
 		//평점 set
 		movie.setMovGrade(movie.getMovGrade()+star);
 		//세션로그인정보가 true 이면 평가 인원에 +1
 		MemberVO member = (MemberVO) session.getAttribute("login_info");
+		
 		
 		if(member!=null){
 			movie.setMovCount(movie.getMovCount()+1);
@@ -215,11 +210,10 @@ public class MovieController {
 		DecimalFormat format = new DecimalFormat(".#");
 		double i= movie.getMovGrade() / movie.getMovCount();
 		movie.setAvgGrade(format.format(i));
-		System.out.println(movie.getAvgGrade());
 		service.updateMovie(movie);
 		
 		map.addAttribute("movie",movie);
-		return "movie/userMovieInfo.tiles";
+		return service.updateMovie(movie);
 	}
 	
 	//관심영화 추가
@@ -236,7 +230,6 @@ public class MovieController {
 	@RequestMapping("user_favorite2.do")
 	public String redirectFav(ModelMap map){
 		List list = service.selFavoriteAll();
-		System.out.println(list);
 		map.put("movie", list);
 		
 		return "movie/user_favorite.tiles";
@@ -246,7 +239,6 @@ public class MovieController {
 	@RequestMapping("user_favorate.do")
 	public String favorList(ModelMap map){
 		List list = service.selFavoriteAll();
-		System.out.println(list);
 		map.put("movie", list);
 		return "movie/user_favorite.tiles";
 	}
@@ -254,9 +246,7 @@ public class MovieController {
 	//관심영화 삭제
 	@RequestMapping("delFavor.do")
 	public String delFavor(@RequestParam int movNo){
-		System.out.println("넘어온번호 "+movNo);
 		int i = service.delFavorite(movNo);
-		System.out.println(i);
 	return "/movie/user_favorate.do";
 		
 	}

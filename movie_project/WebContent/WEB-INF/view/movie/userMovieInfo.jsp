@@ -8,20 +8,45 @@ tr {
 }
 </style>
 <script type="text/javascript">
-	var flag = false;
+	/* var flag = false;
 	function submitCheck() {
 		$.each($(".star"), function() {
 			if ($(this).prop("checked") == true) {
-				/* alert("점수가 반영 되었습니다.") */
+				/alert("점수가 반영 되었습니다.")
 				flag = true;
 			}
 		});
 		return flag;
+	} */
+	function check(){
+		var star;
+		$.each($(".star"), function() {
+			if ($(this).prop("checked") == true) {
+				star = $(this).val();
+			}
+		});
+		$.ajax({
+			type:"POST",
+			url:"<%=request.getContextPath()%>/movie/login/movieGrade.do",
+			dataType:"text",
+			data:{
+						movNo:"${requestScope.movie.movieNo }",
+						star:star
+			},
+			success:function(ret){
+				if(ret==1){
+					alert("평점을 반영 했습니다.");
+					location.reload();
+				} else {
+					alert("평점 반영을 실패 했습니다.");
+					location.reload();
+				}
+			}	
+		});
 	}
 </script>
-
+ 	
 <h1>영화 정보</h1>
-${sessionScope }
 <table>
 	<tr>
 		<!-- 제목 -->
@@ -36,26 +61,29 @@ ${sessionScope }
 	<tr>
 		<!-- 상영등급 -->
 		<td>상영등급</td>
-		<td>${requestScope.movie.screeningGrade}</td>
+		<td>
+		${requestScope.movie.sgradeName }
+		
+		</td>
 
 		<!-- 장르 -->
 		<td>장르</td>
-		<td>${requestScope.movie.genre}</td>
+		<td>${requestScope.movie.genreName}</td>
 	</tr>
 
 	<tr>
 		<!-- 영화감독 -->
 		<td>감독</td>
-		<td>${requestScope.movie.dirNo}</td>
+		<td>${requestScope.movie.dirName}</td>
 		<!-- 배우 -->
 		<td>배우</td>
-		<td>${requestScope.movie.actNo}</td>
+		<td>${requestScope.movie.actName}</td>
 	</tr>
 
 	<tr>
 		<!-- 제작사 -->
 		<td>제작사</td>
-		<td>${requestScope.movie.proNo}</td>
+		<td>${requestScope.movie.proName}</td>
 		<!-- 포스터 -->
 		<td>포스터</td>
 		<td><img
@@ -93,7 +121,7 @@ ${sessionScope }
 					5<input name="star" id="star" type="radio" class="star" value="5" />
 					<input type="hidden" name="movNo"
 						value="${requestScope.movie.movieNo }"> <input
-						type="submit" value="평가">
+						type="button" onclick="check();" value="평가">
 				</form>
 		<td>
 			<form action="<%=request.getContextPath()%>/movie/login/addFavorite.do">
