@@ -18,8 +18,6 @@ public interface TheaterService {
 
 	public int registTheater(TheaterVO vo);
 
-	public List<ScheduleVO> getScheduleListByNo(int theaNo);
-
 	public List<ScheduleVO> getScheduleListBytheaNo(int theaNo);
 
 	public List<ScheduleVO> getScreenTimeList(ScheduleVO vo);
@@ -54,4 +52,6 @@ public interface TheaterService {
 	public int getScheduleCount(MovieroomVO vo);
 
 	public List getScheduleListByDate(ScheduleVO vo, SearchVO searchVo, int page);
+
+	public int modifyMemberMileage(TicketVO vo);
 }

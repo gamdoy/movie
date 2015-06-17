@@ -142,7 +142,7 @@ function addTheaterFrom() {
 			.append("<td><input type=text id='theaAddress2' name='theaAddress2'></td>")
 			.append("<td>비영업</td>")
 			.append("<td><span><input  type='button' onclick='addTheater();' value='저장'>"
-					+ "<input  type='button' onclick=\"modifyZipcode('999999')\";' value='우편번호 검색'></span></td>")
+					+ "<input  type='button' onclick=\"modifyZipcode('999999')\";' value='우편번호 검색'></span></td><td></td>")
 	);
 }
 function addTheater(){

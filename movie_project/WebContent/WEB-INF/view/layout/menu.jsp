@@ -21,7 +21,7 @@ var flag = false;
 	$(document).ready(function() {
 		if(${sessionScope.login_info != null}){
 			hide_subMenu();
-			$(".myinfo_menu").show();
+			
 		}
 		$("#myinfoBtn").on("click", function() {
 			hide_subMenu();
