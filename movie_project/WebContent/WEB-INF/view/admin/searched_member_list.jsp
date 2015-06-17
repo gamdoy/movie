@@ -13,6 +13,12 @@ $(document).ready(function(){
 	      }
 	 });
 	
+	$(".memberTypeBtn").on("click", function(){
+		var no = $(this).parent().parent().children().html();
+		var memberType = $(this).parent().children().val();
+		location.href="<%=request.getContextPath() %>/admin/modifyMemberType.do?memNo="+no+"&memberType="+memberType;
+	});
+	
 	/* 
 	if ($("#MEM_ID").val() == searchType){
 		$("#MEM_ID").prop("selected","selected")
@@ -128,7 +134,14 @@ function checkVal() {
 					<td>${adminVO.memberBirthdate}</td>
 					<td>${adminVO.memberEmail}</td>
 					<td class="mileageBtn">${adminVO.memberMileage}	[발급]</td>
-					<td>${adminVO.memberTypeName}</td>
+					<td>	
+						<select id="memberType" class="memberType" name="memberType">
+							<option value="${adminVO.memberTypeName}">${adminVO.memberTypeName}</option>
+							<option value="회원">회원</option>
+							<option value="VIP">VIP</option>
+						</select>
+					<input type="button" class="memberTypeBtn" value="변경">
+					</td>
 					<td>${adminVO.memberJoindate}</td>
 					<td class="modifyMemBtn">[수정하기]</td>
 				</tr> 
