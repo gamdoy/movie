@@ -27,4 +27,6 @@ public interface AdminService {
 	public int selectSearchMemberCount(SearchVO svo);
 
 	public abstract int updateMemberMileage(AdminVO member);
+
+	public abstract void updateMember(AdminVO admin);
 }

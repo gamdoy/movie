@@ -27,6 +27,8 @@ public interface AdminDAO {
 	public int selectSearchMemberCount(SearchVO svo);
 
 	public int updateMemberMileage(AdminVO member);
+
+	public void updateMember(AdminVO admin);
 	
 	
 }

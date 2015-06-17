@@ -14,27 +14,22 @@ function goUrl(){
 
 <h2> 추가페이지</h2>
 
-<form method="post" action="<%=request.getContextPath()%>/event/modifyWinner.do"  id="modifyWinner_form" enctype="multipart/form-data">
-<input type="hidden" id="winNo" name="winNo" value="${winVO.winNo}">
+<form method="post" action="<%=request.getContextPath()%>/event/insertWinner.do"  id="insertWinner_form" enctype="multipart/form-data">
 
 	<table style="width:600px">
-	<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
-		<tr>
-			<td width="80" align="center">이벤트명</td>
-			<td colspan="3">
-				<input type="text" name="winTitle" id='winTitle' size="85">
-			</td>
-		</tr>
-		<tr>
-			<td  align="center">기간</td>
-			<td><input type="text" id="winRegdate" name="winRegdate" size="30"onClick="datePicker(event,'winRegdate')" readonly="readonly"></td>
-		</tr>
-		
-		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
-		<tr>
-			 <td colspan="4"><textarea name="winText" id="winText" cols="70" rows="13"></textarea></td>
-		</tr>
-		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
+		<tr height="1" bgcolor="#82B5DF" style="width:600px"><td colspan="4"></td></tr>
+			<tr>
+				<td width="80" align="center">이벤트명</td>
+				<td colspan="3">
+					<input type="text" name="winTitle" id='winTitle' size="85">
+				</td>
+			</tr>
+			
+			<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
+			<tr>
+				 <td colspan="4"><textarea name="winText" id="winText" cols="70" rows="13"></textarea></td>
+			</tr>
+			<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 	</table>
 	<div style="width:600px;" align="right">                                                                                                 
 			<input type="submit" value="완료">

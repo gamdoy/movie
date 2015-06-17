@@ -106,6 +106,7 @@
 		select 	t.thea_no, t.zip_no, z.zip_zipcode, t.thea_location, t.thea_phoneno, t.thea_address1, t.thea_address2, t.thea_status
 		from		theater t, zipcode z
 		where t.zip_no = z.zip_no
+			and t.thea_status != '111200'
 		order by t.thea_location
 	</select>
 	

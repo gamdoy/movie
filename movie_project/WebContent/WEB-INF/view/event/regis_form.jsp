@@ -8,8 +8,24 @@
 	
 var idDup = false;//ID 중복여부 체크 - true : 사용할 수 있다(중복아님), false : 사용할 수 없다(중복아님) 
 $(document).ready(function(){
+	
+
 
 	$("#registerForm").on("submit", function(){
+		
+		var startDate=$("#evtStartDate").val();
+		var endDate=$("#evtEndDate").val();
+		
+		var arr1=startDate.split('-');
+		var arr2=endDate.split('-');
+		
+		var evtStartDate=new Date(arr1[0],arr1[1],arr1[2]);
+		var evtEndDate=new Date(arr2[0],arr2[1],arr2[2]);
+		
+		if(evtStartDate>evtEndDate){
+			alert("이벤트 종료일은 시작일 이후여야합니다.");
+			return false;
+		}
 		
 		if(!$("#evtTitle").val()){
 			alert("이벤트 분류명을 입력하세요");
@@ -29,13 +45,17 @@ $(document).ready(function(){
 			return false;
 		}
 		
-		if(!$("#evtRegDate").val()){
-			alert("등록일을 입력하세요");
-			$("#evtRegDate").focus();
+	
+		if(!$("#evtContent").val()){
+			alert("이벤트제목을 입력하세요");
+			$("#evtTitle").focus();
 			return false;
 		}
 		
-		if(!$("#evtContent").val()){
+		
+		
+		
+		if(!$("#evtStartDate").val()){
 			alert("이벤트제목을 입력하세요");
 			$("#evtTitle").focus();
 			return false;
@@ -45,6 +65,19 @@ $(document).ready(function(){
 	});
 	
 });
+
+function day_check(value){
+	var arr=value.split('-');
+	
+	var startDate=new Date(arr[0],arr[1],arr[2]);
+	var endDate=new Date(arr[0],arr[1],arr[2]);
+	
+	if(startDate<endDate){
+		alert("이벤트 종료일은 시작일 이후여야합니다.");
+		$("#evtEndDate").prop("value","");
+		return false;
+	}
+}
 
 </script>
 
@@ -69,18 +102,13 @@ $(document).ready(function(){
 			<td>종료일</td>
 			<td>
 				<input type="text" id="evtEndDate" name="evtEndDate" onClick="datePicker(event,'evtEndDate')" readonly="readonly">
-			</td>
-		</tr>
-		<tr>
-			<td>등록일</td>
-			<td>
-				<input type="text" id="evtRegDate" name="evtRegDate" onClick="datePicker(event,'evtRegDate')" readonly="readonly">
+				<label id="endDateLabel" name="endDateLabel" ></label>
 			</td>
 		</tr>
 		<tr>
 			<td>이벤트 내용</td>
-			<td>
-				<input type="text" id="evtContent" name="evtContent"> 
+			<td><br>
+				<textarea name="evtContent" id="evtContent"	cols="50" rows='5'></textarea>
 			</td>
 		</tr>
 		<tr>

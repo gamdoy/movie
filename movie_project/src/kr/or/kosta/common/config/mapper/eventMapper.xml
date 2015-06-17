@@ -48,7 +48,16 @@
 	<select id="selectEventList" resultMap="event-resultmap">
 		select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
 		from		event
-		order by evt_no
+		where evt_enddate > to_char(sysdate, 'yyyy-mm-dd hh24:mi')
+		and to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_startdate
+		order by evt_no desc
+	</select>
+	
+	<select id="selectEndEventList" resultMap="event-resultmap">
+		select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
+		from		event
+		where to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_enddate 
+		order by evt_no desc
 	</select>
 	
 	<select id="selectEventByEvtNo" parameterType="_int" resultMap="event-resultmap">
@@ -59,14 +68,14 @@
 	
 	<insert id="insertEvent" parameterType="eventVO">
 		insert into event (evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title)
-		values (EVENT_SEQ.nextval, #{evtStartDate}, #{evtEndDate}, #{evtRegDate}, #{evtContent} , #{evtFile} , #{evtTitle})
+		values (EVENT_SEQ.nextval, #{evtStartDate}|| ' 00:00:00', #{evtEndDate}|| ' 23:59:59',to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'), #{evtContent} , #{evtFile} , #{evtTitle})
 	</insert>
 	
 	<update id="updateEvent" parameterType="eventVO">
 		update event
-		set			evt_startdate=#{evtStartDate},
-					evt_enddate=#{evtEndDate},
-					evt_regdate=#{evtRegDate},
+		set			evt_startdate=#{evtStartDate}|| ' 00:00:00',
+					evt_enddate=#{evtEndDate}|| ' 23:59:59',
+					evt_regdate=to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),
 					evt_content=#{evtContent},
 					evt_file=#{evtFile},
 					evt_title=#{evtTitle}
@@ -100,6 +109,7 @@
 			)
 		) 
 		where page = #{pageNo}
+		order by win_no desc
 	</select>
 	
 	<select id="selectTotalEventCount" resultType="_int">
@@ -112,7 +122,27 @@
 	
 	<select id="findEventByText" parameterType="String" resultMap="event-resultmap">
 		select *
-		from event
+		from 
+		    (
+		     	select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
+				from		event
+				where evt_enddate > to_char(sysdate, 'yyyy-mm-dd hh24:mi')
+				and to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_startdate
+				order by evt_no
+		    )
+		where evt_title like '%'||#{text}||'%'
+		order by evt_no
+	</select>
+	
+	<select id="findEndEventByText" parameterType="String" resultMap="event-resultmap">
+		select *
+		from 
+		    (
+		      select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
+		      from		event
+		      where to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_enddate 
+			  order by evt_no
+		    )
 		where evt_title like '%'||#{text}||'%'
 		order by evt_no
 	</select>
@@ -130,10 +160,14 @@
 		where win_no=#{winNo}		
 	</delete>
 	
+	<insert id="insertWinner" parameterType="winnerVO">
+		insert into winner (win_no, win_title, win_regdate, win_text)
+		values (WINNER_SEQ.nextval, #{winTitle}, to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'), #{winText})
+	</insert>
+	
 	<update id="modifyWinner" parameterType="winnerVO">
 		update winner
 		set		win_title=#{winTitle},
-				win_regdate=#{winRegdate},
 				win_text=#{winText}
 					
 		where	win_no=#{winNo}	

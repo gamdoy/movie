@@ -27,9 +27,9 @@ function goUrl(){
            
            <thead>
                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>등록 일시</th>
+                    <th width="30">번호</th>
+                    <th width="300">제목</th>
+                    <th width="150">등록 일시</th>
                </tr>
            </thead>
            <tbody>
@@ -82,5 +82,14 @@ function goUrl(){
 </tr>
 </tbody>	
 </table>
-<input type="button" value="글쓰기" onclick="goUrl();">
-</p>
+
+<c:choose>
+	<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
+		<nav style="width: 510px" align="right">
+		<input type="button" value="글쓰기" onclick="goUrl();"></nav>
+	</c:when>
+	<c:otherwise>
+		
+	</c:otherwise>
+</c:choose>
+

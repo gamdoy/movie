@@ -84,7 +84,10 @@ public class AdminDAOImpl implements AdminDAO{
 		return vo;
 	}
 	
-	
+	@Override
+	public void updateMember(AdminVO admin) {
+		session.update(namespace+"updateMember", admin);
+	}
 	
 	@Override
 	public int selectTotalMemberCount() {

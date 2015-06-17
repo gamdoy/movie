@@ -45,7 +45,7 @@ public class EventController {
 	
 	@RequestMapping(value="endEvent.do")
 	public String endEvent(ModelMap map){
-		List<EventVO> list= service.getEventList();
+		List<EventVO> list= service.getEndEventList();
 		System.out.println(list.size());
 		
 		map.addAttribute("event_list",list);
@@ -156,6 +156,17 @@ public class EventController {
 		return "event/search_event.tiles";
 	}
 	
+	@RequestMapping(value="searchEndEventText")
+	public String searchEndEventText(@RequestParam String searchText, @ModelAttribute EventVO vo ,ModelMap map){
+		
+		List<EventVO> searchEventList = service.searchEndEventByText(searchText);
+		System.out.println(searchEventList);
+		
+		map.addAttribute("search_event_list",searchEventList);
+		
+		return "event/search_endevent.tiles";
+	}
+	
 	/*파일 싱글 업로드
 	@RequestMapping(value="singleup")
 	public String singleUpload(SingleUpload svo,ModelMap map)throws IllegalStateException, IOException{
@@ -232,6 +243,13 @@ public class EventController {
 	public String modifyWinner(@ModelAttribute WinnerVO vo, ModelMap map){
 		
 		service.modifyWinner(vo);
+		return "/event/eventListPaging.do";
+	}
+	
+	@RequestMapping(value="insertWinner")
+	public String insertWinner(@ModelAttribute WinnerVO vo, ModelMap map){
+		
+		service.insertWinner(vo);
 		return "/event/eventListPaging.do";
 	}
 
