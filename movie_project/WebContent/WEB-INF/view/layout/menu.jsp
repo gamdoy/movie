@@ -5,15 +5,163 @@
 	a:hover	{text-decoration:underline; color: white;}/*링크에 마우스 올라갔을 때*/
 	a:active	{text-decoration:none; color: white;}/*링크 클릭시*/
 	a:visited {text-decoration:none; color: white;}/*방문한 링크 표시*/
-	.loginArea{background-color: gray; height: 195px;width: 300px; float:right;}
+	.loginArea{background-color: black; height: 195px;width: 300px; float:right;}
 	.loginArea tr{height: 65px;}
-	.menu {height: 195px;width: 880px; float:left;}/*메뉴영역*/
+	.menu {background-color: black; height: 195px;width: 880px; float:left;}/*메뉴영역*/
 	.main_menu {background-color: black; height: 100px;width: 880px;}/*메뉴영역*/
-	.myinfo_menu {height: 95px;width: 880px; display: none;}
-	.movie_menu {height: 95px;width: 880px; display: none;}
-	.event_menu {height: 95px;width: 880px; display: none;}
-	.customer_menu {height: 95px;width: 880px; display: none;}
-	.admin_menu {height: 95px;width: 880px; display: none;}
+	.myinfo_menu {background-color: black; height: 95px;width: 880px; display: none;}
+	.movie_menu {background-color: black; height: 95px;width: 880px; display: none;}
+	.event_menu {background-color: black; height: 95px;width: 880px; display: none;}
+	.customer_menu {background-color: black; height: 95px;width: 880px; display: none;}
+	.admin_menu {background-color: black; height: 95px;width: 880px; display: none;}
+	
+	.form-1 {
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    font-weight: 350;
+    /* Size and position */
+    height: 195px;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+
+    /* Styles */
+    background:black;
+   
+}
+.form-2 {
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    font-weight: 350;
+}
+.form-2 label {
+    /* Size and position */
+    
+    float: left;
+
+    /* Styles */
+    color: #ddd;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #000;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.form-1 label {
+    /* Size and position */
+    
+    float: left;
+
+    /* Styles */
+    color: #ddd;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #000;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.form-1 input[type=text]:hover,
+.form-1 input[type=password]:hover,
+.form-1 label:hover ~ input[type=text],
+.form-1 label:hover ~ input[type=password] {
+    background: #27292c;
+}
+
+.form-1 input[type=text]:focus, 
+.form-1 input[type=password]:focus {
+    box-shadow: inset 0 0 2px #000;
+    background: #494d54;
+    border-color: #51cbee;
+    outline: none; /* Remove Chrome outline */
+}
+.form-1 p:nth-child(3),
+.form-1 p:nth-child(4) {
+    float: left;
+    width: 50%;
+}
+.form-1 input[type=submit] {
+    /* Width and position */
+    width: 100%;
+    padding: 8px 5px;
+  
+    /* Styles */
+    border: 1px solid #0273dd; /* Fallback */
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: #38a6f0;
+    cursor:pointer;
+  
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+.form-1 input[type=button] {
+    /* Width and position */
+    width: 49%;
+    padding: 8px 5px;
+  
+    /* Styles */
+    border: 1px solid #0273dd; /* Fallback */
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: #38a6f0;
+    cursor:pointer;
+  
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+.form-2 input[type=button] {
+    /* Width and position */
+    width: 49%;
+    padding: 8px 5px;
+  
+    /* Styles */
+    border: 1px solid #0273dd; /* Fallback */
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: #38a6f0;
+    cursor:pointer;
+  
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+.form-1 input[type=submit]:hover { 
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.form-1 input[type=submit]:active { 
+    background: #287db5;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.6);
+    border-color: #000; /* Fallback */
+    border-color: rgba(0,0,0,0.9);
+}
+
+.no-boxshadow .form-1 input[type=submit]:hover {
+    background: #2a92d8;
+}
 </style>
 <script type="text/javascript">
 var flag = false;
@@ -37,7 +185,7 @@ var flag = false;
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
-			window.location = "<%=request.getContextPath() %>/theater/movieSchedule.do";
+			window.location = "<%=request.getContextPath() %>/theater/theaterManagement.do";
 		});
 		$("#eventBtn").on("click", function() {
 			hide_subMenu();
@@ -51,7 +199,7 @@ var flag = false;
 			hide_subMenu();
 			$(".stats_menu").show();
 		});
-		$("#adminBtn").on("click", function() {
+		$("#admin").on("click", function() {
 			hide_subMenu();
 			$(".admin_menu").show();
 		});
@@ -93,7 +241,9 @@ var flag = false;
 		<img src="<%=request.getContextPath()%>/upload/icon.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<c:if test="${sessionScope.login_info != null && sessionScope.login_info.memMemberType == '102300'}">
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:if>	
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="adminBtn">관리자</label>
@@ -135,42 +285,37 @@ var flag = false;
 <section class="loginArea">
 <c:choose>
 	<c:when test="${sessionScope.login_info == null}">
-<form action="<%=request.getContextPath() %>/member/login.do" method="post" >
-	<table style=" width: 300px; height: 180px">
-		<tr>
-			<td>아이디</td>
-			<td><input type="text" name="id" size="5" placeholder="ID" onclick="id" autofocus="autofocus"></td>
-		</tr>
-		<tr>
-			<td>패스워드</td>
-			<td><input type="password" name="password" placeholder="Password" size="5"></td>	
-		</tr>
-		<tr>
-			<td colspan="2" align="center">
-				<input type="submit" value="로그인">
-				<input type="button" value="회원가입" onclick="join()">				
-				<input type="button" value="Id/PW찾기" onclick="membersearch()">
-			</td>
-		</tr>			
-	</table>
+<form class="form-1" action="<%=request.getContextPath() %>/member/login.do" method="post" >
+	
+	<p class="clearfix" style="margin: 0px;">
+			<label for="login">Username</label>
+			<input type="text" name="id" size="15" placeholder="ID" onclick="id" autofocus="autofocus">
+	</p>
+	<p class="clearfix" style="margin: 0px; height: 50px;">
+			<label for="password">Password</label>
+			<input type="password" name="password" placeholder="Password" size="15">	
+	</p>	
+	<p class="clearfix2" style="margin: 0px; height: 45px; width:300px;">
+			<input type="submit" value="로그인">
+			<input type="button" value="회원가입" onclick="join()">				
+			<input type="button" value="Id/PW찾기" onclick="membersearch()">
+	</p>
 </form>
 </c:when>
 <c:when test="${sessionScope.login_info != null}">
-<form>
-<table style=" width: 300px;">
-		<tr>	
-			<td colspan="2">${sessionScope.login_info.memId}님환영합니다.</td>
-		</tr>
+<form class="form-2">
+		<p class="login-after">
+			<label for="id">${sessionScope.login_info.memId} 님 환영합니다.</label>
+		</p>
 	
-		<tr>
-			<td><input type="button" name="myinfoBtn" id="myinfoBtn" value="마이페이지"></td>
-			<td><input type="button" name="" id="" value="예매내역"></td>
-		</tr>
-		<tr>
-			<td><input type="button" name="admin" id="admin" value="관리자모드"></td>
-			<td><input type="button" name="logout" id="logout" value="로그아웃"></td>
-		</tr>
-</table>
+		<p class="login-after">
+			<input type="button" name="myinfoBtn" id="myinfoBtn" value="마이페이지">
+			<input type="button" name="" id="" value="예매내역">
+		</p>
+		<p class="login-after">
+			<input type="button" name="admin" id="admin" value="관리자모드">
+			<input type="button" name="logout" id="logout" value="로그아웃">
+		</p>
 </form>		
 
 </c:when>
