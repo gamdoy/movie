@@ -31,6 +31,7 @@ public class AdminDAOImpl implements AdminDAO{
 		return session.selectList(namespace+"selectMemberListPaging", param);
 	}
 	
+	
 	@Override
 	public List<AdminVO> selectMemberBySearchVOPaging(SearchVO svo, int page) {
 		Map param = new HashMap();
@@ -74,6 +75,10 @@ public class AdminDAOImpl implements AdminDAO{
 	public int updateMemberMileage(AdminVO member) {
 		// TODO Auto-generated method stub
 		return session.update(namespace+"updateMemberMileage", member);
+	}
+	
+	public void updateMemberType(AdminVO member) {
+		session.update(namespace+"updateMemberType", member);
 	}
 	
 	@Override

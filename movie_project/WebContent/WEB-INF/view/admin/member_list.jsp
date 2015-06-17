@@ -8,6 +8,12 @@ $(document).ready(function(){
 		location.href="<%=request.getContextPath() %>/admin/getMemberByNo.do?memNo="+no;
 	});
 	
+	$(".memberTypeBtn").on("click", function(){
+		var no = $(this).parent().parent().children().html();
+		var memberType = $(this).parent().children().val();
+		location.href="<%=request.getContextPath() %>/admin/modifyMemberType.do?memNo="+no+"&memberType="+memberType;
+	});
+	
 	$(".modifyMemBtn").on("click", function(){
 		var no = $(this).parent().children().html();
 		location.href="<%=request.getContextPath() %>/admin/modifyMember.do?memNo="+no;
@@ -63,19 +69,19 @@ $(document).ready(function(){
 
 	<h2 align="center">회원목록</h2>
 
-	<table id="listTB" style="width:800px" align="center" >
+	<table id="listTB" style="width:1200px" align="center" >
 		<thead>
 			<tr>
 				<td hidden="hidden">회원번호</td>
 				<td>ID</td>
 				<td>이름</td>
-				<td>생년월일</td>
+				<td width="100">생년월일</td>
 				<td>E-MAIL</td>
 				<td>전화번호</td>
-				<td>마일리지</td>
-				<td>회원등급</td>
-				<td>가입일</td>
-				<td>정보수정</td>
+				<td width="120">마일리지</td>
+				<td width="150">회원등급</td>
+				<td width="100">가입일</td>
+				<td width="120">정보수정</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -88,7 +94,15 @@ $(document).ready(function(){
 					<td>${adminVO.memberEmail}</td>
 					<td>${adminVO.memberPhone}</td>
 					<td class="mileageBtn">${adminVO.memberMileage}	[발급]</td>
-					<td>${adminVO.memberTypeName}</td>
+					
+					<td>	
+						<select id="memberType" class="memberType" name="memberType">
+							<option value="${adminVO.memberTypeName}">${adminVO.memberTypeName}</option>
+							<option value="회원">회원</option>
+							<option value="VIP">VIP</option>
+						</select>
+						<input type="button" class="memberTypeBtn" value="변경">
+					</td>
 					<td>${adminVO.memberJoindate}</td>
 					<td class="modifyMemBtn">[수정하기]</td>
 				</tr> 
