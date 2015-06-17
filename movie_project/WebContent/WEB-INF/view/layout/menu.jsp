@@ -315,7 +315,9 @@ var flag = false;
 			<input type="button" name="" id="" value="예매내역">
 		</p>
 		<p class="login-after">
+		<c:if test="${sessionScope.login_info != null && sessionScope.login_info.memMemberType == '102300'}">
 			<input type="button" name="admin" id="admin" value="관리자모드">
+		</c:if>
 			<input type="button" name="logout" id="logout" value="로그아웃">
 		</p>
 </form>		
