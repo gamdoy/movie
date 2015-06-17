@@ -13,6 +13,7 @@ import kr.or.kosta.admin.vo.AdminVO;
 import kr.or.kosta.common.vo.PagingBean;
 import kr.or.kosta.common.vo.SearchVO;
 import kr.or.kosta.commoncode.model.service.CommonCodeService;
+import kr.or.kosta.commoncode.vo.CommonCodeVO;
 import kr.or.kosta.coupon.vo.CouponVO;
 import kr.or.kosta.member.model.service.MemberService;
 import kr.or.kosta.member.vo.MemberVO;
@@ -37,6 +38,7 @@ public class AdminController {
 	
 	@Autowired
 	private CommonCodeService commonService;
+	
 /*	
 	@RequestMapping("member_list")
 	public String memberList(ModelMap map){
@@ -46,6 +48,26 @@ public class AdminController {
 		return "admin/member_list.tiles";
 	}
 	*/
+	
+	//관리자가 멤버정보수정
+	@RequestMapping("modifyMember")
+	public String modifyMember(ModelMap map,@RequestParam("memNo") int number){
+		AdminVO member = service.selectMemberByNo(number);
+		
+		List<CommonCodeVO> telList = commonService.getCodeList("101");
+		map.addAttribute("telList",telList);
+		
+		map.addAttribute("member_info", member);
+		
+		return "admin/modify_form.tiles";
+	}
+	
+	@RequestMapping("modifyMemberInfo")
+	public String modifyMember(@ModelAttribute AdminVO admin){
+		System.out.println("modifyMember : "+admin);
+		service.updateMember(admin);
+		return "/admin/member_list_Paging.do";
+	}
 	
 	@RequestMapping("myinfo")
 	public String myInfo(HttpSession session, ModelMap map){

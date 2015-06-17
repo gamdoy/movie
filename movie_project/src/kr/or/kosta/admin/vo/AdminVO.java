@@ -5,6 +5,10 @@ import kr.or.kosta.coupon.vo.CouponVO;
 public class AdminVO {
 	private int memNo;
 	private String memberId;
+	private int zipNo;
+	private String zipAddress;
+	private String memPassword;
+	private String memAddressDetail;
 	private String memberName;
 	private String memberBirthdate;
 	private String memberEmail;
@@ -13,6 +17,7 @@ public class AdminVO {
 	private String memberType;
 	private String memberTypeName;
 	private String memberJoindate;
+	private String memPhoneNo;
 	private CouponVO coupon;
 	
 	public AdminVO() {
@@ -41,6 +46,32 @@ public class AdminVO {
 		return memNo;
 	}
 
+	
+	public String getMemPhoneNo() {
+		return memPhoneNo;
+	}
+
+	
+	public String getMemPassword() {
+		return memPassword;
+	}
+
+	public void setMemPassword(String memPassword) {
+		this.memPassword = memPassword;
+	}
+
+	public int getZipNo() {
+		return zipNo;
+	}
+
+	public void setZipNo(int zipNo) {
+		this.zipNo = zipNo;
+	}
+
+	public void setMemPhoneNo(String memPhoneNo) {
+		this.memPhoneNo = memPhoneNo;
+	}
+
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
@@ -51,6 +82,24 @@ public class AdminVO {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+
+
+	public String getZipAddress() {
+		return zipAddress;
+	}
+
+	public void setZipAddress(String zipAddress) {
+		this.zipAddress = zipAddress;
+	}
+
+	public String getMemAddressDetail() {
+		return memAddressDetail;
+	}
+
+	public void setMemAddressDetail(String memAddressDetail) {
+		this.memAddressDetail = memAddressDetail;
 	}
 
 	public String getMemberName() {
@@ -215,12 +264,15 @@ public class AdminVO {
 	@Override
 	public String toString() {
 		return "AdminVO [memNo=" + memNo + ", memberId=" + memberId
-				+ ", memberName=" + memberName + ", memberBirthdate="
-				+ memberBirthdate + ", memberEmail=" + memberEmail
-				+ ", memberPhone=" + memberPhone + ", memberMileage="
-				+ memberMileage + ", memberType=" + memberType
-				+ ", memberTypeName=" + memberTypeName + ", memberJoindate="
-				+ memberJoindate + ", coupon=" + coupon + "]";
+				+ ", zipNo=" + zipNo + ", zipAddress=" + zipAddress
+				+ ", memPassword=" + memPassword + ", memAddressDetail="
+				+ memAddressDetail + ", memberName=" + memberName
+				+ ", memberBirthdate=" + memberBirthdate + ", memberEmail="
+				+ memberEmail + ", memberPhone=" + memberPhone
+				+ ", memberMileage=" + memberMileage + ", memberType="
+				+ memberType + ", memberTypeName=" + memberTypeName
+				+ ", memberJoindate=" + memberJoindate + ", memPhoneNo="
+				+ memPhoneNo + ", coupon=" + coupon + "]";
 	}
 
 }

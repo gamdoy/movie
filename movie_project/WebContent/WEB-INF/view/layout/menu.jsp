@@ -108,7 +108,7 @@ var flag = false;
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
-	</section>
+	</section>f
 	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->
 	</section>
 	<section class="theater_menu"><!-- 영화 서브메뉴영역 -->
