@@ -36,7 +36,6 @@ public class MovieServiceImpl implements MovieService {
 		//목록에 뿌려줄 List<MovieVO> 조회
 		List<MovieVO> list = dao.allMovieList(pageNo, vo);
 		int count = dao.totalCount(vo);
-		System.out.println("토탈카운트 "+count);
 		//PagingBean 생성
 		PagingBean pagingBean = new PagingBean(count, pageNo);
 		//두개의 값(List, PagingBean)을 Map에 넣어 return
@@ -56,8 +55,33 @@ public class MovieServiceImpl implements MovieService {
 	}
 	//movNo로 영화조회
 	@Override
-	public MovieVO getMovieByNo(String movNo) {
+	public MovieVO getMovieByNo(int movNo) {
 		return dao.getMovieByNo(movNo);
+	}
+	//movNo로 영화조회-list
+	public List<MovieVO> getMovieByNoList(int movNo){
+		return dao.getMovieByNoList(movNo);
+	}
+	
+	//관심영화
+	public  int addFavorite(Map map){
+		return dao.addFavorite(map);		
+	}
+	//관심영화 전체 조회
+	@Override
+	public List selFavoriteAll() {
+		return dao.selFavoriteAll();
+	}
+	
+	//관심영화 조회
+	@Override
+	public MovieVO selFavorite(int moveNo) {
+		return dao.selFavorite(moveNo);
+	}
+	//관심영화 삭제
+	@Override
+	public int delFavorite(int movNo) {
+		return dao.delFavorite(movNo);
 	}
 	
 	
@@ -74,6 +98,9 @@ public class MovieServiceImpl implements MovieService {
 	public List<ProductionVO> getProduction() {
 		return dao.getProduction();
 	}
+	
+	
+	
 	
 
 	

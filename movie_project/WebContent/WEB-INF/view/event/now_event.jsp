@@ -28,8 +28,10 @@ table#listTB thead tr{
 	</c:otherwise>
 </c:choose>
 <form method="POST" action="<%=request.getContextPath() %>/event/searchEventText.do" id="search_event">
+<nav style="width: 800px" align="right">
 <input type="text" id="searchText" name="searchText">
 <input type="submit" value="검색">
+</nav>
 </form>
 <form method="POST" action="<%=request.getContextPath() %>/event/specEvent.do" id="now_event">
 <input type="hidden" name="evtNo" id="evtNo"> 	
@@ -42,7 +44,7 @@ table#listTB thead tr{
 					<c:if test="${idx.index%4==0 }">
 						<tr>
 					</c:if>
-							<td width="15" height="20" align="center">
+							<td width="15" height="20" align="center" style="width: 200px;">
 								<div style="width:200;">
 									<div onclick="getEvent(${eventVO.evtNo })">
 										<c:choose>

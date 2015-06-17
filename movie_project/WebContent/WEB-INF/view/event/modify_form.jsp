@@ -1,10 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/script/date_picker.js"></script>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
 	$("#modifyForm").on("submit", function(){
+		
+		var startDate=$("#evtStartDate").val();
+		var endDate=$("#evtEndDate").val();
+		
+		var arr1=startDate.split('-');
+		var arr2=endDate.split('-');
+		
+		var evtStartDate=new Date(arr1[0],arr1[1],arr1[2]);
+		var evtEndDate=new Date(arr2[0],arr2[1],arr2[2]);
+		
+		if(evtStartDate>evtEndDate){
+			alert("이벤트 종료일은 시작일 이후여야합니다.");
+			return false;
+		}
 		
 		if(!$("#evtTitle").val()){
 			alert("이벤트 이름을 입력하세요");
@@ -23,13 +41,7 @@ $(document).ready(function(){
 			$("#evtEndDate").focus();
 			return false;
 		}
-		
-		if(!$("#evtRegDate").val()){
-			alert("등록일을 입력하세요");
-			$("#evtRegDate").focus();
-			return false;
-		}
-		
+	
 		if(!$("#evtContent").val()){
 			alert("이벤트내용을 입력하세요");
 			$("#evtContent").focus();
@@ -61,25 +73,19 @@ $(document).ready(function(){
 		<tr>
 			<td>시작일</td>
 			<td>
-				<input type="text" id="evtStartDate" name="evtStartDate"> 
+				<input type="text" id="evtStartDate" name="evtStartDate" onClick="datePicker(event,'evtStartDate')" readonly="readonly">
 			</td>
 		</tr>
 		<tr>
 			<td>종료일</td>
 			<td>
-				<input type="text" id="evtEndDate" name="evtEndDate"> 
+				<input type="text" id="evtEndDate" name="evtEndDate" onClick="datePicker(event,'evtEndDate')" readonly="readonly">
 			</td>
-		</tr>
-		<tr>
-			<td>등록일</td>
-			<td>
-				<input type="text" id="evtRegDate" name="evtRegDate"> 
-			</td>
-		</tr>
+		</tr>	
 		<tr>
 			<td>이벤트 내용</td>
-			<td>
-				<input type="text" id="evtContent" name="evtContent"> 
+			<td><br>
+				<textarea name="evtContent" id="evtContent"	cols="50" rows='5'></textarea>
 			</td>
 		</tr>
 		<tr>
