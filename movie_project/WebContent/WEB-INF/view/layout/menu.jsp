@@ -111,7 +111,7 @@ var flag = false;
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/movie/user_movie_list.do">영화</a>
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
-	</section>f
+	</section>
 	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->
 	</section>
 	<section class="theater_menu"><!-- 영화 서브메뉴영역 -->
@@ -120,7 +120,7 @@ var flag = false;
 		<a href="<%=request.getContextPath() %>/event/nowEvent.do">진행중인 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/endEvent.do">종료된 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/eventListPaging.do">당첨자 확인</a>
 	</section>
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">Q & A</a>
+		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/login/qa.do">Q & A</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황	
