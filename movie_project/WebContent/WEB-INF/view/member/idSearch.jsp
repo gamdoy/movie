@@ -123,7 +123,7 @@ $("#memPhoneNo").val($("#tel").val()+"-"+$("#tel2").val()+"-"+$("#tel3").val());
 <c:choose>
 	<c:when test="${empty member_info.memId}">
 <form class="idsearch" action="<%=request.getContextPath() %>/member/idSearch.do" id="idSearchForm" 
-	      enctype="multipart/form-data" onsubmit="return setSubmit();">
+	      enctype="multipart/form-data" onsubmit="return setSubmit();" method="post">
 	      <br>
 	      <br>
 	      <br>

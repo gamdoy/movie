@@ -246,9 +246,7 @@ var flag = false;
 		</c:if>
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<c:if test="${sessionScope.login_info != null && sessionScope.login_info.memMemberType == '102300'}">
-		<label id="adminBtn">관리자</label>
-		</c:if>
+		
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
@@ -315,7 +313,9 @@ var flag = false;
 			<input type="button" name="" id="" value="예매내역">
 		</p>
 		<p class="login-after">
-			<input type="button" name="admin" id="admin" value="관리자모드">
+			<c:if test="${sessionScope.login_info != null && sessionScope.login_info.memMemberType == '102300'}">
+				<input type="button" name="admin" id="admin" value="관리자모드">
+			</c:if>
 			<input type="button" name="logout" id="logout" value="로그아웃">
 		</p>
 </form>		

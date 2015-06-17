@@ -29,7 +29,7 @@ function changeTicStatus(ticNo) {
 					ticStatus:$("#ticStatusSel"+ticNo).val()
 				},
 		success:function(ret){
-			if(ret == "1"){
+			if(ret == "true"){
 				alert("수정에 성공하였습니다.");
 			} else {
 				alert("수정에 실패하였습니다.");

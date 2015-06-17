@@ -142,6 +142,8 @@ public class TheaterController {
 		Map<String, String> map = new HashMap<String, String>();
 		int count = 0;
 		
+		System.out.println(vo);
+		
 		//예매 좌석을 문자열로 만들어서 입력한다.
 		for (int seat = 0; seat < vo.getTicTotalcustomer(); seat++) {
 			String seatNo = "|" + mrLineStr + "-" + (vo.getMrSeat() + seat);

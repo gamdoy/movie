@@ -265,22 +265,10 @@
 	<!-- 검색결과화면에서 페이징 -->
 	<select id="selectQaBySearchVOPaging"  parameterType="hashmap" resultMap="qa_list-resultmap1">
 		select fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no, qa_secret, qa_password,fq_parent_number, reply_level, reply_step, mem_id
-		from (
-			select ceil(rownum/#{contentsPerPage}) page, fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password,fq_parent_number, reply_level, reply_step, mem_id
-			from (
-			<include refid="qa-select"/>
-			
-			<if test="searchType=='WRITER' and searchKeyword != null and searchKeyword != ''">
-		 		where mem_no = (select mem_no from member where mem_id=#{searchKeyword})
-			</if>
-			
-			<if test="searchType!=null and searchType!='WRITER' and searchKeyword != null and searchKeyword != ''">
-		 		where ${searchType} like '%'||#{searchKeyword}||'%'
-		 	</if>
-		 	
-		 	order by reply_step desc
-		)
-	)
+		from (    
+select ceil(rownum/10) page,fq_parent_number fq_no, qa_title, substr(fq_lastdate,1,10) fq_lastdate, qa_count, mem_no,qa_secret, qa_password,fq_parent_number, reply_level, reply_step, mem_id    
+from (        select   fq_no,       qa_title,       substr(fq_lastdate,1,10) fq_lastdate,       qa_count,       mem_no,      qa_secret,      qa_password,       reply_level,        reply_step, fq_parent_number,      
+(select member.mem_id from member where member.mem_no = qa.mem_no) mem_id   from  qa                                  order by reply_step desc   )  )
 	where page = #{pageNo}
 	
 	</select>

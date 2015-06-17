@@ -103,7 +103,7 @@ function cancle(){
 <body>
 <c:choose>
 	<c:when test="${empty member_info.memPassword }">
-<form class="pwsearch" action="<%=request.getContextPath() %>/member/pwSearch.do" enctype="multipart/form-data" onsubmit="return setSubmit();">
+<form class="pwsearch" action="<%=request.getContextPath() %>/member/pwSearch.do" enctype="multipart/form-data" onsubmit="return setSubmit();" method="post">
 	 	  <br>    
 	      <br>
 	<p class="idsearch">

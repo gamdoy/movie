@@ -95,7 +95,7 @@
 					} else {
 						$(".scheduleArea").append($("<div class='screenTime' onclick=\"setTime('" +  this.schDate + "', '" + this.schNo + "');\" id='" + this.schDate + "'>").append(this.schDate + "(" + this.emptySeat + ")"));
 					}
-					$(".posterArea").html($("<img src='<%= request.getContextPath()%>/" + this.movPoster + "'>"));
+					$(".posterArea").html($("<img src='<%= request.getContextPath()%>" + this.movPoster + "'>"));
 				})
 			}	
 		});

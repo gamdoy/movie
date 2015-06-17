@@ -74,7 +74,7 @@ function setSchedule(mrNo) {
 	  		</td>
 	  		<td>
 	  			<select id="lineSel${movieroom.mrNo }">
-	  				<c:forEach begin="1" end="9" varStatus="line">
+	  				<c:forEach begin="1" end="15" varStatus="line">
 	  					<c:choose>
 	  						<c:when test="${line.index ==  movieroom.mrLine }">
 			  					<option value="${line.index }" selected="selected">${line.index }</option>
@@ -88,7 +88,7 @@ function setSchedule(mrNo) {
 	  		</td>
 	  		<td>
 	  			<select id="seatSel${movieroom.mrNo }">
-	  				<c:forEach begin="1" end="9" varStatus="seat">
+	  				<c:forEach begin="1" end="15" varStatus="seat">
 	  					<c:choose>
 	  						<c:when test="${seat.index ==  movieroom.mrSeat }">
 			  					<option value="${seat.index }" selected="selected">${seat.index }</option>
