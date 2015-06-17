@@ -62,17 +62,15 @@ nav.template{
 	color:white;
 	font-weight:bold;
 	text-align:center;
-	border-bottom:1px  solid gray;
+	border:0px  solid black;
 }
 section.template{
-	
-	margin:10px;
+	border:0px solid black;
 	height: auto; 
 	overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 }
 footer.template{
 	
-	margin:10px;
 	height: auto; 
 	overflow:auto;/*hight를 500px에 내용이 늘어나면 늘어나도록 처리*/
 }

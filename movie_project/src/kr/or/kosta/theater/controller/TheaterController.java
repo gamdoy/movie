@@ -160,6 +160,7 @@ public class TheaterController {
 		vo.setTicPrice(8000);//가격 고정
 		vo.setTicSeatno(seats);//
 		
+		theaterService.modifyMemberMileage(vo);
 		theaterService.registTicket(vo);
 		map.put("url", "/theater/reserveSuccess.do");
 		map.put("ticNo", vo.getTicNo()+"");

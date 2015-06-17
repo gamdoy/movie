@@ -4,6 +4,105 @@
 <style>
 .normalMessage{color: blue;}
 .errorMessage{color: red;}
+.joinform {
+	text-align:
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+   	background-color: black;
+   
+}
+.joinform label {
+    /* Size and position */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    text-align:center;
+    font-weight: 350;
+    width:120px;
+    float: left;
+	background-color:black;
+    /* Styles */
+    color: #ddd;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 0 #000;
+    text-indent: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.joinform input[type=text]:hover,
+.joinform input[type=password]:hover,
+.joinform label:hover ~ input[type=text],
+.joinform label:hover ~ input[type=password] {
+    background: #27292c;
+}
+
+.joinform input[type=text]:focus, 
+.joinform input[type=password]:focus {
+    box-shadow: inset 0 0 2px #000;
+    background: #494d54;
+    border-color: #51cbee;
+    outline: none; /* Remove Chrome outline */
+}
+
+.joinform input[type=submit], 
+.joinform input[type=button],
+.joinform input[type=reset]{
+    /* Width and position */
+    width: 150px;
+    padding: 8px 5px;
+  
+    /* Styles */
+    border: 1px solid #0273dd; /* Fallback */
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: #38a6f0;
+    cursor:pointer;
+  
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+   	color: #ddd;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+.joinform input[type=button] {
+    /* Width and position */
+    padding: 8px 5px;
+  
+    /* Styles */
+    border: 1px solid #0273dd; /* Fallback */
+    border: 1px solid rgba(0,0,0,0.4);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 10px 10px rgba(255,255,255,0.1);
+    border-radius: 3px;
+    background: #38a6f0;
+    cursor:pointer;
+  
+    /* Font styles */
+    font-family: 'Ubuntu', 'Lato', sans-serif;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.8);
+}
+.joinform input[type=submit]:hover { 
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.joinform input[type=submit]:active { 
+    background: #287db5;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.6);
+    border-color: #000; /* Fallback */
+    border-color: rgba(0,0,0,0.9);
+}
+
+.no-boxshadow .joinform input[type=submit]:hover {
+    background: #2a92d8;
+}
 </style>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/script/date_picker.js"></script>
@@ -137,61 +236,45 @@ function setSubmit(){
 }
 </script>
 
-<h2>가입양식</h2>
 
-<form method="post" action="<%=request.getContextPath() %>/member/join.do"  id="registerForm" onsubmit=" return setSubmit();" enctype="multipart/form-data">
+<form class="joinform" method="post" action="<%=request.getContextPath() %>/member/join.do"  id="registerForm" onsubmit=" return setSubmit();" enctype="multipart/form-data">
 	<input type="hidden" id="memPhoneNo" name="memPhoneNo">
 	<input type="hidden" id="zipNo" name="zipNo">
-	<table style="width:600px">
-		<tr>
-			<td width="100">ID</td>
-			<td>
-				<input type="text" name="memId" id="memId"> <input type="button" name="idconfirm" id="idconfirm" value="중복확인">
-				<span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td>비밀번호</td>
-			<td>
-				<input type="password" id="memPassword" name="memPassword"><span id="passwrodMessageLayer"></span> <span class="errorMessage"><form:errors path="member.password"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td>비밀번호확인</td>
-			<td>
-				<input type="password" id="password2" name="password2"><span id="passwrodMessageLayer2"></span> <span class="errorMessage"><form:errors path="member.password"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td>이름</td>
-			<td>
-				<input type="text" id="memName" name="memName"> <span class="errorMessage"><form:errors path="member.name"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td>생년월일</td>
-			<td>
-				<input type="text" name="memBirthDate" id="memBirthDate" readonly="readonly" onClick="datePicker(event,'memBirthDate')" onClick="datePicker(event,'memBirthDate')"><br>
-			</td>
-		</tr>
+	ddd
+	<p class="joinform">
+		<label for="memId" style="height: 50px;"><br>ID</label>
+		<input type="text" name="memId" id="memId"> <input type="button" name="idconfirm" id="idconfirm" value="중복확인">
+		<span id="dupMessageLayer"> </span><span class="errorMessage"><form:errors path="member.id"/></span>	
+	</p>
 		
-			
-		<tr>
-			<td>이메일</td>
-			<td>
+	<p class="joinform">
+		<label for="memPassword">Password</label>
+			<input type="password" id="memPassword" name="memPassword"><span id="passwrodMessageLayer"></span> <span class="errorMessage"><form:errors path="member.password"/></span>
+	</p>
+	<p class="joinform">
+		<label for="password2">Password확인</label>	
+				<input type="password" id="password2" name="password2"><span id="passwrodMessageLayer2"></span> <span class="errorMessage"><form:errors path="member.password"/></span>
+	</p>
+	<p class="joinform">
+		<label for="memName">이름</label>					
+				<input type="text" id="memName" name="memName"> <span class="errorMessage"><form:errors path="member.name"/></span>
+	</p>	
+	<p class="joinform">
+		<label for="memBirthDate">생년월일</label>	
+				<input type="text" name="memBirthDate" id="memBirthDate" readonly="readonly" onClick="datePicker(event,'memBirthDate')" onClick="datePicker(event,'memBirthDate')"><br>
+	</p>
+	<p class="joinform">
+		<label for="memEmail">이메일</label>			
 				<input type="text" id="memEmail" name="memEmail"><span id="emailMessageLayer"></span> <span class="errorMessage"><form:errors path="member.email"/></span>
-			</td>
-		</tr>
-		<tr>
-			<td>상세주소</td>
-			<td>
+	</p>
+	<p class="joinform">
+		<label for="memAddressDetail">상세주소</label>					
 				<input type="text" size="7" id="zipcode" name="zipcode" readonly="readonly">   <input type="text" id="address2" size="25"name="address2" readonly="readonly">  <input type="button" id="address" name="address" value="우편번호검색"><br>
-				<input type="text" size="30" id="memAddressDetail" name="memAddressDetail">
-			</td>
-		</tr>
-		<tr>
-			<td>연락처</td>
-			<td> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="text" size="38" id="memAddressDetail" name="memAddressDetail">
+	</p>	
+	<p class="joinform">
+		<label for="tel">연락처</label>				
 				<select name="tel" id="tel">
 					<c:forEach items="${telList }" var="tList">
 						<option value="${tList.cmnCodeEng}"> ${tList.cmnCodeKor}</option>					
@@ -201,14 +284,9 @@ function setSubmit(){
 				<input type="text" size="4" id="tel2" name="tel2">
 				-
 				<input type="text" size="4" id="tel3" name="tel3">
-				 
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" value="가입">
-				<input type="reset" value="다시작성">
-			</td>
-		</tr>
-	</table>
+	</p>			 
+				<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="가입">
+				&nbsp;&nbsp;<input type="reset" value="다시작성">
+			
 </form>

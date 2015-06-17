@@ -58,4 +58,8 @@ public interface QaDAO {
 
 	int  updateReply(QaVO vo);
 
+	int plusReplyStep();
+
+	int deleteFile(int fileNo);
+
 }

@@ -33,5 +33,7 @@ public interface QaService {
 	public int getCountComment(int fqNo);
 	public int register_reply(QaVO rvo);
 	public abstract int updateReply(QaVO vo);
+	public int plusReplyStep();
+	public int deleteFile(int fileNo);
 	
 }
