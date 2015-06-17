@@ -254,7 +254,7 @@ var flag = false;
 		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
 		<a href="<%=request.getContextPath() %>/movie/user_favorate.do">관심영화</a>
 		관람작&nbsp;&nbsp;&nbsp;
-		마일리지 관리&nbsp;&nbsp;&nbsp;
+		<a href="<%=request.getContextPath() %>/admin/myinfo.do">마일리지 관리</a>&nbsp;&nbsp;&nbsp;
 		예매내역&nbsp;&nbsp;&nbsp;
 		<label style="cursor: pointer;" onclick="memberleave()">회원탈퇴</label>	
 	</section>
