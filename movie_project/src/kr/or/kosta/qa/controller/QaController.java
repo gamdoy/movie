@@ -258,7 +258,6 @@ public class QaController{
 			return "main.tiles";
 		}else if(mvo.getMemMemberType().equals("102300")){
 		//관리자모드
-			System.out.println("관리자모드:");
 			return "qa/qa_list_admin.tiles";
 		}else{
 			return "qa/qa_list.tiles";	
