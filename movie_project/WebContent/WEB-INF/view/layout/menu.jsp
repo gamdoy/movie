@@ -37,7 +37,7 @@ var flag = false;
 		});
 		$("#theaterBtn").on("click", function() {
 			hide_subMenu();
-			window.location = "<%=request.getContextPath() %>/theater/movieSchedule.do";
+			window.location = "<%=request.getContextPath() %>/theater/theaterManagement.do";
 		});
 		$("#eventBtn").on("click", function() {
 			hide_subMenu();
@@ -51,7 +51,7 @@ var flag = false;
 			hide_subMenu();
 			$(".stats_menu").show();
 		});
-		$("#adminBtn").on("click", function() {
+		$("#admin").on("click", function() {
 			hide_subMenu();
 			$(".admin_menu").show();
 		});
@@ -93,22 +93,25 @@ var flag = false;
 		<img src="<%=request.getContextPath()%>/upload/icon.png" width="100px" height="50px" alt="183box" />
 		<label id="movieBtn">영화</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="reserveBtn">예매</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		<c:if test="${sessionScope.login_info != null && sessionScope.login_info.memMemberType == '102300'}">
 		<label id="theaterBtn">극장</label>&nbsp;&nbsp;&nbsp;&nbsp;
+		</c:if>
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="adminBtn">관리자</label>
+		<!-- <label id="adminBtn">관리자</label> -->
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
-		관심영화&nbsp;&nbsp;&nbsp;
+		<a href="<%=request.getContextPath() %>/movie/user_favorate.do">관심영화</a>
 		관람작&nbsp;&nbsp;&nbsp;
 		마일리지 관리&nbsp;&nbsp;&nbsp;
 		예매내역&nbsp;&nbsp;&nbsp;
 		<label style="cursor: pointer;" onclick="memberleave()">회원탈퇴</label>	
 	</section>
 	<section class="movie_menu"><!-- 영화 서브메뉴영역 -->
+		<a href="<%=request.getContextPath() %>/movie/user_movie_list.do">영화</a>
 		예매율&nbsp;&nbsp;&nbsp;평점&nbsp;&nbsp;&nbsp;제목순
-	</section>
+	</section>f
 	<section class="reserve_menu"><!-- 영화 서브메뉴영역 -->
 	</section>
 	<section class="theater_menu"><!-- 영화 서브메뉴영역 -->

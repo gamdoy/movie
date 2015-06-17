@@ -22,14 +22,14 @@ $(document).ready(function(){
 				return false;
 			}
 		}
-		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
+		location.href="<%=request.getContextPath()%>/qa/login/selectQa.do?number="+number;
 	})
 });
 </script>
 
 <script type="text/javascript">
 function goUrl(){
-	window.location="<%=request.getContextPath() %>/qa/write.do";
+	window.location="<%=request.getContextPath() %>/qa/login/write.do";
 }
 </script>
 
