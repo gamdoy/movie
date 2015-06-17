@@ -69,4 +69,6 @@ public interface TheaterDAO {
 	public abstract List<ScheduleVO> selectScheduleListByDate(Map map);
 
 	public abstract int selectTotalScheduleListByDateCount(HashMap map);
+
+	public abstract int updateMemberMileage(TicketVO vo);
 }
