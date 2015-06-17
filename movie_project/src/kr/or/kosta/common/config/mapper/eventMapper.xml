@@ -50,14 +50,14 @@
 		from		event
 		where evt_enddate > to_char(sysdate, 'yyyy-mm-dd hh24:mi')
 		and to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_startdate
-		order by evt_no
+		order by evt_no desc
 	</select>
 	
 	<select id="selectEndEventList" resultMap="event-resultmap">
 		select 	evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title
 		from		event
 		where to_char(sysdate, 'yyyy-mm-dd hh24:mi') > evt_enddate 
-		order by evt_no
+		order by evt_no desc
 	</select>
 	
 	<select id="selectEventByEvtNo" parameterType="_int" resultMap="event-resultmap">
@@ -109,6 +109,7 @@
 			)
 		) 
 		where page = #{pageNo}
+		order by win_no desc
 	</select>
 	
 	<select id="selectTotalEventCount" resultType="_int">
@@ -161,13 +162,12 @@
 	
 	<insert id="insertWinner" parameterType="winnerVO">
 		insert into winner (win_no, win_title, win_regdate, win_text)
-		values (WINNER_SEQ.nextval, #{winTitle}, #{winRegdate}, #{winText})
+		values (WINNER_SEQ.nextval, #{winTitle}, to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'), #{winText})
 	</insert>
 	
 	<update id="modifyWinner" parameterType="winnerVO">
 		update winner
 		set		win_title=#{winTitle},
-				win_regdate=#{winRegdate},
 				win_text=#{winText}
 					
 		where	win_no=#{winNo}	

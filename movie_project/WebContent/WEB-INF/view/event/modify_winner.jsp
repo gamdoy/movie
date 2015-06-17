@@ -10,6 +10,20 @@ function goUrl(){
 	window.location="<%=request.getContextPath() %>/event/eventListPaging.do";
 }
 </script>
+<!-- 
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	var winRegdate="${winVO.winRegdate}";
+
+	var winRegdateSubstr=winRegdate.substring(0,10);
+
+	$("#winRegdate").val(winRegdateSubstr);
+	
+});
+</script>
+ -->
 <h2> 수정페이지</h2>
 
 <form method="post" action="<%=request.getContextPath()%>/event/modifyWinner.do"  id="modifyWinner_form" enctype="multipart/form-data">
@@ -20,17 +34,13 @@ function goUrl(){
 		<tr>
 			<td width="80" align="center">이벤트명</td>
 			<td colspan="3">
-				<input type="text" name="winTitle" id='winTitle' size="85">
+				<input type="text" name="winTitle" id='winTitle' value="${winVO.winTitle}" size="85">
 			</td>
-		</tr>
-		<tr>
-			<td  align="center">등록일</td>
-			<td><input type="text" id="winRegdate" name="winRegdate" size="30" onClick="datePicker(event,'winRegdate')" readonly="readonly"></td>
 		</tr>
 
 		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 		<tr>
-			 <td colspan="4"><textarea name="winText" id="winText" cols="70" rows="13"></textarea></td>
+			 <td colspan="4"><textarea name="winText" id="winText" cols="70" rows="13">${winVO.winText}</textarea></td>
 		</tr>
 		<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 	</table>
