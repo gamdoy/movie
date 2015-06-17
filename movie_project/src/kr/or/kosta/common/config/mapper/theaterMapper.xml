@@ -379,5 +379,9 @@
 		order by room.mr_no
 	</select>
 	
-	
+	<update id="updateMemberMileage" parameterType="ticketVO">
+		update member
+		set mem_mileage = mem_mileage + (#{ticPrice}*0.1)
+		where mem_no = 59
+	</update>
 </mapper>

@@ -38,7 +38,11 @@ public class AdminServiceImpl implements AdminService{
 		 
 	}
 	
-	
+	@Override
+	public void updateMember(AdminVO admin) {
+		dao.updateMember(admin);
+		
+	}
 	
 	@Override
 	public AdminVO selectMemberById(String id) {

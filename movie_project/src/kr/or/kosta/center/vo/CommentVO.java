@@ -6,6 +6,7 @@ public class CommentVO {
 	private String comText;
 	private String comRegDate;
 	private int comParentNumber;
+	private String memId;
 	
 	public CommentVO(){}
 
@@ -45,6 +46,16 @@ public class CommentVO {
 
 	public String getComRegDate() {
 		return comRegDate;
+	}
+	
+	
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 
 	public void setComRegDate(String comRegDate) {

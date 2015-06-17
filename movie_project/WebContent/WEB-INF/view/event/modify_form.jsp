@@ -8,7 +8,32 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
+	var evtStartDate="${evtVO.evtStartDate}";
+	var evtEndDate="${evtVO.evtEndDate}";
+
+	var evtStartDateSubstr=evtStartDate.substring(0,10);
+	var evtEndDateSubstr=evtEndDate.substring(0,10);
+
+	
+	$("#evtStartDate").val(evtStartDateSubstr);
+	$("#evtEndDate").val(evtEndDateSubstr);
+	
 	$("#modifyForm").on("submit", function(){
+		
+		var startDate=$("#evtStartDate").val();
+		var endDate=$("#evtEndDate").val();
+		
+		var arr1=startDate.split('-');
+		var arr2=endDate.split('-');
+		
+		var evtStartDate=new Date(arr1[0],arr1[1],arr1[2]);
+		var evtEndDate=new Date(arr2[0],arr2[1],arr2[2]);
+		
+		if(evtStartDate>evtEndDate){
+			alert("이벤트 종료일은 시작일 이후여야합니다.");
+			return false;
+		}
 		
 		if(!$("#evtTitle").val()){
 			alert("이벤트 이름을 입력하세요");
@@ -37,6 +62,7 @@ $(document).ready(function(){
 	});
 });
 
+
 </script>
 
 <h2>이벤트 수정 </h2>
@@ -52,7 +78,7 @@ $(document).ready(function(){
 		<tr>
 			<td width="100">이벤트 이름</td>
 			<td>
-				<input type="text" name="evtTitle" id='evtTitle'> 
+				<input type="text" name="evtTitle" id='evtTitle' value ="${evtVO.evtTitle }"> 
 				
 			</td>
 		</tr>
@@ -71,13 +97,13 @@ $(document).ready(function(){
 		<tr>
 			<td>이벤트 내용</td>
 			<td>
-				<input type="text" id="evtContent" name="evtContent"> 
+				<textarea name="evtContent" id="evtContent" cols="50" rows='5'>${evtVO.evtContent }</textarea>
 			</td>
 		</tr>
 		<tr>
 			<td>이벤트이미지</td>
 			<td>
-				<input type="file" id="evtImageFile" name="evtImageFile">
+				<input type="file" id="evtImageFile" name="evtImageFile" >
 			</td>
 		</tr>
 		<tr>

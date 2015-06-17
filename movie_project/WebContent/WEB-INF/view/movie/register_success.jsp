@@ -5,16 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-table, td{
-border: 1px;
-
+table, td {
+	dorfer: 1px;
 }
-table{
-border:1px;
-width:500px;
-height:100px;
-magin:auto;
-text-align: center;
+
+table {
+	width: 50%;
+	height: 100px;
+	magin: auto;
+	text-align: center;
 }
 </style>
 <title>결과 페이지</title>

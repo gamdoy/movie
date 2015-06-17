@@ -19,11 +19,11 @@ $(document).ready(function(){
 	
 	$("tbody tr").on("click", function(){
 		var number = $(this).find(":first-child").text();
-		location.href="<%=request.getContextPath()%>/qa/selectQa.do?number="+number;
+		location.href="<%=request.getContextPath()%>/qa/login/selectQa.do?number="+number;
 	})
 	 $(".PageBtn").on("click", function(){
 			var label = $(this).text();
-			location.href="<%=request.getContextPath() %>/qa/qa.do?page="+label+"&searchType="+searchType+"&searchKeyword="+searchKeyword;
+			location.href="<%=request.getContextPath() %>/qa/login/qa.do?page="+label+"&searchType="+searchType+"&searchKeyword="+searchKeyword;
 		});
 }); 
 
@@ -31,7 +31,7 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 function goUrl(){
-	window.location="<%=request.getContextPath() %>/qa/write.do";
+	window.location="<%=request.getContextPath() %>/qa/login/write.do";
 }
 
 $(document).ready(function(){
@@ -57,7 +57,7 @@ $(document).ready(function(){
    
     </head>
        <!-- 검색 폼 영역 -->
-       <form name="searchForm" method="post" id="searchForm" action="<%=request.getContextPath() %>/qa/qa.do">
+       <form name="searchForm" method="post" id="searchForm" action="<%=request.getContextPath() %>/qa/login/qa.do">
        <p>
            <select name="searchType" id="searchType">
             	  <option value="qa_title">제목</option>
@@ -97,11 +97,11 @@ $(document).ready(function(){
 					<td align="center">${QaVO.fqNo}</td>
 					<td>
 						<c:forEach begin="1" end="${QaVO.replyLevel}">
-							<img src="<%=request.getContextPath()%>/upload/화살표.png" width="10px" height="10px">
+							<img src="<%=request.getContextPath()%>/upload/reply.png" width="10px" height="10px">
 						</c:forEach>	
 						${QaVO.qaTitle}
 					</td> 
-					<td align="center">${QaVO.memNo}</td>
+					<td align="center">${QaVO.memId}</td>
 					<td align="center">${QaVO.fqLastdate}</td>
 					<td align="center">${QaVO.qaCount}</td>
 				</tr> 
@@ -114,7 +114,7 @@ $(document).ready(function(){
 
 	<c:when test="${pageMap.pagingBean.previousPageGroup }">
 
-		<a href="<%=request.getContextPath() %>/qa/qa.do?page=${pageMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
+		<a href="<%=request.getContextPath() %>/qa/login/qa.do?page=${pageMap.pagingBean.startPageOfPageGroup-1}"><font color="black">◀</font></a>
 
 	</c:when>
 
@@ -146,7 +146,7 @@ $(document).ready(function(){
 			${pageNum}
 		</label>
 <!-- 
-			<a  href="<%=request.getContextPath() %>/qa/qa.do?page=${pageNum}">
+			<a  href="<%=request.getContextPath() %>/qa/login/qa.do?page=${pageNum}">
 
 				<font color="black">${pageNum}</font>
 
@@ -166,7 +166,7 @@ $(document).ready(function(){
 
 	<c:when test="${pageMap.pagingBean.nextPageGroup }">
 
-		<a href="<%=request.getContextPath() %>/qa/qa.do?page=${pageMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
+		<a href="<%=request.getContextPath() %>/qa/login/qa.do?page=${pageMap.pagingBean.endPageOfPageGroup+1}"><font color="black">▶</font></a>
 
 	</c:when>
 

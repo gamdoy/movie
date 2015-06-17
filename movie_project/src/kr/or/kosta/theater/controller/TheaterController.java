@@ -134,16 +134,17 @@ public class TheaterController {
 		return "ticket/reserveForm.tiles";
 	}
 	
-	@RequestMapping("reserve")
+	@RequestMapping("login/reserve")
 	@ResponseBody
-	public Map<String, String> reserve(@ModelAttribute TicketVO vo, HttpSession session) throws Exception {
+	public Map<String, String> reserve(@ModelAttribute TicketVO vo, @RequestParam String mrLineStr, HttpSession session) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("login_info");
 		String seats = "";
 		Map<String, String> map = new HashMap<String, String>();
+		int count = 0;
 		
 		//예매 좌석을 문자열로 만들어서 입력한다.
 		for (int seat = 0; seat < vo.getTicTotalcustomer(); seat++) {
-			String seatNo = "|" + vo.getMrLine() + "-" + (vo.getMrSeat() + seat);
+			String seatNo = "|" + mrLineStr + "-" + (vo.getMrSeat() + seat);
 			vo.setTicSeatno(seatNo);
 			boolean flag = theaterService.isReservedSeats(vo);
 			if(flag){
@@ -159,6 +160,7 @@ public class TheaterController {
 		vo.setTicPrice(8000);//가격 고정
 		vo.setTicSeatno(seats);//
 		
+		theaterService.modifyMemberMileage(vo);
 		theaterService.registTicket(vo);
 		map.put("url", "/theater/reserveSuccess.do");
 		map.put("ticNo", vo.getTicNo()+"");

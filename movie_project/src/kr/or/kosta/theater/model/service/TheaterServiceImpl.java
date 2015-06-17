@@ -84,11 +84,11 @@ public class TheaterServiceImpl implements TheaterService {
 	}
 
 	/**
-	 * 극장별 상영 스케줄을 찾는 메소드
+	 * 예매시 영화가격의 10%를 마일리지로 적립
 	 */
 	@Override
-	public List<ScheduleVO> getScheduleListByNo(int theaNo) {
-		return dao.selectScheduleListByNo(theaNo);
+	public int modifyMemberMileage(TicketVO vo) {
+		return dao.updateMemberMileage(vo);
 	}
 
 	/**

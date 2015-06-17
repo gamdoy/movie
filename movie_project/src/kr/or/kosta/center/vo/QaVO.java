@@ -13,6 +13,8 @@ public class QaVO {
 	private String qaPassword; //비밀번호
 	private int fqParentNumber; //부모번호
 	private int fileNo; //파일번호
+	private  String MemId;
+	
 	private int replyLevel;
 	private int replyStep;
 	
@@ -37,6 +39,15 @@ public class QaVO {
 		this.fileNo = fileNo;
 		this.replyLevel = replyLevel;
 		this.replyStep = replyStep;
+	}
+
+	
+	public String getMemId() {
+		return MemId;
+	}
+
+	public void setMemId(String memId) {
+		MemId = memId;
 	}
 
 	public int getFqNo() {

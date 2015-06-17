@@ -7,16 +7,19 @@ function getEvent(evtNo){
 	$("#evtNo").val(evtNo);
 	$("#now_event").submit();
 }
+
 </script>
 
 <form method="POST" action="<%=request.getContextPath() %>/event/specEvent.do" id="now_event">
 <input type="hidden" name="evtNo" id="evtNo"> 	
 	<c:if test="${fn:length(search_event_list) != 0 }">
 		<table id="listTB" style="width:800px; color: gray; border: 10ex; border-color: white;" >
+			
 			<tbody>
+				
 						<c:forEach items="${search_event_list }" var="eventVO" varStatus="idx">
 						<c:if test="${idx.index%4==0 }">
-							<tr>
+					<tr>
 						</c:if>
 								<td width="15" height="20" align="center" style="width: 200px;">
 									<div style="width:200;">
@@ -41,7 +44,7 @@ function getEvent(evtNo){
 									</div>
 								</td>
 						<c:if test="${(idx.index+1)%4==0 }">
-							</tr>
+					</tr>
 						</c:if>
 						</c:forEach>
 				

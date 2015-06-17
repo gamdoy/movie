@@ -190,4 +190,10 @@ public class TheaterDAOImpl implements TheaterDAO {
 		return session.selectList(namespace + "selectReservedSeats", schNo);
 	}
 
+	//예매시 마일리지 수정
+	@Override
+	public int updateMemberMileage(TicketVO vo) {
+		return session.update(namespace + "updateMemberMileage", vo);
+	}
+
 }
