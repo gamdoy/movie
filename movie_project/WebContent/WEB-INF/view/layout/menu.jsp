@@ -51,7 +51,7 @@ var flag = false;
 			hide_subMenu();
 			$(".stats_menu").show();
 		});
-		$("#adminBtn").on("click", function() {
+		$("#admin").on("click", function() {
 			hide_subMenu();
 			$(".admin_menu").show();
 		});
@@ -98,7 +98,7 @@ var flag = false;
 		</c:if>
 		<label id="eventBtn">이벤트</label>&nbsp;&nbsp;&nbsp;&nbsp;
 		<label id="customerBtn">고객센터</label>&nbsp;&nbsp;&nbsp;&nbsp;
-		<label id="adminBtn">관리자</label>
+		<!-- <label id="adminBtn">관리자</label> -->
 	</section>
 	<section class="myinfo_menu"><!-- 마이페이지 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/member/modify_form.do">정보수정</a>&nbsp;&nbsp;&nbsp;
@@ -120,7 +120,7 @@ var flag = false;
 		<a href="<%=request.getContextPath() %>/event/nowEvent.do">진행중인 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/endEvent.do">종료된 이벤트</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/event/eventListPaging.do">당첨자 확인</a>
 	</section>
 	<section class="customer_menu"><!-- 이벤트 서브메뉴영역 -->
-		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/qa.do">Q & A</a>
+		<a href="<%=request.getContextPath() %>/notice/notice.do">공지사항</a>&nbsp;&nbsp;&nbsp;<a href="<%=request.getContextPath() %>/qa/login/qa.do">Q & A</a>
 	</section>
 	<section class="admin_menu"><!-- 관리자 서브메뉴영역 -->
 		<a href="<%=request.getContextPath() %>/admin/member_list_Paging.do">회원정보조회</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예매현황	

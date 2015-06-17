@@ -13,8 +13,12 @@
 
 	<resultMap type="adminVO" id="admin-resultmap">
 		<id column="mem_no" property="memNo"/>
+		<result column="zip_no" property="zipNo"/>
+		<result column="zip_address" property="zipAddress"/>
+		<result column="mem_addressdetail" property="memAddressDetail"/>
 		<result column="mem_id" property="memberId"/>
 		<result column="mem_name" property="memberName"/>
+		<result column="mem_password" property="memPassword"/>
 		<result column="mem_birthdate" property="memberBirthdate"/>
 		<result column="mem_email" property="memberEmail"/>
 		<result column="mem_phoneno" property="memberPhone"/>
@@ -24,6 +28,18 @@
 		<result column="mem_joindate" property="memberJoindate"/>
 		<collection  property="coupon" ofType="couponVO" resultMap="coupon-resultmap"/>
 	</resultMap>
+
+	<update id="updateMember" parameterType="adminVO">
+	 		update member
+	 		set mem_password=#{memPassword},
+	 			mem_name=#{memberName},
+	 			mem_birthdate=#{memberBirthdate},
+	 			mem_email=#{memberEmail},
+	 			zip_no=#{zipNo},
+	 			mem_addressdetail=#{memAddressDetail},
+	 			mem_phoneno=#{memPhoneNo}
+	 		where mem_id=#{memberId}		
+	</update>
 
 	<sql id="member-select">
 		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
@@ -69,7 +85,19 @@
 	</select>
 
 	<select id="selectMemberByNo"  parameterType="int" resultMap="admin-resultmap">
-		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate
+		select mem_no, 
+				mem_id, zip_no, 
+				mem_phoneno,
+				mem_addressdetail, 
+				mem_name, 
+				mem_birthdate, 
+				mem_email, 
+				mem_phoneno, 
+				mem_mileage, 
+				(select zip_address from zipcode where member.zip_no=zipcode.zip_no) zip_address,
+				(select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, 
+				mem_membertype, 
+				mem_joindate
 		from member
 		where mem_no = #{value}
 	</select>
@@ -79,6 +107,7 @@
 		from member
 		where ${searchType} like '%'||#{searchKeyword}||'%'
 	</select>
+	
 	
 	<!-- 검색결과화면에서 페이징 -->
 	<select id="selectMemberBySearchVOPaging"  parameterType="hashmap" resultMap="admin-resultmap">
@@ -114,6 +143,8 @@
  		set MEM_MILEAGE=#{memberMileage}
  		where mem_id=#{memberId}		
  	</update>
+ 	
+ 		
  	
  	<select id="selectTotalMember" resultType="_int">
  		select count(mem_no) from member

@@ -24,10 +24,6 @@ function goUrl(){
 					<input type="text" name="winTitle" id='winTitle' size="85">
 				</td>
 			</tr>
-			<tr>
-				<td  align="center">등록일</td>
-				<td><input type="text" id="winRegdate" name="winRegdate" size="30"onClick="datePicker(event,'winRegdate')" readonly="readonly"></td>
-			</tr>
 			
 			<tr height="1" bgcolor="#82B5DF"><td colspan="4"></td></tr>
 			<tr>

@@ -13,7 +13,7 @@ public class MovieVO {
 	private String sysnopsis;//줄거리
 	private String officialSite;//공식사이트
 	private String screeningGrade;//영화등급
-	private String sgradeName;
+	private String sgradeName; //상영등급이름
 	private MultipartFile poster;//포스터
 	private String posterName; //포스터 파일명
 	private String intheaters;//개봉일

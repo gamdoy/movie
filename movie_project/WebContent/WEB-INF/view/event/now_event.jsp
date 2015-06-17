@@ -32,7 +32,7 @@ table#listTB thead tr{
 <input type="text" id="searchText" name="searchText">
 <input type="submit" value="검색">
 </nav>
-</form>
+</form><br>
 <form method="POST" action="<%=request.getContextPath() %>/event/specEvent.do" id="now_event">
 <input type="hidden" name="evtNo" id="evtNo"> 	
 <c:if test="${fn:length(requestScope.event_list) != 0 }">

@@ -28,10 +28,15 @@ $(document).ready(function(){
 	}
 	 */
 
-	$("table#listTB tbody tr").on("click", function(){
-			var no = $(this).find(":first-child").text();
-				location.href="<%=request.getContextPath() %>/admin/getMemberByNo.do?memNo="+no;
-	});
+		$(".mileageBtn").on("click", function(){
+			var no = $(this).parent().children().html();
+			location.href="<%=request.getContextPath() %>/admin/getMemberByNo.do?memNo="+no;
+		});
+		
+		$(".modifyMemBtn").on("click", function(){
+			var no = $(this).parent().children().html();
+			location.href="<%=request.getContextPath() %>/admin/modifyMember.do?memNo="+no;
+		});
 	 
 	$("#nextPageGroupBtn").on("click", function(){
 		location.href="<%=request.getContextPath() %>/admin/getMemberByKeyword.do?page=${searchedMemberMap.pagingBean2.endPageOfPageGroup+1}&searchType="+searchType+"&searchKeyword="+searchKeyword;
@@ -57,13 +62,44 @@ function checkVal() {
 
 <style type="text/css">
 
-table#listTB thead tr{
-	font-weight: bold;
-	background: lightgray;
+#listTB
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #69c;
 }
-table#listTB td{
-	width:100px;
+
+#listTB thead tr
+{
+	padding: 15px 10px 10px 10px;
+	font-weight: normal;
+	font-size: 14px;
+	color: #039;
+	border:0px;
 }
+#listTB tbody
+{
+	background: #e8edff;
+	border:0px;
+}
+#listTB td
+{
+	padding: 10px;
+	color: #669;
+	border-top: 1px dashed #fff;
+	border:0px;
+}
+#listTB tbody tr:hover td
+{
+	color: #339;
+	background: #d0dafd;
+	
+}
+
 </style>
 
 <form method="post" id="f_coupon" action="<%=request.getContextPath() %>/admin/getMemberByKeyword.do" onsubmit="return checkVal();">
@@ -91,10 +127,10 @@ table#listTB td{
 					<td>${adminVO.memberName}</td>
 					<td>${adminVO.memberBirthdate}</td>
 					<td>${adminVO.memberEmail}</td>
-					<td>${adminVO.memberPhone}</td>
-					<td>${adminVO.memberMileage}</td>
+					<td class="mileageBtn">${adminVO.memberMileage}	[발급]</td>
 					<td>${adminVO.memberTypeName}</td>
 					<td>${adminVO.memberJoindate}</td>
+					<td class="modifyMemBtn">[수정하기]</td>
 				</tr> 
 			</c:forEach>
 		</tbody>

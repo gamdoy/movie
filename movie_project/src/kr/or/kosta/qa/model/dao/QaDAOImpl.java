@@ -150,5 +150,15 @@ public class QaDAOImpl implements QaDAO{
 	public int register_reply(QaVO rvo) {
 		return session.insert(namespace+"insertQa_Re",rvo);
 	}
+
+	@Override
+	public int plusReplyStep() {
+		return session.selectOne(namespace+"plusReplyStep");
+	}
+
+	@Override
+	public int deleteFile(int fileNo) {
+		return session.delete(namespace+"deleteFile", fileNo);
+	}
 	
 }

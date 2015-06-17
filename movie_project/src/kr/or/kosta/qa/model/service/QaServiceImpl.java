@@ -154,4 +154,14 @@ public class QaServiceImpl implements QaService{
 	public int updateReply(QaVO vo) {
 		return dao.updateReply(vo);
 	}
+
+	@Override
+	public int plusReplyStep() {
+		return dao.plusReplyStep();
+	}
+
+	@Override
+	public int deleteFile(int fileNo) {
+		return dao.deleteFile(fileNo);
+	}
 }
