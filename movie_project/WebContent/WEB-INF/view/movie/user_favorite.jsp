@@ -33,13 +33,15 @@ height:50px;
                                     <img src="<%=request.getContextPath()%>/images/movie/noimage.png">
                                  </c:when>
                                  <c:otherwise>
-                                    <img src="<%=request.getContextPath()%>/images/movie/${movie.posterName }">
+                                   <img src="<%=request.getContextPath()%>/images/movie/${movie.posterName }">
+                                   
                                  </c:otherwise>
                               </c:choose>
                            </div>
                            
                            <div style="color: black;">
-                              ${movie.title }
+                              ${movie.title }<br>
+                             <input type="button" value="삭제" onclick="location.href='<%=request.getContextPath()%>/movie/delFavor.do?movNo='+${movie.movieNo }">
                            </div>
                            
                         </div>
