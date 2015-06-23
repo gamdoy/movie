@@ -62,6 +62,15 @@ public class AdminController {
 		return "admin/modify_form.tiles";
 	}
 	
+	@RequestMapping("modifyMemberType")
+	public String modifyMemberType(ModelMap map,@RequestParam("memberType") String memberType, @RequestParam("memNo") int number){
+		AdminVO adminVo= service.selectMemberByNo(number);
+		adminVo.setMemberType(memberType);
+		service.updateMemberType(adminVo);
+	
+		return "/admin/member_list_Paging.do";
+	}
+	
 	@RequestMapping("modifyMemberInfo")
 	public String modifyMember(@ModelAttribute AdminVO admin){
 		System.out.println("modifyMember : "+admin);

@@ -120,7 +120,7 @@ function modifyUrl(){
 				<tr id="comment_content">
 					<td align="center">${commentVO.memId}</td>
 					<td style="border-right-color: white">${commentVO.comText}</td><td style="border-left-color:white" >
-					<c:if test="${commentVO.memNo==sessionScope.login_info.memNo}">
+					<c:if test="${commentVO.memNo==sessionScope.login_info.memNo || sessionScope.login_info.memMemberType=='102300'}">
 					<div align="right">
 					<a href="<%=request.getContextPath() %>/qa/login/selectComment_toModify.do?comNo=${commentVO.comNo }&fqNo=${requestScope.qa_vo.fqNo}"><font color="black" size="1">수정</font></a>
 					|
@@ -143,7 +143,7 @@ function modifyUrl(){
 		</form>
 	<div style="width:600px;" align="right">
 		<input type="button" value="덧글" onclick="replyUrl();"> 
-			<c:if test="${requestScope.qa_vo.memNo==sessionScope.login_info.memNo}">
+			<c:if test="${requestScope.qa_vo.memNo==sessionScope.login_info.memNo || sessionScope.login_info.memMemberType=='102300' }">
 				<input type="button" value="수정" onclick="modifyUrl();">	
 				<input type="button" value="삭제" onclick="deleteUrl();">
 			</c:if>

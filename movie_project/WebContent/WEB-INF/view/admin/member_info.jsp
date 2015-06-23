@@ -1,7 +1,46 @@
 <%@ page contentType= "text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style type="text/css">
+table
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #69c;
+}
 
+thead tr
+{
+	padding: 15px 10px 10px 10px;
+	font-weight: normal;
+	font-size: 14px;
+	color: #039;
+	border: 1px solid #69c;
+}
+tbody
+{
+	background: #e8edff;
+	border: 1px solid #69c;
+}
+td
+{
+	padding: 10px;
+	color: #669;
+	border-top: 1px dashed #fff;
+	border: 1px solid #69c;
+}
+tbody tr:hover td
+{
+	color: #339;
+	background: #d0dafd;
+	
+}
+
+</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	var usedMileage = $("#memberMileage").val();
@@ -48,12 +87,12 @@ function checkMileage(){
 
 <form method="post" id="f_coupon" action="<%=request.getContextPath() %>/admin/issueCouponById.do" onsubmit="return checkMileage()">
 	<input type="hidden" id="memNo" name="memNo" value="${requestScope.member_info.memNo}">
-	<table style="width:700px">
+	<table style="width:700px" align="center" >
 		<tr align="center" height="30">
 			<td colspan="2">"${requestScope.member_info.memberName}" 고객님의 현재 회원등급 입니다</td>
 		</tr>
 		<tr align="center" height="50">
-			<td colspan="2">${requestScope.member_info.memberTypeName}</td>
+			<td colspan="2"><h1>${requestScope.member_info.memberTypeName}</h1></td>
 		</tr>
 		<tr align="center" height="30">
 			<td>쿠폰내역</td>
@@ -83,5 +122,4 @@ function checkMileage(){
 			</td>
 		</tr>
 	</table>
-		<input type="button" id="goModifyMemberBtn" name="goModifyMemberBtn" value="회원정보수정">
 </form>

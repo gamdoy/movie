@@ -1,6 +1,46 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<style type="text/css">
+table
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+	border: 1px solid #69c;
+}
+
+thead tr
+{
+	padding: 15px 10px 10px 10px;
+	font-weight: normal;
+	font-size: 14px;
+	color: #039;
+	border:0px;
+}
+tbody
+{
+	background: #e8edff;
+	border:0px;
+}
+td
+{
+	padding: 10px;
+	color: #669;
+	border-top: 1px dashed #fff;
+	border:0px;
+}
+tbody tr:hover td
+{
+	color: #339;
+	background: #d0dafd;
+	
+}
+
+</style>
 
 <style type="text/css">
 table#listTB thead tr{

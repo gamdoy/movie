@@ -29,6 +29,8 @@ public interface AdminDAO {
 	public int updateMemberMileage(AdminVO member);
 
 	public void updateMember(AdminVO admin);
+
+	public void updateMemberType(AdminVO admin);
 	
 	
 }

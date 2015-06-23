@@ -68,14 +68,14 @@
 	
 	<insert id="insertEvent" parameterType="eventVO">
 		insert into event (evt_no, evt_startdate, evt_enddate, evt_regdate, evt_content, evt_file, evt_title)
-		values (EVENT_SEQ.nextval, #{evtStartDate}|| ' 00:00:00', #{evtEndDate}|| ' 23:59:59',to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'), #{evtContent} , #{evtFile} , #{evtTitle})
+		values (EVENT_SEQ.nextval, #{evtStartDate}|| ' 00:00:00', #{evtEndDate}|| ' 23:59:59',to_char(sysdate, 'YYYY-MM-DD HH24:Mi:SS'), #{evtContent} , #{evtFile} , #{evtTitle})
 	</insert>
 	
 	<update id="updateEvent" parameterType="eventVO">
 		update event
 		set			evt_startdate=#{evtStartDate}|| ' 00:00:00',
 					evt_enddate=#{evtEndDate}|| ' 23:59:59',
-					evt_regdate=to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'),
+					evt_regdate=to_char(sysdate, 'YYYY-MM-DD HH24:Mi:SS'),
 					evt_content=#{evtContent},
 					evt_file=#{evtFile},
 					evt_title=#{evtTitle}
@@ -162,7 +162,7 @@
 	
 	<insert id="insertWinner" parameterType="winnerVO">
 		insert into winner (win_no, win_title, win_regdate, win_text)
-		values (WINNER_SEQ.nextval, #{winTitle}, to_char(sysdate, 'YYYY-MM-DD HH:Mi:SS'), #{winText})
+		values (WINNER_SEQ.nextval, #{winTitle}, to_char(sysdate, 'YYYY-MM-DD HH24:Mi:SS'), #{winText})
 	</insert>
 	
 	<update id="modifyWinner" parameterType="winnerVO">

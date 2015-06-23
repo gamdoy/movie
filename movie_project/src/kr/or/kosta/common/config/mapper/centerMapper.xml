@@ -97,6 +97,7 @@
 	  		select com_no, mem_no, com_text, com_regdate, com_parent_number, (select member.mem_id from member where member.mem_no = comments.mem_no) mem_id
 	  		from comments
 	  		where com_parent_number = #{fqNo}
+	  		order by com_regdate desc
 	  </select>
 	 
 	  <delete id="deleteComment" parameterType="_int">
@@ -117,6 +118,7 @@
 	  		select com_no, mem_no, com_text, com_regdate, com_parent_number
 	  		from comments
 	  		where com_no = #{comNo}
+
 	 </select>
 	
 	<select id="getCountComment"  resultType="_int">

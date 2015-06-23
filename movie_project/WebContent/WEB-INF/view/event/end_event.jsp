@@ -21,7 +21,7 @@ table#listTB thead tr{
 <h2>종료된 이벤트</h2>
 <c:choose>
 	<c:when test="${sessionScope.login_info.memMemberType=='102300'}">
-<a href="<%=request.getContextPath() %>/event/regisForm.do"><font color="black">관리자 이벤트 추가</font></a>
+
 </c:when>
 	<c:otherwise>
 		

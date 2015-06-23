@@ -71,9 +71,7 @@ public class MemberController {
 	}
 	@RequestMapping("idSearch")
 	public String idSearch(@ModelAttribute MemberVO vo,HttpSession session,ModelMap map)throws Exception{
-		System.out.println(vo);
 		MemberVO m = service.getMemberByname(vo);
-		System.out.println(service.getMemberByname(vo));
 		map.addAttribute("member_info",m);
 		List<CommonCodeVO> telList = service2.getCodeList("101");
 		map.addAttribute("telList",telList);

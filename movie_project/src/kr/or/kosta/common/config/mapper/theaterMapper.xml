@@ -68,8 +68,8 @@
 		<selectKey keyProperty="theaNo" resultType="_int" order="BEFORE">
 			select THEATER_SEQ.nextval from dual
 		</selectKey>
-		insert into theater (thea_no, zip_no, thea_location, thea_phoneNo, thea_address1, thea_address2)
-		values (#{theaNo}, #{zipNo}, #{theaLocation}, #{theaPhoneNo}, #{theaAddress1}, #{theaAddress2})
+		insert into theater (thea_no, zip_no, thea_location, thea_phoneNo, thea_address1, thea_address2, THEA_STATUS )
+		values (#{theaNo}, #{zipNo}, #{theaLocation}, #{theaPhoneNo}, #{theaAddress1}, #{theaAddress2}, '111200')
 	</insert>
 	
 	<update id="updateTheater" parameterType="theaterVO">
@@ -210,8 +210,8 @@
 		<selectKey keyProperty="ticNo" resultType="_int" order="BEFORE">
 			select ticket_seq.nextval from dual
 		</selectKey>
-		insert into ticket (tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer)
-		values (#{ticNo}, #{memNo}, #{schNo}, #{ticDate}, #{ticPrice}, #{ticPaytype}, #{ticSeatno}, #{ticTotalcustomer})
+		insert into ticket (tic_no, mem_no, sch_no, tic_date, tic_price, tic_paytype, tic_seatno, tic_totalcustomer, tic_status)
+		values (#{ticNo}, #{memNo}, #{schNo}, #{ticDate}, #{ticPrice}, #{ticPaytype}, #{ticSeatno}, #{ticTotalcustomer}, 'paid')
 	</insert>
 	
 	<!-- 스케쥴 생성 -->

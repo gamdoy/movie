@@ -29,4 +29,6 @@ public interface AdminService {
 	public abstract int updateMemberMileage(AdminVO member);
 
 	public abstract void updateMember(AdminVO admin);
+
+	public abstract void updateMemberType(AdminVO admin);
 }

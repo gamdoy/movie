@@ -40,6 +40,11 @@
 	 			mem_phoneno=#{memPhoneNo}
 	 		where mem_id=#{memberId}		
 	</update>
+	<update id="updateMemberType" parameterType="adminVO">
+		update member
+		set mem_membertype=(select commoncode.cmn_no from commoncode where commoncode.cmn_code_kor = #{memberType})
+		where mem_id=#{memberId}	
+	</update>
 
 	<sql id="member-select">
 		select mem_no, mem_id, mem_name, mem_birthdate, mem_email, mem_phoneno, mem_mileage, (select commoncode.cmn_code_kor from commoncode where commoncode.cmn_no = mem_membertype) mem_membertype_name, mem_membertype, mem_joindate

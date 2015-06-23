@@ -21,9 +21,8 @@
 			   d.dir_name,
 			   p.pro_name,
 			   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_SCREENINGGRADE) sgrade_name,
-         	   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_GENRE) genre_name,
-         	   m2.mem_id
-		from movie m, director d, actor a, production p,member m2
+         	   (select  commoncode.cmn_code_kor from commoncode where commoncode.CMN_NO =m.MOV_GENRE) genre_name
+		from movie m, director d, actor a, production p
 		where m.dir_No = d.dir_No and
 			  m.act_No = a.act_No and
 			  m.pro_No = p.pro_No
