@@ -305,7 +305,7 @@ var flag = false;
 <c:when test="${sessionScope.login_info != null}">
 <form class="form-2">
 		<p class="login-after">
-			<label for="id">${sessionScope.login_info.memId} 님 환영합니다.</label>
+			<label for="id">${sessionScope.login_info.memId} 1님 환영합니다.</label>
 		</p>
 	
 		<p class="login-after">
